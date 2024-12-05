@@ -57,3 +57,10 @@ func (k Keeper) GetConfiguration(ctx sdk.Context, id uint64) (val types.Configur
 	k.cdc.MustUnmarshal(b, &val)
 	return val, true
 }
+
+func (k Keeper) SetConfiguration(ctx sdk.Context, configuration types.Configuration) {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
+	b := k.cdc.MustMarshal(&configuration)
+	store.Set(GetConfigurationIDBytes(configuration.Id), b)
+}
