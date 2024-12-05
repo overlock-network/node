@@ -14,7 +14,7 @@ func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCrea
 	var post = types.Configuration{
 		Name: msg.Name,
 	}
-	id := k.AppendPost(
+	id := k.AppendConfiguration(
 		ctx,
 		post,
 	)

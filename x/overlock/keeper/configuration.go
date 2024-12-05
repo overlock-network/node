@@ -10,18 +10,18 @@ import (
 	"overlock/x/overlock/types"
 )
 
-func (k Keeper) AppendPost(ctx sdk.Context, post types.Configuration) uint64 {
-	count := k.GetPostCount(ctx)
-	post.Id = count
+func (k Keeper) AppendConfiguration(ctx sdk.Context, configuration types.Configuration) uint64 {
+	count := k.GetConfigurationCount(ctx)
+	configuration.Id = count
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
-	appendedValue := k.cdc.MustMarshal(&post)
-	store.Set(GetPostIDBytes(post.Id), appendedValue)
-	k.SetPostCount(ctx, count+1)
+	appendedValue := k.cdc.MustMarshal(&configuration)
+	store.Set(GetConfigurationIDBytes(configuration.Id), appendedValue)
+	k.SetConfigurationCount(ctx, count+1)
 	return count
 }
 
-func (k Keeper) GetPostCount(ctx sdk.Context) uint64 {
+func (k Keeper) GetConfigurationCount(ctx sdk.Context) uint64 {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
 	byteKey := types.KeyPrefix(types.ConfigurationCountKey)
@@ -32,13 +32,13 @@ func (k Keeper) GetPostCount(ctx sdk.Context) uint64 {
 	return binary.BigEndian.Uint64(bz)
 }
 
-func GetPostIDBytes(id uint64) []byte {
+func GetConfigurationIDBytes(id uint64) []byte {
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, id)
 	return bz
 }
 
-func (k Keeper) SetPostCount(ctx sdk.Context, count uint64) {
+func (k Keeper) SetConfigurationCount(ctx sdk.Context, count uint64) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
 	byteKey := types.KeyPrefix(types.ConfigurationCountKey)
@@ -47,10 +47,10 @@ func (k Keeper) SetPostCount(ctx sdk.Context, count uint64) {
 	store.Set(byteKey, bz)
 }
 
-func (k Keeper) GetPost(ctx sdk.Context, id uint64) (val types.Configuration, found bool) {
+func (k Keeper) GetConfiguration(ctx sdk.Context, id uint64) (val types.Configuration, found bool) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
-	b := store.Get(GetPostIDBytes(id))
+	b := store.Get(GetConfigurationIDBytes(id))
 	if b == nil {
 		return val, false
 	}
