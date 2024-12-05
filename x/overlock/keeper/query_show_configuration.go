@@ -6,6 +6,7 @@ import (
 	"overlock/x/overlock/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -17,8 +18,10 @@ func (k Keeper) ShowConfiguration(goCtx context.Context, req *types.QueryShowCon
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	configuration, found := k.GetConfiguration(ctx, req.Id)
+	if !found {
+		return nil, sdkerrors.ErrKeyNotFound
+	}
 
-	return &types.QueryShowConfigurationResponse{}, nil
+	return &types.QueryShowConfigurationResponse{Configuration: &configuration}, nil
 }
