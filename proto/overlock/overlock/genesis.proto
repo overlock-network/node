@@ -1,0 +1,17 @@
+syntax = "proto3";
+package overlock.overlock;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "overlock/overlock/params.proto";
+
+option go_package = "overlock/x/overlock/types";
+
+// GenesisState defines the overlock module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
