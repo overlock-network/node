@@ -55,7 +55,7 @@ message QueryListConfigurationRequest {
 }
 
 message QueryListConfigurationResponse {
-  Configuration                          configuration = 1;
-  cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+  repeated  Configuration configuration = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

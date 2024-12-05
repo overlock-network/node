@@ -248,7 +248,7 @@ func (m *QueryListConfigurationRequest) GetPagination() *query.PageRequest {
 }
 
 type QueryListConfigurationResponse struct {
-	Configuration *Configuration      `protobuf:"bytes,1,opt,name=configuration,proto3" json:"configuration,omitempty"`
+	Configuration []*Configuration      `protobuf:"bytes,1,opt,name=configuration,proto3" json:"configuration,omitempty"`
 	Pagination    *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
