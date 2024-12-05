@@ -19,6 +19,7 @@ service Msg {
   rpc UpdateParams        (MsgUpdateParams       ) returns (MsgUpdateParamsResponse       );
   rpc CreateConfiguration (MsgCreateConfiguration) returns (MsgCreateConfigurationResponse);
   rpc UpdateConfiguration (MsgUpdateConfiguration) returns (MsgUpdateConfigurationResponse);
+  rpc DeleteConfiguration (MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -57,4 +58,12 @@ message MsgUpdateConfiguration {
 }
 
 message MsgUpdateConfigurationResponse {}
+
+message MsgDeleteConfiguration {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteConfigurationResponse {}
 

@@ -23,6 +23,7 @@ const (
 	Msg_UpdateParams_FullMethodName        = "/overlock.overlock.Msg/UpdateParams"
 	Msg_CreateConfiguration_FullMethodName = "/overlock.overlock.Msg/CreateConfiguration"
 	Msg_UpdateConfiguration_FullMethodName = "/overlock.overlock.Msg/UpdateConfiguration"
+	Msg_DeleteConfiguration_FullMethodName = "/overlock.overlock.Msg/DeleteConfiguration"
 )
 
 // MsgClient is the client API for Msg service.
@@ -34,6 +35,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateConfiguration(ctx context.Context, in *MsgCreateConfiguration, opts ...grpc.CallOption) (*MsgCreateConfigurationResponse, error)
 	UpdateConfiguration(ctx context.Context, in *MsgUpdateConfiguration, opts ...grpc.CallOption) (*MsgUpdateConfigurationResponse, error)
+	DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error)
 }
 
 type msgClient struct {
@@ -71,6 +73,15 @@ func (c *msgClient) UpdateConfiguration(ctx context.Context, in *MsgUpdateConfig
 	return out, nil
 }
 
+func (c *msgClient) DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error) {
+	out := new(MsgDeleteConfigurationResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteConfiguration_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -80,6 +91,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateConfiguration(context.Context, *MsgCreateConfiguration) (*MsgCreateConfigurationResponse, error)
 	UpdateConfiguration(context.Context, *MsgUpdateConfiguration) (*MsgUpdateConfigurationResponse, error)
+	DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -95,6 +107,9 @@ func (UnimplementedMsgServer) CreateConfiguration(context.Context, *MsgCreateCon
 }
 func (UnimplementedMsgServer) UpdateConfiguration(context.Context, *MsgUpdateConfiguration) (*MsgUpdateConfigurationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfiguration not implemented")
+}
+func (UnimplementedMsgServer) DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteConfiguration not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -163,6 +178,24 @@ func _Msg_UpdateConfiguration_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_DeleteConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteConfiguration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteConfiguration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteConfiguration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteConfiguration(ctx, req.(*MsgDeleteConfiguration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -181,6 +214,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateConfiguration",
 			Handler:    _Msg_UpdateConfiguration_Handler,
+		},
+		{
+			MethodName: "DeleteConfiguration",
+			Handler:    _Msg_DeleteConfiguration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

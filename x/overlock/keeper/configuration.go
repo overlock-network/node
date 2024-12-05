@@ -64,3 +64,9 @@ func (k Keeper) SetConfiguration(ctx sdk.Context, configuration types.Configurat
 	b := k.cdc.MustMarshal(&configuration)
 	store.Set(GetConfigurationIDBytes(configuration.Id), b)
 }
+
+func (k Keeper) RemoveConfiguration(ctx sdk.Context, id uint64) {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
+	store.Delete(GetConfigurationIDBytes(id))
+}
