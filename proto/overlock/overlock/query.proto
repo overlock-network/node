@@ -25,6 +25,12 @@ service Query {
     option (google.api.http).get = "/overlock/overlock/show_configuration/{id}";
   
   }
+  
+  // Queries a list of ListConfiguration items.
+  rpc ListConfiguration (QueryListConfigurationRequest) returns (QueryListConfigurationResponse) {
+    option (google.api.http).get = "/overlock/overlock/list_configuration";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -42,5 +48,14 @@ message QueryShowConfigurationRequest {
 
 message QueryShowConfigurationResponse {
   Configuration configuration = 1;
+}
+
+message QueryListConfigurationRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListConfigurationResponse {
+  Configuration                          configuration = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination    = 2;
 }
 

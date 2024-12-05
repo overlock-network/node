@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Query_Params_FullMethodName            = "/overlock.overlock.Query/Params"
 	Query_ShowConfiguration_FullMethodName = "/overlock.overlock.Query/ShowConfiguration"
+	Query_ListConfiguration_FullMethodName = "/overlock.overlock.Query/ListConfiguration"
 )
 
 // QueryClient is the client API for Query service.
@@ -32,6 +33,8 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of ShowConfiguration items.
 	ShowConfiguration(ctx context.Context, in *QueryShowConfigurationRequest, opts ...grpc.CallOption) (*QueryShowConfigurationResponse, error)
+	// Queries a list of ListConfiguration items.
+	ListConfiguration(ctx context.Context, in *QueryListConfigurationRequest, opts ...grpc.CallOption) (*QueryListConfigurationResponse, error)
 }
 
 type queryClient struct {
@@ -60,6 +63,15 @@ func (c *queryClient) ShowConfiguration(ctx context.Context, in *QueryShowConfig
 	return out, nil
 }
 
+func (c *queryClient) ListConfiguration(ctx context.Context, in *QueryListConfigurationRequest, opts ...grpc.CallOption) (*QueryListConfigurationResponse, error) {
+	out := new(QueryListConfigurationResponse)
+	err := c.cc.Invoke(ctx, Query_ListConfiguration_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -68,6 +80,8 @@ type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of ShowConfiguration items.
 	ShowConfiguration(context.Context, *QueryShowConfigurationRequest) (*QueryShowConfigurationResponse, error)
+	// Queries a list of ListConfiguration items.
+	ListConfiguration(context.Context, *QueryListConfigurationRequest) (*QueryListConfigurationResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -80,6 +94,9 @@ func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*Q
 }
 func (UnimplementedQueryServer) ShowConfiguration(context.Context, *QueryShowConfigurationRequest) (*QueryShowConfigurationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowConfiguration not implemented")
+}
+func (UnimplementedQueryServer) ListConfiguration(context.Context, *QueryListConfigurationRequest) (*QueryListConfigurationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConfiguration not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -130,6 +147,24 @@ func _Query_ShowConfiguration_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListConfigurationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListConfiguration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListConfiguration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListConfiguration(ctx, req.(*QueryListConfigurationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -144,6 +179,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ShowConfiguration",
 			Handler:    _Query_ShowConfiguration_Handler,
+		},
+		{
+			MethodName: "ListConfiguration",
+			Handler:    _Query_ListConfiguration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
