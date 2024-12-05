@@ -1,0 +1,11 @@
+syntax = "proto3";
+package overlock.overlock;
+
+option go_package = "overlock/x/overlock/types";
+
+message Configuration {
+  
+  string name = 1; 
+  string spec = 2; 
+  uint64 id = 3; 
+}
