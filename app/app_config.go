@@ -53,7 +53,10 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
+	blocksmodulev1 "overlock/api/overlock/blocks/module"
 	overlockmodulev1 "overlock/api/overlock/overlock/module"
+	_ "overlock/x/blocks/module" // import for side-effects
+	blocksmoduletypes "overlock/x/blocks/types"
 	_ "overlock/x/overlock/module" // import for side-effects
 	overlockmoduletypes "overlock/x/overlock/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
@@ -94,6 +97,7 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		blocksmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +123,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		blocksmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +143,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		blocksmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -296,6 +302,10 @@ var (
 			{
 				Name:   overlockmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&overlockmodulev1.Module{}),
+			},
+			{
+				Name:   blocksmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&blocksmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
