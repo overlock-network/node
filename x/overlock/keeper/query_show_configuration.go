@@ -23,5 +23,5 @@ func (k Keeper) ShowConfiguration(goCtx context.Context, req *types.QueryShowCon
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowConfigurationResponse{Configuration: &configuration}, nil
+	return &types.QueryShowConfigurationResponse{Configuration: configuration}, nil
 }

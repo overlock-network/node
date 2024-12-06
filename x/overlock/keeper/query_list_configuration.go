@@ -38,5 +38,5 @@ func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListCon
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListConfigurationResponse{Configuration: configurations, Pagination: pageRes}, nil
+	return &types.QueryListConfigurationResponse{Configurations: configurations, Pagination: pageRes}, nil
 }
