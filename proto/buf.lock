@@ -32,6 +32,11 @@ deps:
     commit: acd896313c55464b993332136ded1b6e
     digest: shake256:66626d5e4d9c8ecf25cd72bdbfbbf62b9a68e9e9c33dab6b9b39a53a67063eeba6b8493247dd6d6240b1ac1c32eb2dc311484e67dd7d271884a960c2e5ce8c9a
   - remote: buf.build
+    owner: k8s
+    repository: api
+    commit: 8f68e41b943c4de8a5e9c9a921c889a7
+    digest: shake256:38ab77d24cf737d1204719a0ffc654056c29499f26b1546cc5af9ddb34e33799930d79d1f5a4a04b0f5c149097eabbeed37a5d2abf9552169a7d52011f6a8d6f
+  - remote: buf.build
     owner: protocolbuffers
     repository: wellknowntypes
     commit: 384f8deef6ae4110b57d996aad0032c4
