@@ -1,0 +1,12 @@
+syntax = "proto3";
+package overlock.overlock;
+
+option go_package = "overlock/x/overlock/types";
+
+message Composition {
+  
+  string apiVersion = 1; 
+  string kind = 2; 
+  string spec = 3; 
+  uint64 id = 4; 
+}
