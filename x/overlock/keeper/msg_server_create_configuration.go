@@ -12,7 +12,9 @@ func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCrea
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var post = types.Configuration{
-		Name: msg.Name,
+		Metadata: &types.Metadata{
+			Name: msg.Name,
+		},
 	}
 	id := k.AppendConfiguration(
 		ctx,
