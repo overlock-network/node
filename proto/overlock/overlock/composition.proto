@@ -1,15 +1,116 @@
 syntax = "proto3";
 package overlock.overlock;
 
-import "k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto";
+import "overlock/overlock/meta.proto";
 
 option go_package = "overlock/x/overlock/types";
 
-// Composition Crossplane definition.
+// Composition represents the composition of resources.
 message Composition {
   uint64 id = 1;
-  string apiVersion = 2;
+  string api_version = 2;
   string kind = 3;
-  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 4;
-  string spec = 5;
+  Metadata metadata = 4;
+  CompositionSpec spec = 5;
+}
+
+// Spec defines the specification of the composition.
+message CompositionSpec {
+  CompositeTypeRef composite_type_ref = 3;
+  string mode = 4;
+  repeated Resource resources = 6;
+}
+
+// CompositeTypeRef references a composite type.
+message CompositeTypeRef {
+  string api_version = 1;
+  string kind = 2;
+}
+
+// Resource represents a resource in the composition.
+message Resource {
+  string name = 1;
+  Base base = 2;
+  repeated Patch patches = 3;
+}
+
+// Base defines the base resource.
+message Base {
+  string api_version = 1;
+  string kind = 2;
+  map<string, string> for_provider = 3;
+}
+
+// Patch represents a patch to be applied to a resource.
+message Patch {
+  string type = 1;
+  string from_field_path = 2;
+  string to_field_path = 3;
+
+  repeated Transformer transforms = 5;
+}
+
+// Transformer represents a transformation to be applied.
+message Transformer {
+  // transform defines the type of transformation to be applied.
+  oneof transform {
+    MapTransform map = 1;
+    StringTransform string = 2;
+    MathTransform math = 3;
+    MatchTransform match = 4;
+    ConvertTransform convert = 5;
+  }
+}
+
+// MapTransform defines a map transformation.
+message MapTransform {
+  map<string, string> map = 1;
+}
+
+// StringTransform defines a string transformation.
+message StringTransform {
+  // type defines the type of string transformation.
+  oneof transform_type {
+    StringConvert convert = 1;
+    StringFormat format = 2;
+  }
+}
+
+// StringConvert defines a string conversion.
+message StringConvert {
+  string convert = 1; // ToUpper or ToLower
+}
+
+// StringFormat defines a string format.
+message StringFormat {
+  string fmt = 1;
+}
+
+// MathTransform defines a mathematical transformation.
+message MathTransform {
+  // operation defines the mathematical operation to be applied.
+  oneof operation {
+    double clamp_min = 1;
+    double clamp_max = 2;
+    double multiply = 3;
+  }
+}
+
+// MatchTransform defines a match transformation.
+message MatchTransform {
+  repeated Pattern patterns = 1;
+  string fallback_to = 2;
+  string fallback_value = 3;
+}
+
+// Pattern represents a pattern in the match transformation.
+message Pattern {
+  string type = 1; // "literal" or "regexp"
+  string result = 2;
+}
+
+// ConvertTransform defines a conversion transformation.
+message ConvertTransform {
+  string to_type = 1; // bool, float64, int, etc.
+  string format = 2; // "json" or "quantity"
 }
