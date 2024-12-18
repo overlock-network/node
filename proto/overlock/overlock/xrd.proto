@@ -1,0 +1,48 @@
+syntax = "proto3";
+package overlock.overlock;
+
+import "overlock/overlock/meta.proto";
+
+option go_package = "overlock/x/overlock/types";
+
+// Complete CompositeResourceDefinition object.
+message CompositeResourceDefinition {
+  uint64 id = 1;
+  string api_version = 2;
+  string kind = 3;
+  Metadata metadata = 4;
+  CompositeResourceDefinitionSpec spec = 5;
+}
+
+// Main CompositeResourceDefinition spec structure.
+message CompositeResourceDefinitionSpec {
+  string group = 1;
+  ResourceNames names = 2;
+  repeated Version versions = 3;
+}
+
+// Names of the resource in singular, plural, and kind forms.
+message ResourceNames {
+  string kind = 1;
+  string plural = 2;
+}
+
+// Defines each version of the CRD.
+message Version {
+  string name = 1;
+  OpenAPIV3Schema schema = 2;
+}
+
+// Schema for the object properties in OpenAPI.
+message OpenAPIV3Schema {
+  // Property represents a single property in the OpenAPI schema.
+  message Property {
+    string type = 1;
+    string default = 2;
+    repeated string enum = 3;
+    map<string, Property> properties = 4;
+    repeated string required = 5;
+  }
+
+  map<string, Property> properties = 1;
+}
