@@ -14,34 +14,28 @@ import (
 )
 
 var (
-	md_Configuration             protoreflect.MessageDescriptor
-	fd_Configuration_id          protoreflect.FieldDescriptor
-	fd_Configuration_api_version protoreflect.FieldDescriptor
-	fd_Configuration_kind        protoreflect.FieldDescriptor
-	fd_Configuration_metadata    protoreflect.FieldDescriptor
-	fd_Configuration_spec        protoreflect.FieldDescriptor
+	md_Metadata             protoreflect.MessageDescriptor
+	fd_Metadata_name        protoreflect.FieldDescriptor
+	fd_Metadata_annotations protoreflect.FieldDescriptor
 )
 
 func init() {
-	file_overlock_overlock_configuration_proto_init()
-	md_Configuration = File_overlock_overlock_configuration_proto.Messages().ByName("Configuration")
-	fd_Configuration_id = md_Configuration.Fields().ByName("id")
-	fd_Configuration_api_version = md_Configuration.Fields().ByName("api_version")
-	fd_Configuration_kind = md_Configuration.Fields().ByName("kind")
-	fd_Configuration_metadata = md_Configuration.Fields().ByName("metadata")
-	fd_Configuration_spec = md_Configuration.Fields().ByName("spec")
+	file_overlock_overlock_meta_proto_init()
+	md_Metadata = File_overlock_overlock_meta_proto.Messages().ByName("Metadata")
+	fd_Metadata_name = md_Metadata.Fields().ByName("name")
+	fd_Metadata_annotations = md_Metadata.Fields().ByName("annotations")
 }
 
-var _ protoreflect.Message = (*fastReflection_Configuration)(nil)
+var _ protoreflect.Message = (*fastReflection_Metadata)(nil)
 
-type fastReflection_Configuration Configuration
+type fastReflection_Metadata Metadata
 
-func (x *Configuration) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_Configuration)(x)
+func (x *Metadata) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_Metadata)(x)
 }
 
-func (x *Configuration) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_configuration_proto_msgTypes[0]
+func (x *Metadata) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_overlock_meta_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -52,43 +46,43 @@ func (x *Configuration) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_Configuration_messageType fastReflection_Configuration_messageType
-var _ protoreflect.MessageType = fastReflection_Configuration_messageType{}
+var _fastReflection_Metadata_messageType fastReflection_Metadata_messageType
+var _ protoreflect.MessageType = fastReflection_Metadata_messageType{}
 
-type fastReflection_Configuration_messageType struct{}
+type fastReflection_Metadata_messageType struct{}
 
-func (x fastReflection_Configuration_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_Configuration)(nil)
+func (x fastReflection_Metadata_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_Metadata)(nil)
 }
-func (x fastReflection_Configuration_messageType) New() protoreflect.Message {
-	return new(fastReflection_Configuration)
+func (x fastReflection_Metadata_messageType) New() protoreflect.Message {
+	return new(fastReflection_Metadata)
 }
-func (x fastReflection_Configuration_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_Configuration
+func (x fastReflection_Metadata_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_Metadata
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_Configuration) Descriptor() protoreflect.MessageDescriptor {
-	return md_Configuration
+func (x *fastReflection_Metadata) Descriptor() protoreflect.MessageDescriptor {
+	return md_Metadata
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_Configuration) Type() protoreflect.MessageType {
-	return _fastReflection_Configuration_messageType
+func (x *fastReflection_Metadata) Type() protoreflect.MessageType {
+	return _fastReflection_Metadata_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_Configuration) New() protoreflect.Message {
-	return new(fastReflection_Configuration)
+func (x *fastReflection_Metadata) New() protoreflect.Message {
+	return new(fastReflection_Metadata)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_Configuration) Interface() protoreflect.ProtoMessage {
-	return (*Configuration)(x)
+func (x *fastReflection_Metadata) Interface() protoreflect.ProtoMessage {
+	return (*Metadata)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -96,34 +90,16 @@ func (x *fastReflection_Configuration) Interface() protoreflect.ProtoMessage {
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_Configuration) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Id != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Id)
-		if !f(fd_Configuration_id, value) {
+func (x *fastReflection_Metadata) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Name != "" {
+		value := protoreflect.ValueOfString(x.Name)
+		if !f(fd_Metadata_name, value) {
 			return
 		}
 	}
-	if x.ApiVersion != "" {
-		value := protoreflect.ValueOfString(x.ApiVersion)
-		if !f(fd_Configuration_api_version, value) {
-			return
-		}
-	}
-	if x.Kind != "" {
-		value := protoreflect.ValueOfString(x.Kind)
-		if !f(fd_Configuration_kind, value) {
-			return
-		}
-	}
-	if x.Metadata != nil {
-		value := protoreflect.ValueOfMessage(x.Metadata.ProtoReflect())
-		if !f(fd_Configuration_metadata, value) {
-			return
-		}
-	}
-	if x.Spec != nil {
-		value := protoreflect.ValueOfMessage(x.Spec.ProtoReflect())
-		if !f(fd_Configuration_spec, value) {
+	if x.Annotations != nil {
+		value := protoreflect.ValueOfMessage(x.Annotations.ProtoReflect())
+		if !f(fd_Metadata_annotations, value) {
 			return
 		}
 	}
@@ -140,23 +116,17 @@ func (x *fastReflection_Configuration) Range(f func(protoreflect.FieldDescriptor
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_Configuration) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_Metadata) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "overlock.overlock.Configuration.id":
-		return x.Id != uint64(0)
-	case "overlock.overlock.Configuration.api_version":
-		return x.ApiVersion != ""
-	case "overlock.overlock.Configuration.kind":
-		return x.Kind != ""
-	case "overlock.overlock.Configuration.metadata":
-		return x.Metadata != nil
-	case "overlock.overlock.Configuration.spec":
-		return x.Spec != nil
+	case "overlock.overlock.Metadata.name":
+		return x.Name != ""
+	case "overlock.overlock.Metadata.annotations":
+		return x.Annotations != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -166,23 +136,17 @@ func (x *fastReflection_Configuration) Has(fd protoreflect.FieldDescriptor) bool
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Configuration) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_Metadata) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "overlock.overlock.Configuration.id":
-		x.Id = uint64(0)
-	case "overlock.overlock.Configuration.api_version":
-		x.ApiVersion = ""
-	case "overlock.overlock.Configuration.kind":
-		x.Kind = ""
-	case "overlock.overlock.Configuration.metadata":
-		x.Metadata = nil
-	case "overlock.overlock.Configuration.spec":
-		x.Spec = nil
+	case "overlock.overlock.Metadata.name":
+		x.Name = ""
+	case "overlock.overlock.Metadata.annotations":
+		x.Annotations = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -192,28 +156,19 @@ func (x *fastReflection_Configuration) Clear(fd protoreflect.FieldDescriptor) {
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_Configuration) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Metadata) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "overlock.overlock.Configuration.id":
-		value := x.Id
-		return protoreflect.ValueOfUint64(value)
-	case "overlock.overlock.Configuration.api_version":
-		value := x.ApiVersion
+	case "overlock.overlock.Metadata.name":
+		value := x.Name
 		return protoreflect.ValueOfString(value)
-	case "overlock.overlock.Configuration.kind":
-		value := x.Kind
-		return protoreflect.ValueOfString(value)
-	case "overlock.overlock.Configuration.metadata":
-		value := x.Metadata
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "overlock.overlock.Configuration.spec":
-		value := x.Spec
+	case "overlock.overlock.Metadata.annotations":
+		value := x.Annotations
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -227,23 +182,17 @@ func (x *fastReflection_Configuration) Get(descriptor protoreflect.FieldDescript
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Configuration) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_Metadata) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "overlock.overlock.Configuration.id":
-		x.Id = value.Uint()
-	case "overlock.overlock.Configuration.api_version":
-		x.ApiVersion = value.Interface().(string)
-	case "overlock.overlock.Configuration.kind":
-		x.Kind = value.Interface().(string)
-	case "overlock.overlock.Configuration.metadata":
-		x.Metadata = value.Message().Interface().(*Metadata)
-	case "overlock.overlock.Configuration.spec":
-		x.Spec = value.Message().Interface().(*ConfigurationSpec)
+	case "overlock.overlock.Metadata.name":
+		x.Name = value.Interface().(string)
+	case "overlock.overlock.Metadata.annotations":
+		x.Annotations = value.Message().Interface().(*Annotations)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -257,64 +206,48 @@ func (x *fastReflection_Configuration) Set(fd protoreflect.FieldDescriptor, valu
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Configuration) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Metadata) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.Configuration.metadata":
-		if x.Metadata == nil {
-			x.Metadata = new(Metadata)
+	case "overlock.overlock.Metadata.annotations":
+		if x.Annotations == nil {
+			x.Annotations = new(Annotations)
 		}
-		return protoreflect.ValueOfMessage(x.Metadata.ProtoReflect())
-	case "overlock.overlock.Configuration.spec":
-		if x.Spec == nil {
-			x.Spec = new(ConfigurationSpec)
-		}
-		return protoreflect.ValueOfMessage(x.Spec.ProtoReflect())
-	case "overlock.overlock.Configuration.id":
-		panic(fmt.Errorf("field id of message overlock.overlock.Configuration is not mutable"))
-	case "overlock.overlock.Configuration.api_version":
-		panic(fmt.Errorf("field api_version of message overlock.overlock.Configuration is not mutable"))
-	case "overlock.overlock.Configuration.kind":
-		panic(fmt.Errorf("field kind of message overlock.overlock.Configuration is not mutable"))
+		return protoreflect.ValueOfMessage(x.Annotations.ProtoReflect())
+	case "overlock.overlock.Metadata.name":
+		panic(fmt.Errorf("field name of message overlock.overlock.Metadata is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_Configuration) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Metadata) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.Configuration.id":
-		return protoreflect.ValueOfUint64(uint64(0))
-	case "overlock.overlock.Configuration.api_version":
+	case "overlock.overlock.Metadata.name":
 		return protoreflect.ValueOfString("")
-	case "overlock.overlock.Configuration.kind":
-		return protoreflect.ValueOfString("")
-	case "overlock.overlock.Configuration.metadata":
-		m := new(Metadata)
-		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "overlock.overlock.Configuration.spec":
-		m := new(ConfigurationSpec)
+	case "overlock.overlock.Metadata.annotations":
+		m := new(Annotations)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Configuration"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Metadata"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.Configuration does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Metadata does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_Configuration) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_Metadata) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in overlock.overlock.Configuration", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in overlock.overlock.Metadata", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -322,7 +255,7 @@ func (x *fastReflection_Configuration) WhichOneof(d protoreflect.OneofDescriptor
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_Configuration) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_Metadata) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -333,7 +266,7 @@ func (x *fastReflection_Configuration) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Configuration) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_Metadata) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -345,7 +278,7 @@ func (x *fastReflection_Configuration) SetUnknown(fields protoreflect.RawFields)
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_Configuration) IsValid() bool {
+func (x *fastReflection_Metadata) IsValid() bool {
 	return x != nil
 }
 
@@ -355,9 +288,9 @@ func (x *fastReflection_Configuration) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*Configuration)
+		x := input.Message.Interface().(*Metadata)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -369,23 +302,12 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.Id != 0 {
-			n += 1 + runtime.Sov(uint64(x.Id))
-		}
-		l = len(x.ApiVersion)
+		l = len(x.Name)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Kind)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		if x.Metadata != nil {
-			l = options.Size(x.Metadata)
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		if x.Spec != nil {
-			l = options.Size(x.Spec)
+		if x.Annotations != nil {
+			l = options.Size(x.Annotations)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -398,7 +320,7 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*Configuration)
+		x := input.Message.Interface().(*Metadata)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -417,8 +339,8 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.Spec != nil {
-			encoded, err := options.Marshal(x.Spec)
+		if x.Annotations != nil {
+			encoded, err := options.Marshal(x.Annotations)
 			if err != nil {
 				return protoiface.MarshalOutput{
 					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -428,41 +350,15 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 			i -= len(encoded)
 			copy(dAtA[i:], encoded)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x2a
-		}
-		if x.Metadata != nil {
-			encoded, err := options.Marshal(x.Metadata)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x22
-		}
-		if len(x.Kind) > 0 {
-			i -= len(x.Kind)
-			copy(dAtA[i:], x.Kind)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Kind)))
-			i--
-			dAtA[i] = 0x1a
-		}
-		if len(x.ApiVersion) > 0 {
-			i -= len(x.ApiVersion)
-			copy(dAtA[i:], x.ApiVersion)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ApiVersion)))
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.Id != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+		if len(x.Name) > 0 {
+			i -= len(x.Name)
+			copy(dAtA[i:], x.Name)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
 			i--
-			dAtA[i] = 0x8
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -475,7 +371,7 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*Configuration)
+		x := input.Message.Interface().(*Metadata)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -507,17 +403,17 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Configuration: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Metadata: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Configuration: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Metadata: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 				}
-				x.Id = 0
+				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -527,78 +423,27 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.Id |= uint64(b&0x7F) << shift
+					stringLen |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Name = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ApiVersion", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.ApiVersion = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Kind = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 4:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Annotations", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -625,46 +470,10 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.Metadata == nil {
-					x.Metadata = &Metadata{}
+				if x.Annotations == nil {
+					x.Annotations = &Annotations{}
 				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Metadata); err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				iNdEx = postIndex
-			case 5:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
-				}
-				var msglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					msglen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if x.Spec == nil {
-					x.Spec = &ConfigurationSpec{}
-				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Spec); err != nil {
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Annotations); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -703,20 +512,20 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 	}
 }
 
-var _ protoreflect.Map = (*_ConfigurationSpec_1_map)(nil)
+var _ protoreflect.Map = (*_Annotations_1_map)(nil)
 
-type _ConfigurationSpec_1_map struct {
+type _Annotations_1_map struct {
 	m *map[string]string
 }
 
-func (x *_ConfigurationSpec_1_map) Len() int {
+func (x *_Annotations_1_map) Len() int {
 	if x.m == nil {
 		return 0
 	}
 	return len(*x.m)
 }
 
-func (x *_ConfigurationSpec_1_map) Range(f func(protoreflect.MapKey, protoreflect.Value) bool) {
+func (x *_Annotations_1_map) Range(f func(protoreflect.MapKey, protoreflect.Value) bool) {
 	if x.m == nil {
 		return
 	}
@@ -729,7 +538,7 @@ func (x *_ConfigurationSpec_1_map) Range(f func(protoreflect.MapKey, protoreflec
 	}
 }
 
-func (x *_ConfigurationSpec_1_map) Has(key protoreflect.MapKey) bool {
+func (x *_Annotations_1_map) Has(key protoreflect.MapKey) bool {
 	if x.m == nil {
 		return false
 	}
@@ -739,7 +548,7 @@ func (x *_ConfigurationSpec_1_map) Has(key protoreflect.MapKey) bool {
 	return ok
 }
 
-func (x *_ConfigurationSpec_1_map) Clear(key protoreflect.MapKey) {
+func (x *_Annotations_1_map) Clear(key protoreflect.MapKey) {
 	if x.m == nil {
 		return
 	}
@@ -748,7 +557,7 @@ func (x *_ConfigurationSpec_1_map) Clear(key protoreflect.MapKey) {
 	delete(*x.m, concreteKey)
 }
 
-func (x *_ConfigurationSpec_1_map) Get(key protoreflect.MapKey) protoreflect.Value {
+func (x *_Annotations_1_map) Get(key protoreflect.MapKey) protoreflect.Value {
 	if x.m == nil {
 		return protoreflect.Value{}
 	}
@@ -761,7 +570,7 @@ func (x *_ConfigurationSpec_1_map) Get(key protoreflect.MapKey) protoreflect.Val
 	return protoreflect.ValueOfString(v)
 }
 
-func (x *_ConfigurationSpec_1_map) Set(key protoreflect.MapKey, value protoreflect.Value) {
+func (x *_Annotations_1_map) Set(key protoreflect.MapKey, value protoreflect.Value) {
 	if !key.IsValid() || !value.IsValid() {
 		panic("invalid key or value provided")
 	}
@@ -772,40 +581,40 @@ func (x *_ConfigurationSpec_1_map) Set(key protoreflect.MapKey, value protorefle
 	(*x.m)[concreteKey] = concreteValue
 }
 
-func (x *_ConfigurationSpec_1_map) Mutable(key protoreflect.MapKey) protoreflect.Value {
+func (x *_Annotations_1_map) Mutable(key protoreflect.MapKey) protoreflect.Value {
 	panic("should not call Mutable on protoreflect.Map whose value is not of type protoreflect.Message")
 }
 
-func (x *_ConfigurationSpec_1_map) NewValue() protoreflect.Value {
+func (x *_Annotations_1_map) NewValue() protoreflect.Value {
 	v := ""
 	return protoreflect.ValueOfString(v)
 }
 
-func (x *_ConfigurationSpec_1_map) IsValid() bool {
+func (x *_Annotations_1_map) IsValid() bool {
 	return x.m != nil
 }
 
 var (
-	md_ConfigurationSpec            protoreflect.MessageDescriptor
-	fd_ConfigurationSpec_crossplane protoreflect.FieldDescriptor
+	md_Annotations             protoreflect.MessageDescriptor
+	fd_Annotations_annotations protoreflect.FieldDescriptor
 )
 
 func init() {
-	file_overlock_overlock_configuration_proto_init()
-	md_ConfigurationSpec = File_overlock_overlock_configuration_proto.Messages().ByName("ConfigurationSpec")
-	fd_ConfigurationSpec_crossplane = md_ConfigurationSpec.Fields().ByName("crossplane")
+	file_overlock_overlock_meta_proto_init()
+	md_Annotations = File_overlock_overlock_meta_proto.Messages().ByName("Annotations")
+	fd_Annotations_annotations = md_Annotations.Fields().ByName("annotations")
 }
 
-var _ protoreflect.Message = (*fastReflection_ConfigurationSpec)(nil)
+var _ protoreflect.Message = (*fastReflection_Annotations)(nil)
 
-type fastReflection_ConfigurationSpec ConfigurationSpec
+type fastReflection_Annotations Annotations
 
-func (x *ConfigurationSpec) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_ConfigurationSpec)(x)
+func (x *Annotations) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_Annotations)(x)
 }
 
-func (x *ConfigurationSpec) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_configuration_proto_msgTypes[1]
+func (x *Annotations) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_overlock_meta_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -816,43 +625,43 @@ func (x *ConfigurationSpec) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_ConfigurationSpec_messageType fastReflection_ConfigurationSpec_messageType
-var _ protoreflect.MessageType = fastReflection_ConfigurationSpec_messageType{}
+var _fastReflection_Annotations_messageType fastReflection_Annotations_messageType
+var _ protoreflect.MessageType = fastReflection_Annotations_messageType{}
 
-type fastReflection_ConfigurationSpec_messageType struct{}
+type fastReflection_Annotations_messageType struct{}
 
-func (x fastReflection_ConfigurationSpec_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_ConfigurationSpec)(nil)
+func (x fastReflection_Annotations_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_Annotations)(nil)
 }
-func (x fastReflection_ConfigurationSpec_messageType) New() protoreflect.Message {
-	return new(fastReflection_ConfigurationSpec)
+func (x fastReflection_Annotations_messageType) New() protoreflect.Message {
+	return new(fastReflection_Annotations)
 }
-func (x fastReflection_ConfigurationSpec_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_ConfigurationSpec
+func (x fastReflection_Annotations_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_Annotations
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_ConfigurationSpec) Descriptor() protoreflect.MessageDescriptor {
-	return md_ConfigurationSpec
+func (x *fastReflection_Annotations) Descriptor() protoreflect.MessageDescriptor {
+	return md_Annotations
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_ConfigurationSpec) Type() protoreflect.MessageType {
-	return _fastReflection_ConfigurationSpec_messageType
+func (x *fastReflection_Annotations) Type() protoreflect.MessageType {
+	return _fastReflection_Annotations_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_ConfigurationSpec) New() protoreflect.Message {
-	return new(fastReflection_ConfigurationSpec)
+func (x *fastReflection_Annotations) New() protoreflect.Message {
+	return new(fastReflection_Annotations)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_ConfigurationSpec) Interface() protoreflect.ProtoMessage {
-	return (*ConfigurationSpec)(x)
+func (x *fastReflection_Annotations) Interface() protoreflect.ProtoMessage {
+	return (*Annotations)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -860,10 +669,10 @@ func (x *fastReflection_ConfigurationSpec) Interface() protoreflect.ProtoMessage
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_ConfigurationSpec) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if len(x.Crossplane) != 0 {
-		value := protoreflect.ValueOfMap(&_ConfigurationSpec_1_map{m: &x.Crossplane})
-		if !f(fd_ConfigurationSpec_crossplane, value) {
+func (x *fastReflection_Annotations) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.Annotations) != 0 {
+		value := protoreflect.ValueOfMap(&_Annotations_1_map{m: &x.Annotations})
+		if !f(fd_Annotations_annotations, value) {
 			return
 		}
 	}
@@ -880,15 +689,15 @@ func (x *fastReflection_ConfigurationSpec) Range(f func(protoreflect.FieldDescri
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_ConfigurationSpec) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_Annotations) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
-		return len(x.Crossplane) != 0
+	case "overlock.overlock.Annotations.annotations":
+		return len(x.Annotations) != 0
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -898,15 +707,15 @@ func (x *fastReflection_ConfigurationSpec) Has(fd protoreflect.FieldDescriptor) 
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_ConfigurationSpec) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_Annotations) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
-		x.Crossplane = nil
+	case "overlock.overlock.Annotations.annotations":
+		x.Annotations = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -916,19 +725,19 @@ func (x *fastReflection_ConfigurationSpec) Clear(fd protoreflect.FieldDescriptor
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_ConfigurationSpec) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Annotations) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
-		if len(x.Crossplane) == 0 {
-			return protoreflect.ValueOfMap(&_ConfigurationSpec_1_map{})
+	case "overlock.overlock.Annotations.annotations":
+		if len(x.Annotations) == 0 {
+			return protoreflect.ValueOfMap(&_Annotations_1_map{})
 		}
-		mapValue := &_ConfigurationSpec_1_map{m: &x.Crossplane}
+		mapValue := &_Annotations_1_map{m: &x.Annotations}
 		return protoreflect.ValueOfMap(mapValue)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -942,17 +751,17 @@ func (x *fastReflection_ConfigurationSpec) Get(descriptor protoreflect.FieldDesc
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_ConfigurationSpec) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_Annotations) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
+	case "overlock.overlock.Annotations.annotations":
 		mv := value.Map()
-		cmv := mv.(*_ConfigurationSpec_1_map)
-		x.Crossplane = *cmv.m
+		cmv := mv.(*_Annotations_1_map)
+		x.Annotations = *cmv.m
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -966,45 +775,45 @@ func (x *fastReflection_ConfigurationSpec) Set(fd protoreflect.FieldDescriptor, 
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_ConfigurationSpec) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Annotations) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
-		if x.Crossplane == nil {
-			x.Crossplane = make(map[string]string)
+	case "overlock.overlock.Annotations.annotations":
+		if x.Annotations == nil {
+			x.Annotations = make(map[string]string)
 		}
-		value := &_ConfigurationSpec_1_map{m: &x.Crossplane}
+		value := &_Annotations_1_map{m: &x.Annotations}
 		return protoreflect.ValueOfMap(value)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_ConfigurationSpec) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Annotations) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.ConfigurationSpec.crossplane":
+	case "overlock.overlock.Annotations.annotations":
 		m := make(map[string]string)
-		return protoreflect.ValueOfMap(&_ConfigurationSpec_1_map{m: &m})
+		return protoreflect.ValueOfMap(&_Annotations_1_map{m: &m})
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.ConfigurationSpec"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Annotations"))
 		}
-		panic(fmt.Errorf("message overlock.overlock.ConfigurationSpec does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.overlock.Annotations does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_ConfigurationSpec) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_Annotations) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in overlock.overlock.ConfigurationSpec", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in overlock.overlock.Annotations", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1012,7 +821,7 @@ func (x *fastReflection_ConfigurationSpec) WhichOneof(d protoreflect.OneofDescri
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_ConfigurationSpec) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_Annotations) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1023,7 +832,7 @@ func (x *fastReflection_ConfigurationSpec) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_ConfigurationSpec) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_Annotations) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1035,7 +844,7 @@ func (x *fastReflection_ConfigurationSpec) SetUnknown(fields protoreflect.RawFie
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_ConfigurationSpec) IsValid() bool {
+func (x *fastReflection_Annotations) IsValid() bool {
 	return x != nil
 }
 
@@ -1045,9 +854,9 @@ func (x *fastReflection_ConfigurationSpec) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_Annotations) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*ConfigurationSpec)
+		x := input.Message.Interface().(*Annotations)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1059,23 +868,23 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if len(x.Crossplane) > 0 {
+		if len(x.Annotations) > 0 {
 			SiZeMaP := func(k string, v string) {
 				mapEntrySize := 1 + len(k) + runtime.Sov(uint64(len(k))) + 1 + len(v) + runtime.Sov(uint64(len(v)))
 				n += mapEntrySize + 1 + runtime.Sov(uint64(mapEntrySize))
 			}
 			if options.Deterministic {
-				sortme := make([]string, 0, len(x.Crossplane))
-				for k := range x.Crossplane {
+				sortme := make([]string, 0, len(x.Annotations))
+				for k := range x.Annotations {
 					sortme = append(sortme, k)
 				}
 				sort.Strings(sortme)
 				for _, k := range sortme {
-					v := x.Crossplane[k]
+					v := x.Annotations[k]
 					SiZeMaP(k, v)
 				}
 			} else {
-				for k, v := range x.Crossplane {
+				for k, v := range x.Annotations {
 					SiZeMaP(k, v)
 				}
 			}
@@ -1090,7 +899,7 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*ConfigurationSpec)
+		x := input.Message.Interface().(*Annotations)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1109,7 +918,7 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Crossplane) > 0 {
+		if len(x.Annotations) > 0 {
 			MaRsHaLmAp := func(k string, v string) (protoiface.MarshalOutput, error) {
 				baseI := i
 				i -= len(v)
@@ -1128,23 +937,23 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 				return protoiface.MarshalOutput{}, nil
 			}
 			if options.Deterministic {
-				keysForCrossplane := make([]string, 0, len(x.Crossplane))
-				for k := range x.Crossplane {
-					keysForCrossplane = append(keysForCrossplane, string(k))
+				keysForAnnotations := make([]string, 0, len(x.Annotations))
+				for k := range x.Annotations {
+					keysForAnnotations = append(keysForAnnotations, string(k))
 				}
-				sort.Slice(keysForCrossplane, func(i, j int) bool {
-					return keysForCrossplane[i] < keysForCrossplane[j]
+				sort.Slice(keysForAnnotations, func(i, j int) bool {
+					return keysForAnnotations[i] < keysForAnnotations[j]
 				})
-				for iNdEx := len(keysForCrossplane) - 1; iNdEx >= 0; iNdEx-- {
-					v := x.Crossplane[string(keysForCrossplane[iNdEx])]
-					out, err := MaRsHaLmAp(keysForCrossplane[iNdEx], v)
+				for iNdEx := len(keysForAnnotations) - 1; iNdEx >= 0; iNdEx-- {
+					v := x.Annotations[string(keysForAnnotations[iNdEx])]
+					out, err := MaRsHaLmAp(keysForAnnotations[iNdEx], v)
 					if err != nil {
 						return out, err
 					}
 				}
 			} else {
-				for k := range x.Crossplane {
-					v := x.Crossplane[k]
+				for k := range x.Annotations {
+					v := x.Annotations[k]
 					out, err := MaRsHaLmAp(k, v)
 					if err != nil {
 						return out, err
@@ -1163,7 +972,7 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*ConfigurationSpec)
+		x := input.Message.Interface().(*Annotations)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1195,15 +1004,15 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ConfigurationSpec: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Annotations: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ConfigurationSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Annotations: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Crossplane", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Annotations", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1230,8 +1039,8 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.Crossplane == nil {
-					x.Crossplane = make(map[string]string)
+				if x.Annotations == nil {
+					x.Annotations = make(map[string]string)
 				}
 				var mapkey string
 				var mapvalue string
@@ -1326,7 +1135,7 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 						iNdEx += skippy
 					}
 				}
-				x.Crossplane[mapkey] = mapvalue
+				x.Annotations[mapkey] = mapvalue
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -1367,7 +1176,7 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 // versions:
 // 	protoc-gen-go v1.27.0
 // 	protoc        (unknown)
-// source: overlock/overlock/configuration.proto
+// source: overlock/overlock/meta.proto
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
@@ -1376,145 +1185,111 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Configuration holds the configuration details.
-type Configuration struct {
+// Metadata contains metadata information.
+type Metadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         uint64             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApiVersion string             `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind       string             `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
-	Metadata   *Metadata          `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Spec       *ConfigurationSpec `protobuf:"bytes,5,opt,name=spec,proto3" json:"spec,omitempty"`
+	Name        string       `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Annotations *Annotations `protobuf:"bytes,2,opt,name=annotations,proto3" json:"annotations,omitempty"`
 }
 
-func (x *Configuration) Reset() {
-	*x = Configuration{}
+func (x *Metadata) Reset() {
+	*x = Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_configuration_proto_msgTypes[0]
+		mi := &file_overlock_overlock_meta_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *Configuration) String() string {
+func (x *Metadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Configuration) ProtoMessage() {}
+func (*Metadata) ProtoMessage() {}
 
-// Deprecated: Use Configuration.ProtoReflect.Descriptor instead.
-func (*Configuration) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_configuration_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use Metadata.ProtoReflect.Descriptor instead.
+func (*Metadata) Descriptor() ([]byte, []int) {
+	return file_overlock_overlock_meta_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Configuration) GetId() uint64 {
+func (x *Metadata) GetName() string {
 	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Configuration) GetApiVersion() string {
-	if x != nil {
-		return x.ApiVersion
+		return x.Name
 	}
 	return ""
 }
 
-func (x *Configuration) GetKind() string {
+func (x *Metadata) GetAnnotations() *Annotations {
 	if x != nil {
-		return x.Kind
-	}
-	return ""
-}
-
-func (x *Configuration) GetMetadata() *Metadata {
-	if x != nil {
-		return x.Metadata
+		return x.Annotations
 	}
 	return nil
 }
 
-func (x *Configuration) GetSpec() *ConfigurationSpec {
-	if x != nil {
-		return x.Spec
-	}
-	return nil
-}
-
-// Spec defines the specification of the composition.
-type ConfigurationSpec struct {
+// Annotations represents a map of annotations.
+type Annotations struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Crossplane map[string]string `protobuf:"bytes,1,rep,name=crossplane,proto3" json:"crossplane,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Annotations map[string]string `protobuf:"bytes,1,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
-func (x *ConfigurationSpec) Reset() {
-	*x = ConfigurationSpec{}
+func (x *Annotations) Reset() {
+	*x = Annotations{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_configuration_proto_msgTypes[1]
+		mi := &file_overlock_overlock_meta_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ConfigurationSpec) String() string {
+func (x *Annotations) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ConfigurationSpec) ProtoMessage() {}
+func (*Annotations) ProtoMessage() {}
 
-// Deprecated: Use ConfigurationSpec.ProtoReflect.Descriptor instead.
-func (*ConfigurationSpec) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_configuration_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use Annotations.ProtoReflect.Descriptor instead.
+func (*Annotations) Descriptor() ([]byte, []int) {
+	return file_overlock_overlock_meta_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ConfigurationSpec) GetCrossplane() map[string]string {
+func (x *Annotations) GetAnnotations() map[string]string {
 	if x != nil {
-		return x.Crossplane
+		return x.Annotations
 	}
 	return nil
 }
 
-var File_overlock_overlock_configuration_proto protoreflect.FileDescriptor
+var File_overlock_overlock_meta_proto protoreflect.FileDescriptor
 
-var file_overlock_overlock_configuration_proto_rawDesc = []byte{
-	0x0a, 0x25, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c,
-	0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x1a, 0x1c, 0x6f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6d, 0x65,
-	0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc7, 0x01, 0x0a, 0x0d, 0x43, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70,
-	0x69, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0a, 0x61, 0x70, 0x69, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x6b,
-	0x69, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12,
-	0x37, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08,
-	0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x38, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69,
-	0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70,
-	0x65, 0x63, 0x22, 0xa8, 0x01, 0x0a, 0x11, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65, 0x63, 0x12, 0x54, 0x0a, 0x0a, 0x63, 0x72, 0x6f, 0x73,
-	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x6f,
+var file_overlock_overlock_meta_proto_rawDesc = []byte{
+	0x0a, 0x1c, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2f, 0x6d, 0x65, 0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x22, 0x60, 0x0a, 0x08, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x12, 0x40, 0x0a, 0x0b, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x41, 0x6e, 0x6e, 0x6f, 0x74,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0b, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x22, 0xa0, 0x01, 0x0a, 0x0b, 0x41, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x12, 0x51, 0x0a, 0x0b, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x41, 0x6e, 0x6e,
+	0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x41, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0b, 0x61, 0x6e, 0x6e, 0x6f, 0x74,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x1a, 0x3e, 0x0a, 0x10, 0x41, 0x6e, 0x6e, 0x6f, 0x74, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
+	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
+	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0xa7, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6f,
 	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
-	0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70,
-	0x65, 0x63, 0x2e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x45, 0x6e, 0x74,
-	0x72, 0x79, 0x52, 0x0a, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x1a, 0x3d,
-	0x0a, 0x0f, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x45, 0x6e, 0x74, 0x72,
-	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0xb0, 0x01,
-	0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f,
-	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x42, 0x12, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x6f,
+	0x42, 0x09, 0x4d, 0x65, 0x74, 0x61, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x6f,
 	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72,
 	0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xa2, 0x02, 0x03,
 	0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4f,
@@ -1527,44 +1302,41 @@ var file_overlock_overlock_configuration_proto_rawDesc = []byte{
 }
 
 var (
-	file_overlock_overlock_configuration_proto_rawDescOnce sync.Once
-	file_overlock_overlock_configuration_proto_rawDescData = file_overlock_overlock_configuration_proto_rawDesc
+	file_overlock_overlock_meta_proto_rawDescOnce sync.Once
+	file_overlock_overlock_meta_proto_rawDescData = file_overlock_overlock_meta_proto_rawDesc
 )
 
-func file_overlock_overlock_configuration_proto_rawDescGZIP() []byte {
-	file_overlock_overlock_configuration_proto_rawDescOnce.Do(func() {
-		file_overlock_overlock_configuration_proto_rawDescData = protoimpl.X.CompressGZIP(file_overlock_overlock_configuration_proto_rawDescData)
+func file_overlock_overlock_meta_proto_rawDescGZIP() []byte {
+	file_overlock_overlock_meta_proto_rawDescOnce.Do(func() {
+		file_overlock_overlock_meta_proto_rawDescData = protoimpl.X.CompressGZIP(file_overlock_overlock_meta_proto_rawDescData)
 	})
-	return file_overlock_overlock_configuration_proto_rawDescData
+	return file_overlock_overlock_meta_proto_rawDescData
 }
 
-var file_overlock_overlock_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_overlock_overlock_configuration_proto_goTypes = []interface{}{
-	(*Configuration)(nil),     // 0: overlock.overlock.Configuration
-	(*ConfigurationSpec)(nil), // 1: overlock.overlock.ConfigurationSpec
-	nil,                       // 2: overlock.overlock.ConfigurationSpec.CrossplaneEntry
-	(*Metadata)(nil),          // 3: overlock.overlock.Metadata
+var file_overlock_overlock_meta_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_overlock_overlock_meta_proto_goTypes = []interface{}{
+	(*Metadata)(nil),    // 0: overlock.overlock.Metadata
+	(*Annotations)(nil), // 1: overlock.overlock.Annotations
+	nil,                 // 2: overlock.overlock.Annotations.AnnotationsEntry
 }
-var file_overlock_overlock_configuration_proto_depIdxs = []int32{
-	3, // 0: overlock.overlock.Configuration.metadata:type_name -> overlock.overlock.Metadata
-	1, // 1: overlock.overlock.Configuration.spec:type_name -> overlock.overlock.ConfigurationSpec
-	2, // 2: overlock.overlock.ConfigurationSpec.crossplane:type_name -> overlock.overlock.ConfigurationSpec.CrossplaneEntry
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+var file_overlock_overlock_meta_proto_depIdxs = []int32{
+	1, // 0: overlock.overlock.Metadata.annotations:type_name -> overlock.overlock.Annotations
+	2, // 1: overlock.overlock.Annotations.annotations:type_name -> overlock.overlock.Annotations.AnnotationsEntry
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_overlock_overlock_configuration_proto_init() }
-func file_overlock_overlock_configuration_proto_init() {
-	if File_overlock_overlock_configuration_proto != nil {
+func init() { file_overlock_overlock_meta_proto_init() }
+func file_overlock_overlock_meta_proto_init() {
+	if File_overlock_overlock_meta_proto != nil {
 		return
 	}
-	file_overlock_overlock_meta_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_overlock_overlock_configuration_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Configuration); i {
+		file_overlock_overlock_meta_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Metadata); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1575,8 +1347,8 @@ func file_overlock_overlock_configuration_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_configuration_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ConfigurationSpec); i {
+		file_overlock_overlock_meta_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Annotations); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1592,18 +1364,18 @@ func file_overlock_overlock_configuration_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_overlock_overlock_configuration_proto_rawDesc,
+			RawDescriptor: file_overlock_overlock_meta_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_overlock_overlock_configuration_proto_goTypes,
-		DependencyIndexes: file_overlock_overlock_configuration_proto_depIdxs,
-		MessageInfos:      file_overlock_overlock_configuration_proto_msgTypes,
+		GoTypes:           file_overlock_overlock_meta_proto_goTypes,
+		DependencyIndexes: file_overlock_overlock_meta_proto_depIdxs,
+		MessageInfos:      file_overlock_overlock_meta_proto_msgTypes,
 	}.Build()
-	File_overlock_overlock_configuration_proto = out.File
-	file_overlock_overlock_configuration_proto_rawDesc = nil
-	file_overlock_overlock_configuration_proto_goTypes = nil
-	file_overlock_overlock_configuration_proto_depIdxs = nil
+	File_overlock_overlock_meta_proto = out.File
+	file_overlock_overlock_meta_proto_rawDesc = nil
+	file_overlock_overlock_meta_proto_goTypes = nil
+	file_overlock_overlock_meta_proto_depIdxs = nil
 }

@@ -15,8 +15,10 @@ func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpda
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var configuration = types.Configuration{
-		Id:   msg.Id,
-		Name: msg.Name,
+		Id: msg.Id,
+		Metadata: &types.Metadata{
+			Name: msg.Name,
+		},
 		Spec: msg.Spec,
 	}
 
