@@ -1,7 +1,8 @@
 syntax = "proto3";
 package overlock.overlock;
 
-import "overlock/overlock/meta.proto";
+import "overlock/overlock/configuration_spec.proto";
+import "overlock/overlock/metadata.proto";
 
 option go_package = "overlock/x/overlock/types";
 
@@ -12,9 +13,4 @@ message Configuration {
   string kind = 3;
   Metadata metadata = 4;
   ConfigurationSpec spec = 5;
-}
-
-// Spec defines the specification of the composition.
-message ConfigurationSpec {
-  map<string, string> crossplane = 1;
 }

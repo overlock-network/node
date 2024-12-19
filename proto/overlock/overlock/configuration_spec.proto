@@ -1,0 +1,9 @@
+syntax = "proto3";
+package overlock.overlock;
+
+option go_package = "overlock/x/overlock/types";
+
+// Spec defines the specification of the composition.
+message ConfigurationSpec {
+  map<string, string> crossplane = 1;
+}

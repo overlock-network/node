@@ -1,0 +1,16 @@
+syntax = "proto3";
+package overlock.overlock;
+
+import "overlock/overlock/metadata.proto";
+import "overlock/overlock/xrd_spec.proto";
+
+option go_package = "overlock/x/overlock/types";
+
+// Complete CompositeResourceDefinition object.
+message CompositeResourceDefinition {
+  uint64 id = 1;
+  string api_version = 2;
+  string kind = 3;
+  Metadata metadata = 4;
+  XrdSpec spec = 5;
+}

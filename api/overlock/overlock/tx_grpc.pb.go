@@ -20,6 +20,12 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Msg_UpdateParams_FullMethodName        = "/overlock.overlock.Msg/UpdateParams"
+	Msg_CreateComposition_FullMethodName   = "/overlock.overlock.Msg/CreateComposition"
+	Msg_UpdateComposition_FullMethodName   = "/overlock.overlock.Msg/UpdateComposition"
+	Msg_DeleteComposition_FullMethodName   = "/overlock.overlock.Msg/DeleteComposition"
+	Msg_CreateXrd_FullMethodName           = "/overlock.overlock.Msg/CreateXrd"
+	Msg_UpdateXrd_FullMethodName           = "/overlock.overlock.Msg/UpdateXrd"
+	Msg_DeleteXrd_FullMethodName           = "/overlock.overlock.Msg/DeleteXrd"
 	Msg_CreateConfiguration_FullMethodName = "/overlock.overlock.Msg/CreateConfiguration"
 	Msg_UpdateConfiguration_FullMethodName = "/overlock.overlock.Msg/UpdateConfiguration"
 	Msg_DeleteConfiguration_FullMethodName = "/overlock.overlock.Msg/DeleteConfiguration"
@@ -32,6 +38,12 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
+	CreateComposition(ctx context.Context, in *MsgCreateComposition, opts ...grpc.CallOption) (*MsgCreateCompositionResponse, error)
+	UpdateComposition(ctx context.Context, in *MsgUpdateComposition, opts ...grpc.CallOption) (*MsgUpdateCompositionResponse, error)
+	DeleteComposition(ctx context.Context, in *MsgDeleteComposition, opts ...grpc.CallOption) (*MsgDeleteCompositionResponse, error)
+	CreateXrd(ctx context.Context, in *MsgCreateXrd, opts ...grpc.CallOption) (*MsgCreateXrdResponse, error)
+	UpdateXrd(ctx context.Context, in *MsgUpdateXrd, opts ...grpc.CallOption) (*MsgUpdateXrdResponse, error)
+	DeleteXrd(ctx context.Context, in *MsgDeleteXrd, opts ...grpc.CallOption) (*MsgDeleteXrdResponse, error)
 	CreateConfiguration(ctx context.Context, in *MsgCreateConfiguration, opts ...grpc.CallOption) (*MsgCreateConfigurationResponse, error)
 	UpdateConfiguration(ctx context.Context, in *MsgUpdateConfiguration, opts ...grpc.CallOption) (*MsgUpdateConfigurationResponse, error)
 	DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error)
@@ -48,6 +60,60 @@ func NewMsgClient(cc grpc.ClientConnInterface) MsgClient {
 func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error) {
 	out := new(MsgUpdateParamsResponse)
 	err := c.cc.Invoke(ctx, Msg_UpdateParams_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) CreateComposition(ctx context.Context, in *MsgCreateComposition, opts ...grpc.CallOption) (*MsgCreateCompositionResponse, error) {
+	out := new(MsgCreateCompositionResponse)
+	err := c.cc.Invoke(ctx, Msg_CreateComposition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateComposition(ctx context.Context, in *MsgUpdateComposition, opts ...grpc.CallOption) (*MsgUpdateCompositionResponse, error) {
+	out := new(MsgUpdateCompositionResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateComposition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteComposition(ctx context.Context, in *MsgDeleteComposition, opts ...grpc.CallOption) (*MsgDeleteCompositionResponse, error) {
+	out := new(MsgDeleteCompositionResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteComposition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) CreateXrd(ctx context.Context, in *MsgCreateXrd, opts ...grpc.CallOption) (*MsgCreateXrdResponse, error) {
+	out := new(MsgCreateXrdResponse)
+	err := c.cc.Invoke(ctx, Msg_CreateXrd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateXrd(ctx context.Context, in *MsgUpdateXrd, opts ...grpc.CallOption) (*MsgUpdateXrdResponse, error) {
+	out := new(MsgUpdateXrdResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateXrd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteXrd(ctx context.Context, in *MsgDeleteXrd, opts ...grpc.CallOption) (*MsgDeleteXrdResponse, error) {
+	out := new(MsgDeleteXrdResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteXrd_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,6 +154,12 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
+	CreateComposition(context.Context, *MsgCreateComposition) (*MsgCreateCompositionResponse, error)
+	UpdateComposition(context.Context, *MsgUpdateComposition) (*MsgUpdateCompositionResponse, error)
+	DeleteComposition(context.Context, *MsgDeleteComposition) (*MsgDeleteCompositionResponse, error)
+	CreateXrd(context.Context, *MsgCreateXrd) (*MsgCreateXrdResponse, error)
+	UpdateXrd(context.Context, *MsgUpdateXrd) (*MsgUpdateXrdResponse, error)
+	DeleteXrd(context.Context, *MsgDeleteXrd) (*MsgDeleteXrdResponse, error)
 	CreateConfiguration(context.Context, *MsgCreateConfiguration) (*MsgCreateConfigurationResponse, error)
 	UpdateConfiguration(context.Context, *MsgUpdateConfiguration) (*MsgUpdateConfigurationResponse, error)
 	DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error)
@@ -100,6 +172,24 @@ type UnimplementedMsgServer struct {
 
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
+}
+func (UnimplementedMsgServer) CreateComposition(context.Context, *MsgCreateComposition) (*MsgCreateCompositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateComposition not implemented")
+}
+func (UnimplementedMsgServer) UpdateComposition(context.Context, *MsgUpdateComposition) (*MsgUpdateCompositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateComposition not implemented")
+}
+func (UnimplementedMsgServer) DeleteComposition(context.Context, *MsgDeleteComposition) (*MsgDeleteCompositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComposition not implemented")
+}
+func (UnimplementedMsgServer) CreateXrd(context.Context, *MsgCreateXrd) (*MsgCreateXrdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateXrd not implemented")
+}
+func (UnimplementedMsgServer) UpdateXrd(context.Context, *MsgUpdateXrd) (*MsgUpdateXrdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateXrd not implemented")
+}
+func (UnimplementedMsgServer) DeleteXrd(context.Context, *MsgDeleteXrd) (*MsgDeleteXrdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteXrd not implemented")
 }
 func (UnimplementedMsgServer) CreateConfiguration(context.Context, *MsgCreateConfiguration) (*MsgCreateConfigurationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateConfiguration not implemented")
@@ -137,6 +227,114 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).UpdateParams(ctx, req.(*MsgUpdateParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_CreateComposition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateComposition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateComposition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreateComposition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateComposition(ctx, req.(*MsgCreateComposition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateComposition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateComposition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateComposition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateComposition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateComposition(ctx, req.(*MsgUpdateComposition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteComposition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteComposition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteComposition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteComposition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteComposition(ctx, req.(*MsgDeleteComposition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_CreateXrd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateXrd)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateXrd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreateXrd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateXrd(ctx, req.(*MsgCreateXrd))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateXrd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateXrd)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateXrd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateXrd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateXrd(ctx, req.(*MsgUpdateXrd))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteXrd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteXrd)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteXrd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteXrd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteXrd(ctx, req.(*MsgDeleteXrd))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -205,6 +403,30 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateParams",
 			Handler:    _Msg_UpdateParams_Handler,
+		},
+		{
+			MethodName: "CreateComposition",
+			Handler:    _Msg_CreateComposition_Handler,
+		},
+		{
+			MethodName: "UpdateComposition",
+			Handler:    _Msg_UpdateComposition_Handler,
+		},
+		{
+			MethodName: "DeleteComposition",
+			Handler:    _Msg_DeleteComposition_Handler,
+		},
+		{
+			MethodName: "CreateXrd",
+			Handler:    _Msg_CreateXrd_Handler,
+		},
+		{
+			MethodName: "UpdateXrd",
+			Handler:    _Msg_UpdateXrd_Handler,
+		},
+		{
+			MethodName: "DeleteXrd",
+			Handler:    _Msg_DeleteXrd_Handler,
 		},
 		{
 			MethodName: "CreateConfiguration",
