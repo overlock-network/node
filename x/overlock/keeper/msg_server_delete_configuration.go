@@ -18,6 +18,7 @@ func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *types.MsgDele
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
-	k.RemoveConfiguration(ctx, msg.Id)
+	k.RemoveComposition(ctx, msg.Id)
+
 	return &types.MsgDeleteConfigurationResponse{}, nil
 }

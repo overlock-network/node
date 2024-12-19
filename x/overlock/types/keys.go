@@ -13,6 +13,14 @@ const (
 	ConfigurationKey = "Configuration/value/"
 
 	ConfigurationCountKey = "Configuration/count/"
+
+	CompositionKey = "Composition/value/"
+
+	CompositionCountKey = "Composition/count/"
+
+	CompositeResourceDefinitionKey = "CompositeResourceDefinition/value/"
+
+	CompositeResourceDefinitionCountKey = "CompositeResourceDefinition/count/"
 )
 
 var (

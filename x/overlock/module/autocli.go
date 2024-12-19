@@ -31,6 +31,90 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "ListComposition",
+					Use:            "list-composition",
+					Short:          "Query list-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ListXrd",
+					Use:            "list-xrd",
+					Short:          "Query list-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -53,6 +137,60 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "update-configuration [name] [spec] [id]",
 					Short:          "Send a update-configuration tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "spec"}, {ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "DeleteConfiguration",
+					Use:            "delete-configuration [id]",
+					Short:          "Send a delete-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateComposition",
+					Use:            "create-composition [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateComposition",
+					Use:            "update-composition [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "DeleteComposition",
+					Use:            "delete-composition [id]",
+					Short:          "Send a delete-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateXrd",
+					Use:            "create-xrd [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateXrd",
+					Use:            "update-xrd [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "DeleteXrd",
+					Use:            "delete-xrd [id]",
+					Short:          "Send a delete-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateConfiguration",
+					Use:            "create-configuration [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateConfiguration",
+					Use:            "update-configuration [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteConfiguration",

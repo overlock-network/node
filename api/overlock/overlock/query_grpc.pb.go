@@ -22,6 +22,10 @@ const (
 	Query_Params_FullMethodName            = "/overlock.overlock.Query/Params"
 	Query_ShowConfiguration_FullMethodName = "/overlock.overlock.Query/ShowConfiguration"
 	Query_ListConfiguration_FullMethodName = "/overlock.overlock.Query/ListConfiguration"
+	Query_ListComposition_FullMethodName   = "/overlock.overlock.Query/ListComposition"
+	Query_ShowComposition_FullMethodName   = "/overlock.overlock.Query/ShowComposition"
+	Query_ShowXrd_FullMethodName           = "/overlock.overlock.Query/ShowXrd"
+	Query_ListXrd_FullMethodName           = "/overlock.overlock.Query/ListXrd"
 )
 
 // QueryClient is the client API for Query service.
@@ -34,6 +38,14 @@ type QueryClient interface {
 	ShowConfiguration(ctx context.Context, in *QueryShowConfigurationRequest, opts ...grpc.CallOption) (*QueryShowConfigurationResponse, error)
 	// Queries a list of ListConfiguration items.
 	ListConfiguration(ctx context.Context, in *QueryListConfigurationRequest, opts ...grpc.CallOption) (*QueryListConfigurationResponse, error)
+	// Queries a list of ListComposition items.
+	ListComposition(ctx context.Context, in *QueryListCompositionRequest, opts ...grpc.CallOption) (*QueryListCompositionResponse, error)
+	// Queries a list of ShowComposition items.
+	ShowComposition(ctx context.Context, in *QueryShowCompositionRequest, opts ...grpc.CallOption) (*QueryShowCompositionResponse, error)
+	// Queries a list of ShowXrd items.
+	ShowXrd(ctx context.Context, in *QueryShowXrdRequest, opts ...grpc.CallOption) (*QueryShowXrdResponse, error)
+	// Queries a list of ListXrd items.
+	ListXrd(ctx context.Context, in *QueryListXrdRequest, opts ...grpc.CallOption) (*QueryListXrdResponse, error)
 }
 
 type queryClient struct {
@@ -71,6 +83,42 @@ func (c *queryClient) ListConfiguration(ctx context.Context, in *QueryListConfig
 	return out, nil
 }
 
+func (c *queryClient) ListComposition(ctx context.Context, in *QueryListCompositionRequest, opts ...grpc.CallOption) (*QueryListCompositionResponse, error) {
+	out := new(QueryListCompositionResponse)
+	err := c.cc.Invoke(ctx, Query_ListComposition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ShowComposition(ctx context.Context, in *QueryShowCompositionRequest, opts ...grpc.CallOption) (*QueryShowCompositionResponse, error) {
+	out := new(QueryShowCompositionResponse)
+	err := c.cc.Invoke(ctx, Query_ShowComposition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ShowXrd(ctx context.Context, in *QueryShowXrdRequest, opts ...grpc.CallOption) (*QueryShowXrdResponse, error) {
+	out := new(QueryShowXrdResponse)
+	err := c.cc.Invoke(ctx, Query_ShowXrd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListXrd(ctx context.Context, in *QueryListXrdRequest, opts ...grpc.CallOption) (*QueryListXrdResponse, error) {
+	out := new(QueryListXrdResponse)
+	err := c.cc.Invoke(ctx, Query_ListXrd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -81,6 +129,14 @@ type QueryServer interface {
 	ShowConfiguration(context.Context, *QueryShowConfigurationRequest) (*QueryShowConfigurationResponse, error)
 	// Queries a list of ListConfiguration items.
 	ListConfiguration(context.Context, *QueryListConfigurationRequest) (*QueryListConfigurationResponse, error)
+	// Queries a list of ListComposition items.
+	ListComposition(context.Context, *QueryListCompositionRequest) (*QueryListCompositionResponse, error)
+	// Queries a list of ShowComposition items.
+	ShowComposition(context.Context, *QueryShowCompositionRequest) (*QueryShowCompositionResponse, error)
+	// Queries a list of ShowXrd items.
+	ShowXrd(context.Context, *QueryShowXrdRequest) (*QueryShowXrdResponse, error)
+	// Queries a list of ListXrd items.
+	ListXrd(context.Context, *QueryListXrdRequest) (*QueryListXrdResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -96,6 +152,18 @@ func (UnimplementedQueryServer) ShowConfiguration(context.Context, *QueryShowCon
 }
 func (UnimplementedQueryServer) ListConfiguration(context.Context, *QueryListConfigurationRequest) (*QueryListConfigurationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListConfiguration not implemented")
+}
+func (UnimplementedQueryServer) ListComposition(context.Context, *QueryListCompositionRequest) (*QueryListCompositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListComposition not implemented")
+}
+func (UnimplementedQueryServer) ShowComposition(context.Context, *QueryShowCompositionRequest) (*QueryShowCompositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowComposition not implemented")
+}
+func (UnimplementedQueryServer) ShowXrd(context.Context, *QueryShowXrdRequest) (*QueryShowXrdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowXrd not implemented")
+}
+func (UnimplementedQueryServer) ListXrd(context.Context, *QueryListXrdRequest) (*QueryListXrdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListXrd not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -164,6 +232,78 @@ func _Query_ListConfiguration_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListComposition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListCompositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListComposition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListComposition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListComposition(ctx, req.(*QueryListCompositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ShowComposition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowCompositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowComposition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowComposition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowComposition(ctx, req.(*QueryShowCompositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ShowXrd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowXrdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowXrd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowXrd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowXrd(ctx, req.(*QueryShowXrdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListXrd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListXrdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListXrd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListXrd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListXrd(ctx, req.(*QueryListXrdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -182,6 +322,22 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListConfiguration",
 			Handler:    _Query_ListConfiguration_Handler,
+		},
+		{
+			MethodName: "ListComposition",
+			Handler:    _Query_ListComposition_Handler,
+		},
+		{
+			MethodName: "ShowComposition",
+			Handler:    _Query_ShowComposition_Handler,
+		},
+		{
+			MethodName: "ShowXrd",
+			Handler:    _Query_ShowXrd_Handler,
+		},
+		{
+			MethodName: "ListXrd",
+			Handler:    _Query_ListXrd_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

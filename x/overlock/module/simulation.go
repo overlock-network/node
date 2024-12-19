@@ -23,6 +23,30 @@ var (
 )
 
 const (
+	opWeightMsgCreateComposition = "op_weight_msg_create_composition"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateComposition int = 100
+
+	opWeightMsgUpdateComposition = "op_weight_msg_update_composition"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateComposition int = 100
+
+	opWeightMsgDeleteComposition = "op_weight_msg_delete_composition"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteComposition int = 100
+
+	opWeightMsgCreateXrd = "op_weight_msg_create_xrd"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateXrd int = 100
+
+	opWeightMsgUpdateXrd = "op_weight_msg_update_xrd"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateXrd int = 100
+
+	opWeightMsgDeleteXrd = "op_weight_msg_delete_xrd"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteXrd int = 100
+
 	opWeightMsgCreateConfiguration = "op_weight_msg_create_configuration"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateConfiguration int = 100
@@ -57,6 +81,72 @@ func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
+
+	var weightMsgCreateComposition int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateComposition, &weightMsgCreateComposition, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateComposition = defaultWeightMsgCreateComposition
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateComposition,
+		overlocksimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateComposition int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateComposition, &weightMsgUpdateComposition, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateComposition = defaultWeightMsgUpdateComposition
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateComposition,
+		overlocksimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteComposition int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeleteComposition, &weightMsgDeleteComposition, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteComposition = defaultWeightMsgDeleteComposition
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteComposition,
+		overlocksimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateXrd int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateXrd, &weightMsgCreateXrd, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateXrd = defaultWeightMsgCreateXrd
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateXrd,
+		overlocksimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateXrd int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateXrd, &weightMsgUpdateXrd, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateXrd = defaultWeightMsgUpdateXrd
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateXrd,
+		overlocksimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteXrd int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeleteXrd, &weightMsgDeleteXrd, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteXrd = defaultWeightMsgDeleteXrd
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteXrd,
+		overlocksimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	var weightMsgCreateConfiguration int
 	simState.AppParams.GetOrGenerate(opWeightMsgCreateConfiguration, &weightMsgCreateConfiguration, nil,
@@ -99,6 +189,78 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 // ProposalMsgs returns msgs used for governance proposals for simulations.
 func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.WeightedProposalMsg {
 	return []simtypes.WeightedProposalMsg{
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateConfiguration,
+			defaultWeightMsgCreateConfiguration,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateConfiguration,
+			defaultWeightMsgUpdateConfiguration,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDeleteConfiguration,
+			defaultWeightMsgDeleteConfiguration,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateComposition,
+			defaultWeightMsgCreateComposition,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateComposition,
+			defaultWeightMsgUpdateComposition,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDeleteComposition,
+			defaultWeightMsgDeleteComposition,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateXrd,
+			defaultWeightMsgCreateXrd,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateXrd,
+			defaultWeightMsgUpdateXrd,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDeleteXrd,
+			defaultWeightMsgDeleteXrd,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				overlocksimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
 		simulation.NewWeightedProposalMsg(
 			opWeightMsgCreateConfiguration,
 			defaultWeightMsgCreateConfiguration,

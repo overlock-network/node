@@ -8,12 +8,14 @@ import (
 
 var _ sdk.Msg = &MsgUpdateConfiguration{}
 
-func NewMsgUpdateConfiguration(creator string, name string, spec ConfigurationSpec, id uint64) *MsgUpdateConfiguration {
+func NewMsgUpdateConfiguration(creator string, id uint64, apiVersion string, kind string, metadata *Metadata, spec *ConfigurationSpec) *MsgUpdateConfiguration {
 	return &MsgUpdateConfiguration{
-		Creator: creator,
-		Name:    name,
-		Spec:    &spec,
-		Id:      id,
+		Creator:    creator,
+		Id:         id,
+		ApiVersion: apiVersion,
+		Kind:       kind,
+		Metadata:   metadata,
+		Spec:       spec,
 	}
 }
 

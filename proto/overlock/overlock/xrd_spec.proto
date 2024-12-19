@@ -1,21 +1,10 @@
 syntax = "proto3";
 package overlock.overlock;
 
-import "overlock/overlock/meta.proto";
-
 option go_package = "overlock/x/overlock/types";
 
-// Complete CompositeResourceDefinition object.
-message CompositeResourceDefinition {
-  uint64 id = 1;
-  string api_version = 2;
-  string kind = 3;
-  Metadata metadata = 4;
-  CompositeResourceDefinitionSpec spec = 5;
-}
-
 // Main CompositeResourceDefinition spec structure.
-message CompositeResourceDefinitionSpec {
+message XrdSpec {
   string group = 1;
   ResourceNames names = 2;
   repeated Version versions = 3;

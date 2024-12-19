@@ -11,18 +11,16 @@ import (
 func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCreateConfiguration) (*types.MsgCreateConfigurationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var post = types.Configuration{
-		Metadata: &types.Metadata{
-			Name: msg.Name,
-		},
+	var configuration = types.Configuration{
+		ApiVersion: msg.ApiVersion,
+		Kind:       msg.Kind,
+		Metadata:   msg.Metadata,
+		Spec:       &types.ConfigurationSpec{},
 	}
 	id := k.AppendConfiguration(
 		ctx,
-		post,
+		configuration,
 	)
-	return &types.MsgCreateConfigurationResponse{
-		Id: id,
-	}, nil
 
-	return &types.MsgCreateConfigurationResponse{}, nil
+	return &types.MsgCreateConfigurationResponse{Id: id}, nil
 }

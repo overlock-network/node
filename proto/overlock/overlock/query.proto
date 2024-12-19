@@ -3,43 +3,64 @@ syntax = "proto3";
 package overlock.overlock;
 
 import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "cosmos/base/query/v1beta1/pagination.proto";
-import "overlock/overlock/params.proto";
+import "overlock/overlock/composite_resource_definition.proto";
+import "overlock/overlock/composition.proto";
 import "overlock/overlock/configuration.proto";
+import "overlock/overlock/params.proto";
 
 option go_package = "overlock/x/overlock/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  
   // Parameters queries the parameters of the module.
-  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/overlock/overlock/params";
-  
   }
-  
+
   // Queries a list of ShowConfiguration items.
-  rpc ShowConfiguration (QueryShowConfigurationRequest) returns (QueryShowConfigurationResponse) {
+  rpc ShowConfiguration(QueryShowConfigurationRequest) returns (QueryShowConfigurationResponse) {
     option (google.api.http).get = "/overlock/overlock/show_configuration/{id}";
-  
   }
-  
+
   // Queries a list of ListConfiguration items.
-  rpc ListConfiguration (QueryListConfigurationRequest) returns (QueryListConfigurationResponse) {
+  rpc ListConfiguration(QueryListConfigurationRequest) returns (QueryListConfigurationResponse) {
     option (google.api.http).get = "/overlock/overlock/list_configuration";
-  
+  }
+
+  // Queries a list of ListComposition items.
+  rpc ListComposition(QueryListCompositionRequest) returns (QueryListCompositionResponse) {
+    option (google.api.http).get = "/overlock/overlock/list_composition";
+  }
+
+  // Queries a list of ShowComposition items.
+  rpc ShowComposition(QueryShowCompositionRequest) returns (QueryShowCompositionResponse) {
+    option (google.api.http).get = "/overlock/overlock/show_composition/{id}";
+  }
+
+  // Queries a list of ShowXrd items.
+  rpc ShowXrd(QueryShowXrdRequest) returns (QueryShowXrdResponse) {
+    option (google.api.http).get = "/overlock/overlock/show_xrd/{id}";
+  }
+
+  // Queries a list of ListXrd items.
+  rpc ListXrd(QueryListXrdRequest) returns (QueryListXrdResponse) {
+    option (google.api.http).get = "/overlock/overlock/list_xrd";
   }
 }
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-  
   // params holds all the parameters of this module.
-  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
 }
 
 message QueryShowConfigurationRequest {
@@ -55,7 +76,40 @@ message QueryListConfigurationRequest {
 }
 
 message QueryListConfigurationResponse {
-  repeated  Configuration configurations = 1 [(gogoproto.nullable) = false];
+  repeated Configuration configurations = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+message QueryListCompositionRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListCompositionResponse {
+  repeated Composition compositions = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryShowCompositionRequest {
+  uint64 id = 1;
+}
+
+message QueryShowCompositionResponse {
+  Composition composition = 1;
+}
+
+message QueryShowXrdRequest {
+  uint64 id = 1;
+}
+
+message QueryShowXrdResponse {
+  CompositeResourceDefinition xrd = 1;
+}
+
+message QueryListXrdRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListXrdResponse {
+  repeated CompositeResourceDefinition xrd = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
