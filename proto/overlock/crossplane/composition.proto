@@ -1,0 +1,108 @@
+syntax = "proto3";
+package overlock.crossplane;
+
+import "overlock/crossplane/metadata.proto";
+
+option go_package = "overlock/x/crossplane/types";
+
+// Composition represents the composition of resources.
+message Composition {
+  uint64 id = 1;
+  Metadata metadata = 2;
+  CompositionSpec spec = 3;
+}
+
+// Spec defines the specification of the composition.
+message CompositionSpec {
+  CompositeTypeRef composite_type_ref = 3;
+  string mode = 4;
+  repeated Resource resources = 6;
+}
+
+// CompositeTypeRef references a composite type.
+message CompositeTypeRef {
+  string api_version = 1;
+  string kind = 2;
+}
+
+// Resource represents a resource in the composition.
+message Resource {
+  string name = 1;
+  Base base = 2;
+  repeated Patch patches = 3;
+}
+
+// Base defines the base resource.
+message Base {
+  string api_version = 1;
+  string kind = 2;
+}
+
+// Patch represents a patch to be applied to a resource.
+message Patch {
+  string type = 1;
+  string from_field_path = 2;
+  string to_field_path = 3;
+
+  repeated Transformer transforms = 5;
+}
+
+// Transformer represents a transformation to be applied.
+message Transformer {
+  // transform defines the type of transformation to be applied.
+  oneof transform {
+    string map = 1;
+    StringTransform string = 2;
+    MathTransform math = 3;
+    MatchTransform match = 4;
+    ConvertTransform convert = 5;
+  }
+}
+
+// StringTransform defines a string transformation.
+message StringTransform {
+  // type defines the type of string transformation.
+  oneof transform_type {
+    StringConvert convert = 1;
+    StringFormat format = 2;
+  }
+}
+
+// StringConvert defines a string conversion.
+message StringConvert {
+  string convert = 1; // ToUpper or ToLower
+}
+
+// StringFormat defines a string format.
+message StringFormat {
+  string fmt = 1;
+}
+
+// MathTransform defines a mathematical transformation.
+message MathTransform {
+  // operation defines the mathematical operation to be applied.
+  oneof operation {
+    double clamp_min = 1;
+    double clamp_max = 2;
+    double multiply = 3;
+  }
+}
+
+// MatchTransform defines a match transformation.
+message MatchTransform {
+  repeated Pattern patterns = 1;
+  string fallback_to = 2;
+  string fallback_value = 3;
+}
+
+// Pattern represents a pattern in the match transformation.
+message Pattern {
+  string type = 1; // "literal" or "regexp"
+  string result = 2;
+}
+
+// ConvertTransform defines a conversion transformation.
+message ConvertTransform {
+  string to_type = 1; // bool, float64, int, etc.
+  string format = 2; // "json" or "quantity"
+}

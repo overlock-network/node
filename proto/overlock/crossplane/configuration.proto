@@ -1,0 +1,13 @@
+syntax = "proto3";
+package overlock.crossplane;
+
+import "overlock/crossplane/metadata.proto";
+
+option go_package = "overlock/x/crossplane/types";
+
+// Configuration holds the configuration details.
+message Configuration {
+  uint64 id = 1;
+  Metadata metadata = 2;
+  string spec = 3;
+}

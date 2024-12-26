@@ -1,0 +1,10 @@
+syntax = "proto3";
+package overlock.crossplane;
+
+option go_package = "overlock/x/crossplane/types";
+
+// Metadata contains metadata information.
+message Metadata {
+  string name = 1;
+  string annotations = 2;
+}

@@ -53,9 +53,9 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	overlockmodulev1 "overlock/api/overlock/overlock/module"
-	_ "overlock/x/overlock/module" // import for side-effects
-	overlockmoduletypes "overlock/x/overlock/types"
+	crossplanemodulev1 "overlock/api/overlock/crossplane/module"
+	_ "overlock/x/crossplane/module" // import for side-effects
+	overlockmoduletypes "overlock/x/crossplane/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -295,7 +295,7 @@ var (
 			},
 			{
 				Name:   overlockmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&overlockmodulev1.Module{}),
+				Config: appconfig.WrapAny(&crossplanemodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
