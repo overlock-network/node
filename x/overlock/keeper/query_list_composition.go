@@ -24,7 +24,7 @@ func (k Keeper) ListComposition(goCtx context.Context, req *types.QueryListCompo
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositionKey))
 
 	var compositions []types.Composition
-	pageRes, err := query.Paginate(store, &req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
 		var composition types.Composition
 		if err := k.cdc.Unmarshal(value, &composition); err != nil {
 			return err

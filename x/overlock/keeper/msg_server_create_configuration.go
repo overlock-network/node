@@ -12,10 +12,8 @@ func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCrea
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var configuration = types.Configuration{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.ConfigurationSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	id := k.AppendConfiguration(
 		ctx,

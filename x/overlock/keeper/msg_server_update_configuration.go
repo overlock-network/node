@@ -15,10 +15,8 @@ func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpda
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var configuration = types.Configuration{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.ConfigurationSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	_, found := k.GetComposition(ctx, msg.Id)
 	if !found {

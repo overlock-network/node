@@ -1,7 +1,6 @@
 syntax = "proto3";
 package overlock.overlock;
 
-import "overlock/overlock/configuration_spec.proto";
 import "overlock/overlock/metadata.proto";
 
 option go_package = "overlock/x/overlock/types";
@@ -9,8 +8,6 @@ option go_package = "overlock/x/overlock/types";
 // Configuration holds the configuration details.
 message Configuration {
   uint64 id = 1;
-  string api_version = 2;
-  string kind = 3;
-  Metadata metadata = 4;
-  ConfigurationSpec spec = 5;
+  Metadata metadata = 2;
+  string spec = 3;
 }

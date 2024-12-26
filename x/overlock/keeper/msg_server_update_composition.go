@@ -15,10 +15,8 @@ func (k msgServer) UpdateComposition(goCtx context.Context, msg *types.MsgUpdate
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var composition = types.Composition{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.CompositionSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	_, found := k.GetComposition(ctx, msg.Id)
 	if !found {

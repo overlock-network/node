@@ -103,18 +103,6 @@ func (x *fastReflection_Xrd) Range(f func(protoreflect.FieldDescriptor, protoref
 			return
 		}
 	}
-	if x.ApiVersion != "" {
-		value := protoreflect.ValueOfString(x.ApiVersion)
-		if !f(fd_Xrd_api_version, value) {
-			return
-		}
-	}
-	if x.Kind != "" {
-		value := protoreflect.ValueOfString(x.Kind)
-		if !f(fd_Xrd_kind, value) {
-			return
-		}
-	}
 	if x.Metadata != nil {
 		value := protoreflect.ValueOfMessage(x.Metadata.ProtoReflect())
 		if !f(fd_Xrd_metadata, value) {
@@ -144,10 +132,6 @@ func (x *fastReflection_Xrd) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "overlock.overlock.Xrd.id":
 		return x.Id != uint64(0)
-	case "overlock.overlock.Xrd.api_version":
-		return x.ApiVersion != ""
-	case "overlock.overlock.Xrd.kind":
-		return x.Kind != ""
 	case "overlock.overlock.Xrd.metadata":
 		return x.Metadata != nil
 	case "overlock.overlock.Xrd.spec":
@@ -170,10 +154,6 @@ func (x *fastReflection_Xrd) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "overlock.overlock.Xrd.id":
 		x.Id = uint64(0)
-	case "overlock.overlock.Xrd.api_version":
-		x.ApiVersion = ""
-	case "overlock.overlock.Xrd.kind":
-		x.Kind = ""
 	case "overlock.overlock.Xrd.metadata":
 		x.Metadata = nil
 	case "overlock.overlock.Xrd.spec":
@@ -197,12 +177,6 @@ func (x *fastReflection_Xrd) Get(descriptor protoreflect.FieldDescriptor) protor
 	case "overlock.overlock.Xrd.id":
 		value := x.Id
 		return protoreflect.ValueOfUint64(value)
-	case "overlock.overlock.Xrd.api_version":
-		value := x.ApiVersion
-		return protoreflect.ValueOfString(value)
-	case "overlock.overlock.Xrd.kind":
-		value := x.Kind
-		return protoreflect.ValueOfString(value)
 	case "overlock.overlock.Xrd.metadata":
 		value := x.Metadata
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
@@ -231,10 +205,6 @@ func (x *fastReflection_Xrd) Set(fd protoreflect.FieldDescriptor, value protoref
 	switch fd.FullName() {
 	case "overlock.overlock.Xrd.id":
 		x.Id = value.Uint()
-	case "overlock.overlock.Xrd.api_version":
-		x.ApiVersion = value.Interface().(string)
-	case "overlock.overlock.Xrd.kind":
-		x.Kind = value.Interface().(string)
 	case "overlock.overlock.Xrd.metadata":
 		x.Metadata = value.Message().Interface().(*Metadata)
 	case "overlock.overlock.Xrd.spec":
@@ -372,14 +342,6 @@ func (x *fastReflection_Xrd) ProtoMethods() *protoiface.Methods {
 		if x.Id != 0 {
 			n += 1 + runtime.Sov(uint64(x.Id))
 		}
-		l = len(x.ApiVersion)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Kind)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
 		if x.Metadata != nil {
 			l = options.Size(x.Metadata)
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -444,20 +406,6 @@ func (x *fastReflection_Xrd) ProtoMethods() *protoiface.Methods {
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0x22
-		}
-		if len(x.Kind) > 0 {
-			i -= len(x.Kind)
-			copy(dAtA[i:], x.Kind)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Kind)))
-			i--
-			dAtA[i] = 0x1a
-		}
-		if len(x.ApiVersion) > 0 {
-			i -= len(x.ApiVersion)
-			copy(dAtA[i:], x.ApiVersion)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ApiVersion)))
-			i--
-			dAtA[i] = 0x12
 		}
 		if x.Id != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
@@ -562,7 +510,6 @@ func (x *fastReflection_Xrd) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.ApiVersion = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
 				if wireType != 2 {
@@ -594,7 +541,6 @@ func (x *fastReflection_Xrd) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Kind = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 4:
 				if wireType != 2 {
@@ -723,8 +669,6 @@ type Xrd struct {
 	unknownFields protoimpl.UnknownFields
 
 	Id         uint64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApiVersion string    `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind       string    `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
 	Metadata   *Metadata `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Spec       *XrdSpec  `protobuf:"bytes,5,opt,name=spec,proto3" json:"spec,omitempty"`
 }
@@ -756,19 +700,6 @@ func (x *Xrd) GetId() uint64 {
 	return 0
 }
 
-func (x *Xrd) GetApiVersion() string {
-	if x != nil {
-		return x.ApiVersion
-	}
-	return ""
-}
-
-func (x *Xrd) GetKind() string {
-	if x != nil {
-		return x.Kind
-	}
-	return ""
-}
 
 func (x *Xrd) GetMetadata() *Metadata {
 	if x != nil {

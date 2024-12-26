@@ -19,19 +19,5 @@ message ResourceNames {
 // Defines each version of the CRD.
 message Version {
   string name = 1;
-  OpenAPIV3Schema schema = 2;
-}
-
-// Schema for the object properties in OpenAPI.
-message OpenAPIV3Schema {
-  // Property represents a single property in the OpenAPI schema.
-  message Property {
-    string type = 1;
-    string default = 2;
-    repeated string enum = 3;
-    map<string, Property> properties = 4;
-    repeated string required = 5;
-  }
-
-  map<string, Property> properties = 1;
+  string schema = 2;
 }

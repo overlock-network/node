@@ -9,8 +9,6 @@ option go_package = "overlock/x/overlock/types";
 // Composition represents the composition of resources.
 message Composition {
   uint64 id = 1;
-  string api_version = 2;
-  string kind = 3;
-  Metadata metadata = 4;
-  CompositionSpec spec = 5;
+  Metadata metadata = 2;
+  CompositionSpec spec = 3;
 }

@@ -24,11 +24,9 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // Configuration holds the configuration details.
 type Configuration struct {
-	Id         uint64             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApiVersion string             `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind       string             `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
-	Metadata   *Metadata          `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Spec       *ConfigurationSpec `protobuf:"bytes,5,opt,name=spec,proto3" json:"spec,omitempty"`
+	Id       uint64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Metadata *Metadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Spec     string    `protobuf:"bytes,3,opt,name=spec,proto3" json:"spec,omitempty"`
 }
 
 func (m *Configuration) Reset()         { *m = Configuration{} }
@@ -71,20 +69,6 @@ func (m *Configuration) GetId() uint64 {
 	return 0
 }
 
-func (m *Configuration) GetApiVersion() string {
-	if m != nil {
-		return m.ApiVersion
-	}
-	return ""
-}
-
-func (m *Configuration) GetKind() string {
-	if m != nil {
-		return m.Kind
-	}
-	return ""
-}
-
 func (m *Configuration) GetMetadata() *Metadata {
 	if m != nil {
 		return m.Metadata
@@ -92,11 +76,11 @@ func (m *Configuration) GetMetadata() *Metadata {
 	return nil
 }
 
-func (m *Configuration) GetSpec() *ConfigurationSpec {
+func (m *Configuration) GetSpec() string {
 	if m != nil {
 		return m.Spec
 	}
-	return nil
+	return ""
 }
 
 func init() {
@@ -108,23 +92,19 @@ func init() {
 }
 
 var fileDescriptor_3abc2eaf02ca9921 = []byte{
-	// 247 bytes of a gzipped FileDescriptorProto
+	// 186 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xcd, 0x2f, 0x4b, 0x2d,
 	0xca, 0xc9, 0x4f, 0xce, 0xd6, 0x87, 0x33, 0x92, 0xf3, 0xf3, 0xd2, 0x32, 0xd3, 0x4b, 0x8b, 0x12,
 	0x4b, 0x32, 0xf3, 0xf3, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x04, 0x61, 0xb2, 0x7a, 0x30,
-	0x86, 0x94, 0x16, 0x01, 0x9d, 0xf1, 0xc5, 0x05, 0xa9, 0xc9, 0x10, 0xed, 0x52, 0x0a, 0x98, 0x6a,
-	0x73, 0x53, 0x4b, 0x12, 0x53, 0x12, 0x4b, 0x12, 0x21, 0x2a, 0x94, 0x8e, 0x33, 0x72, 0xf1, 0x3a,
-	0x23, 0x6b, 0x17, 0xe2, 0xe3, 0x62, 0xca, 0x4c, 0x91, 0x60, 0x54, 0x60, 0xd4, 0x60, 0x09, 0x62,
-	0xca, 0x4c, 0x11, 0x92, 0xe7, 0xe2, 0x4e, 0x2c, 0xc8, 0x8c, 0x2f, 0x4b, 0x2d, 0x2a, 0xce, 0xcc,
-	0xcf, 0x93, 0x60, 0x52, 0x60, 0xd4, 0xe0, 0x0c, 0xe2, 0x4a, 0x2c, 0xc8, 0x0c, 0x83, 0x88, 0x08,
-	0x09, 0x71, 0xb1, 0x64, 0x67, 0xe6, 0xa5, 0x48, 0x30, 0x83, 0x65, 0xc0, 0x6c, 0x21, 0x73, 0x2e,
-	0x0e, 0x98, 0x45, 0x12, 0x2c, 0x0a, 0x8c, 0x1a, 0xdc, 0x46, 0xd2, 0x7a, 0x18, 0x5e, 0xd1, 0xf3,
-	0x85, 0x2a, 0x09, 0x82, 0x2b, 0x16, 0xb2, 0xe0, 0x62, 0x01, 0xb9, 0x5f, 0x82, 0x15, 0xac, 0x49,
-	0x05, 0x8b, 0x26, 0x14, 0xd7, 0x06, 0x17, 0xa4, 0x26, 0x07, 0x81, 0x75, 0x38, 0x19, 0x9f, 0x78,
-	0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c,
-	0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x24, 0xdc, 0xf3, 0x15, 0x88, 0x70, 0x28,
-	0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0x87, 0x82, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x9f,
-	0x2d, 0x4a, 0x62, 0x8f, 0x01, 0x00, 0x00,
+	0x86, 0x94, 0x02, 0xa6, 0xce, 0xdc, 0xd4, 0x92, 0xc4, 0x94, 0xc4, 0x92, 0x44, 0x88, 0x26, 0xa5,
+	0x1c, 0x2e, 0x5e, 0x67, 0x64, 0xb3, 0x84, 0xf8, 0xb8, 0x98, 0x32, 0x53, 0x24, 0x18, 0x15, 0x18,
+	0x35, 0x58, 0x82, 0x98, 0x32, 0x53, 0x84, 0xcc, 0xb9, 0x38, 0x60, 0x5a, 0x24, 0x98, 0x14, 0x18,
+	0x35, 0xb8, 0x8d, 0xa4, 0xf5, 0x30, 0x2c, 0xd2, 0xf3, 0x85, 0x2a, 0x09, 0x82, 0x2b, 0x16, 0x12,
+	0xe2, 0x62, 0x29, 0x2e, 0x48, 0x4d, 0x96, 0x60, 0x56, 0x60, 0xd4, 0xe0, 0x0c, 0x02, 0xb3, 0x9d,
+	0x8c, 0x4f, 0x3c, 0x92, 0x63, 0xbc, 0xf0, 0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f,
+	0xe5, 0x18, 0x2e, 0x3c, 0x96, 0x63, 0xb8, 0xf1, 0x58, 0x8e, 0x21, 0x4a, 0x12, 0xee, 0xc0, 0x0a,
+	0x84, 0x5b, 0x4b, 0x2a, 0x0b, 0x52, 0x8b, 0x93, 0xd8, 0xc0, 0x2e, 0x35, 0x06, 0x04, 0x00, 0x00,
+	0xff, 0xff, 0xc6, 0x2e, 0x52, 0x47, 0x07, 0x01, 0x00, 0x00,
 }
 
 func (m *Configuration) Marshal() (dAtA []byte, err error) {
@@ -147,17 +127,12 @@ func (m *Configuration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Spec != nil {
-		{
-			size, err := m.Spec.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintConfiguration(dAtA, i, uint64(size))
-		}
+	if len(m.Spec) > 0 {
+		i -= len(m.Spec)
+		copy(dAtA[i:], m.Spec)
+		i = encodeVarintConfiguration(dAtA, i, uint64(len(m.Spec)))
 		i--
-		dAtA[i] = 0x2a
+		dAtA[i] = 0x1a
 	}
 	if m.Metadata != nil {
 		{
@@ -168,20 +143,6 @@ func (m *Configuration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i -= size
 			i = encodeVarintConfiguration(dAtA, i, uint64(size))
 		}
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.Kind) > 0 {
-		i -= len(m.Kind)
-		copy(dAtA[i:], m.Kind)
-		i = encodeVarintConfiguration(dAtA, i, uint64(len(m.Kind)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.ApiVersion) > 0 {
-		i -= len(m.ApiVersion)
-		copy(dAtA[i:], m.ApiVersion)
-		i = encodeVarintConfiguration(dAtA, i, uint64(len(m.ApiVersion)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -213,20 +174,12 @@ func (m *Configuration) Size() (n int) {
 	if m.Id != 0 {
 		n += 1 + sovConfiguration(uint64(m.Id))
 	}
-	l = len(m.ApiVersion)
-	if l > 0 {
-		n += 1 + l + sovConfiguration(uint64(l))
-	}
-	l = len(m.Kind)
-	if l > 0 {
-		n += 1 + l + sovConfiguration(uint64(l))
-	}
 	if m.Metadata != nil {
 		l = m.Metadata.Size()
 		n += 1 + l + sovConfiguration(uint64(l))
 	}
-	if m.Spec != nil {
-		l = m.Spec.Size()
+	l = len(m.Spec)
+	if l > 0 {
 		n += 1 + l + sovConfiguration(uint64(l))
 	}
 	return n
@@ -288,70 +241,6 @@ func (m *Configuration) Unmarshal(dAtA []byte) error {
 			}
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ApiVersion", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConfiguration
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConfiguration
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConfiguration
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ApiVersion = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConfiguration
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConfiguration
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConfiguration
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Kind = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
 			}
 			var msglen int
@@ -386,11 +275,11 @@ func (m *Configuration) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 5:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
 			}
-			var msglen int
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowConfiguration
@@ -400,27 +289,23 @@ func (m *Configuration) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			if msglen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthConfiguration
 			}
-			postIndex := iNdEx + msglen
+			postIndex := iNdEx + intStringLen
 			if postIndex < 0 {
 				return ErrInvalidLengthConfiguration
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Spec == nil {
-				m.Spec = &ConfigurationSpec{}
-			}
-			if err := m.Spec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
+			m.Spec = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

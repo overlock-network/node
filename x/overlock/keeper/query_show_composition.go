@@ -23,5 +23,5 @@ func (k Keeper) ShowComposition(goCtx context.Context, req *types.QueryShowCompo
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowCompositionResponse{Composition: &composition}, nil
+	return &types.QueryShowCompositionResponse{Composition: composition}, nil
 }

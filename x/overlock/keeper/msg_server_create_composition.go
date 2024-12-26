@@ -12,10 +12,8 @@ func (k msgServer) CreateComposition(goCtx context.Context, msg *types.MsgCreate
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var composition = types.Composition{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.CompositionSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	id := k.AppendComposition(
 		ctx,

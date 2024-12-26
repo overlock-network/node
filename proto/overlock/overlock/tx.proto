@@ -7,8 +7,6 @@ import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "overlock/overlock/composition_spec.proto";
-import "overlock/overlock/configuration.proto";
-import "overlock/overlock/configuration_spec.proto";
 import "overlock/overlock/metadata.proto";
 import "overlock/overlock/params.proto";
 import "overlock/overlock/xrd_spec.proto";
@@ -57,8 +55,6 @@ message MsgUpdateParamsResponse {}
 message MsgCreateComposition {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string apiVersion = 2;
-  string kind = 3;
   Metadata metadata = 4;
   CompositionSpec spec = 5;
 }
@@ -71,8 +67,6 @@ message MsgUpdateComposition {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
-  string apiVersion = 3;
-  string kind = 4;
   Metadata metadata = 5;
   CompositionSpec spec = 6;
 }
@@ -90,8 +84,6 @@ message MsgDeleteCompositionResponse {}
 message MsgCreateXrd {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string apiVersion = 2;
-  string kind = 3;
   Metadata metadata = 4;
   XrdSpec spec = 5;
 }
@@ -104,8 +96,6 @@ message MsgUpdateXrd {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
-  string apiVersion = 3;
-  string kind = 4;
   Metadata metadata = 5;
   XrdSpec spec = 6;
 }
@@ -123,10 +113,8 @@ message MsgDeleteXrdResponse {}
 message MsgCreateConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string apiVersion = 2;
-  string kind = 3;
   Metadata metadata = 4;
-  ConfigurationSpec spec = 5;
+  string spec = 5;
 }
 
 message MsgCreateConfigurationResponse {
@@ -137,10 +125,8 @@ message MsgUpdateConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
-  string apiVersion = 3;
-  string kind = 4;
   Metadata metadata = 5;
-  ConfigurationSpec spec = 6;
+  string spec = 6;
 }
 
 message MsgUpdateConfigurationResponse {}
