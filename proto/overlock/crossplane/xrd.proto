@@ -1,0 +1,32 @@
+syntax = "proto3";
+package overlock.crossplane;
+
+import "overlock/crossplane/metadata.proto";
+
+option go_package = "overlock/x/crossplane/types";
+
+// Complete CompositeResourceDefinition object.
+message CompositeResourceDefinition {
+  uint64 id = 1;
+  Metadata metadata = 2;
+  XrdSpec spec = 3;
+}
+
+// Main CompositeResourceDefinition spec structure.
+message XrdSpec {
+  string group = 1;
+  ResourceNames names = 2;
+  repeated Version versions = 3;
+}
+
+// Names of the resource in singular, plural, and kind forms.
+message ResourceNames {
+  string kind = 1;
+  string plural = 2;
+}
+
+// Defines each version of the CRD.
+message Version {
+  string name = 1;
+  string schema = 2;
+}

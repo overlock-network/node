@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"overlock/x/overlock/keeper"
-	"overlock/x/overlock/types"
+	"overlock/x/crossplane/keeper"
+	"overlock/x/crossplane/types"
 )
 
 func OverlockKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

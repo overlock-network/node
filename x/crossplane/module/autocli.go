@@ -1,0 +1,205 @@
+package overlock
+
+import (
+	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
+
+	modulev1 "overlock/api/overlock/crossplane"
+)
+
+// AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.
+func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
+	return &autocliv1.ModuleOptions{
+		Query: &autocliv1.ServiceCommandDescriptor{
+			Service: modulev1.Query_ServiceDesc.ServiceName,
+			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
+				{
+					RpcMethod: "Params",
+					Use:       "params",
+					Short:     "Shows the parameters of the module",
+				},
+				{
+					RpcMethod:      "ShowConfiguration",
+					Use:            "show-configuration [id]",
+					Short:          "Query show-configuration",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ListConfiguration",
+					Use:            "list-configuration",
+					Short:          "Query list-configuration",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
+				{
+					RpcMethod:      "ListComposition",
+					Use:            "list-composition",
+					Short:          "Query list-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowComposition",
+					Use:            "show-composition [id]",
+					Short:          "Query show-composition",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ShowXrd",
+					Use:            "show-xrd [id]",
+					Short:          "Query show-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ListXrd",
+					Use:            "list-xrd",
+					Short:          "Query list-xrd",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
+				// this line is used by ignite scaffolding # autocli/query
+			},
+		},
+		Tx: &autocliv1.ServiceCommandDescriptor{
+			Service:              modulev1.Msg_ServiceDesc.ServiceName,
+			EnhanceCustomCommand: true, // only required if you want to use the custom command
+			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
+				{
+					RpcMethod: "UpdateParams",
+					Skip:      true, // skipped because authority gated
+				},
+				{
+					RpcMethod:      "CreateConfiguration",
+					Use:            "create-configuration [name]",
+					Short:          "Send a create-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+				},
+				{
+					RpcMethod:      "UpdateConfiguration",
+					Use:            "update-configuration [name] [spec] [id]",
+					Short:          "Send a update-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "spec"}, {ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "DeleteConfiguration",
+					Use:            "delete-configuration [id]",
+					Short:          "Send a delete-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateComposition",
+					Use:            "create-composition [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateComposition",
+					Use:            "update-composition [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "DeleteComposition",
+					Use:            "delete-composition [id]",
+					Short:          "Send a delete-composition tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateXrd",
+					Use:            "create-xrd [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateXrd",
+					Use:            "update-xrd [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "DeleteXrd",
+					Use:            "delete-xrd [id]",
+					Short:          "Send a delete-xrd tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateConfiguration",
+					Use:            "create-configuration [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a create-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "UpdateConfiguration",
+					Use:            "update-configuration [id] [api-version] [kind] [metadata] [spec]",
+					Short:          "Send a update-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+				},
+				{
+					RpcMethod:      "DeleteConfiguration",
+					Use:            "delete-configuration [id]",
+					Short:          "Send a delete-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				// this line is used by ignite scaffolding # autocli/tx
+			},
+		},
+	}
+}
