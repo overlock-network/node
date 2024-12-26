@@ -104,8 +104,8 @@ func (x *fastReflection_Configuration) Range(f func(protoreflect.FieldDescriptor
 			return
 		}
 	}
-	if x.Spec != "" {
-		value := protoreflect.ValueOfString(x.Spec)
+	if x.Spec != nil {
+		value := protoreflect.ValueOfMessage(x.Spec.ProtoReflect())
 		if !f(fd_Configuration_spec, value) {
 			return
 		}
@@ -130,7 +130,7 @@ func (x *fastReflection_Configuration) Has(fd protoreflect.FieldDescriptor) bool
 	case "overlock.crossplane.Configuration.metadata":
 		return x.Metadata != nil
 	case "overlock.crossplane.Configuration.spec":
-		return x.Spec != ""
+		return x.Spec != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -152,7 +152,7 @@ func (x *fastReflection_Configuration) Clear(fd protoreflect.FieldDescriptor) {
 	case "overlock.crossplane.Configuration.metadata":
 		x.Metadata = nil
 	case "overlock.crossplane.Configuration.spec":
-		x.Spec = ""
+		x.Spec = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -177,7 +177,7 @@ func (x *fastReflection_Configuration) Get(descriptor protoreflect.FieldDescript
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	case "overlock.crossplane.Configuration.spec":
 		value := x.Spec
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -203,7 +203,7 @@ func (x *fastReflection_Configuration) Set(fd protoreflect.FieldDescriptor, valu
 	case "overlock.crossplane.Configuration.metadata":
 		x.Metadata = value.Message().Interface().(*Metadata)
 	case "overlock.crossplane.Configuration.spec":
-		x.Spec = value.Interface().(string)
+		x.Spec = value.Message().Interface().(*ConfigurationSpec)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -229,10 +229,13 @@ func (x *fastReflection_Configuration) Mutable(fd protoreflect.FieldDescriptor) 
 			x.Metadata = new(Metadata)
 		}
 		return protoreflect.ValueOfMessage(x.Metadata.ProtoReflect())
+	case "overlock.crossplane.Configuration.spec":
+		if x.Spec == nil {
+			x.Spec = new(ConfigurationSpec)
+		}
+		return protoreflect.ValueOfMessage(x.Spec.ProtoReflect())
 	case "overlock.crossplane.Configuration.id":
 		panic(fmt.Errorf("field id of message overlock.crossplane.Configuration is not mutable"))
-	case "overlock.crossplane.Configuration.spec":
-		panic(fmt.Errorf("field spec of message overlock.crossplane.Configuration is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -252,7 +255,8 @@ func (x *fastReflection_Configuration) NewField(fd protoreflect.FieldDescriptor)
 		m := new(Metadata)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	case "overlock.crossplane.Configuration.spec":
-		return protoreflect.ValueOfString("")
+		m := new(ConfigurationSpec)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Configuration"))
@@ -329,8 +333,8 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Metadata)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Spec)
-		if l > 0 {
+		if x.Spec != nil {
+			l = options.Size(x.Spec)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -362,10 +366,17 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Spec) > 0 {
-			i -= len(x.Spec)
-			copy(dAtA[i:], x.Spec)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Spec)))
+		if x.Spec != nil {
+			encoded, err := options.Marshal(x.Spec)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0x1a
 		}
@@ -496,6 +507,1003 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
 				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Spec == nil {
+					x.Spec = &ConfigurationSpec{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Spec); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_ConfigurationSpec_2_list)(nil)
+
+type _ConfigurationSpec_2_list struct {
+	list *[]*Dependency
+}
+
+func (x *_ConfigurationSpec_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_ConfigurationSpec_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_ConfigurationSpec_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Dependency)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_ConfigurationSpec_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Dependency)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_ConfigurationSpec_2_list) AppendMutable() protoreflect.Value {
+	v := new(Dependency)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_ConfigurationSpec_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_ConfigurationSpec_2_list) NewElement() protoreflect.Value {
+	v := new(Dependency)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_ConfigurationSpec_2_list) IsValid() bool {
+	return x.list != nil
+}
+
+var (
+	md_ConfigurationSpec            protoreflect.MessageDescriptor
+	fd_ConfigurationSpec_crossplane protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_depends_on protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_overlock_crossplane_configuration_proto_init()
+	md_ConfigurationSpec = File_overlock_crossplane_configuration_proto.Messages().ByName("ConfigurationSpec")
+	fd_ConfigurationSpec_crossplane = md_ConfigurationSpec.Fields().ByName("crossplane")
+	fd_ConfigurationSpec_depends_on = md_ConfigurationSpec.Fields().ByName("depends_on")
+}
+
+var _ protoreflect.Message = (*fastReflection_ConfigurationSpec)(nil)
+
+type fastReflection_ConfigurationSpec ConfigurationSpec
+
+func (x *ConfigurationSpec) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_ConfigurationSpec)(x)
+}
+
+func (x *ConfigurationSpec) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_crossplane_configuration_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_ConfigurationSpec_messageType fastReflection_ConfigurationSpec_messageType
+var _ protoreflect.MessageType = fastReflection_ConfigurationSpec_messageType{}
+
+type fastReflection_ConfigurationSpec_messageType struct{}
+
+func (x fastReflection_ConfigurationSpec_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_ConfigurationSpec)(nil)
+}
+func (x fastReflection_ConfigurationSpec_messageType) New() protoreflect.Message {
+	return new(fastReflection_ConfigurationSpec)
+}
+func (x fastReflection_ConfigurationSpec_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_ConfigurationSpec
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_ConfigurationSpec) Descriptor() protoreflect.MessageDescriptor {
+	return md_ConfigurationSpec
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_ConfigurationSpec) Type() protoreflect.MessageType {
+	return _fastReflection_ConfigurationSpec_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_ConfigurationSpec) New() protoreflect.Message {
+	return new(fastReflection_ConfigurationSpec)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_ConfigurationSpec) Interface() protoreflect.ProtoMessage {
+	return (*ConfigurationSpec)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_ConfigurationSpec) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Crossplane != nil {
+		value := protoreflect.ValueOfMessage(x.Crossplane.ProtoReflect())
+		if !f(fd_ConfigurationSpec_crossplane, value) {
+			return
+		}
+	}
+	if len(x.DependsOn) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_2_list{list: &x.DependsOn})
+		if !f(fd_ConfigurationSpec_depends_on, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_ConfigurationSpec) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		return x.Crossplane != nil
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		return len(x.DependsOn) != 0
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_ConfigurationSpec) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		x.Crossplane = nil
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		x.DependsOn = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_ConfigurationSpec) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		value := x.Crossplane
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		if len(x.DependsOn) == 0 {
+			return protoreflect.ValueOfList(&_ConfigurationSpec_2_list{})
+		}
+		listValue := &_ConfigurationSpec_2_list{list: &x.DependsOn}
+		return protoreflect.ValueOfList(listValue)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_ConfigurationSpec) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		x.Crossplane = value.Message().Interface().(*CrossplaneSpec)
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		lv := value.List()
+		clv := lv.(*_ConfigurationSpec_2_list)
+		x.DependsOn = *clv.list
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_ConfigurationSpec) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		if x.Crossplane == nil {
+			x.Crossplane = new(CrossplaneSpec)
+		}
+		return protoreflect.ValueOfMessage(x.Crossplane.ProtoReflect())
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		if x.DependsOn == nil {
+			x.DependsOn = []*Dependency{}
+		}
+		value := &_ConfigurationSpec_2_list{list: &x.DependsOn}
+		return protoreflect.ValueOfList(value)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_ConfigurationSpec) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.ConfigurationSpec.crossplane":
+		m := new(CrossplaneSpec)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "overlock.crossplane.ConfigurationSpec.depends_on":
+		list := []*Dependency{}
+		return protoreflect.ValueOfList(&_ConfigurationSpec_2_list{list: &list})
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.ConfigurationSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_ConfigurationSpec) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.ConfigurationSpec", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_ConfigurationSpec) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_ConfigurationSpec) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_ConfigurationSpec) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*ConfigurationSpec)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.Crossplane != nil {
+			l = options.Size(x.Crossplane)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.DependsOn) > 0 {
+			for _, e := range x.DependsOn {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*ConfigurationSpec)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.DependsOn) > 0 {
+			for iNdEx := len(x.DependsOn) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.DependsOn[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+			}
+		}
+		if x.Crossplane != nil {
+			encoded, err := options.Marshal(x.Crossplane)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*ConfigurationSpec)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ConfigurationSpec: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: ConfigurationSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Crossplane", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Crossplane == nil {
+					x.Crossplane = &CrossplaneSpec{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Crossplane); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DependsOn", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.DependsOn = append(x.DependsOn, &Dependency{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.DependsOn[len(x.DependsOn)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_CrossplaneSpec         protoreflect.MessageDescriptor
+	fd_CrossplaneSpec_version protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_overlock_crossplane_configuration_proto_init()
+	md_CrossplaneSpec = File_overlock_crossplane_configuration_proto.Messages().ByName("CrossplaneSpec")
+	fd_CrossplaneSpec_version = md_CrossplaneSpec.Fields().ByName("version")
+}
+
+var _ protoreflect.Message = (*fastReflection_CrossplaneSpec)(nil)
+
+type fastReflection_CrossplaneSpec CrossplaneSpec
+
+func (x *CrossplaneSpec) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_CrossplaneSpec)(x)
+}
+
+func (x *CrossplaneSpec) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_crossplane_configuration_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_CrossplaneSpec_messageType fastReflection_CrossplaneSpec_messageType
+var _ protoreflect.MessageType = fastReflection_CrossplaneSpec_messageType{}
+
+type fastReflection_CrossplaneSpec_messageType struct{}
+
+func (x fastReflection_CrossplaneSpec_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_CrossplaneSpec)(nil)
+}
+func (x fastReflection_CrossplaneSpec_messageType) New() protoreflect.Message {
+	return new(fastReflection_CrossplaneSpec)
+}
+func (x fastReflection_CrossplaneSpec_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_CrossplaneSpec
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_CrossplaneSpec) Descriptor() protoreflect.MessageDescriptor {
+	return md_CrossplaneSpec
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_CrossplaneSpec) Type() protoreflect.MessageType {
+	return _fastReflection_CrossplaneSpec_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_CrossplaneSpec) New() protoreflect.Message {
+	return new(fastReflection_CrossplaneSpec)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_CrossplaneSpec) Interface() protoreflect.ProtoMessage {
+	return (*CrossplaneSpec)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_CrossplaneSpec) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Version != "" {
+		value := protoreflect.ValueOfString(x.Version)
+		if !f(fd_CrossplaneSpec_version, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_CrossplaneSpec) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		return x.Version != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_CrossplaneSpec) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		x.Version = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_CrossplaneSpec) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		value := x.Version
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_CrossplaneSpec) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		x.Version = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_CrossplaneSpec) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		panic(fmt.Errorf("field version of message overlock.crossplane.CrossplaneSpec is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_CrossplaneSpec) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.CrossplaneSpec.version":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.CrossplaneSpec"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.CrossplaneSpec does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_CrossplaneSpec) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.CrossplaneSpec", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_CrossplaneSpec) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_CrossplaneSpec) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_CrossplaneSpec) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_CrossplaneSpec) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*CrossplaneSpec)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Version)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*CrossplaneSpec)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Version) > 0 {
+			i -= len(x.Version)
+			copy(dAtA[i:], x.Version)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Version)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*CrossplaneSpec)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: CrossplaneSpec: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: CrossplaneSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
+				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -522,7 +1530,619 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Spec = string(dAtA[iNdEx:postIndex])
+				x.Version = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_Dependency               protoreflect.MessageDescriptor
+	fd_Dependency_configuration protoreflect.FieldDescriptor
+	fd_Dependency_function      protoreflect.FieldDescriptor
+	fd_Dependency_provider      protoreflect.FieldDescriptor
+	fd_Dependency_version       protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_overlock_crossplane_configuration_proto_init()
+	md_Dependency = File_overlock_crossplane_configuration_proto.Messages().ByName("Dependency")
+	fd_Dependency_configuration = md_Dependency.Fields().ByName("configuration")
+	fd_Dependency_function = md_Dependency.Fields().ByName("function")
+	fd_Dependency_provider = md_Dependency.Fields().ByName("provider")
+	fd_Dependency_version = md_Dependency.Fields().ByName("version")
+}
+
+var _ protoreflect.Message = (*fastReflection_Dependency)(nil)
+
+type fastReflection_Dependency Dependency
+
+func (x *Dependency) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_Dependency)(x)
+}
+
+func (x *Dependency) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_crossplane_configuration_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_Dependency_messageType fastReflection_Dependency_messageType
+var _ protoreflect.MessageType = fastReflection_Dependency_messageType{}
+
+type fastReflection_Dependency_messageType struct{}
+
+func (x fastReflection_Dependency_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_Dependency)(nil)
+}
+func (x fastReflection_Dependency_messageType) New() protoreflect.Message {
+	return new(fastReflection_Dependency)
+}
+func (x fastReflection_Dependency_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_Dependency
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_Dependency) Descriptor() protoreflect.MessageDescriptor {
+	return md_Dependency
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_Dependency) Type() protoreflect.MessageType {
+	return _fastReflection_Dependency_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_Dependency) New() protoreflect.Message {
+	return new(fastReflection_Dependency)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_Dependency) Interface() protoreflect.ProtoMessage {
+	return (*Dependency)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_Dependency) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Configuration != "" {
+		value := protoreflect.ValueOfString(x.Configuration)
+		if !f(fd_Dependency_configuration, value) {
+			return
+		}
+	}
+	if x.Function != "" {
+		value := protoreflect.ValueOfString(x.Function)
+		if !f(fd_Dependency_function, value) {
+			return
+		}
+	}
+	if x.Provider != "" {
+		value := protoreflect.ValueOfString(x.Provider)
+		if !f(fd_Dependency_provider, value) {
+			return
+		}
+	}
+	if x.Version != "" {
+		value := protoreflect.ValueOfString(x.Version)
+		if !f(fd_Dependency_version, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_Dependency) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		return x.Configuration != ""
+	case "overlock.crossplane.Dependency.function":
+		return x.Function != ""
+	case "overlock.crossplane.Dependency.provider":
+		return x.Provider != ""
+	case "overlock.crossplane.Dependency.version":
+		return x.Version != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Dependency) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		x.Configuration = ""
+	case "overlock.crossplane.Dependency.function":
+		x.Function = ""
+	case "overlock.crossplane.Dependency.provider":
+		x.Provider = ""
+	case "overlock.crossplane.Dependency.version":
+		x.Version = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_Dependency) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		value := x.Configuration
+		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.Dependency.function":
+		value := x.Function
+		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.Dependency.provider":
+		value := x.Provider
+		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.Dependency.version":
+		value := x.Version
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Dependency) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		x.Configuration = value.Interface().(string)
+	case "overlock.crossplane.Dependency.function":
+		x.Function = value.Interface().(string)
+	case "overlock.crossplane.Dependency.provider":
+		x.Provider = value.Interface().(string)
+	case "overlock.crossplane.Dependency.version":
+		x.Version = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Dependency) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		panic(fmt.Errorf("field configuration of message overlock.crossplane.Dependency is not mutable"))
+	case "overlock.crossplane.Dependency.function":
+		panic(fmt.Errorf("field function of message overlock.crossplane.Dependency is not mutable"))
+	case "overlock.crossplane.Dependency.provider":
+		panic(fmt.Errorf("field provider of message overlock.crossplane.Dependency is not mutable"))
+	case "overlock.crossplane.Dependency.version":
+		panic(fmt.Errorf("field version of message overlock.crossplane.Dependency is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_Dependency) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "overlock.crossplane.Dependency.configuration":
+		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.Dependency.function":
+		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.Dependency.provider":
+		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.Dependency.version":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
+		}
+		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_Dependency) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.Dependency", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_Dependency) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_Dependency) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_Dependency) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_Dependency) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*Dependency)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Configuration)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Function)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Provider)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.Version)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*Dependency)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Version) > 0 {
+			i -= len(x.Version)
+			copy(dAtA[i:], x.Version)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Version)))
+			i--
+			dAtA[i] = 0x22
+		}
+		if len(x.Provider) > 0 {
+			i -= len(x.Provider)
+			copy(dAtA[i:], x.Provider)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Provider)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.Function) > 0 {
+			i -= len(x.Function)
+			copy(dAtA[i:], x.Function)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Function)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Configuration) > 0 {
+			i -= len(x.Configuration)
+			copy(dAtA[i:], x.Configuration)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Configuration)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*Dependency)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Dependency: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Dependency: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Configuration", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Configuration = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Function", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Function = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Provider = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Version = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -578,9 +2198,9 @@ type Configuration struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       uint64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Metadata *Metadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Spec     string    `protobuf:"bytes,3,opt,name=spec,proto3" json:"spec,omitempty"`
+	Id       uint64             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Metadata *Metadata          `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Spec     *ConfigurationSpec `protobuf:"bytes,3,opt,name=spec,proto3" json:"spec,omitempty"`
 }
 
 func (x *Configuration) Reset() {
@@ -617,9 +2237,149 @@ func (x *Configuration) GetMetadata() *Metadata {
 	return nil
 }
 
-func (x *Configuration) GetSpec() string {
+func (x *Configuration) GetSpec() *ConfigurationSpec {
 	if x != nil {
 		return x.Spec
+	}
+	return nil
+}
+
+// Spec defines the specification of the composition.
+type ConfigurationSpec struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Crossplane *CrossplaneSpec `protobuf:"bytes,1,opt,name=crossplane,proto3" json:"crossplane,omitempty"`
+	DependsOn  []*Dependency   `protobuf:"bytes,2,rep,name=depends_on,json=dependsOn,proto3" json:"depends_on,omitempty"`
+}
+
+func (x *ConfigurationSpec) Reset() {
+	*x = ConfigurationSpec{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_overlock_crossplane_configuration_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ConfigurationSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigurationSpec) ProtoMessage() {}
+
+// Deprecated: Use ConfigurationSpec.ProtoReflect.Descriptor instead.
+func (*ConfigurationSpec) Descriptor() ([]byte, []int) {
+	return file_overlock_crossplane_configuration_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ConfigurationSpec) GetCrossplane() *CrossplaneSpec {
+	if x != nil {
+		return x.Crossplane
+	}
+	return nil
+}
+
+func (x *ConfigurationSpec) GetDependsOn() []*Dependency {
+	if x != nil {
+		return x.DependsOn
+	}
+	return nil
+}
+
+// Crossplane specs.
+type CrossplaneSpec struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+}
+
+func (x *CrossplaneSpec) Reset() {
+	*x = CrossplaneSpec{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_overlock_crossplane_configuration_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CrossplaneSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CrossplaneSpec) ProtoMessage() {}
+
+// Deprecated: Use CrossplaneSpec.ProtoReflect.Descriptor instead.
+func (*CrossplaneSpec) Descriptor() ([]byte, []int) {
+	return file_overlock_crossplane_configuration_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CrossplaneSpec) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+// Dependency specs.
+type Dependency struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Configuration string `protobuf:"bytes,1,opt,name=configuration,proto3" json:"configuration,omitempty"`
+	Function      string `protobuf:"bytes,2,opt,name=function,proto3" json:"function,omitempty"`
+	Provider      string `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	Version       string `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
+}
+
+func (x *Dependency) Reset() {
+	*x = Dependency{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_overlock_crossplane_configuration_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Dependency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dependency) ProtoMessage() {}
+
+// Deprecated: Use Dependency.ProtoReflect.Descriptor instead.
+func (*Dependency) Descriptor() ([]byte, []int) {
+	return file_overlock_crossplane_configuration_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Dependency) GetConfiguration() string {
+	if x != nil {
+		return x.Configuration
+	}
+	return ""
+}
+
+func (x *Dependency) GetFunction() string {
+	if x != nil {
+		return x.Function
+	}
+	return ""
+}
+
+func (x *Dependency) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *Dependency) GetVersion() string {
+	if x != nil {
+		return x.Version
 	}
 	return ""
 }
@@ -633,26 +2393,49 @@ var file_overlock_crossplane_configuration_proto_rawDesc = []byte{
 	0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x1a, 0x22,
 	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c,
 	0x61, 0x6e, 0x65, 0x2f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0x6e, 0x0a, 0x0d, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x02, 0x69, 0x64, 0x12, 0x39, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
-	0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x4d, 0x65, 0x74, 0x61,
-	0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x12,
-	0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x70,
-	0x65, 0x63, 0x42, 0xbc, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c,
-	0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x12,
-	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73,
-	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03, 0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f,
-	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61,
-	0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72,
-	0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2, 0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c,
-	0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47,
-	0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e,
-	0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x6f, 0x22, 0x96, 0x01, 0x0a, 0x0d, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x39, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12,
+	0x3a, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c,
+	0x61, 0x6e, 0x65, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0x98, 0x01, 0x0a, 0x11,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65,
+	0x63, 0x12, 0x43, 0x0a, 0x0a, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
+	0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x43, 0x72, 0x6f, 0x73,
+	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x53, 0x70, 0x65, 0x63, 0x52, 0x0a, 0x63, 0x72, 0x6f, 0x73,
+	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x12, 0x3e, 0x0a, 0x0a, 0x64, 0x65, 0x70, 0x65, 0x6e, 0x64,
+	0x73, 0x5f, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65,
+	0x2e, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x52, 0x09, 0x64, 0x65, 0x70,
+	0x65, 0x6e, 0x64, 0x73, 0x4f, 0x6e, 0x22, 0x2a, 0x0a, 0x0e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70,
+	0x6c, 0x61, 0x6e, 0x65, 0x53, 0x70, 0x65, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73,
+	0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69,
+	0x6f, 0x6e, 0x22, 0x84, 0x01, 0x0a, 0x0a, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63,
+	0x79, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12,
+	0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0xbc, 0x01, 0x0a, 0x17, 0x63, 0x6f,
+	0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73,
+	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x12, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
+	0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03,
+	0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43,
+	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72,
+	0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2,
+	0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72,
+	0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -667,18 +2450,24 @@ func file_overlock_crossplane_configuration_proto_rawDescGZIP() []byte {
 	return file_overlock_crossplane_configuration_proto_rawDescData
 }
 
-var file_overlock_crossplane_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_overlock_crossplane_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_overlock_crossplane_configuration_proto_goTypes = []interface{}{
-	(*Configuration)(nil), // 0: overlock.crossplane.Configuration
-	(*Metadata)(nil),      // 1: overlock.crossplane.Metadata
+	(*Configuration)(nil),     // 0: overlock.crossplane.Configuration
+	(*ConfigurationSpec)(nil), // 1: overlock.crossplane.ConfigurationSpec
+	(*CrossplaneSpec)(nil),    // 2: overlock.crossplane.CrossplaneSpec
+	(*Dependency)(nil),        // 3: overlock.crossplane.Dependency
+	(*Metadata)(nil),          // 4: overlock.crossplane.Metadata
 }
 var file_overlock_crossplane_configuration_proto_depIdxs = []int32{
-	1, // 0: overlock.crossplane.Configuration.metadata:type_name -> overlock.crossplane.Metadata
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: overlock.crossplane.Configuration.metadata:type_name -> overlock.crossplane.Metadata
+	1, // 1: overlock.crossplane.Configuration.spec:type_name -> overlock.crossplane.ConfigurationSpec
+	2, // 2: overlock.crossplane.ConfigurationSpec.crossplane:type_name -> overlock.crossplane.CrossplaneSpec
+	3, // 3: overlock.crossplane.ConfigurationSpec.depends_on:type_name -> overlock.crossplane.Dependency
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_overlock_crossplane_configuration_proto_init() }
@@ -700,6 +2489,42 @@ func file_overlock_crossplane_configuration_proto_init() {
 				return nil
 			}
 		}
+		file_overlock_crossplane_configuration_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ConfigurationSpec); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_overlock_crossplane_configuration_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CrossplaneSpec); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_overlock_crossplane_configuration_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Dependency); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -707,7 +2532,7 @@ func file_overlock_crossplane_configuration_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_overlock_crossplane_configuration_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

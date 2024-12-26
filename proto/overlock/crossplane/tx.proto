@@ -7,6 +7,7 @@ import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "overlock/crossplane/composition.proto";
+import "overlock/crossplane/configuration.proto";
 import "overlock/crossplane/metadata.proto";
 import "overlock/crossplane/params.proto";
 import "overlock/crossplane/xrd.proto";
@@ -135,7 +136,7 @@ message MsgCreateConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   Metadata metadata = 4;
-  string spec = 5;
+  ConfigurationSpec spec = 5;
 }
 
 // MsgCreateConfigurationResponse
@@ -149,7 +150,7 @@ message MsgUpdateConfiguration {
   string creator = 1;
   uint64 id = 2;
   Metadata metadata = 5;
-  string spec = 6;
+  ConfigurationSpec spec = 6;
 }
 
 // MsgUpdateConfigurationResponse
