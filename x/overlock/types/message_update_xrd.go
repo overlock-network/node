@@ -8,14 +8,12 @@ import (
 
 var _ sdk.Msg = &MsgUpdateXrd{}
 
-func NewMsgUpdateXrd(creator string, id uint64, apiVersion string, kind string, metadata *Metadata, spec *XrdSpec) *MsgUpdateXrd {
+func NewMsgUpdateXrd(creator string, id uint64, metadata *Metadata, spec *XrdSpec) *MsgUpdateXrd {
 	return &MsgUpdateXrd{
-		Creator:    creator,
-		Id:         id,
-		ApiVersion: apiVersion,
-		Kind:       kind,
-		Metadata:   metadata,
-		Spec:       spec,
+		Creator:  creator,
+		Id:       id,
+		Metadata: metadata,
+		Spec:     spec,
 	}
 }
 

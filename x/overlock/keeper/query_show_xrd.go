@@ -23,5 +23,5 @@ func (k Keeper) ShowXrd(goCtx context.Context, req *types.QueryShowXrdRequest) (
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowXrdResponse{Xrd: &xrd}, nil
+	return &types.QueryShowXrdResponse{Xrd: xrd}, nil
 }

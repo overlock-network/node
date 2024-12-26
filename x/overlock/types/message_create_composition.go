@@ -8,13 +8,11 @@ import (
 
 var _ sdk.Msg = &MsgCreateComposition{}
 
-func NewMsgCreateComposition(creator string, apiVersion string, kind string, metadata *Metadata, spec *CompositionSpec) *MsgCreateComposition {
+func NewMsgCreateComposition(creator string, metadata *Metadata, spec *CompositionSpec) *MsgCreateComposition {
 	return &MsgCreateComposition{
-		Creator:    creator,
-		ApiVersion: apiVersion,
-		Kind:       kind,
-		Metadata:   metadata,
-		Spec:       spec,
+		Creator:  creator,
+		Metadata: metadata,
+		Spec:     spec,
 	}
 }
 

@@ -11,7 +11,6 @@ import (
 	io "io"
 	math "math"
 	reflect "reflect"
-	sort "sort"
 	sync "sync"
 )
 
@@ -1773,93 +1772,10 @@ func (x *fastReflection_Resource) ProtoMethods() *protoiface.Methods {
 	}
 }
 
-var _ protoreflect.Map = (*_Base_3_map)(nil)
-
-type _Base_3_map struct {
-	m *map[string]string
-}
-
-func (x *_Base_3_map) Len() int {
-	if x.m == nil {
-		return 0
-	}
-	return len(*x.m)
-}
-
-func (x *_Base_3_map) Range(f func(protoreflect.MapKey, protoreflect.Value) bool) {
-	if x.m == nil {
-		return
-	}
-	for k, v := range *x.m {
-		mapKey := (protoreflect.MapKey)(protoreflect.ValueOfString(k))
-		mapValue := protoreflect.ValueOfString(v)
-		if !f(mapKey, mapValue) {
-			break
-		}
-	}
-}
-
-func (x *_Base_3_map) Has(key protoreflect.MapKey) bool {
-	if x.m == nil {
-		return false
-	}
-	keyUnwrapped := key.String()
-	concreteValue := keyUnwrapped
-	_, ok := (*x.m)[concreteValue]
-	return ok
-}
-
-func (x *_Base_3_map) Clear(key protoreflect.MapKey) {
-	if x.m == nil {
-		return
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	delete(*x.m, concreteKey)
-}
-
-func (x *_Base_3_map) Get(key protoreflect.MapKey) protoreflect.Value {
-	if x.m == nil {
-		return protoreflect.Value{}
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	v, ok := (*x.m)[concreteKey]
-	if !ok {
-		return protoreflect.Value{}
-	}
-	return protoreflect.ValueOfString(v)
-}
-
-func (x *_Base_3_map) Set(key protoreflect.MapKey, value protoreflect.Value) {
-	if !key.IsValid() || !value.IsValid() {
-		panic("invalid key or value provided")
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	valueUnwrapped := value.String()
-	concreteValue := valueUnwrapped
-	(*x.m)[concreteKey] = concreteValue
-}
-
-func (x *_Base_3_map) Mutable(key protoreflect.MapKey) protoreflect.Value {
-	panic("should not call Mutable on protoreflect.Map whose value is not of type protoreflect.Message")
-}
-
-func (x *_Base_3_map) NewValue() protoreflect.Value {
-	v := ""
-	return protoreflect.ValueOfString(v)
-}
-
-func (x *_Base_3_map) IsValid() bool {
-	return x.m != nil
-}
-
 var (
-	md_Base              protoreflect.MessageDescriptor
-	fd_Base_api_version  protoreflect.FieldDescriptor
-	fd_Base_kind         protoreflect.FieldDescriptor
-	fd_Base_for_provider protoreflect.FieldDescriptor
+	md_Base             protoreflect.MessageDescriptor
+	fd_Base_api_version protoreflect.FieldDescriptor
+	fd_Base_kind        protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -1867,7 +1783,6 @@ func init() {
 	md_Base = File_overlock_overlock_composition_spec_proto.Messages().ByName("Base")
 	fd_Base_api_version = md_Base.Fields().ByName("api_version")
 	fd_Base_kind = md_Base.Fields().ByName("kind")
-	fd_Base_for_provider = md_Base.Fields().ByName("for_provider")
 }
 
 var _ protoreflect.Message = (*fastReflection_Base)(nil)
@@ -1947,12 +1862,6 @@ func (x *fastReflection_Base) Range(f func(protoreflect.FieldDescriptor, protore
 			return
 		}
 	}
-	if len(x.ForProvider) != 0 {
-		value := protoreflect.ValueOfMap(&_Base_3_map{m: &x.ForProvider})
-		if !f(fd_Base_for_provider, value) {
-			return
-		}
-	}
 }
 
 // Has reports whether a field is populated.
@@ -1972,8 +1881,6 @@ func (x *fastReflection_Base) Has(fd protoreflect.FieldDescriptor) bool {
 		return x.ApiVersion != ""
 	case "overlock.overlock.Base.kind":
 		return x.Kind != ""
-	case "overlock.overlock.Base.for_provider":
-		return len(x.ForProvider) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Base"))
@@ -1994,8 +1901,6 @@ func (x *fastReflection_Base) Clear(fd protoreflect.FieldDescriptor) {
 		x.ApiVersion = ""
 	case "overlock.overlock.Base.kind":
 		x.Kind = ""
-	case "overlock.overlock.Base.for_provider":
-		x.ForProvider = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Base"))
@@ -2018,12 +1923,6 @@ func (x *fastReflection_Base) Get(descriptor protoreflect.FieldDescriptor) proto
 	case "overlock.overlock.Base.kind":
 		value := x.Kind
 		return protoreflect.ValueOfString(value)
-	case "overlock.overlock.Base.for_provider":
-		if len(x.ForProvider) == 0 {
-			return protoreflect.ValueOfMap(&_Base_3_map{})
-		}
-		mapValue := &_Base_3_map{m: &x.ForProvider}
-		return protoreflect.ValueOfMap(mapValue)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Base"))
@@ -2048,10 +1947,6 @@ func (x *fastReflection_Base) Set(fd protoreflect.FieldDescriptor, value protore
 		x.ApiVersion = value.Interface().(string)
 	case "overlock.overlock.Base.kind":
 		x.Kind = value.Interface().(string)
-	case "overlock.overlock.Base.for_provider":
-		mv := value.Map()
-		cmv := mv.(*_Base_3_map)
-		x.ForProvider = *cmv.m
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Base"))
@@ -2072,12 +1967,6 @@ func (x *fastReflection_Base) Set(fd protoreflect.FieldDescriptor, value protore
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Base) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.Base.for_provider":
-		if x.ForProvider == nil {
-			x.ForProvider = make(map[string]string)
-		}
-		value := &_Base_3_map{m: &x.ForProvider}
-		return protoreflect.ValueOfMap(value)
 	case "overlock.overlock.Base.api_version":
 		panic(fmt.Errorf("field api_version of message overlock.overlock.Base is not mutable"))
 	case "overlock.overlock.Base.kind":
@@ -2099,9 +1988,6 @@ func (x *fastReflection_Base) NewField(fd protoreflect.FieldDescriptor) protoref
 		return protoreflect.ValueOfString("")
 	case "overlock.overlock.Base.kind":
 		return protoreflect.ValueOfString("")
-	case "overlock.overlock.Base.for_provider":
-		m := make(map[string]string)
-		return protoreflect.ValueOfMap(&_Base_3_map{m: &m})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Base"))
@@ -2179,27 +2065,6 @@ func (x *fastReflection_Base) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if len(x.ForProvider) > 0 {
-			SiZeMaP := func(k string, v string) {
-				mapEntrySize := 1 + len(k) + runtime.Sov(uint64(len(k))) + 1 + len(v) + runtime.Sov(uint64(len(v)))
-				n += mapEntrySize + 1 + runtime.Sov(uint64(mapEntrySize))
-			}
-			if options.Deterministic {
-				sortme := make([]string, 0, len(x.ForProvider))
-				for k := range x.ForProvider {
-					sortme = append(sortme, k)
-				}
-				sort.Strings(sortme)
-				for _, k := range sortme {
-					v := x.ForProvider[k]
-					SiZeMaP(k, v)
-				}
-			} else {
-				for k, v := range x.ForProvider {
-					SiZeMaP(k, v)
-				}
-			}
-		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2228,49 +2093,6 @@ func (x *fastReflection_Base) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
-		}
-		if len(x.ForProvider) > 0 {
-			MaRsHaLmAp := func(k string, v string) (protoiface.MarshalOutput, error) {
-				baseI := i
-				i -= len(v)
-				copy(dAtA[i:], v)
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(v)))
-				i--
-				dAtA[i] = 0x12
-				i -= len(k)
-				copy(dAtA[i:], k)
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(k)))
-				i--
-				dAtA[i] = 0xa
-				i = runtime.EncodeVarint(dAtA, i, uint64(baseI-i))
-				i--
-				dAtA[i] = 0x1a
-				return protoiface.MarshalOutput{}, nil
-			}
-			if options.Deterministic {
-				keysForForProvider := make([]string, 0, len(x.ForProvider))
-				for k := range x.ForProvider {
-					keysForForProvider = append(keysForForProvider, string(k))
-				}
-				sort.Slice(keysForForProvider, func(i, j int) bool {
-					return keysForForProvider[i] < keysForForProvider[j]
-				})
-				for iNdEx := len(keysForForProvider) - 1; iNdEx >= 0; iNdEx-- {
-					v := x.ForProvider[string(keysForForProvider[iNdEx])]
-					out, err := MaRsHaLmAp(keysForForProvider[iNdEx], v)
-					if err != nil {
-						return out, err
-					}
-				}
-			} else {
-				for k := range x.ForProvider {
-					v := x.ForProvider[k]
-					out, err := MaRsHaLmAp(k, v)
-					if err != nil {
-						return out, err
-					}
-				}
-			}
 		}
 		if len(x.Kind) > 0 {
 			i -= len(x.Kind)
@@ -2398,133 +2220,6 @@ func (x *fastReflection_Base) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
 				x.Kind = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ForProvider", wireType)
-				}
-				var msglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					msglen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if x.ForProvider == nil {
-					x.ForProvider = make(map[string]string)
-				}
-				var mapkey string
-				var mapvalue string
-				for iNdEx < postIndex {
-					entryPreIndex := iNdEx
-					var wire uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						wire |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					fieldNum := int32(wire >> 3)
-					if fieldNum == 1 {
-						var stringLenmapkey uint64
-						for shift := uint(0); ; shift += 7 {
-							if shift >= 64 {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-							}
-							if iNdEx >= l {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-							}
-							b := dAtA[iNdEx]
-							iNdEx++
-							stringLenmapkey |= uint64(b&0x7F) << shift
-							if b < 0x80 {
-								break
-							}
-						}
-						intStringLenmapkey := int(stringLenmapkey)
-						if intStringLenmapkey < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						postStringIndexmapkey := iNdEx + intStringLenmapkey
-						if postStringIndexmapkey < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if postStringIndexmapkey > l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-						iNdEx = postStringIndexmapkey
-					} else if fieldNum == 2 {
-						var stringLenmapvalue uint64
-						for shift := uint(0); ; shift += 7 {
-							if shift >= 64 {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-							}
-							if iNdEx >= l {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-							}
-							b := dAtA[iNdEx]
-							iNdEx++
-							stringLenmapvalue |= uint64(b&0x7F) << shift
-							if b < 0x80 {
-								break
-							}
-						}
-						intStringLenmapvalue := int(stringLenmapvalue)
-						if intStringLenmapvalue < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-						if postStringIndexmapvalue < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if postStringIndexmapvalue > l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
-						iNdEx = postStringIndexmapvalue
-					} else {
-						iNdEx = entryPreIndex
-						skippy, err := runtime.Skip(dAtA[iNdEx:])
-						if err != nil {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-						}
-						if (skippy < 0) || (iNdEx+skippy) < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if (iNdEx + skippy) > postIndex {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						iNdEx += skippy
-					}
-				}
-				x.ForProvider[mapkey] = mapvalue
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -3335,7 +3030,7 @@ func (x *fastReflection_Transformer) Range(f func(protoreflect.FieldDescriptor, 
 		switch o := x.Transform.(type) {
 		case *Transformer_Map:
 			v := o.Map
-			value := protoreflect.ValueOfMessage(v.ProtoReflect())
+			value := protoreflect.ValueOfString(v)
 			if !f(fd_Transformer_map, value) {
 				return
 			}
@@ -3464,11 +3159,11 @@ func (x *fastReflection_Transformer) Get(descriptor protoreflect.FieldDescriptor
 	switch descriptor.FullName() {
 	case "overlock.overlock.Transformer.map":
 		if x.Transform == nil {
-			return protoreflect.ValueOfMessage((*MapTransform)(nil).ProtoReflect())
+			return protoreflect.ValueOfString("")
 		} else if v, ok := x.Transform.(*Transformer_Map); ok {
-			return protoreflect.ValueOfMessage(v.Map.ProtoReflect())
+			return protoreflect.ValueOfString(v.Map)
 		} else {
-			return protoreflect.ValueOfMessage((*MapTransform)(nil).ProtoReflect())
+			return protoreflect.ValueOfString("")
 		}
 	case "overlock.overlock.Transformer.string":
 		if x.Transform == nil {
@@ -3523,7 +3218,7 @@ func (x *fastReflection_Transformer) Get(descriptor protoreflect.FieldDescriptor
 func (x *fastReflection_Transformer) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	case "overlock.overlock.Transformer.map":
-		cv := value.Message().Interface().(*MapTransform)
+		cv := value.Interface().(string)
 		x.Transform = &Transformer_Map{Map: cv}
 	case "overlock.overlock.Transformer.string":
 		cv := value.Message().Interface().(*StringTransform)
@@ -3557,22 +3252,6 @@ func (x *fastReflection_Transformer) Set(fd protoreflect.FieldDescriptor, value 
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Transformer) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.overlock.Transformer.map":
-		if x.Transform == nil {
-			value := &MapTransform{}
-			oneofValue := &Transformer_Map{Map: value}
-			x.Transform = oneofValue
-			return protoreflect.ValueOfMessage(value.ProtoReflect())
-		}
-		switch m := x.Transform.(type) {
-		case *Transformer_Map:
-			return protoreflect.ValueOfMessage(m.Map.ProtoReflect())
-		default:
-			value := &MapTransform{}
-			oneofValue := &Transformer_Map{Map: value}
-			x.Transform = oneofValue
-			return protoreflect.ValueOfMessage(value.ProtoReflect())
-		}
 	case "overlock.overlock.Transformer.string":
 		if x.Transform == nil {
 			value := &StringTransform{}
@@ -3637,6 +3316,8 @@ func (x *fastReflection_Transformer) Mutable(fd protoreflect.FieldDescriptor) pr
 			x.Transform = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
+	case "overlock.overlock.Transformer.map":
+		panic(fmt.Errorf("field map of message overlock.overlock.Transformer is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Transformer"))
@@ -3651,8 +3332,7 @@ func (x *fastReflection_Transformer) Mutable(fd protoreflect.FieldDescriptor) pr
 func (x *fastReflection_Transformer) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "overlock.overlock.Transformer.map":
-		value := &MapTransform{}
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
+		return protoreflect.ValueOfString("")
 	case "overlock.overlock.Transformer.string":
 		value := &StringTransform{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
@@ -3755,7 +3435,7 @@ func (x *fastReflection_Transformer) ProtoMethods() *protoiface.Methods {
 			if x == nil {
 				break
 			}
-			l = options.Size(x.Map)
+			l = len(x.Map)
 			n += 1 + l + runtime.Sov(uint64(l))
 		case *Transformer_String_:
 			if x == nil {
@@ -3813,16 +3493,9 @@ func (x *fastReflection_Transformer) ProtoMethods() *protoiface.Methods {
 		}
 		switch x := x.Transform.(type) {
 		case *Transformer_Map:
-			encoded, err := options.Marshal(x.Map)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i -= len(x.Map)
+			copy(dAtA[i:], x.Map)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Map)))
 			i--
 			dAtA[i] = 0xa
 		case *Transformer_String_:
@@ -3931,7 +3604,7 @@ func (x *fastReflection_Transformer) ProtoMethods() *protoiface.Methods {
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Map", wireType)
 				}
-				var msglen int
+				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -3941,26 +3614,23 @@ func (x *fastReflection_Transformer) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					msglen |= int(b&0x7F) << shift
+					stringLen |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				if msglen < 0 {
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + msglen
+				postIndex := iNdEx + intStringLen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				v := &MapTransform{}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], v); err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				x.Transform = &Transformer_Map{v}
+				x.Transform = &Transformer_Map{string(dAtA[iNdEx:postIndex])}
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
@@ -4137,666 +3807,6 @@ func (x *fastReflection_Transformer) ProtoMethods() *protoiface.Methods {
 	}
 }
 
-var _ protoreflect.Map = (*_MapTransform_1_map)(nil)
-
-type _MapTransform_1_map struct {
-	m *map[string]string
-}
-
-func (x *_MapTransform_1_map) Len() int {
-	if x.m == nil {
-		return 0
-	}
-	return len(*x.m)
-}
-
-func (x *_MapTransform_1_map) Range(f func(protoreflect.MapKey, protoreflect.Value) bool) {
-	if x.m == nil {
-		return
-	}
-	for k, v := range *x.m {
-		mapKey := (protoreflect.MapKey)(protoreflect.ValueOfString(k))
-		mapValue := protoreflect.ValueOfString(v)
-		if !f(mapKey, mapValue) {
-			break
-		}
-	}
-}
-
-func (x *_MapTransform_1_map) Has(key protoreflect.MapKey) bool {
-	if x.m == nil {
-		return false
-	}
-	keyUnwrapped := key.String()
-	concreteValue := keyUnwrapped
-	_, ok := (*x.m)[concreteValue]
-	return ok
-}
-
-func (x *_MapTransform_1_map) Clear(key protoreflect.MapKey) {
-	if x.m == nil {
-		return
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	delete(*x.m, concreteKey)
-}
-
-func (x *_MapTransform_1_map) Get(key protoreflect.MapKey) protoreflect.Value {
-	if x.m == nil {
-		return protoreflect.Value{}
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	v, ok := (*x.m)[concreteKey]
-	if !ok {
-		return protoreflect.Value{}
-	}
-	return protoreflect.ValueOfString(v)
-}
-
-func (x *_MapTransform_1_map) Set(key protoreflect.MapKey, value protoreflect.Value) {
-	if !key.IsValid() || !value.IsValid() {
-		panic("invalid key or value provided")
-	}
-	keyUnwrapped := key.String()
-	concreteKey := keyUnwrapped
-	valueUnwrapped := value.String()
-	concreteValue := valueUnwrapped
-	(*x.m)[concreteKey] = concreteValue
-}
-
-func (x *_MapTransform_1_map) Mutable(key protoreflect.MapKey) protoreflect.Value {
-	panic("should not call Mutable on protoreflect.Map whose value is not of type protoreflect.Message")
-}
-
-func (x *_MapTransform_1_map) NewValue() protoreflect.Value {
-	v := ""
-	return protoreflect.ValueOfString(v)
-}
-
-func (x *_MapTransform_1_map) IsValid() bool {
-	return x.m != nil
-}
-
-var (
-	md_MapTransform     protoreflect.MessageDescriptor
-	fd_MapTransform_map protoreflect.FieldDescriptor
-)
-
-func init() {
-	file_overlock_overlock_composition_spec_proto_init()
-	md_MapTransform = File_overlock_overlock_composition_spec_proto.Messages().ByName("MapTransform")
-	fd_MapTransform_map = md_MapTransform.Fields().ByName("map")
-}
-
-var _ protoreflect.Message = (*fastReflection_MapTransform)(nil)
-
-type fastReflection_MapTransform MapTransform
-
-func (x *MapTransform) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MapTransform)(x)
-}
-
-func (x *MapTransform) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-var _fastReflection_MapTransform_messageType fastReflection_MapTransform_messageType
-var _ protoreflect.MessageType = fastReflection_MapTransform_messageType{}
-
-type fastReflection_MapTransform_messageType struct{}
-
-func (x fastReflection_MapTransform_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MapTransform)(nil)
-}
-func (x fastReflection_MapTransform_messageType) New() protoreflect.Message {
-	return new(fastReflection_MapTransform)
-}
-func (x fastReflection_MapTransform_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MapTransform
-}
-
-// Descriptor returns message descriptor, which contains only the protobuf
-// type information for the message.
-func (x *fastReflection_MapTransform) Descriptor() protoreflect.MessageDescriptor {
-	return md_MapTransform
-}
-
-// Type returns the message type, which encapsulates both Go and protobuf
-// type information. If the Go type information is not needed,
-// it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MapTransform) Type() protoreflect.MessageType {
-	return _fastReflection_MapTransform_messageType
-}
-
-// New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MapTransform) New() protoreflect.Message {
-	return new(fastReflection_MapTransform)
-}
-
-// Interface unwraps the message reflection interface and
-// returns the underlying ProtoMessage interface.
-func (x *fastReflection_MapTransform) Interface() protoreflect.ProtoMessage {
-	return (*MapTransform)(x)
-}
-
-// Range iterates over every populated field in an undefined order,
-// calling f for each field descriptor and value encountered.
-// Range returns immediately if f returns false.
-// While iterating, mutating operations may only be performed
-// on the current field descriptor.
-func (x *fastReflection_MapTransform) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if len(x.Map) != 0 {
-		value := protoreflect.ValueOfMap(&_MapTransform_1_map{m: &x.Map})
-		if !f(fd_MapTransform_map, value) {
-			return
-		}
-	}
-}
-
-// Has reports whether a field is populated.
-//
-// Some fields have the property of nullability where it is possible to
-// distinguish between the default value of a field and whether the field
-// was explicitly populated with the default value. Singular message fields,
-// member fields of a oneof, and proto2 scalar fields are nullable. Such
-// fields are populated only if explicitly set.
-//
-// In other cases (aside from the nullable cases above),
-// a proto3 scalar field is populated if it contains a non-zero value, and
-// a repeated field is populated if it is non-empty.
-func (x *fastReflection_MapTransform) Has(fd protoreflect.FieldDescriptor) bool {
-	switch fd.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		return len(x.Map) != 0
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", fd.FullName()))
-	}
-}
-
-// Clear clears the field such that a subsequent Has call reports false.
-//
-// Clearing an extension field clears both the extension type and value
-// associated with the given field number.
-//
-// Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MapTransform) Clear(fd protoreflect.FieldDescriptor) {
-	switch fd.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		x.Map = nil
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", fd.FullName()))
-	}
-}
-
-// Get retrieves the value for a field.
-//
-// For unpopulated scalars, it returns the default value, where
-// the default value of a bytes scalar is guaranteed to be a copy.
-// For unpopulated composite types, it returns an empty, read-only view
-// of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MapTransform) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
-	switch descriptor.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		if len(x.Map) == 0 {
-			return protoreflect.ValueOfMap(&_MapTransform_1_map{})
-		}
-		mapValue := &_MapTransform_1_map{m: &x.Map}
-		return protoreflect.ValueOfMap(mapValue)
-	default:
-		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", descriptor.FullName()))
-	}
-}
-
-// Set stores the value for a field.
-//
-// For a field belonging to a oneof, it implicitly clears any other field
-// that may be currently set within the same oneof.
-// For extension fields, it implicitly stores the provided ExtensionType.
-// When setting a composite type, it is unspecified whether the stored value
-// aliases the source's memory in any way. If the composite value is an
-// empty, read-only value, then it panics.
-//
-// Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MapTransform) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
-	switch fd.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		mv := value.Map()
-		cmv := mv.(*_MapTransform_1_map)
-		x.Map = *cmv.m
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", fd.FullName()))
-	}
-}
-
-// Mutable returns a mutable reference to a composite type.
-//
-// If the field is unpopulated, it may allocate a composite value.
-// For a field belonging to a oneof, it implicitly clears any other field
-// that may be currently set within the same oneof.
-// For extension fields, it implicitly stores the provided ExtensionType
-// if not already stored.
-// It panics if the field does not contain a composite type.
-//
-// Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MapTransform) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
-	switch fd.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		if x.Map == nil {
-			x.Map = make(map[string]string)
-		}
-		value := &_MapTransform_1_map{m: &x.Map}
-		return protoreflect.ValueOfMap(value)
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", fd.FullName()))
-	}
-}
-
-// NewField returns a new value that is assignable to the field
-// for the given descriptor. For scalars, this returns the default value.
-// For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MapTransform) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
-	switch fd.FullName() {
-	case "overlock.overlock.MapTransform.map":
-		m := make(map[string]string)
-		return protoreflect.ValueOfMap(&_MapTransform_1_map{m: &m})
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.MapTransform"))
-		}
-		panic(fmt.Errorf("message overlock.overlock.MapTransform does not contain field %s", fd.FullName()))
-	}
-}
-
-// WhichOneof reports which field within the oneof is populated,
-// returning nil if none are populated.
-// It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MapTransform) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
-	switch d.FullName() {
-	default:
-		panic(fmt.Errorf("%s is not a oneof field in overlock.overlock.MapTransform", d.FullName()))
-	}
-	panic("unreachable")
-}
-
-// GetUnknown retrieves the entire list of unknown fields.
-// The caller may only mutate the contents of the RawFields
-// if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MapTransform) GetUnknown() protoreflect.RawFields {
-	return x.unknownFields
-}
-
-// SetUnknown stores an entire list of unknown fields.
-// The raw fields must be syntactically valid according to the wire format.
-// An implementation may panic if this is not the case.
-// Once stored, the caller must not mutate the content of the RawFields.
-// An empty RawFields may be passed to clear the fields.
-//
-// SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MapTransform) SetUnknown(fields protoreflect.RawFields) {
-	x.unknownFields = fields
-}
-
-// IsValid reports whether the message is valid.
-//
-// An invalid message is an empty, read-only value.
-//
-// An invalid message often corresponds to a nil pointer of the concrete
-// message type, but the details are implementation dependent.
-// Validity is not part of the protobuf data model, and may not
-// be preserved in marshaling or other operations.
-func (x *fastReflection_MapTransform) IsValid() bool {
-	return x != nil
-}
-
-// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
-// This method may return nil.
-//
-// The returned methods type is identical to
-// "google.golang.org/protobuf/runtime/protoiface".Methods.
-// Consult the protoiface package documentation for details.
-func (x *fastReflection_MapTransform) ProtoMethods() *protoiface.Methods {
-	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MapTransform)
-		if x == nil {
-			return protoiface.SizeOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Size:              0,
-			}
-		}
-		options := runtime.SizeInputToOptions(input)
-		_ = options
-		var n int
-		var l int
-		_ = l
-		if len(x.Map) > 0 {
-			SiZeMaP := func(k string, v string) {
-				mapEntrySize := 1 + len(k) + runtime.Sov(uint64(len(k))) + 1 + len(v) + runtime.Sov(uint64(len(v)))
-				n += mapEntrySize + 1 + runtime.Sov(uint64(mapEntrySize))
-			}
-			if options.Deterministic {
-				sortme := make([]string, 0, len(x.Map))
-				for k := range x.Map {
-					sortme = append(sortme, k)
-				}
-				sort.Strings(sortme)
-				for _, k := range sortme {
-					v := x.Map[k]
-					SiZeMaP(k, v)
-				}
-			} else {
-				for k, v := range x.Map {
-					SiZeMaP(k, v)
-				}
-			}
-		}
-		if x.unknownFields != nil {
-			n += len(x.unknownFields)
-		}
-		return protoiface.SizeOutput{
-			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-			Size:              n,
-		}
-	}
-
-	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MapTransform)
-		if x == nil {
-			return protoiface.MarshalOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Buf:               input.Buf,
-			}, nil
-		}
-		options := runtime.MarshalInputToOptions(input)
-		_ = options
-		size := options.Size(x)
-		dAtA := make([]byte, size)
-		i := len(dAtA)
-		_ = i
-		var l int
-		_ = l
-		if x.unknownFields != nil {
-			i -= len(x.unknownFields)
-			copy(dAtA[i:], x.unknownFields)
-		}
-		if len(x.Map) > 0 {
-			MaRsHaLmAp := func(k string, v string) (protoiface.MarshalOutput, error) {
-				baseI := i
-				i -= len(v)
-				copy(dAtA[i:], v)
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(v)))
-				i--
-				dAtA[i] = 0x12
-				i -= len(k)
-				copy(dAtA[i:], k)
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(k)))
-				i--
-				dAtA[i] = 0xa
-				i = runtime.EncodeVarint(dAtA, i, uint64(baseI-i))
-				i--
-				dAtA[i] = 0xa
-				return protoiface.MarshalOutput{}, nil
-			}
-			if options.Deterministic {
-				keysForMap := make([]string, 0, len(x.Map))
-				for k := range x.Map {
-					keysForMap = append(keysForMap, string(k))
-				}
-				sort.Slice(keysForMap, func(i, j int) bool {
-					return keysForMap[i] < keysForMap[j]
-				})
-				for iNdEx := len(keysForMap) - 1; iNdEx >= 0; iNdEx-- {
-					v := x.Map[string(keysForMap[iNdEx])]
-					out, err := MaRsHaLmAp(keysForMap[iNdEx], v)
-					if err != nil {
-						return out, err
-					}
-				}
-			} else {
-				for k := range x.Map {
-					v := x.Map[k]
-					out, err := MaRsHaLmAp(k, v)
-					if err != nil {
-						return out, err
-					}
-				}
-			}
-		}
-		if input.Buf != nil {
-			input.Buf = append(input.Buf, dAtA...)
-		} else {
-			input.Buf = dAtA
-		}
-		return protoiface.MarshalOutput{
-			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-			Buf:               input.Buf,
-		}, nil
-	}
-	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MapTransform)
-		if x == nil {
-			return protoiface.UnmarshalOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Flags:             input.Flags,
-			}, nil
-		}
-		options := runtime.UnmarshalInputToOptions(input)
-		_ = options
-		dAtA := input.Buf
-		l := len(dAtA)
-		iNdEx := 0
-		for iNdEx < l {
-			preIndex := iNdEx
-			var wire uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				wire |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			fieldNum := int32(wire >> 3)
-			wireType := int(wire & 0x7)
-			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MapTransform: wiretype end group for non-group")
-			}
-			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MapTransform: illegal tag %d (wire type %d)", fieldNum, wire)
-			}
-			switch fieldNum {
-			case 1:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Map", wireType)
-				}
-				var msglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					msglen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if x.Map == nil {
-					x.Map = make(map[string]string)
-				}
-				var mapkey string
-				var mapvalue string
-				for iNdEx < postIndex {
-					entryPreIndex := iNdEx
-					var wire uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						wire |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					fieldNum := int32(wire >> 3)
-					if fieldNum == 1 {
-						var stringLenmapkey uint64
-						for shift := uint(0); ; shift += 7 {
-							if shift >= 64 {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-							}
-							if iNdEx >= l {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-							}
-							b := dAtA[iNdEx]
-							iNdEx++
-							stringLenmapkey |= uint64(b&0x7F) << shift
-							if b < 0x80 {
-								break
-							}
-						}
-						intStringLenmapkey := int(stringLenmapkey)
-						if intStringLenmapkey < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						postStringIndexmapkey := iNdEx + intStringLenmapkey
-						if postStringIndexmapkey < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if postStringIndexmapkey > l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-						iNdEx = postStringIndexmapkey
-					} else if fieldNum == 2 {
-						var stringLenmapvalue uint64
-						for shift := uint(0); ; shift += 7 {
-							if shift >= 64 {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-							}
-							if iNdEx >= l {
-								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-							}
-							b := dAtA[iNdEx]
-							iNdEx++
-							stringLenmapvalue |= uint64(b&0x7F) << shift
-							if b < 0x80 {
-								break
-							}
-						}
-						intStringLenmapvalue := int(stringLenmapvalue)
-						if intStringLenmapvalue < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-						if postStringIndexmapvalue < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if postStringIndexmapvalue > l {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
-						iNdEx = postStringIndexmapvalue
-					} else {
-						iNdEx = entryPreIndex
-						skippy, err := runtime.Skip(dAtA[iNdEx:])
-						if err != nil {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-						}
-						if (skippy < 0) || (iNdEx+skippy) < 0 {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-						}
-						if (iNdEx + skippy) > postIndex {
-							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-						}
-						iNdEx += skippy
-					}
-				}
-				x.Map[mapkey] = mapvalue
-				iNdEx = postIndex
-			default:
-				iNdEx = preIndex
-				skippy, err := runtime.Skip(dAtA[iNdEx:])
-				if err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				if (skippy < 0) || (iNdEx+skippy) < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if (iNdEx + skippy) > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if !options.DiscardUnknown {
-					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-				}
-				iNdEx += skippy
-			}
-		}
-
-		if iNdEx > l {
-			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-		}
-		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
-	}
-	return &protoiface.Methods{
-		NoUnkeyedLiterals: struct{}{},
-		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
-		Size:              size,
-		Marshal:           marshal,
-		Unmarshal:         unmarshal,
-		Merge:             nil,
-		CheckInitialized:  nil,
-	}
-}
-
 var (
 	md_StringTransform         protoreflect.MessageDescriptor
 	fd_StringTransform_convert protoreflect.FieldDescriptor
@@ -4819,7 +3829,7 @@ func (x *StringTransform) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StringTransform) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[7]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5395,7 +4405,7 @@ func (x *StringConvert) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StringConvert) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[8]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5815,7 +4825,7 @@ func (x *StringFormat) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StringFormat) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[9]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6239,7 +5249,7 @@ func (x *MathTransform) ProtoReflect() protoreflect.Message {
 }
 
 func (x *MathTransform) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[10]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6828,7 +5838,7 @@ func (x *MatchTransform) ProtoReflect() protoreflect.Message {
 }
 
 func (x *MatchTransform) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[11]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7397,7 +6407,7 @@ func (x *Pattern) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Pattern) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[12]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7881,7 +6891,7 @@ func (x *ConvertTransform) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ConvertTransform) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[13]
+	mi := &file_overlock_overlock_composition_spec_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8510,9 +7520,8 @@ type Base struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ApiVersion  string            `protobuf:"bytes,1,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind        string            `protobuf:"bytes,2,opt,name=kind,proto3" json:"kind,omitempty"`
-	ForProvider map[string]string `protobuf:"bytes,3,rep,name=for_provider,json=forProvider,proto3" json:"for_provider,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ApiVersion string `protobuf:"bytes,1,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
+	Kind       string `protobuf:"bytes,2,opt,name=kind,proto3" json:"kind,omitempty"`
 }
 
 func (x *Base) Reset() {
@@ -8547,13 +7556,6 @@ func (x *Base) GetKind() string {
 		return x.Kind
 	}
 	return ""
-}
-
-func (x *Base) GetForProvider() map[string]string {
-	if x != nil {
-		return x.ForProvider
-	}
-	return nil
 }
 
 // Patch represents a patch to be applied to a resource.
@@ -8661,11 +7663,11 @@ func (x *Transformer) GetTransform() isTransformer_Transform {
 	return nil
 }
 
-func (x *Transformer) GetMap() *MapTransform {
+func (x *Transformer) GetMap() string {
 	if x, ok := x.GetTransform().(*Transformer_Map); ok {
 		return x.Map
 	}
-	return nil
+	return ""
 }
 
 func (x *Transformer) GetString_() *StringTransform {
@@ -8701,7 +7703,7 @@ type isTransformer_Transform interface {
 }
 
 type Transformer_Map struct {
-	Map *MapTransform `protobuf:"bytes,1,opt,name=map,proto3,oneof"`
+	Map string `protobuf:"bytes,1,opt,name=map,proto3,oneof"`
 }
 
 type Transformer_String_ struct {
@@ -8730,42 +7732,6 @@ func (*Transformer_Match) isTransformer_Transform() {}
 
 func (*Transformer_Convert) isTransformer_Transform() {}
 
-// MapTransform defines a map transformation.
-type MapTransform struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Map map[string]string `protobuf:"bytes,1,rep,name=map,proto3" json:"map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-}
-
-func (x *MapTransform) Reset() {
-	*x = MapTransform{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *MapTransform) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MapTransform) ProtoMessage() {}
-
-// Deprecated: Use MapTransform.ProtoReflect.Descriptor instead.
-func (*MapTransform) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *MapTransform) GetMap() map[string]string {
-	if x != nil {
-		return x.Map
-	}
-	return nil
-}
-
 // StringTransform defines a string transformation.
 type StringTransform struct {
 	state         protoimpl.MessageState
@@ -8784,7 +7750,7 @@ type StringTransform struct {
 func (x *StringTransform) Reset() {
 	*x = StringTransform{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[7]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8798,7 +7764,7 @@ func (*StringTransform) ProtoMessage() {}
 
 // Deprecated: Use StringTransform.ProtoReflect.Descriptor instead.
 func (*StringTransform) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{7}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *StringTransform) GetTransformType() isStringTransform_TransformType {
@@ -8850,7 +7816,7 @@ type StringConvert struct {
 func (x *StringConvert) Reset() {
 	*x = StringConvert{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[8]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8864,7 +7830,7 @@ func (*StringConvert) ProtoMessage() {}
 
 // Deprecated: Use StringConvert.ProtoReflect.Descriptor instead.
 func (*StringConvert) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{8}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *StringConvert) GetConvert() string {
@@ -8886,7 +7852,7 @@ type StringFormat struct {
 func (x *StringFormat) Reset() {
 	*x = StringFormat{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[9]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8900,7 +7866,7 @@ func (*StringFormat) ProtoMessage() {}
 
 // Deprecated: Use StringFormat.ProtoReflect.Descriptor instead.
 func (*StringFormat) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{9}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StringFormat) GetFmt() string {
@@ -8929,7 +7895,7 @@ type MathTransform struct {
 func (x *MathTransform) Reset() {
 	*x = MathTransform{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[10]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8943,7 +7909,7 @@ func (*MathTransform) ProtoMessage() {}
 
 // Deprecated: Use MathTransform.ProtoReflect.Descriptor instead.
 func (*MathTransform) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{10}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *MathTransform) GetOperation() isMathTransform_Operation {
@@ -9010,7 +7976,7 @@ type MatchTransform struct {
 func (x *MatchTransform) Reset() {
 	*x = MatchTransform{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[11]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9024,7 +7990,7 @@ func (*MatchTransform) ProtoMessage() {}
 
 // Deprecated: Use MatchTransform.ProtoReflect.Descriptor instead.
 func (*MatchTransform) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{11}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *MatchTransform) GetPatterns() []*Pattern {
@@ -9061,7 +8027,7 @@ type Pattern struct {
 func (x *Pattern) Reset() {
 	*x = Pattern{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[12]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9075,7 +8041,7 @@ func (*Pattern) ProtoMessage() {}
 
 // Deprecated: Use Pattern.ProtoReflect.Descriptor instead.
 func (*Pattern) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{12}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Pattern) GetType_() string {
@@ -9105,7 +8071,7 @@ type ConvertTransform struct {
 func (x *ConvertTransform) Reset() {
 	*x = ConvertTransform{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[13]
+		mi := &file_overlock_overlock_composition_spec_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9119,7 +8085,7 @@ func (*ConvertTransform) ProtoMessage() {}
 
 // Deprecated: Use ConvertTransform.ProtoReflect.Descriptor instead.
 func (*ConvertTransform) Descriptor() ([]byte, []int) {
-	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{13}
+	return file_overlock_overlock_composition_spec_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ConvertTransform) GetToType() string {
@@ -9166,110 +8132,91 @@ var file_overlock_overlock_composition_spec_proto_rawDesc = []byte{
 	0x61, 0x73, 0x65, 0x52, 0x04, 0x62, 0x61, 0x73, 0x65, 0x12, 0x32, 0x0a, 0x07, 0x70, 0x61, 0x74,
 	0x63, 0x68, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6f, 0x76, 0x65,
 	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x50,
-	0x61, 0x74, 0x63, 0x68, 0x52, 0x07, 0x70, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73, 0x22, 0xc8, 0x01,
-	0x0a, 0x04, 0x42, 0x61, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70, 0x69, 0x5f, 0x76, 0x65,
-	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x70, 0x69,
-	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x4b, 0x0a, 0x0c, 0x66,
-	0x6f, 0x72, 0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x03, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x28, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x2e, 0x46, 0x6f, 0x72, 0x50, 0x72,
-	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0b, 0x66, 0x6f, 0x72,
-	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x1a, 0x3e, 0x0a, 0x10, 0x46, 0x6f, 0x72, 0x50,
-	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
-	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14,
-	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xa7, 0x01, 0x0a, 0x05, 0x50, 0x61, 0x74,
-	0x63, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x26, 0x0a, 0x0f, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x66,
-	0x69, 0x65, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0d, 0x66, 0x72, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x50, 0x61, 0x74, 0x68, 0x12, 0x22,
-	0x0a, 0x0d, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x74, 0x6f, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x50, 0x61,
-	0x74, 0x68, 0x12, 0x3e, 0x0a, 0x0a, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x73,
-	0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73,
-	0x66, 0x6f, 0x72, 0x6d, 0x65, 0x72, 0x52, 0x0a, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72,
-	0x6d, 0x73, 0x22, 0xc1, 0x02, 0x0a, 0x0b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d,
-	0x65, 0x72, 0x12, 0x33, 0x0a, 0x03, 0x6d, 0x61, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1f, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c,
-	0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x61, 0x70, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d,
-	0x48, 0x00, 0x52, 0x03, 0x6d, 0x61, 0x70, 0x12, 0x3c, 0x0a, 0x06, 0x73, 0x74, 0x72, 0x69, 0x6e,
-	0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x53, 0x74, 0x72, 0x69,
-	0x6e, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48, 0x00, 0x52, 0x06, 0x73,
-	0x74, 0x72, 0x69, 0x6e, 0x67, 0x12, 0x36, 0x0a, 0x04, 0x6d, 0x61, 0x74, 0x68, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f,
-	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x61, 0x74, 0x68, 0x54, 0x72, 0x61, 0x6e,
-	0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48, 0x00, 0x52, 0x04, 0x6d, 0x61, 0x74, 0x68, 0x12, 0x39, 0x0a,
-	0x05, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6f,
-	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
-	0x2e, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48,
-	0x00, 0x52, 0x05, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x12, 0x3f, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x76,
-	0x65, 0x72, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x6f,
-	0x6e, 0x76, 0x65, 0x72, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48, 0x00,
-	0x52, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x42, 0x0b, 0x0a, 0x09, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x22, 0x82, 0x01, 0x0a, 0x0c, 0x4d, 0x61, 0x70, 0x54, 0x72,
-	0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x3a, 0x0a, 0x03, 0x6d, 0x61, 0x70, 0x18, 0x01,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
-	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x61, 0x70, 0x54, 0x72, 0x61, 0x6e,
-	0x73, 0x66, 0x6f, 0x72, 0x6d, 0x2e, 0x4d, 0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x03,
-	0x6d, 0x61, 0x70, 0x1a, 0x36, 0x0a, 0x08, 0x4d, 0x61, 0x70, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12,
-	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
-	0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x9c, 0x01, 0x0a, 0x0f,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12,
-	0x3c, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x20, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x76, 0x65,
-	0x72, 0x74, 0x48, 0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x12, 0x39, 0x0a,
-	0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
+	0x61, 0x74, 0x63, 0x68, 0x52, 0x07, 0x70, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73, 0x22, 0x3b, 0x0a,
+	0x04, 0x42, 0x61, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70, 0x69, 0x5f, 0x76, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x70, 0x69, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x22, 0xa7, 0x01, 0x0a, 0x05, 0x50,
+	0x61, 0x74, 0x63, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x26, 0x0a, 0x0f, 0x66, 0x72, 0x6f, 0x6d,
+	0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0d, 0x66, 0x72, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x50, 0x61, 0x74, 0x68,
+	0x12, 0x22, 0x0a, 0x0d, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x74,
+	0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x74, 0x6f, 0x46, 0x69, 0x65, 0x6c, 0x64,
+	0x50, 0x61, 0x74, 0x68, 0x12, 0x3e, 0x0a, 0x0a, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72,
+	0x6d, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x54, 0x72, 0x61,
+	0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x65, 0x72, 0x52, 0x0a, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66,
+	0x6f, 0x72, 0x6d, 0x73, 0x22, 0xa0, 0x02, 0x0a, 0x0b, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f,
+	0x72, 0x6d, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x03, 0x6d, 0x61, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x48, 0x00, 0x52, 0x03, 0x6d, 0x61, 0x70, 0x12, 0x3c, 0x0a, 0x06, 0x73, 0x74, 0x72, 0x69,
+	0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x53, 0x74, 0x72,
+	0x69, 0x6e, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48, 0x00, 0x52, 0x06,
+	0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x12, 0x36, 0x0a, 0x04, 0x6d, 0x61, 0x74, 0x68, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x61, 0x74, 0x68, 0x54, 0x72, 0x61,
+	0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48, 0x00, 0x52, 0x04, 0x6d, 0x61, 0x74, 0x68, 0x12, 0x39,
+	0x0a, 0x05, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e,
 	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x48, 0x00,
-	0x52, 0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x42, 0x10, 0x0a, 0x0e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x66, 0x6f, 0x72, 0x6d, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x22, 0x29, 0x0a, 0x0d, 0x53, 0x74,
-	0x72, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f,
-	0x6e, 0x76, 0x65, 0x72, 0x74, 0x22, 0x20, 0x0a, 0x0c, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x46,
-	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x66, 0x6d, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x03, 0x66, 0x6d, 0x74, 0x22, 0x78, 0x0a, 0x0d, 0x4d, 0x61, 0x74, 0x68, 0x54,
-	0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x1d, 0x0a, 0x09, 0x63, 0x6c, 0x61, 0x6d,
-	0x70, 0x5f, 0x6d, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x63,
-	0x6c, 0x61, 0x6d, 0x70, 0x4d, 0x69, 0x6e, 0x12, 0x1d, 0x0a, 0x09, 0x63, 0x6c, 0x61, 0x6d, 0x70,
-	0x5f, 0x6d, 0x61, 0x78, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x63, 0x6c,
-	0x61, 0x6d, 0x70, 0x4d, 0x61, 0x78, 0x12, 0x1c, 0x0a, 0x08, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70,
-	0x6c, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x6d, 0x75, 0x6c, 0x74,
-	0x69, 0x70, 0x6c, 0x79, 0x42, 0x0b, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x22, 0x90, 0x01, 0x0a, 0x0e, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x72, 0x61, 0x6e, 0x73,
-	0x66, 0x6f, 0x72, 0x6d, 0x12, 0x36, 0x0a, 0x08, 0x70, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x73,
-	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x50, 0x61, 0x74, 0x74, 0x65,
-	0x72, 0x6e, 0x52, 0x08, 0x70, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x73, 0x12, 0x1f, 0x0a, 0x0b,
-	0x66, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x5f, 0x74, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x0a, 0x66, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x54, 0x6f, 0x12, 0x25, 0x0a,
-	0x0e, 0x66, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x66, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x22, 0x35, 0x0a, 0x07, 0x50, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x12,
-	0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74,
-	0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x43, 0x0a, 0x10, 0x43,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12,
-	0x17, 0x0a, 0x07, 0x74, 0x6f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x74, 0x6f, 0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x66, 0x6f, 0x72, 0x6d,
-	0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74,
-	0x42, 0xb2, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x42, 0x14, 0x43, 0x6f, 0x6d, 0x70,
-	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65, 0x63, 0x50, 0x72, 0x6f, 0x74, 0x6f,
-	0x50, 0x01, 0x5a, 0x1e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0xa2, 0x02, 0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c,
-	0x6f, 0x63, 0x6b, 0x2e, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xca, 0x02, 0x11, 0x4f,
+	0x6b, 0x2e, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d,
+	0x48, 0x00, 0x52, 0x05, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x12, 0x3f, 0x0a, 0x07, 0x63, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43,
+	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x48,
+	0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x42, 0x0b, 0x0a, 0x09, 0x74, 0x72,
+	0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x22, 0x9c, 0x01, 0x0a, 0x0f, 0x53, 0x74, 0x72, 0x69,
+	0x6e, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x3c, 0x0a, 0x07, 0x63,
+	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f,
+	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
+	0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x48, 0x00,
+	0x52, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x12, 0x39, 0x0a, 0x06, 0x66, 0x6f, 0x72,
+	0x6d, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6f, 0x76, 0x65, 0x72,
+	0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x53, 0x74,
+	0x72, 0x69, 0x6e, 0x67, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x48, 0x00, 0x52, 0x06, 0x66, 0x6f,
+	0x72, 0x6d, 0x61, 0x74, 0x42, 0x10, 0x0a, 0x0e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72,
+	0x6d, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x22, 0x29, 0x0a, 0x0d, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67,
+	0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65,
+	0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72,
+	0x74, 0x22, 0x20, 0x0a, 0x0c, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x46, 0x6f, 0x72, 0x6d, 0x61,
+	0x74, 0x12, 0x10, 0x0a, 0x03, 0x66, 0x6d, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x66, 0x6d, 0x74, 0x22, 0x78, 0x0a, 0x0d, 0x4d, 0x61, 0x74, 0x68, 0x54, 0x72, 0x61, 0x6e, 0x73,
+	0x66, 0x6f, 0x72, 0x6d, 0x12, 0x1d, 0x0a, 0x09, 0x63, 0x6c, 0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x69,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x63, 0x6c, 0x61, 0x6d, 0x70,
+	0x4d, 0x69, 0x6e, 0x12, 0x1d, 0x0a, 0x09, 0x63, 0x6c, 0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x61, 0x78,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x63, 0x6c, 0x61, 0x6d, 0x70, 0x4d,
+	0x61, 0x78, 0x12, 0x1c, 0x0a, 0x08, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x79, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x08, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x79,
+	0x42, 0x0b, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x90, 0x01,
+	0x0a, 0x0e, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d,
+	0x12, 0x36, 0x0a, 0x08, 0x70, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x50, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x52, 0x08,
+	0x70, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x61, 0x6c, 0x6c,
+	0x62, 0x61, 0x63, 0x6b, 0x5f, 0x74, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66,
+	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x54, 0x6f, 0x12, 0x25, 0x0a, 0x0e, 0x66, 0x61, 0x6c,
+	0x6c, 0x62, 0x61, 0x63, 0x6b, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0d, 0x66, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x56, 0x61, 0x6c, 0x75, 0x65,
+	0x22, 0x35, 0x0a, 0x07, 0x50, 0x61, 0x74, 0x74, 0x65, 0x72, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12,
+	0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x43, 0x0a, 0x10, 0x43, 0x6f, 0x6e, 0x76, 0x65,
+	0x72, 0x74, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x17, 0x0a, 0x07, 0x74,
+	0x6f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x74, 0x6f,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x42, 0xb2, 0x01, 0x0a,
+	0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x42, 0x14, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65, 0x63, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xa2, 0x02,
+	0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
+	0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xca, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xe2, 0x02, 0x1d, 0x4f,
 	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
-	0xe2, 0x02, 0x1d, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0xea, 0x02, 0x12, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x4f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x12, 0x4f,
+	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -9284,7 +8231,7 @@ func file_overlock_overlock_composition_spec_proto_rawDescGZIP() []byte {
 	return file_overlock_overlock_composition_spec_proto_rawDescData
 }
 
-var file_overlock_overlock_composition_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_overlock_overlock_composition_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_overlock_overlock_composition_spec_proto_goTypes = []interface{}{
 	(*CompositionSpec)(nil),  // 0: overlock.overlock.CompositionSpec
 	(*CompositeTypeRef)(nil), // 1: overlock.overlock.CompositeTypeRef
@@ -9292,38 +8239,32 @@ var file_overlock_overlock_composition_spec_proto_goTypes = []interface{}{
 	(*Base)(nil),             // 3: overlock.overlock.Base
 	(*Patch)(nil),            // 4: overlock.overlock.Patch
 	(*Transformer)(nil),      // 5: overlock.overlock.Transformer
-	(*MapTransform)(nil),     // 6: overlock.overlock.MapTransform
-	(*StringTransform)(nil),  // 7: overlock.overlock.StringTransform
-	(*StringConvert)(nil),    // 8: overlock.overlock.StringConvert
-	(*StringFormat)(nil),     // 9: overlock.overlock.StringFormat
-	(*MathTransform)(nil),    // 10: overlock.overlock.MathTransform
-	(*MatchTransform)(nil),   // 11: overlock.overlock.MatchTransform
-	(*Pattern)(nil),          // 12: overlock.overlock.Pattern
-	(*ConvertTransform)(nil), // 13: overlock.overlock.ConvertTransform
-	nil,                      // 14: overlock.overlock.Base.ForProviderEntry
-	nil,                      // 15: overlock.overlock.MapTransform.MapEntry
+	(*StringTransform)(nil),  // 6: overlock.overlock.StringTransform
+	(*StringConvert)(nil),    // 7: overlock.overlock.StringConvert
+	(*StringFormat)(nil),     // 8: overlock.overlock.StringFormat
+	(*MathTransform)(nil),    // 9: overlock.overlock.MathTransform
+	(*MatchTransform)(nil),   // 10: overlock.overlock.MatchTransform
+	(*Pattern)(nil),          // 11: overlock.overlock.Pattern
+	(*ConvertTransform)(nil), // 12: overlock.overlock.ConvertTransform
 }
 var file_overlock_overlock_composition_spec_proto_depIdxs = []int32{
 	1,  // 0: overlock.overlock.CompositionSpec.composite_type_ref:type_name -> overlock.overlock.CompositeTypeRef
 	2,  // 1: overlock.overlock.CompositionSpec.resources:type_name -> overlock.overlock.Resource
 	3,  // 2: overlock.overlock.Resource.base:type_name -> overlock.overlock.Base
 	4,  // 3: overlock.overlock.Resource.patches:type_name -> overlock.overlock.Patch
-	14, // 4: overlock.overlock.Base.for_provider:type_name -> overlock.overlock.Base.ForProviderEntry
-	5,  // 5: overlock.overlock.Patch.transforms:type_name -> overlock.overlock.Transformer
-	6,  // 6: overlock.overlock.Transformer.map:type_name -> overlock.overlock.MapTransform
-	7,  // 7: overlock.overlock.Transformer.string:type_name -> overlock.overlock.StringTransform
-	10, // 8: overlock.overlock.Transformer.math:type_name -> overlock.overlock.MathTransform
-	11, // 9: overlock.overlock.Transformer.match:type_name -> overlock.overlock.MatchTransform
-	13, // 10: overlock.overlock.Transformer.convert:type_name -> overlock.overlock.ConvertTransform
-	15, // 11: overlock.overlock.MapTransform.map:type_name -> overlock.overlock.MapTransform.MapEntry
-	8,  // 12: overlock.overlock.StringTransform.convert:type_name -> overlock.overlock.StringConvert
-	9,  // 13: overlock.overlock.StringTransform.format:type_name -> overlock.overlock.StringFormat
-	12, // 14: overlock.overlock.MatchTransform.patterns:type_name -> overlock.overlock.Pattern
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	5,  // 4: overlock.overlock.Patch.transforms:type_name -> overlock.overlock.Transformer
+	6,  // 5: overlock.overlock.Transformer.string:type_name -> overlock.overlock.StringTransform
+	9,  // 6: overlock.overlock.Transformer.math:type_name -> overlock.overlock.MathTransform
+	10, // 7: overlock.overlock.Transformer.match:type_name -> overlock.overlock.MatchTransform
+	12, // 8: overlock.overlock.Transformer.convert:type_name -> overlock.overlock.ConvertTransform
+	7,  // 9: overlock.overlock.StringTransform.convert:type_name -> overlock.overlock.StringConvert
+	8,  // 10: overlock.overlock.StringTransform.format:type_name -> overlock.overlock.StringFormat
+	11, // 11: overlock.overlock.MatchTransform.patterns:type_name -> overlock.overlock.Pattern
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_overlock_overlock_composition_spec_proto_init() }
@@ -9405,18 +8346,6 @@ func file_overlock_overlock_composition_spec_proto_init() {
 			}
 		}
 		file_overlock_overlock_composition_spec_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MapTransform); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StringTransform); i {
 			case 0:
 				return &v.state
@@ -9428,7 +8357,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StringConvert); i {
 			case 0:
 				return &v.state
@@ -9440,7 +8369,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StringFormat); i {
 			case 0:
 				return &v.state
@@ -9452,7 +8381,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MathTransform); i {
 			case 0:
 				return &v.state
@@ -9464,7 +8393,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MatchTransform); i {
 			case 0:
 				return &v.state
@@ -9476,7 +8405,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Pattern); i {
 			case 0:
 				return &v.state
@@ -9488,7 +8417,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_overlock_composition_spec_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_overlock_overlock_composition_spec_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ConvertTransform); i {
 			case 0:
 				return &v.state
@@ -9508,11 +8437,11 @@ func file_overlock_overlock_composition_spec_proto_init() {
 		(*Transformer_Match)(nil),
 		(*Transformer_Convert)(nil),
 	}
-	file_overlock_overlock_composition_spec_proto_msgTypes[7].OneofWrappers = []interface{}{
+	file_overlock_overlock_composition_spec_proto_msgTypes[6].OneofWrappers = []interface{}{
 		(*StringTransform_Convert)(nil),
 		(*StringTransform_Format)(nil),
 	}
-	file_overlock_overlock_composition_spec_proto_msgTypes[10].OneofWrappers = []interface{}{
+	file_overlock_overlock_composition_spec_proto_msgTypes[9].OneofWrappers = []interface{}{
 		(*MathTransform_ClampMin)(nil),
 		(*MathTransform_ClampMax)(nil),
 		(*MathTransform_Multiply)(nil),
@@ -9523,7 +8452,7 @@ func file_overlock_overlock_composition_spec_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_overlock_overlock_composition_spec_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

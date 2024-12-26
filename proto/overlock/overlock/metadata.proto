@@ -6,10 +6,5 @@ option go_package = "overlock/x/overlock/types";
 // Metadata contains metadata information.
 message Metadata {
   string name = 1;
-  Annotations annotations = 2;
-}
-
-// Annotations represents a map of annotations.
-message Annotations {
-  map<string, string> annotations = 1;
+  string annotations = 2;
 }

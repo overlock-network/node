@@ -15,10 +15,8 @@ func (k msgServer) UpdateXrd(goCtx context.Context, msg *types.MsgUpdateXrd) (*t
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var xrd = types.CompositeResourceDefinition{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.XrdSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	_, found := k.GetCompositeResourceDefinition(ctx, msg.Id)
 	if !found {

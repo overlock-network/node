@@ -148,13 +148,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "CreateComposition",
 					Use:            "create-composition [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a create-composition tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "UpdateComposition",
 					Use:            "update-composition [id] [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a update-composition tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteComposition",
@@ -166,13 +166,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "CreateXrd",
 					Use:            "create-xrd [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a create-xrd tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "UpdateXrd",
 					Use:            "update-xrd [id] [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a update-xrd tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteXrd",
@@ -184,13 +184,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "CreateConfiguration",
 					Use:            "create-configuration [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a create-configuration tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "UpdateConfiguration",
 					Use:            "update-configuration [id] [api-version] [kind] [metadata] [spec]",
 					Short:          "Send a update-configuration tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "apiVersion"}, {ProtoField: "kind"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteConfiguration",

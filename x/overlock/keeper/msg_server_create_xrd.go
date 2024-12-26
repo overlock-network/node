@@ -12,10 +12,8 @@ func (k msgServer) CreateXrd(goCtx context.Context, msg *types.MsgCreateXrd) (*t
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var xrd = types.CompositeResourceDefinition{
-		ApiVersion: msg.ApiVersion,
-		Kind:       msg.Kind,
-		Metadata:   msg.Metadata,
-		Spec:       &types.XrdSpec{},
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	id := k.AppendCompositeResourceDefinition(
 		ctx,

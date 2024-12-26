@@ -13,20 +13,16 @@ import (
 )
 
 var (
-	md_Composition             protoreflect.MessageDescriptor
-	fd_Composition_id          protoreflect.FieldDescriptor
-	fd_Composition_api_version protoreflect.FieldDescriptor
-	fd_Composition_kind        protoreflect.FieldDescriptor
-	fd_Composition_metadata    protoreflect.FieldDescriptor
-	fd_Composition_spec        protoreflect.FieldDescriptor
+	md_Composition          protoreflect.MessageDescriptor
+	fd_Composition_id       protoreflect.FieldDescriptor
+	fd_Composition_metadata protoreflect.FieldDescriptor
+	fd_Composition_spec     protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_overlock_overlock_composition_proto_init()
 	md_Composition = File_overlock_overlock_composition_proto.Messages().ByName("Composition")
 	fd_Composition_id = md_Composition.Fields().ByName("id")
-	fd_Composition_api_version = md_Composition.Fields().ByName("api_version")
-	fd_Composition_kind = md_Composition.Fields().ByName("kind")
 	fd_Composition_metadata = md_Composition.Fields().ByName("metadata")
 	fd_Composition_spec = md_Composition.Fields().ByName("spec")
 }
@@ -102,18 +98,6 @@ func (x *fastReflection_Composition) Range(f func(protoreflect.FieldDescriptor, 
 			return
 		}
 	}
-	if x.ApiVersion != "" {
-		value := protoreflect.ValueOfString(x.ApiVersion)
-		if !f(fd_Composition_api_version, value) {
-			return
-		}
-	}
-	if x.Kind != "" {
-		value := protoreflect.ValueOfString(x.Kind)
-		if !f(fd_Composition_kind, value) {
-			return
-		}
-	}
 	if x.Metadata != nil {
 		value := protoreflect.ValueOfMessage(x.Metadata.ProtoReflect())
 		if !f(fd_Composition_metadata, value) {
@@ -143,10 +127,6 @@ func (x *fastReflection_Composition) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "overlock.overlock.Composition.id":
 		return x.Id != uint64(0)
-	case "overlock.overlock.Composition.api_version":
-		return x.ApiVersion != ""
-	case "overlock.overlock.Composition.kind":
-		return x.Kind != ""
 	case "overlock.overlock.Composition.metadata":
 		return x.Metadata != nil
 	case "overlock.overlock.Composition.spec":
@@ -169,10 +149,6 @@ func (x *fastReflection_Composition) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "overlock.overlock.Composition.id":
 		x.Id = uint64(0)
-	case "overlock.overlock.Composition.api_version":
-		x.ApiVersion = ""
-	case "overlock.overlock.Composition.kind":
-		x.Kind = ""
 	case "overlock.overlock.Composition.metadata":
 		x.Metadata = nil
 	case "overlock.overlock.Composition.spec":
@@ -196,12 +172,6 @@ func (x *fastReflection_Composition) Get(descriptor protoreflect.FieldDescriptor
 	case "overlock.overlock.Composition.id":
 		value := x.Id
 		return protoreflect.ValueOfUint64(value)
-	case "overlock.overlock.Composition.api_version":
-		value := x.ApiVersion
-		return protoreflect.ValueOfString(value)
-	case "overlock.overlock.Composition.kind":
-		value := x.Kind
-		return protoreflect.ValueOfString(value)
 	case "overlock.overlock.Composition.metadata":
 		value := x.Metadata
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
@@ -230,10 +200,6 @@ func (x *fastReflection_Composition) Set(fd protoreflect.FieldDescriptor, value 
 	switch fd.FullName() {
 	case "overlock.overlock.Composition.id":
 		x.Id = value.Uint()
-	case "overlock.overlock.Composition.api_version":
-		x.ApiVersion = value.Interface().(string)
-	case "overlock.overlock.Composition.kind":
-		x.Kind = value.Interface().(string)
 	case "overlock.overlock.Composition.metadata":
 		x.Metadata = value.Message().Interface().(*Metadata)
 	case "overlock.overlock.Composition.spec":
@@ -270,10 +236,6 @@ func (x *fastReflection_Composition) Mutable(fd protoreflect.FieldDescriptor) pr
 		return protoreflect.ValueOfMessage(x.Spec.ProtoReflect())
 	case "overlock.overlock.Composition.id":
 		panic(fmt.Errorf("field id of message overlock.overlock.Composition is not mutable"))
-	case "overlock.overlock.Composition.api_version":
-		panic(fmt.Errorf("field api_version of message overlock.overlock.Composition is not mutable"))
-	case "overlock.overlock.Composition.kind":
-		panic(fmt.Errorf("field kind of message overlock.overlock.Composition is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.overlock.Composition"))
@@ -289,10 +251,6 @@ func (x *fastReflection_Composition) NewField(fd protoreflect.FieldDescriptor) p
 	switch fd.FullName() {
 	case "overlock.overlock.Composition.id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "overlock.overlock.Composition.api_version":
-		return protoreflect.ValueOfString("")
-	case "overlock.overlock.Composition.kind":
-		return protoreflect.ValueOfString("")
 	case "overlock.overlock.Composition.metadata":
 		m := new(Metadata)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
@@ -371,14 +329,6 @@ func (x *fastReflection_Composition) ProtoMethods() *protoiface.Methods {
 		if x.Id != 0 {
 			n += 1 + runtime.Sov(uint64(x.Id))
 		}
-		l = len(x.ApiVersion)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Kind)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
 		if x.Metadata != nil {
 			l = options.Size(x.Metadata)
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -428,7 +378,7 @@ func (x *fastReflection_Composition) ProtoMethods() *protoiface.Methods {
 			copy(dAtA[i:], encoded)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
-			dAtA[i] = 0x2a
+			dAtA[i] = 0x1a
 		}
 		if x.Metadata != nil {
 			encoded, err := options.Marshal(x.Metadata)
@@ -441,20 +391,6 @@ func (x *fastReflection_Composition) ProtoMethods() *protoiface.Methods {
 			i -= len(encoded)
 			copy(dAtA[i:], encoded)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x22
-		}
-		if len(x.Kind) > 0 {
-			i -= len(x.Kind)
-			copy(dAtA[i:], x.Kind)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Kind)))
-			i--
-			dAtA[i] = 0x1a
-		}
-		if len(x.ApiVersion) > 0 {
-			i -= len(x.ApiVersion)
-			copy(dAtA[i:], x.ApiVersion)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ApiVersion)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -533,70 +469,6 @@ func (x *fastReflection_Composition) ProtoMethods() *protoiface.Methods {
 				}
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ApiVersion", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.ApiVersion = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Kind = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 4:
-				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
 				}
 				var msglen int
@@ -631,7 +503,7 @@ func (x *fastReflection_Composition) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
-			case 5:
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
 				}
@@ -721,11 +593,9 @@ type Composition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         uint64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApiVersion string           `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind       string           `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
-	Metadata   *Metadata        `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Spec       *CompositionSpec `protobuf:"bytes,5,opt,name=spec,proto3" json:"spec,omitempty"`
+	Id       uint64           `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Metadata *Metadata        `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Spec     *CompositionSpec `protobuf:"bytes,3,opt,name=spec,proto3" json:"spec,omitempty"`
 }
 
 func (x *Composition) Reset() {
@@ -755,20 +625,6 @@ func (x *Composition) GetId() uint64 {
 	return 0
 }
 
-func (x *Composition) GetApiVersion() string {
-	if x != nil {
-		return x.ApiVersion
-	}
-	return ""
-}
-
-func (x *Composition) GetKind() string {
-	if x != nil {
-		return x.Kind
-	}
-	return ""
-}
-
 func (x *Composition) GetMetadata() *Metadata {
 	if x != nil {
 		return x.Metadata
@@ -794,31 +650,27 @@ var file_overlock_overlock_composition_proto_rawDesc = []byte{
 	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x70, 0x65, 0x63, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x1a, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65,
 	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc3, 0x01, 0x0a, 0x0b, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x8e, 0x01, 0x0a, 0x0b, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69,
 	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x02, 0x69, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70, 0x69, 0x5f, 0x76, 0x65, 0x72, 0x73,
-	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x70, 0x69, 0x56, 0x65,
-	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x37, 0x0a, 0x08, 0x6d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6f, 0x76,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x37, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x36, 0x0a,
+	0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x6f, 0x76,
 	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61,
-	0x74, 0x61, 0x12, 0x36, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x22, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e,
-	0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x42, 0xae, 0x01, 0x0a, 0x15, 0x63,
-	0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x42, 0x10, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f,
-	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xa2, 0x02, 0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02,
-	0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0xca, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76,
-	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xe2, 0x02, 0x1d, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x5c, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x12, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x3a, 0x3a, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65, 0x63, 0x52,
+	0x04, 0x73, 0x70, 0x65, 0x63, 0x42, 0xae, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x42,
+	0x10, 0x43, 0x6f, 0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74,
+	0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0xa2, 0x02, 0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x11, 0x4f, 0x76, 0x65, 0x72,
+	0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0xca, 0x02, 0x11,
+	0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0xe2, 0x02, 0x1d, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x4f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x12, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x4f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

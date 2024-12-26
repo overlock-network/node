@@ -81,7 +81,7 @@ message QueryListConfigurationResponse {
 }
 
 message QueryListCompositionRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryListCompositionResponse {
@@ -94,7 +94,7 @@ message QueryShowCompositionRequest {
 }
 
 message QueryShowCompositionResponse {
-  Composition composition = 1;
+  Composition composition = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryShowXrdRequest {
@@ -102,11 +102,11 @@ message QueryShowXrdRequest {
 }
 
 message QueryShowXrdResponse {
-  CompositeResourceDefinition xrd = 1;
+  CompositeResourceDefinition xrd = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryListXrdRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryListXrdResponse {

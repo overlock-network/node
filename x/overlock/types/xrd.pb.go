@@ -26,8 +26,6 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 // Complete CompositeResourceDefinition object.
 type Xrd struct {
 	Id         uint64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApiVersion string    `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	Kind       string    `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
 	Metadata   *Metadata `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	Spec       *XrdSpec  `protobuf:"bytes,5,opt,name=spec,proto3" json:"spec,omitempty"`
 }
@@ -70,20 +68,6 @@ func (m *Xrd) GetId() uint64 {
 		return m.Id
 	}
 	return 0
-}
-
-func (m *Xrd) GetApiVersion() string {
-	if m != nil {
-		return m.ApiVersion
-	}
-	return ""
-}
-
-func (m *Xrd) GetKind() string {
-	if m != nil {
-		return m.Kind
-	}
-	return ""
 }
 
 func (m *Xrd) GetMetadata() *Metadata {
@@ -169,20 +153,6 @@ func (m *Xrd) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.Kind) > 0 {
-		i -= len(m.Kind)
-		copy(dAtA[i:], m.Kind)
-		i = encodeVarintXrd(dAtA, i, uint64(len(m.Kind)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.ApiVersion) > 0 {
-		i -= len(m.ApiVersion)
-		copy(dAtA[i:], m.ApiVersion)
-		i = encodeVarintXrd(dAtA, i, uint64(len(m.ApiVersion)))
-		i--
-		dAtA[i] = 0x12
-	}
 	if m.Id != 0 {
 		i = encodeVarintXrd(dAtA, i, uint64(m.Id))
 		i--
@@ -210,14 +180,6 @@ func (m *Xrd) Size() (n int) {
 	_ = l
 	if m.Id != 0 {
 		n += 1 + sovXrd(uint64(m.Id))
-	}
-	l = len(m.ApiVersion)
-	if l > 0 {
-		n += 1 + l + sovXrd(uint64(l))
-	}
-	l = len(m.Kind)
-	if l > 0 {
-		n += 1 + l + sovXrd(uint64(l))
 	}
 	if m.Metadata != nil {
 		l = m.Metadata.Size()
@@ -314,7 +276,6 @@ func (m *Xrd) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ApiVersion = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -346,7 +307,6 @@ func (m *Xrd) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Kind = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
