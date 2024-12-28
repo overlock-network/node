@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -18,6 +19,12 @@ func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCrea
 	id := k.AppendConfiguration(
 		ctx,
 		configuration,
+	)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.ConfigurationCreatedEvent,
+			sdk.NewAttribute(types.ConfigurationIndex, strconv.FormatUint(id, 10)),
+		),
 	)
 
 	return &types.MsgCreateConfigurationResponse{Id: id}, nil

@@ -21,7 +21,7 @@ func (k Keeper) ListXrd(goCtx context.Context, req *types.QueryListXrdRequest) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositeResourceDefinitionKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
 
 	var xrds []types.CompositeResourceDefinition
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {

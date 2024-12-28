@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -15,9 +16,16 @@ func (k msgServer) CreateXrd(goCtx context.Context, msg *types.MsgCreateXrd) (*t
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 	}
+
 	id := k.AppendCompositeResourceDefinition(
 		ctx,
 		xrd,
+	)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.XRDCreatedEvent,
+			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(id, 10)),
+		),
 	)
 
 	return &types.MsgCreateXrdResponse{Id: id}, nil

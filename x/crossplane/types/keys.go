@@ -14,13 +14,25 @@ const (
 
 	ConfigurationCountKey = "Configuration/count/"
 
+	ConfigurationCreatedEvent = "configuration-created"
+
+	ConfigurationIndex = "id"
+
 	CompositionKey = "Composition/value/"
 
 	CompositionCountKey = "Composition/count/"
 
-	CompositeResourceDefinitionKey = "CompositeResourceDefinition/value/"
+	CompositionCreatedEvent = "composition-created"
 
-	CompositeResourceDefinitionCountKey = "CompositeResourceDefinition/count/"
+	CompositionIndex = "id"
+
+	XRDKey = "XRD/value/"
+
+	XRDCountKey = "XRD/count/"
+
+	XRDCreatedEvent = "CompositeResource-created"
+
+	XRDIndex = "id"
 )
 
 var (
