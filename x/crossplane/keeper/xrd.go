@@ -14,7 +14,7 @@ func (k Keeper) AppendCompositeResourceDefinition(ctx sdk.Context, xrd types.Com
 	count := k.GetCompositeResourceDefinitionCount(ctx)
 	xrd.Id = count
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositeResourceDefinitionKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
 	appendedValue := k.cdc.MustMarshal(&xrd)
 	store.Set(GetCompositeResourceDefinitionIDBytes(xrd.Id), appendedValue)
 	k.SetCompositeResourceDefinitionCount(ctx, count+1)
@@ -24,7 +24,7 @@ func (k Keeper) AppendCompositeResourceDefinition(ctx sdk.Context, xrd types.Com
 func (k Keeper) GetCompositeResourceDefinitionCount(ctx sdk.Context) uint64 {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
-	byteKey := types.KeyPrefix(types.CompositeResourceDefinitionCountKey)
+	byteKey := types.KeyPrefix(types.XRDCountKey)
 	bz := store.Get(byteKey)
 	if bz == nil {
 		return 0
@@ -41,7 +41,7 @@ func GetCompositeResourceDefinitionIDBytes(id uint64) []byte {
 func (k Keeper) SetCompositeResourceDefinitionCount(ctx sdk.Context, count uint64) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
-	byteKey := types.KeyPrefix(types.CompositeResourceDefinitionCountKey)
+	byteKey := types.KeyPrefix(types.XRDCountKey)
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, count)
 	store.Set(byteKey, bz)
@@ -49,7 +49,7 @@ func (k Keeper) SetCompositeResourceDefinitionCount(ctx sdk.Context, count uint6
 
 func (k Keeper) GetCompositeResourceDefinition(ctx sdk.Context, id uint64) (val types.CompositeResourceDefinition, found bool) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositeResourceDefinitionKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
 	b := store.Get(GetCompositeResourceDefinitionIDBytes(id))
 	if b == nil {
 		return val, false
@@ -60,13 +60,13 @@ func (k Keeper) GetCompositeResourceDefinition(ctx sdk.Context, id uint64) (val 
 
 func (k Keeper) SetCompositeResourceDefinition(ctx sdk.Context, xrd types.CompositeResourceDefinition) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositeResourceDefinitionKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
 	b := k.cdc.MustMarshal(&xrd)
 	store.Set(GetCompositeResourceDefinitionIDBytes(xrd.Id), b)
 }
 
 func (k Keeper) RemoveCompositeResourceDefinition(ctx sdk.Context, id uint64) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.CompositeResourceDefinitionKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
 	store.Delete(GetCompositeResourceDefinitionIDBytes(id))
 }
