@@ -1,0 +1,28 @@
+syntax = "proto3";
+package overlock.storage;
+
+import "overlock/crossplane/metadata.proto";
+
+option go_package = "overlock/x/storage/types";
+
+// OCIRegistry
+message OCIRegistry {
+  // id
+  uint64 id = 1;
+  // creator
+  string creator = 2;
+  // metadata
+  overlock.crossplane.Metadata metadata = 3;
+  // spec
+  RegistrySpec spec = 4;
+}
+
+// RegistrySpec
+message RegistrySpec {
+  // url
+  string url = 1;
+  // type
+  string type = 2;
+  // provider
+  string provider = 3;
+}
