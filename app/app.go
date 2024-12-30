@@ -76,6 +76,8 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	overlockmodulekeeper "overlock/x/crossplane/keeper"
+	storagemodulekeeper "overlock/x/storage/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"overlock/docs"
@@ -142,6 +144,7 @@ type App struct {
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
 	OverlockKeeper overlockmodulekeeper.Keeper
+	StorageKeeper  storagemodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -246,6 +249,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.OverlockKeeper,
+		&app.StorageKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

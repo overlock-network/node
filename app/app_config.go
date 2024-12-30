@@ -54,8 +54,11 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	crossplanemodulev1 "overlock/api/overlock/crossplane/module"
+	storagemodulev1 "overlock/api/overlock/storage/module"
 	_ "overlock/x/crossplane/module" // import for side-effects
 	overlockmoduletypes "overlock/x/crossplane/types"
+	_ "overlock/x/storage/module" // import for side-effects
+	storagemoduletypes "overlock/x/storage/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -94,6 +97,7 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		storagemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +123,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		storagemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +143,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		overlockmoduletypes.ModuleName,
+		storagemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -296,6 +302,10 @@ var (
 			{
 				Name:   overlockmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&crossplanemodulev1.Module{}),
+			},
+			{
+				Name:   storagemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&storagemodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package overlock.storage;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "overlock/x/storage/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "overlock/x/storage/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

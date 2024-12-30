@@ -1,0 +1,17 @@
+syntax = "proto3";
+package overlock.storage;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "overlock/storage/params.proto";
+
+option go_package = "overlock/x/storage/types";
+
+// GenesisState defines the storage module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
