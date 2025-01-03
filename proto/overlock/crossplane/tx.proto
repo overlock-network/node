@@ -17,27 +17,46 @@ option go_package = "overlock/x/crossplane/types";
 // Msg defines the Msg service.
 service Msg {
   option (cosmos.msg.v1.service) = true;
+
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+
   // CreateComposition
   rpc CreateComposition(MsgCreateComposition) returns (MsgCreateCompositionResponse);
+
   // UpdateComposition
   rpc UpdateComposition(MsgUpdateComposition) returns (MsgUpdateCompositionResponse);
+
   // DeleteComposition
   rpc DeleteComposition(MsgDeleteComposition) returns (MsgDeleteCompositionResponse);
+
   // CreateXrd
   rpc CreateXrd(MsgCreateXrd) returns (MsgCreateXrdResponse);
+
   // UpdateXrd
   rpc UpdateXrd(MsgUpdateXrd) returns (MsgUpdateXrdResponse);
+
   // DeleteXrd
   rpc DeleteXrd(MsgDeleteXrd) returns (MsgDeleteXrdResponse);
+
   // CreateConfiguration
   rpc CreateConfiguration(MsgCreateConfiguration) returns (MsgCreateConfigurationResponse);
+
   // UpdateConfiguration
   rpc UpdateConfiguration(MsgUpdateConfiguration) returns (MsgUpdateConfigurationResponse);
+
   // DeleteConfiguration
   rpc DeleteConfiguration(MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
+
+  // CreateEnvironment
+  rpc CreateEnvironment(MsgCreateEnvironment) returns (MsgCreateEnvironmentResponse);
+
+  // UpdateEnvironment
+  rpc UpdateEnvironment(MsgUpdateEnvironment) returns (MsgUpdateEnvironmentResponse);
+
+  // DeleteEnvironment
+  rpc DeleteEnvironment(MsgDeleteEnvironment) returns (MsgDeleteEnvironmentResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -165,3 +184,39 @@ message MsgDeleteConfiguration {
 
 // MsgDeleteConfigurationResponse
 message MsgDeleteConfigurationResponse {}
+
+// MsgCreateEnvironment
+message MsgCreateEnvironment {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string name = 2;
+}
+
+// MsgCreateEnvironmentResponse
+message MsgCreateEnvironmentResponse {
+  uint64 id = 1;
+}
+
+// MsgUpdateEnvironment
+message MsgUpdateEnvironment {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id = 2;
+  string name = 3;
+  string provider = 4;
+}
+
+// MsgUpdateEnvironmentResponse
+message MsgUpdateEnvironmentResponse {
+  uint64 id = 1;
+}
+
+// MsgDeleteEnvironment
+message MsgDeleteEnvironment {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id = 2;
+}
+
+// MsgDeleteEnvironmentResponse
+message MsgDeleteEnvironmentResponse {}

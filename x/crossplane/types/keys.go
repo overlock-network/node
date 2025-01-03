@@ -33,6 +33,14 @@ const (
 	XRDCreatedEvent = "CompositeResource-created"
 
 	XRDIndex = "id"
+
+	EnvironmentKey = "Environment/value/"
+
+	EnvironmentCountKey = "Environment/count/"
+
+	EnvironmentCreatedEvent = "environment-created"
+
+	EnvironmentIndex = "id"
 )
 
 var (

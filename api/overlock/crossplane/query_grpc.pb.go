@@ -26,6 +26,8 @@ const (
 	Query_ShowComposition_FullMethodName   = "/overlock.crossplane.Query/ShowComposition"
 	Query_ShowXrd_FullMethodName           = "/overlock.crossplane.Query/ShowXrd"
 	Query_ListXrd_FullMethodName           = "/overlock.crossplane.Query/ListXrd"
+	Query_ShowEnvironment_FullMethodName   = "/overlock.crossplane.Query/ShowEnvironment"
+	Query_ListEnvironment_FullMethodName   = "/overlock.crossplane.Query/ListEnvironment"
 )
 
 // QueryClient is the client API for Query service.
@@ -46,6 +48,10 @@ type QueryClient interface {
 	ShowXrd(ctx context.Context, in *QueryShowXrdRequest, opts ...grpc.CallOption) (*QueryShowXrdResponse, error)
 	// Queries a list of ListXrd items.
 	ListXrd(ctx context.Context, in *QueryListXrdRequest, opts ...grpc.CallOption) (*QueryListXrdResponse, error)
+	// Queries a list of ShowEnvironment items.
+	ShowEnvironment(ctx context.Context, in *QueryShowEnvironmentRequest, opts ...grpc.CallOption) (*QueryShowEnvironmentResponse, error)
+	// Queries a list of ListEnvironment items.
+	ListEnvironment(ctx context.Context, in *QueryListEnvironmentRequest, opts ...grpc.CallOption) (*QueryListEnvironmentResponse, error)
 }
 
 type queryClient struct {
@@ -119,6 +125,24 @@ func (c *queryClient) ListXrd(ctx context.Context, in *QueryListXrdRequest, opts
 	return out, nil
 }
 
+func (c *queryClient) ShowEnvironment(ctx context.Context, in *QueryShowEnvironmentRequest, opts ...grpc.CallOption) (*QueryShowEnvironmentResponse, error) {
+	out := new(QueryShowEnvironmentResponse)
+	err := c.cc.Invoke(ctx, Query_ShowEnvironment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListEnvironment(ctx context.Context, in *QueryListEnvironmentRequest, opts ...grpc.CallOption) (*QueryListEnvironmentResponse, error) {
+	out := new(QueryListEnvironmentResponse)
+	err := c.cc.Invoke(ctx, Query_ListEnvironment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -137,6 +161,10 @@ type QueryServer interface {
 	ShowXrd(context.Context, *QueryShowXrdRequest) (*QueryShowXrdResponse, error)
 	// Queries a list of ListXrd items.
 	ListXrd(context.Context, *QueryListXrdRequest) (*QueryListXrdResponse, error)
+	// Queries a list of ShowEnvironment items.
+	ShowEnvironment(context.Context, *QueryShowEnvironmentRequest) (*QueryShowEnvironmentResponse, error)
+	// Queries a list of ListEnvironment items.
+	ListEnvironment(context.Context, *QueryListEnvironmentRequest) (*QueryListEnvironmentResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -164,6 +192,12 @@ func (UnimplementedQueryServer) ShowXrd(context.Context, *QueryShowXrdRequest) (
 }
 func (UnimplementedQueryServer) ListXrd(context.Context, *QueryListXrdRequest) (*QueryListXrdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListXrd not implemented")
+}
+func (UnimplementedQueryServer) ShowEnvironment(context.Context, *QueryShowEnvironmentRequest) (*QueryShowEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowEnvironment not implemented")
+}
+func (UnimplementedQueryServer) ListEnvironment(context.Context, *QueryListEnvironmentRequest) (*QueryListEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEnvironment not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -304,6 +338,42 @@ func _Query_ListXrd_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ShowEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowEnvironmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowEnvironment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowEnvironment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowEnvironment(ctx, req.(*QueryShowEnvironmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListEnvironmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListEnvironment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListEnvironment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListEnvironment(ctx, req.(*QueryListEnvironmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -338,6 +408,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListXrd",
 			Handler:    _Query_ListXrd_Handler,
+		},
+		{
+			MethodName: "ShowEnvironment",
+			Handler:    _Query_ShowEnvironment_Handler,
+		},
+		{
+			MethodName: "ListEnvironment",
+			Handler:    _Query_ListEnvironment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

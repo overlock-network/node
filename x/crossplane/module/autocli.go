@@ -115,6 +115,20 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "ShowEnvironment",
+					Use:            "show-environment [id]",
+					Short:          "Query show-environment",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
+				{
+					RpcMethod:      "ListEnvironment",
+					Use:            "list-environment",
+					Short:          "Query list-environment",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -178,6 +192,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "DeleteConfiguration",
 					Use:            "delete-configuration [id]",
 					Short:          "Send a delete-configuration tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+				{
+					RpcMethod:      "CreateEnvironment",
+					Use:            "create-environment [name]",
+					Short:          "Send a create-environment tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+				},
+				{
+					RpcMethod:      "UpdateEnvironment",
+					Use:            "update-environment [id] [name] [provider]",
+					Short:          "Send a update-environment tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "name"}, {ProtoField: "provider"}},
+				},
+				{
+					RpcMethod:      "DeleteEnvironment",
+					Use:            "delete-environment [id]",
+					Short:          "Send a delete-environment tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
