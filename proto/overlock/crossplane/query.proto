@@ -10,88 +10,79 @@ import "overlock/crossplane/composition.proto";
 import "overlock/crossplane/configuration.proto";
 import "overlock/crossplane/environment.proto";
 import "overlock/crossplane/params.proto";
-import "overlock/crossplane/xrd.proto";
 import "overlock/crossplane/provider.proto";
+import "overlock/crossplane/xrd.proto";
 
 option go_package = "overlock/x/crossplane/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  
   // Parameters queries the parameters of the module.
-  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/overlock/crossplane/params";
-  
   }
-  
+
   // Queries a list of ShowConfiguration items.
-  rpc ShowConfiguration (QueryShowConfigurationRequest) returns (QueryShowConfigurationResponse) {
+  rpc ShowConfiguration(QueryShowConfigurationRequest) returns (QueryShowConfigurationResponse) {
     option (google.api.http).get = "/overlock/crossplane/show_configuration/{id}";
-  
   }
-  
+
   // Queries a list of ListConfiguration items.
-  rpc ListConfiguration (QueryListConfigurationRequest) returns (QueryListConfigurationResponse) {
+  rpc ListConfiguration(QueryListConfigurationRequest) returns (QueryListConfigurationResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_configuration";
-  
   }
-  
+
   // Queries a list of ListComposition items.
-  rpc ListComposition (QueryListCompositionRequest) returns (QueryListCompositionResponse) {
+  rpc ListComposition(QueryListCompositionRequest) returns (QueryListCompositionResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_composition";
-  
   }
-  
+
   // Queries a list of ShowComposition items.
-  rpc ShowComposition (QueryShowCompositionRequest) returns (QueryShowCompositionResponse) {
+  rpc ShowComposition(QueryShowCompositionRequest) returns (QueryShowCompositionResponse) {
     option (google.api.http).get = "/overlock/crossplane/show_composition/{id}";
-  
   }
-  
+
   // Queries a list of ShowXrd items.
-  rpc ShowXrd (QueryShowXrdRequest) returns (QueryShowXrdResponse) {
+  rpc ShowXrd(QueryShowXrdRequest) returns (QueryShowXrdResponse) {
     option (google.api.http).get = "/overlock/crossplane/show_xrd/{id}";
-  
   }
-  
+
   // Queries a list of ListXrd items.
-  rpc ListXrd (QueryListXrdRequest) returns (QueryListXrdResponse) {
+  rpc ListXrd(QueryListXrdRequest) returns (QueryListXrdResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_xrd";
-  
   }
-  
+
   // Queries a list of ShowEnvironment items.
-  rpc ShowEnvironment (QueryShowEnvironmentRequest) returns (QueryShowEnvironmentResponse) {
+  rpc ShowEnvironment(QueryShowEnvironmentRequest) returns (QueryShowEnvironmentResponse) {
     option (google.api.http).get = "/overlock/crossplane/show_environment/{id}";
-  
   }
-  
+
   // Queries a list of ListEnvironment items.
-  rpc ListEnvironment (QueryListEnvironmentRequest) returns (QueryListEnvironmentResponse) {
+  rpc ListEnvironment(QueryListEnvironmentRequest) returns (QueryListEnvironmentResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_environment";
-  
   }
-  
+
   // Queries a list of ListProvider items.
-  rpc ListProvider (QueryListProviderRequest) returns (QueryListProviderResponse) {
+  rpc ListProvider(QueryListProviderRequest) returns (QueryListProviderResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_provider";
-  
   }
-  
+
   // Queries a list of ShowProvider items.
-  rpc ShowProvider (QueryShowProviderRequest) returns (QueryShowProviderResponse) {
+  rpc ShowProvider(QueryShowProviderRequest) returns (QueryShowProviderResponse) {
     option (google.api.http).get = "/overlock/crossplane/show_provider/{id}";
-  
   }
 }
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-  
   // params holds all the parameters of this module.
-  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
 }
 
 // QueryShowConfigurationRequest
@@ -111,8 +102,8 @@ message QueryListConfigurationRequest {
 
 // QueryListConfigurationResponse
 message QueryListConfigurationResponse {
-  repeated Configuration                          configurations = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination     = 2;
+  repeated Configuration configurations = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // QueryListCompositionRequest
@@ -122,8 +113,8 @@ message QueryListCompositionRequest {
 
 // QueryListCompositionResponse
 message QueryListCompositionResponse {
-  repeated Composition                            compositions = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+  repeated Composition compositions = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // QueryShowCompositionRequest
@@ -153,8 +144,8 @@ message QueryListXrdRequest {
 
 // QueryListXrdResponse
 message QueryListXrdResponse {
-  repeated CompositeResourceDefinition            xrd        = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated CompositeResourceDefinition xrd = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // QueryShowEnvironmentRequest
@@ -174,24 +165,27 @@ message QueryListEnvironmentRequest {
 
 // QueryListEnvironmentResponse
 message QueryListEnvironmentResponse {
-  repeated Environment                            environments = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+  repeated Environment environments = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryListProviderRequest
 message QueryListProviderRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
+// QueryListProviderResponse
 message QueryListProviderResponse {
-  Provider                               provider   = 1;
+  repeated Provider providers = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryShowProviderRequest
 message QueryShowProviderRequest {
   uint64 id = 1;
 }
 
+// QueryShowProviderResponse
 message QueryShowProviderResponse {
   Provider provider = 1;
 }
-
