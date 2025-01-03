@@ -3,10 +3,14 @@ package overlock.crossplane;
 
 option go_package = "overlock/x/crossplane/types";
 
+// Provider
 message Provider {
-  
-  string name = 1; 
-  string url = 2; 
-  uint64 environment = 3; 
-  uint64 id = 4; 
+  // name
+  string name = 1;
+  // url
+  string url = 2;
+  // environment
+  uint64 environment = 3;
+  // id
+  uint64 id = 4;
 }
