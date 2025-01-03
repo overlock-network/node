@@ -2,19 +2,18 @@
 package crossplane
 
 import (
-	fmt "fmt"
-	io "io"
-	reflect "reflect"
-	sync "sync"
-
 	_ "cosmossdk.io/api/amino"
 	_ "cosmossdk.io/api/cosmos/msg/v1"
+	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	io "io"
+	reflect "reflect"
+	sync "sync"
 )
 
 var (
@@ -10127,6 +10126,7 @@ func (x *fastReflection_MsgCreateEnvironmentResponse) ProtoMethods() *protoiface
 var (
 	md_MsgUpdateEnvironment          protoreflect.MessageDescriptor
 	fd_MsgUpdateEnvironment_creator  protoreflect.FieldDescriptor
+	fd_MsgUpdateEnvironment_id       protoreflect.FieldDescriptor
 	fd_MsgUpdateEnvironment_name     protoreflect.FieldDescriptor
 	fd_MsgUpdateEnvironment_provider protoreflect.FieldDescriptor
 )
@@ -10135,6 +10135,7 @@ func init() {
 	file_overlock_crossplane_tx_proto_init()
 	md_MsgUpdateEnvironment = File_overlock_crossplane_tx_proto.Messages().ByName("MsgUpdateEnvironment")
 	fd_MsgUpdateEnvironment_creator = md_MsgUpdateEnvironment.Fields().ByName("creator")
+	fd_MsgUpdateEnvironment_id = md_MsgUpdateEnvironment.Fields().ByName("id")
 	fd_MsgUpdateEnvironment_name = md_MsgUpdateEnvironment.Fields().ByName("name")
 	fd_MsgUpdateEnvironment_provider = md_MsgUpdateEnvironment.Fields().ByName("provider")
 }
@@ -10210,6 +10211,12 @@ func (x *fastReflection_MsgUpdateEnvironment) Range(f func(protoreflect.FieldDes
 			return
 		}
 	}
+	if x.Id != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Id)
+		if !f(fd_MsgUpdateEnvironment_id, value) {
+			return
+		}
+	}
 	if x.Name != "" {
 		value := protoreflect.ValueOfString(x.Name)
 		if !f(fd_MsgUpdateEnvironment_name, value) {
@@ -10239,6 +10246,8 @@ func (x *fastReflection_MsgUpdateEnvironment) Has(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		return x.Creator != ""
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		return x.Id != uint64(0)
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		return x.Name != ""
 	case "overlock.crossplane.MsgUpdateEnvironment.provider":
@@ -10261,6 +10270,8 @@ func (x *fastReflection_MsgUpdateEnvironment) Clear(fd protoreflect.FieldDescrip
 	switch fd.FullName() {
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		x.Creator = ""
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		x.Id = uint64(0)
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		x.Name = ""
 	case "overlock.crossplane.MsgUpdateEnvironment.provider":
@@ -10284,6 +10295,9 @@ func (x *fastReflection_MsgUpdateEnvironment) Get(descriptor protoreflect.FieldD
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		value := x.Id
+		return protoreflect.ValueOfUint64(value)
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		value := x.Name
 		return protoreflect.ValueOfString(value)
@@ -10312,6 +10326,8 @@ func (x *fastReflection_MsgUpdateEnvironment) Set(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		x.Creator = value.Interface().(string)
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		x.Id = value.Uint()
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		x.Name = value.Interface().(string)
 	case "overlock.crossplane.MsgUpdateEnvironment.provider":
@@ -10338,6 +10354,8 @@ func (x *fastReflection_MsgUpdateEnvironment) Mutable(fd protoreflect.FieldDescr
 	switch fd.FullName() {
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		panic(fmt.Errorf("field creator of message overlock.crossplane.MsgUpdateEnvironment is not mutable"))
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		panic(fmt.Errorf("field id of message overlock.crossplane.MsgUpdateEnvironment is not mutable"))
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		panic(fmt.Errorf("field name of message overlock.crossplane.MsgUpdateEnvironment is not mutable"))
 	case "overlock.crossplane.MsgUpdateEnvironment.provider":
@@ -10357,6 +10375,8 @@ func (x *fastReflection_MsgUpdateEnvironment) NewField(fd protoreflect.FieldDesc
 	switch fd.FullName() {
 	case "overlock.crossplane.MsgUpdateEnvironment.creator":
 		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.MsgUpdateEnvironment.id":
+		return protoreflect.ValueOfUint64(uint64(0))
 	case "overlock.crossplane.MsgUpdateEnvironment.name":
 		return protoreflect.ValueOfString("")
 	case "overlock.crossplane.MsgUpdateEnvironment.provider":
@@ -10434,6 +10454,9 @@ func (x *fastReflection_MsgUpdateEnvironment) ProtoMethods() *protoiface.Methods
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
 		l = len(x.Name)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -10476,14 +10499,19 @@ func (x *fastReflection_MsgUpdateEnvironment) ProtoMethods() *protoiface.Methods
 			copy(dAtA[i:], x.Provider)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Provider)))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 		}
 		if len(x.Name) > 0 {
 			i -= len(x.Name)
 			copy(dAtA[i:], x.Name)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
 			i--
-			dAtA[i] = 0x12
+			dAtA[i] = 0x1a
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x10
 		}
 		if len(x.Creator) > 0 {
 			i -= len(x.Creator)
@@ -10574,6 +10602,25 @@ func (x *fastReflection_MsgUpdateEnvironment) ProtoMethods() *protoiface.Methods
 				x.Creator = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 				}
@@ -10605,7 +10652,7 @@ func (x *fastReflection_MsgUpdateEnvironment) ProtoMethods() *protoiface.Methods
 				}
 				x.Name = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 3:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
 				}
@@ -12809,8 +12856,9 @@ type MsgUpdateEnvironment struct {
 	unknownFields protoimpl.UnknownFields
 
 	Creator  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Provider string `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	Id       uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Provider string `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`
 }
 
 func (x *MsgUpdateEnvironment) Reset() {
@@ -12838,6 +12886,13 @@ func (x *MsgUpdateEnvironment) GetCreator() string {
 		return x.Creator
 	}
 	return ""
+}
+
+func (x *MsgUpdateEnvironment) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *MsgUpdateEnvironment) GetName() string {
@@ -13107,13 +13162,14 @@ var file_overlock_crossplane_tx_proto_rawDesc = []byte{
 	0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x2e,
 	0x0a, 0x1c, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x69, 0x72,
 	0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22, 0x6e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22, 0x7e,
 	0x0a, 0x14, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x69, 0x72,
 	0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f,
 	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
-	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
 	0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x2e,
 	0x0a, 0x1c, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x69, 0x72,
 	0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e,
