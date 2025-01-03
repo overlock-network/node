@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -11,8 +12,18 @@ import (
 func (k msgServer) CreateEnvironment(goCtx context.Context, msg *types.MsgCreateEnvironment) (*types.MsgCreateEnvironmentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	var env = types.Environment{
+		Name: msg.Name,
+	}
+	id := k.AppendEnvironment(
+		ctx,
+		env,
+	)
 
-	return &types.MsgCreateEnvironmentResponse{}, nil
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.EnvironmentCreatedEvent,
+			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(id, 10)),
+		),
+	)
+	return &types.MsgCreateEnvironmentResponse{Id: id}, nil
 }
