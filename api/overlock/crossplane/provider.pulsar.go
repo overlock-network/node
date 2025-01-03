@@ -3,13 +3,14 @@ package crossplane
 
 import (
 	fmt "fmt"
+	io "io"
+	reflect "reflect"
+	sync "sync"
+
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	io "io"
-	reflect "reflect"
-	sync "sync"
 )
 
 var (
@@ -605,15 +606,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Provider
 type Provider struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Url         string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	// name
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// url
+	Url string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	// environment
 	Environment uint64 `protobuf:"varint,3,opt,name=environment,proto3" json:"environment,omitempty"`
-	Id          uint64 `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	// id
+	Id uint64 `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *Provider) Reset() {
