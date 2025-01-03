@@ -59,15 +59,6 @@ service Msg {
 
   // DeleteEnvironment
   rpc DeleteEnvironment(MsgDeleteEnvironment) returns (MsgDeleteEnvironmentResponse);
-
-  // CreateProvider
-  rpc CreateProvider(MsgCreateProvider) returns (MsgCreateProviderResponse);
-
-  // UpdateProvider
-  rpc UpdateProvider(MsgUpdateProvider) returns (MsgUpdateProviderResponse);
-
-  // DeleteProvider
-  rpc DeleteProvider(MsgDeleteProvider) returns (MsgDeleteProviderResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -232,42 +223,3 @@ message MsgDeleteEnvironment {
 
 // MsgDeleteEnvironmentResponse
 message MsgDeleteEnvironmentResponse {}
-
-// MsgCreateProvider
-message MsgCreateProvider {
-  option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  Metadata metadata = 2;
-  ProviderSpec spec = 3;
-}
-
-// MsgCreateProviderResponse
-message MsgCreateProviderResponse {
-  uint64 id = 1;
-}
-
-// MsgUpdateProvider
-message MsgUpdateProvider {
-  option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  uint64 id = 2;
-  Metadata metadata = 3;
-  ProviderSpec spec = 4;
-}
-
-// MsgUpdateProviderResponse
-message MsgUpdateProviderResponse {
-  uint64 id = 1;
-}
-
-// MsgDeleteProvider
-message MsgDeleteProvider {
-  option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  uint64 id = 2;
-}
-
-// MsgDeleteProviderResponse
-message MsgDeleteProviderResponse {
-  uint64 id = 1;
-}
