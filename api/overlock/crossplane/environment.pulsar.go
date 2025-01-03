@@ -14,28 +14,30 @@ import (
 )
 
 var (
-	md_Metadata             protoreflect.MessageDescriptor
-	fd_Metadata_name        protoreflect.FieldDescriptor
-	fd_Metadata_annotations protoreflect.FieldDescriptor
+	md_Environment          protoreflect.MessageDescriptor
+	fd_Environment_name     protoreflect.FieldDescriptor
+	fd_Environment_provider protoreflect.FieldDescriptor
+	fd_Environment_id       protoreflect.FieldDescriptor
 )
 
 func init() {
-	file_overlock_crossplane_metadata_proto_init()
-	md_Metadata = File_overlock_crossplane_metadata_proto.Messages().ByName("Metadata")
-	fd_Metadata_name = md_Metadata.Fields().ByName("name")
-	fd_Metadata_annotations = md_Metadata.Fields().ByName("annotations")
+	file_overlock_crossplane_environment_proto_init()
+	md_Environment = File_overlock_crossplane_environment_proto.Messages().ByName("Environment")
+	fd_Environment_name = md_Environment.Fields().ByName("name")
+	fd_Environment_provider = md_Environment.Fields().ByName("provider")
+	fd_Environment_id = md_Environment.Fields().ByName("id")
 }
 
-var _ protoreflect.Message = (*fastReflection_Metadata)(nil)
+var _ protoreflect.Message = (*fastReflection_Environment)(nil)
 
-type fastReflection_Metadata Metadata
+type fastReflection_Environment Environment
 
-func (x *Metadata) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_Metadata)(x)
+func (x *Environment) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_Environment)(x)
 }
 
-func (x *Metadata) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_crossplane_metadata_proto_msgTypes[0]
+func (x *Environment) slowProtoReflect() protoreflect.Message {
+	mi := &file_overlock_crossplane_environment_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -46,43 +48,43 @@ func (x *Metadata) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_Metadata_messageType fastReflection_Metadata_messageType
-var _ protoreflect.MessageType = fastReflection_Metadata_messageType{}
+var _fastReflection_Environment_messageType fastReflection_Environment_messageType
+var _ protoreflect.MessageType = fastReflection_Environment_messageType{}
 
-type fastReflection_Metadata_messageType struct{}
+type fastReflection_Environment_messageType struct{}
 
-func (x fastReflection_Metadata_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_Metadata)(nil)
+func (x fastReflection_Environment_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_Environment)(nil)
 }
-func (x fastReflection_Metadata_messageType) New() protoreflect.Message {
-	return new(fastReflection_Metadata)
+func (x fastReflection_Environment_messageType) New() protoreflect.Message {
+	return new(fastReflection_Environment)
 }
-func (x fastReflection_Metadata_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_Metadata
+func (x fastReflection_Environment_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_Environment
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_Metadata) Descriptor() protoreflect.MessageDescriptor {
-	return md_Metadata
+func (x *fastReflection_Environment) Descriptor() protoreflect.MessageDescriptor {
+	return md_Environment
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_Metadata) Type() protoreflect.MessageType {
-	return _fastReflection_Metadata_messageType
+func (x *fastReflection_Environment) Type() protoreflect.MessageType {
+	return _fastReflection_Environment_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_Metadata) New() protoreflect.Message {
-	return new(fastReflection_Metadata)
+func (x *fastReflection_Environment) New() protoreflect.Message {
+	return new(fastReflection_Environment)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_Metadata) Interface() protoreflect.ProtoMessage {
-	return (*Metadata)(x)
+func (x *fastReflection_Environment) Interface() protoreflect.ProtoMessage {
+	return (*Environment)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -90,16 +92,22 @@ func (x *fastReflection_Metadata) Interface() protoreflect.ProtoMessage {
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_Metadata) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_Environment) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Name != "" {
 		value := protoreflect.ValueOfString(x.Name)
-		if !f(fd_Metadata_name, value) {
+		if !f(fd_Environment_name, value) {
 			return
 		}
 	}
-	if x.Annotations != "" {
-		value := protoreflect.ValueOfString(x.Annotations)
-		if !f(fd_Metadata_annotations, value) {
+	if x.Provider != "" {
+		value := protoreflect.ValueOfString(x.Provider)
+		if !f(fd_Environment_provider, value) {
+			return
+		}
+	}
+	if x.Id != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Id)
+		if !f(fd_Environment_id, value) {
 			return
 		}
 	}
@@ -116,17 +124,19 @@ func (x *fastReflection_Metadata) Range(f func(protoreflect.FieldDescriptor, pro
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_Metadata) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_Environment) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "overlock.crossplane.Metadata.name":
+	case "overlock.crossplane.Environment.name":
 		return x.Name != ""
-	case "overlock.crossplane.Metadata.annotations":
-		return x.Annotations != ""
+	case "overlock.crossplane.Environment.provider":
+		return x.Provider != ""
+	case "overlock.crossplane.Environment.id":
+		return x.Id != uint64(0)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -136,17 +146,19 @@ func (x *fastReflection_Metadata) Has(fd protoreflect.FieldDescriptor) bool {
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Metadata) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_Environment) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "overlock.crossplane.Metadata.name":
+	case "overlock.crossplane.Environment.name":
 		x.Name = ""
-	case "overlock.crossplane.Metadata.annotations":
-		x.Annotations = ""
+	case "overlock.crossplane.Environment.provider":
+		x.Provider = ""
+	case "overlock.crossplane.Environment.id":
+		x.Id = uint64(0)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -156,19 +168,22 @@ func (x *fastReflection_Metadata) Clear(fd protoreflect.FieldDescriptor) {
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_Metadata) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Environment) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "overlock.crossplane.Metadata.name":
+	case "overlock.crossplane.Environment.name":
 		value := x.Name
 		return protoreflect.ValueOfString(value)
-	case "overlock.crossplane.Metadata.annotations":
-		value := x.Annotations
+	case "overlock.crossplane.Environment.provider":
+		value := x.Provider
 		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.Environment.id":
+		value := x.Id
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -182,17 +197,19 @@ func (x *fastReflection_Metadata) Get(descriptor protoreflect.FieldDescriptor) p
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Metadata) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_Environment) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "overlock.crossplane.Metadata.name":
+	case "overlock.crossplane.Environment.name":
 		x.Name = value.Interface().(string)
-	case "overlock.crossplane.Metadata.annotations":
-		x.Annotations = value.Interface().(string)
+	case "overlock.crossplane.Environment.provider":
+		x.Provider = value.Interface().(string)
+	case "overlock.crossplane.Environment.id":
+		x.Id = value.Uint()
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -206,44 +223,48 @@ func (x *fastReflection_Metadata) Set(fd protoreflect.FieldDescriptor, value pro
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Metadata) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Environment) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.crossplane.Metadata.name":
-		panic(fmt.Errorf("field name of message overlock.crossplane.Metadata is not mutable"))
-	case "overlock.crossplane.Metadata.annotations":
-		panic(fmt.Errorf("field annotations of message overlock.crossplane.Metadata is not mutable"))
+	case "overlock.crossplane.Environment.name":
+		panic(fmt.Errorf("field name of message overlock.crossplane.Environment is not mutable"))
+	case "overlock.crossplane.Environment.provider":
+		panic(fmt.Errorf("field provider of message overlock.crossplane.Environment is not mutable"))
+	case "overlock.crossplane.Environment.id":
+		panic(fmt.Errorf("field id of message overlock.crossplane.Environment is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_Metadata) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_Environment) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "overlock.crossplane.Metadata.name":
+	case "overlock.crossplane.Environment.name":
 		return protoreflect.ValueOfString("")
-	case "overlock.crossplane.Metadata.annotations":
+	case "overlock.crossplane.Environment.provider":
 		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.Environment.id":
+		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Metadata"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Environment"))
 		}
-		panic(fmt.Errorf("message overlock.crossplane.Metadata does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message overlock.crossplane.Environment does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_Metadata) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_Environment) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.Metadata", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.Environment", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -251,7 +272,7 @@ func (x *fastReflection_Metadata) WhichOneof(d protoreflect.OneofDescriptor) pro
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_Metadata) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_Environment) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -262,7 +283,7 @@ func (x *fastReflection_Metadata) GetUnknown() protoreflect.RawFields {
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Metadata) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_Environment) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -274,7 +295,7 @@ func (x *fastReflection_Metadata) SetUnknown(fields protoreflect.RawFields) {
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_Metadata) IsValid() bool {
+func (x *fastReflection_Environment) IsValid() bool {
 	return x != nil
 }
 
@@ -284,9 +305,9 @@ func (x *fastReflection_Metadata) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_Environment) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*Metadata)
+		x := input.Message.Interface().(*Environment)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -302,9 +323,12 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Annotations)
+		l = len(x.Provider)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -316,7 +340,7 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*Metadata)
+		x := input.Message.Interface().(*Environment)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -335,10 +359,15 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Annotations) > 0 {
-			i -= len(x.Annotations)
-			copy(dAtA[i:], x.Annotations)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Annotations)))
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x18
+		}
+		if len(x.Provider) > 0 {
+			i -= len(x.Provider)
+			copy(dAtA[i:], x.Provider)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Provider)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -360,7 +389,7 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*Metadata)
+		x := input.Message.Interface().(*Environment)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -392,10 +421,10 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Metadata: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Environment: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Metadata: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Environment: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -432,7 +461,7 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Annotations", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -460,8 +489,27 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Annotations = string(dAtA[iNdEx:postIndex])
+				x.Provider = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
+			case 3:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -501,7 +549,7 @@ func (x *fastReflection_Metadata) ProtoMethods() *protoiface.Methods {
 // versions:
 // 	protoc-gen-go v1.27.0
 // 	protoc        (unknown)
-// source: overlock/crossplane/metadata.proto
+// source: overlock/crossplane/environment.proto
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
@@ -510,92 +558,100 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Metadata contains metadata information.
-type Metadata struct {
+type Environment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Annotations string `protobuf:"bytes,2,opt,name=annotations,proto3" json:"annotations,omitempty"`
+	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Id       uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *Metadata) Reset() {
-	*x = Metadata{}
+func (x *Environment) Reset() {
+	*x = Environment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_crossplane_metadata_proto_msgTypes[0]
+		mi := &file_overlock_crossplane_environment_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *Metadata) String() string {
+func (x *Environment) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Metadata) ProtoMessage() {}
+func (*Environment) ProtoMessage() {}
 
-// Deprecated: Use Metadata.ProtoReflect.Descriptor instead.
-func (*Metadata) Descriptor() ([]byte, []int) {
-	return file_overlock_crossplane_metadata_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use Environment.ProtoReflect.Descriptor instead.
+func (*Environment) Descriptor() ([]byte, []int) {
+	return file_overlock_crossplane_environment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Metadata) GetName() string {
+func (x *Environment) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *Metadata) GetAnnotations() string {
+func (x *Environment) GetProvider() string {
 	if x != nil {
-		return x.Annotations
+		return x.Provider
 	}
 	return ""
 }
 
-var File_overlock_crossplane_metadata_proto protoreflect.FileDescriptor
+func (x *Environment) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
 
-var file_overlock_crossplane_metadata_proto_rawDesc = []byte{
-	0x0a, 0x22, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73,
-	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63,
-	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x22, 0x40, 0x0a, 0x08, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x6e, 0x6e,
-	0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0xb7, 0x01, 0x0a, 0x17,
+var File_overlock_crossplane_environment_proto protoreflect.FileDescriptor
+
+var file_overlock_crossplane_environment_proto_rawDesc = []byte{
+	0x0a, 0x25, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73,
+	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2f, 0x65, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e,
+	0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x22, 0x4d, 0x0a, 0x0b,
+	0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x1a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x42, 0xba, 0x01, 0x0a, 0x17,
 	0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f,
-	0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x0d, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f,
-	0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03, 0x4f, 0x43, 0x58,
-	0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x72, 0x6f, 0x73,
-	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2, 0x02, 0x1f, 0x4f,
-	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61,
-	0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72, 0x6f, 0x73, 0x73,
-	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x10, 0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e,
+	0x6d, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65,
+	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
+	0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03,
+	0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43,
+	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72,
+	0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2,
+	0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72,
+	0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_overlock_crossplane_metadata_proto_rawDescOnce sync.Once
-	file_overlock_crossplane_metadata_proto_rawDescData = file_overlock_crossplane_metadata_proto_rawDesc
+	file_overlock_crossplane_environment_proto_rawDescOnce sync.Once
+	file_overlock_crossplane_environment_proto_rawDescData = file_overlock_crossplane_environment_proto_rawDesc
 )
 
-func file_overlock_crossplane_metadata_proto_rawDescGZIP() []byte {
-	file_overlock_crossplane_metadata_proto_rawDescOnce.Do(func() {
-		file_overlock_crossplane_metadata_proto_rawDescData = protoimpl.X.CompressGZIP(file_overlock_crossplane_metadata_proto_rawDescData)
+func file_overlock_crossplane_environment_proto_rawDescGZIP() []byte {
+	file_overlock_crossplane_environment_proto_rawDescOnce.Do(func() {
+		file_overlock_crossplane_environment_proto_rawDescData = protoimpl.X.CompressGZIP(file_overlock_crossplane_environment_proto_rawDescData)
 	})
-	return file_overlock_crossplane_metadata_proto_rawDescData
+	return file_overlock_crossplane_environment_proto_rawDescData
 }
 
-var file_overlock_crossplane_metadata_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_overlock_crossplane_metadata_proto_goTypes = []interface{}{
-	(*Metadata)(nil), // 0: overlock.crossplane.Metadata
+var file_overlock_crossplane_environment_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_overlock_crossplane_environment_proto_goTypes = []interface{}{
+	(*Environment)(nil), // 0: overlock.crossplane.Environment
 }
-var file_overlock_crossplane_metadata_proto_depIdxs = []int32{
+var file_overlock_crossplane_environment_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -603,14 +659,14 @@ var file_overlock_crossplane_metadata_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_overlock_crossplane_metadata_proto_init() }
-func file_overlock_crossplane_metadata_proto_init() {
-	if File_overlock_crossplane_metadata_proto != nil {
+func init() { file_overlock_crossplane_environment_proto_init() }
+func file_overlock_crossplane_environment_proto_init() {
+	if File_overlock_crossplane_environment_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_overlock_crossplane_metadata_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Metadata); i {
+		file_overlock_crossplane_environment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Environment); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -626,18 +682,18 @@ func file_overlock_crossplane_metadata_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_overlock_crossplane_metadata_proto_rawDesc,
+			RawDescriptor: file_overlock_crossplane_environment_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_overlock_crossplane_metadata_proto_goTypes,
-		DependencyIndexes: file_overlock_crossplane_metadata_proto_depIdxs,
-		MessageInfos:      file_overlock_crossplane_metadata_proto_msgTypes,
+		GoTypes:           file_overlock_crossplane_environment_proto_goTypes,
+		DependencyIndexes: file_overlock_crossplane_environment_proto_depIdxs,
+		MessageInfos:      file_overlock_crossplane_environment_proto_msgTypes,
 	}.Build()
-	File_overlock_crossplane_metadata_proto = out.File
-	file_overlock_crossplane_metadata_proto_rawDesc = nil
-	file_overlock_crossplane_metadata_proto_goTypes = nil
-	file_overlock_crossplane_metadata_proto_depIdxs = nil
+	File_overlock_crossplane_environment_proto = out.File
+	file_overlock_crossplane_environment_proto_rawDesc = nil
+	file_overlock_crossplane_environment_proto_goTypes = nil
+	file_overlock_crossplane_environment_proto_depIdxs = nil
 }
