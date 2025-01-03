@@ -11,7 +11,6 @@ var _ sdk.Msg = &MsgCreateEnvironment{}
 func NewMsgCreateEnvironment(creator string, name string) *MsgCreateEnvironment {
 	return &MsgCreateEnvironment{
 		Creator: creator,
-		Name:    name,
 	}
 }
 

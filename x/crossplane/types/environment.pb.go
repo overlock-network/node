@@ -5,11 +5,10 @@ package types
 
 import (
 	fmt "fmt"
+	proto "github.com/cosmos/gogoproto/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-
-	proto "github.com/cosmos/gogoproto/proto"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -25,12 +24,12 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // Environment
 type Environment struct {
-	// name
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// provider
-	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	// metadata
+	Metadata *Metadata `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// spec
+	Spec *EnvironmentSpec `protobuf:"bytes,2,opt,name=spec,proto3" json:"spec,omitempty"`
 	// id
-	Id uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	Id uint64 `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (m *Environment) Reset()         { *m = Environment{} }
@@ -66,18 +65,18 @@ func (m *Environment) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Environment proto.InternalMessageInfo
 
-func (m *Environment) GetName() string {
+func (m *Environment) GetMetadata() *Metadata {
 	if m != nil {
-		return m.Name
+		return m.Metadata
 	}
-	return ""
+	return nil
 }
 
-func (m *Environment) GetProvider() string {
+func (m *Environment) GetSpec() *EnvironmentSpec {
 	if m != nil {
-		return m.Provider
+		return m.Spec
 	}
-	return ""
+	return nil
 }
 
 func (m *Environment) GetId() uint64 {
@@ -87,8 +86,73 @@ func (m *Environment) GetId() uint64 {
 	return 0
 }
 
+// Spec defines the specification of the environment.
+type EnvironmentSpec struct {
+	// providers
+	Providers []*Provider `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	// configurations
+	Configurations []*Configuration `protobuf:"bytes,3,rep,name=configurations,proto3" json:"configurations,omitempty"`
+	// functions
+	Functions []*Function `protobuf:"bytes,4,rep,name=functions,proto3" json:"functions,omitempty"`
+}
+
+func (m *EnvironmentSpec) Reset()         { *m = EnvironmentSpec{} }
+func (m *EnvironmentSpec) String() string { return proto.CompactTextString(m) }
+func (*EnvironmentSpec) ProtoMessage()    {}
+func (*EnvironmentSpec) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c7476339719a8cb6, []int{1}
+}
+func (m *EnvironmentSpec) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *EnvironmentSpec) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_EnvironmentSpec.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *EnvironmentSpec) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EnvironmentSpec.Merge(m, src)
+}
+func (m *EnvironmentSpec) XXX_Size() int {
+	return m.Size()
+}
+func (m *EnvironmentSpec) XXX_DiscardUnknown() {
+	xxx_messageInfo_EnvironmentSpec.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EnvironmentSpec proto.InternalMessageInfo
+
+func (m *EnvironmentSpec) GetProviders() []*Provider {
+	if m != nil {
+		return m.Providers
+	}
+	return nil
+}
+
+func (m *EnvironmentSpec) GetConfigurations() []*Configuration {
+	if m != nil {
+		return m.Configurations
+	}
+	return nil
+}
+
+func (m *EnvironmentSpec) GetFunctions() []*Function {
+	if m != nil {
+		return m.Functions
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Environment)(nil), "overlock.crossplane.Environment")
+	proto.RegisterType((*EnvironmentSpec)(nil), "overlock.crossplane.EnvironmentSpec")
 }
 
 func init() {
@@ -96,18 +160,26 @@ func init() {
 }
 
 var fileDescriptor_c7476339719a8cb6 = []byte{
-	// 173 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xcd, 0x2f, 0x4b, 0x2d,
-	0xca, 0xc9, 0x4f, 0xce, 0xd6, 0x4f, 0x2e, 0xca, 0x2f, 0x2e, 0x2e, 0xc8, 0x49, 0xcc, 0x4b, 0xd5,
-	0x4f, 0xcd, 0x2b, 0xcb, 0x2c, 0xca, 0xcf, 0xcb, 0x4d, 0xcd, 0x2b, 0xd1, 0x2b, 0x28, 0xca, 0x2f,
-	0xc9, 0x17, 0x12, 0x86, 0x29, 0xd3, 0x43, 0x28, 0x53, 0xf2, 0xe5, 0xe2, 0x76, 0x45, 0xa8, 0x14,
-	0x12, 0xe2, 0x62, 0xc9, 0x4b, 0xcc, 0x4d, 0x95, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x02, 0xb3,
-	0x85, 0xa4, 0xb8, 0x38, 0x0a, 0x8a, 0xf2, 0xcb, 0x32, 0x53, 0x52, 0x8b, 0x24, 0x98, 0xc0, 0xe2,
-	0x70, 0xbe, 0x10, 0x1f, 0x17, 0x53, 0x66, 0x8a, 0x04, 0xb3, 0x02, 0xa3, 0x06, 0x4b, 0x10, 0x53,
-	0x66, 0x8a, 0x93, 0xe9, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7,
-	0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x49, 0xc3,
-	0x1d, 0x59, 0x81, 0xec, 0xcc, 0x92, 0xca, 0x82, 0xd4, 0xe2, 0x24, 0x36, 0xb0, 0x0b, 0x8d, 0x01,
-	0x01, 0x00, 0x00, 0xff, 0xff, 0xa6, 0x8f, 0x6e, 0x57, 0xca, 0x00, 0x00, 0x00,
+	// 301 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0xd1, 0xc1, 0x4a, 0xc3, 0x30,
+	0x1c, 0x06, 0xf0, 0xa5, 0x9b, 0xa2, 0x19, 0x4c, 0x88, 0x97, 0x30, 0x31, 0x94, 0xa2, 0xb8, 0x53,
+	0x07, 0x8a, 0xa0, 0x78, 0x53, 0xf4, 0x20, 0x08, 0x12, 0x6f, 0xde, 0x6a, 0x9a, 0x49, 0x70, 0x4b,
+	0x42, 0x92, 0x15, 0x7d, 0x0b, 0xf1, 0xa9, 0x3c, 0xee, 0xa6, 0x47, 0x69, 0x5f, 0x44, 0xec, 0xda,
+	0xb5, 0x8e, 0x3a, 0xef, 0xbf, 0xef, 0xdf, 0xaf, 0xf9, 0xe0, 0xbe, 0x4a, 0xb8, 0x19, 0x2b, 0xf6,
+	0x34, 0x64, 0x46, 0x59, 0xab, 0xc7, 0x91, 0xe4, 0x43, 0x2e, 0x13, 0x61, 0x94, 0x9c, 0x70, 0xe9,
+	0x42, 0x6d, 0x94, 0x53, 0x68, 0xbb, 0x64, 0x61, 0xc5, 0xfa, 0x07, 0x4d, 0x59, 0xa6, 0xe4, 0x48,
+	0x3c, 0x4e, 0x4d, 0xe4, 0x84, 0x92, 0xf3, 0x74, 0x3f, 0x68, 0x82, 0xa3, 0xa9, 0x64, 0xff, 0x99,
+	0x09, 0x77, 0x51, 0x1c, 0xb9, 0x68, 0x95, 0xd1, 0x46, 0x25, 0x22, 0xe6, 0x66, 0x6e, 0x82, 0x37,
+	0x00, 0xbb, 0x97, 0x55, 0x7f, 0x74, 0x0a, 0x37, 0xca, 0x2b, 0x18, 0xf8, 0x60, 0xd0, 0x3d, 0xdc,
+	0x0d, 0x1b, 0x7e, 0x26, 0xbc, 0x29, 0x10, 0x5d, 0x70, 0x74, 0x02, 0x3b, 0x56, 0x73, 0x86, 0xbd,
+	0x3c, 0xb6, 0xd7, 0x18, 0xab, 0x7d, 0xea, 0x4e, 0x73, 0x46, 0xf3, 0x04, 0xea, 0x41, 0x4f, 0xc4,
+	0x78, 0xcd, 0x07, 0x83, 0x0e, 0xf5, 0x44, 0x1c, 0x7c, 0x00, 0xb8, 0xb5, 0x24, 0xd1, 0x19, 0xdc,
+	0x2c, 0xab, 0x5b, 0xec, 0xf9, 0xed, 0x3f, 0x9b, 0xdd, 0x16, 0x8a, 0x56, 0x1e, 0x5d, 0xc3, 0xde,
+	0xaf, 0x87, 0xb6, 0xb8, 0x9d, 0x5f, 0x08, 0x1a, 0x2f, 0x5c, 0xd4, 0x29, 0x5d, 0x4a, 0xfe, 0x14,
+	0x29, 0xb7, 0xb0, 0xb8, 0xb3, 0xa2, 0xc8, 0x55, 0xa1, 0x68, 0xe5, 0xcf, 0x8f, 0xdf, 0x53, 0x02,
+	0x66, 0x29, 0x01, 0x5f, 0x29, 0x01, 0xaf, 0x19, 0x69, 0xcd, 0x32, 0xd2, 0xfa, 0xcc, 0x48, 0xeb,
+	0x7e, 0x67, 0x31, 0xd6, 0x73, 0x7d, 0x2e, 0xf7, 0xa2, 0xb9, 0x7d, 0x58, 0xcf, 0xc7, 0x3a, 0xfa,
+	0x0e, 0x00, 0x00, 0xff, 0xff, 0xd9, 0x2d, 0x00, 0xc2, 0x7f, 0x02, 0x00, 0x00,
 }
 
 func (m *Environment) Marshal() (dAtA []byte, err error) {
@@ -133,21 +205,96 @@ func (m *Environment) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.Id != 0 {
 		i = encodeVarintEnvironment(dAtA, i, uint64(m.Id))
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x28
 	}
-	if len(m.Provider) > 0 {
-		i -= len(m.Provider)
-		copy(dAtA[i:], m.Provider)
-		i = encodeVarintEnvironment(dAtA, i, uint64(len(m.Provider)))
+	if m.Spec != nil {
+		{
+			size, err := m.Spec.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintEnvironment(dAtA, i, uint64(size))
+		}
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintEnvironment(dAtA, i, uint64(len(m.Name)))
+	if m.Metadata != nil {
+		{
+			size, err := m.Metadata.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintEnvironment(dAtA, i, uint64(size))
+		}
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *EnvironmentSpec) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *EnvironmentSpec) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *EnvironmentSpec) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Functions) > 0 {
+		for iNdEx := len(m.Functions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Functions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Configurations) > 0 {
+		for iNdEx := len(m.Configurations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Configurations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.Providers) > 0 {
+		for iNdEx := len(m.Providers) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Providers[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -169,16 +316,43 @@ func (m *Environment) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Name)
-	if l > 0 {
+	if m.Metadata != nil {
+		l = m.Metadata.Size()
 		n += 1 + l + sovEnvironment(uint64(l))
 	}
-	l = len(m.Provider)
-	if l > 0 {
+	if m.Spec != nil {
+		l = m.Spec.Size()
 		n += 1 + l + sovEnvironment(uint64(l))
 	}
 	if m.Id != 0 {
 		n += 1 + sovEnvironment(uint64(m.Id))
+	}
+	return n
+}
+
+func (m *EnvironmentSpec) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Providers) > 0 {
+		for _, e := range m.Providers {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
+	}
+	if len(m.Configurations) > 0 {
+		for _, e := range m.Configurations {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
+	}
+	if len(m.Functions) > 0 {
+		for _, e := range m.Functions {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
 	}
 	return n
 }
@@ -220,9 +394,9 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEnvironment
@@ -232,29 +406,33 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthEnvironment
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthEnvironment
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			if m.Metadata == nil {
+				m.Metadata = &Metadata{}
+			}
+			if err := m.Metadata.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEnvironment
@@ -264,25 +442,29 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthEnvironment
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthEnvironment
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Provider = string(dAtA[iNdEx:postIndex])
+			if m.Spec == nil {
+				m.Spec = &EnvironmentSpec{}
+			}
+			if err := m.Spec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
-		case 3:
+		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
 			}
@@ -301,6 +483,158 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEnvironment(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *EnvironmentSpec) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEnvironment
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: EnvironmentSpec: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: EnvironmentSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Providers", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEnvironment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Providers = append(m.Providers, &Provider{})
+			if err := m.Providers[len(m.Providers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Configurations", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEnvironment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Configurations = append(m.Configurations, &Configuration{})
+			if err := m.Configurations[len(m.Configurations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Functions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEnvironment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Functions = append(m.Functions, &Function{})
+			if err := m.Functions[len(m.Functions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipEnvironment(dAtA[iNdEx:])

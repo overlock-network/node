@@ -13,9 +13,8 @@ func (k msgServer) CreateProvider(goCtx context.Context, msg *types.MsgCreatePro
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var provider = types.Provider{
-		Name:        msg.Name,
-		Url:         msg.Url,
-		Environment: msg.Environment,
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	id := k.AppendProvider(
 		ctx,

@@ -8,13 +8,12 @@ import (
 
 var _ sdk.Msg = &MsgUpdateProvider{}
 
-func NewMsgUpdateProvider(creator string, id uint64, name string, url string, environment uint64) *MsgUpdateProvider {
+func NewMsgUpdateProvider(creator string, id uint64, metadata Metadata, spec ProviderSpec) *MsgUpdateProvider {
 	return &MsgUpdateProvider{
-		Creator:     creator,
-		Id:          id,
-		Name:        name,
-		Url:         url,
-		Environment: environment,
+		Creator:  creator,
+		Id:       id,
+		Metadata: &metadata,
+		Spec:     &spec,
 	}
 }
 

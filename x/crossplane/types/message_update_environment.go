@@ -8,11 +8,11 @@ import (
 
 var _ sdk.Msg = &MsgUpdateEnvironment{}
 
-func NewMsgUpdateEnvironment(creator string, name string, provider string) *MsgUpdateEnvironment {
+func NewMsgUpdateEnvironment(creator string, metadata Metadata, spec EnvironmentSpec) *MsgUpdateEnvironment {
 	return &MsgUpdateEnvironment{
 		Creator:  creator,
-		Name:     name,
-		Provider: provider,
+		Metadata: &metadata,
+		Spec:     &spec,
 	}
 }
 

@@ -8,7 +8,6 @@ package crossplane
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -69,8 +68,11 @@ type MsgClient interface {
 	UpdateEnvironment(ctx context.Context, in *MsgUpdateEnvironment, opts ...grpc.CallOption) (*MsgUpdateEnvironmentResponse, error)
 	// DeleteEnvironment
 	DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error)
+	// CreateProvider
 	CreateProvider(ctx context.Context, in *MsgCreateProvider, opts ...grpc.CallOption) (*MsgCreateProviderResponse, error)
+	// UpdateProvider
 	UpdateProvider(ctx context.Context, in *MsgUpdateProvider, opts ...grpc.CallOption) (*MsgUpdateProviderResponse, error)
+	// DeleteProvider
 	DeleteProvider(ctx context.Context, in *MsgDeleteProvider, opts ...grpc.CallOption) (*MsgDeleteProviderResponse, error)
 }
 
@@ -257,8 +259,11 @@ type MsgServer interface {
 	UpdateEnvironment(context.Context, *MsgUpdateEnvironment) (*MsgUpdateEnvironmentResponse, error)
 	// DeleteEnvironment
 	DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error)
+	// CreateProvider
 	CreateProvider(context.Context, *MsgCreateProvider) (*MsgCreateProviderResponse, error)
+	// UpdateProvider
 	UpdateProvider(context.Context, *MsgUpdateProvider) (*MsgUpdateProviderResponse, error)
+	// DeleteProvider
 	DeleteProvider(context.Context, *MsgDeleteProvider) (*MsgDeleteProviderResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }

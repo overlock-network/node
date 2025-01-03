@@ -1,12 +1,22 @@
 syntax = "proto3";
 package overlock.crossplane;
 
+import "overlock/crossplane/metadata.proto";
+
 option go_package = "overlock/x/crossplane/types";
 
+// Function
 message Function {
-  
-  string name = 1; 
-  string url = 2; 
-  uint64 environment = 3; 
-  uint64 id = 4; 
+  // name
+  Metadata metadata = 1;
+  // spec
+  FunctionSpec spec = 2;
+  // id
+  uint64 id = 4;
+}
+
+// Spec defines the specification of the function.
+message FunctionSpec {
+  // package
+  string package = 1;
 }
