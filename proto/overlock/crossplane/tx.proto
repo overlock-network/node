@@ -48,8 +48,14 @@ service Msg {
 
   // DeleteConfiguration
   rpc DeleteConfiguration(MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
+
+  // CreateEnvironment
   rpc CreateEnvironment(MsgCreateEnvironment) returns (MsgCreateEnvironmentResponse);
+
+  // UpdateEnvironment
   rpc UpdateEnvironment(MsgUpdateEnvironment) returns (MsgUpdateEnvironmentResponse);
+
+  // DeleteEnvironment
   rpc DeleteEnvironment(MsgDeleteEnvironment) returns (MsgDeleteEnvironmentResponse);
 }
 
@@ -179,16 +185,19 @@ message MsgDeleteConfiguration {
 // MsgDeleteConfigurationResponse
 message MsgDeleteConfigurationResponse {}
 
+// MsgCreateEnvironment
 message MsgCreateEnvironment {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   string name = 2;
 }
 
+// MsgCreateEnvironmentResponse
 message MsgCreateEnvironmentResponse {
   uint64 id = 1;
 }
 
+// MsgUpdateEnvironment
 message MsgUpdateEnvironment {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
@@ -197,14 +206,17 @@ message MsgUpdateEnvironment {
   string provider = 4;
 }
 
+// MsgUpdateEnvironmentResponse
 message MsgUpdateEnvironmentResponse {
   uint64 id = 1;
 }
 
+// MsgDeleteEnvironment
 message MsgDeleteEnvironment {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
 }
 
+// MsgDeleteEnvironmentResponse
 message MsgDeleteEnvironmentResponse {}

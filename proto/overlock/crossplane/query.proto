@@ -137,18 +137,22 @@ message QueryListXrdResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
+// QueryShowEnvironmentRequest
 message QueryShowEnvironmentRequest {
   uint64 id = 1;
 }
 
+// QueryShowEnvironmentResponse
 message QueryShowEnvironmentResponse {
   Environment environment = 1;
 }
 
+// QueryListEnvironmentRequest
 message QueryListEnvironmentRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
+// QueryListEnvironmentResponse
 message QueryListEnvironmentResponse {
   repeated Environment environments = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
