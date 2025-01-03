@@ -9,13 +9,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
 	"overlock/testutil/sample"
-	overlocksimulation "overlock/x/crossplane/simulation"
+	crossplanesimulation "overlock/x/crossplane/simulation"
 	"overlock/x/crossplane/types"
 )
 
 // avoid unused import issue
 var (
-	_ = overlocksimulation.FindAccount
+	_ = crossplanesimulation.FindAccount
 	_ = rand.Rand{}
 	_ = sample.AccAddress
 	_ = sdk.AccAddress{}
@@ -102,7 +102,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateComposition,
-		overlocksimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgUpdateComposition int
@@ -113,7 +113,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateComposition,
-		overlocksimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgDeleteComposition int
@@ -124,7 +124,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteComposition,
-		overlocksimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgCreateXrd int
@@ -135,7 +135,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateXrd,
-		overlocksimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgUpdateXrd int
@@ -146,7 +146,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateXrd,
-		overlocksimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgDeleteXrd int
@@ -157,7 +157,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteXrd,
-		overlocksimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgCreateConfiguration int
@@ -168,7 +168,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateConfiguration,
-		overlocksimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgUpdateConfiguration int
@@ -179,7 +179,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateConfiguration,
-		overlocksimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgDeleteConfiguration int
@@ -190,7 +190,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteConfiguration,
-		overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
+		crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgCreateEnvironment int
@@ -238,7 +238,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgCreateConfiguration,
 			defaultWeightMsgCreateConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -246,7 +246,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgUpdateConfiguration,
 			defaultWeightMsgUpdateConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -254,7 +254,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgDeleteConfiguration,
 			defaultWeightMsgDeleteConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -262,7 +262,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgCreateComposition,
 			defaultWeightMsgCreateComposition,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgCreateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -270,7 +270,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgUpdateComposition,
 			defaultWeightMsgUpdateComposition,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgUpdateComposition(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -278,7 +278,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgDeleteComposition,
 			defaultWeightMsgDeleteComposition,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgDeleteComposition(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -286,7 +286,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgCreateXrd,
 			defaultWeightMsgCreateXrd,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgCreateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -294,7 +294,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgUpdateXrd,
 			defaultWeightMsgUpdateXrd,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgUpdateXrd(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -302,7 +302,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgDeleteXrd,
 			defaultWeightMsgDeleteXrd,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgDeleteXrd(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -310,7 +310,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgCreateConfiguration,
 			defaultWeightMsgCreateConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -318,7 +318,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgUpdateConfiguration,
 			defaultWeightMsgUpdateConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
@@ -326,7 +326,7 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			opWeightMsgDeleteConfiguration,
 			defaultWeightMsgDeleteConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
