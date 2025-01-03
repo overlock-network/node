@@ -1,0 +1,12 @@
+syntax = "proto3";
+package overlock.crossplane;
+
+option go_package = "overlock/x/crossplane/types";
+
+message Function {
+  
+  string name = 1; 
+  string url = 2; 
+  uint64 environment = 3; 
+  uint64 id = 4; 
+}
