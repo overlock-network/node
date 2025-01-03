@@ -224,6 +224,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a update-provider tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "name"}, {ProtoField: "url"}, {ProtoField: "environment"}},
 				},
+				{
+					RpcMethod:      "DeleteProvider",
+					Use:            "delete-provider [id]",
+					Short:          "Send a delete-provider tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

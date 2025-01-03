@@ -35,6 +35,7 @@ const (
 	Msg_DeleteEnvironment_FullMethodName   = "/overlock.crossplane.Msg/DeleteEnvironment"
 	Msg_CreateProvider_FullMethodName      = "/overlock.crossplane.Msg/CreateProvider"
 	Msg_UpdateProvider_FullMethodName      = "/overlock.crossplane.Msg/UpdateProvider"
+	Msg_DeleteProvider_FullMethodName      = "/overlock.crossplane.Msg/DeleteProvider"
 )
 
 // MsgClient is the client API for Msg service.
@@ -70,6 +71,7 @@ type MsgClient interface {
 	DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error)
 	CreateProvider(ctx context.Context, in *MsgCreateProvider, opts ...grpc.CallOption) (*MsgCreateProviderResponse, error)
 	UpdateProvider(ctx context.Context, in *MsgUpdateProvider, opts ...grpc.CallOption) (*MsgUpdateProviderResponse, error)
+	DeleteProvider(ctx context.Context, in *MsgDeleteProvider, opts ...grpc.CallOption) (*MsgDeleteProviderResponse, error)
 }
 
 type msgClient struct {
@@ -215,6 +217,15 @@ func (c *msgClient) UpdateProvider(ctx context.Context, in *MsgUpdateProvider, o
 	return out, nil
 }
 
+func (c *msgClient) DeleteProvider(ctx context.Context, in *MsgDeleteProvider, opts ...grpc.CallOption) (*MsgDeleteProviderResponse, error) {
+	out := new(MsgDeleteProviderResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteProvider_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -248,6 +259,7 @@ type MsgServer interface {
 	DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error)
 	CreateProvider(context.Context, *MsgCreateProvider) (*MsgCreateProviderResponse, error)
 	UpdateProvider(context.Context, *MsgUpdateProvider) (*MsgUpdateProviderResponse, error)
+	DeleteProvider(context.Context, *MsgDeleteProvider) (*MsgDeleteProviderResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -299,6 +311,9 @@ func (UnimplementedMsgServer) CreateProvider(context.Context, *MsgCreateProvider
 }
 func (UnimplementedMsgServer) UpdateProvider(context.Context, *MsgUpdateProvider) (*MsgUpdateProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProvider not implemented")
+}
+func (UnimplementedMsgServer) DeleteProvider(context.Context, *MsgDeleteProvider) (*MsgDeleteProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProvider not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -583,6 +598,24 @@ func _Msg_UpdateProvider_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_DeleteProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteProvider)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteProvider(ctx, req.(*MsgDeleteProvider))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -649,6 +682,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProvider",
 			Handler:    _Msg_UpdateProvider_Handler,
+		},
+		{
+			MethodName: "DeleteProvider",
+			Handler:    _Msg_DeleteProvider_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
