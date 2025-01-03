@@ -22,10 +22,14 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+// Environment
 type Environment struct {
-	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// name
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// provider
 	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Id       uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	// id
+	Id uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (m *Environment) Reset()         { *m = Environment{} }

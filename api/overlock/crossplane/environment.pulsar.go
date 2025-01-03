@@ -557,14 +557,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Environment
 type Environment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// name
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// provider
 	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Id       uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	// id
+	Id uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *Environment) Reset() {

@@ -59,8 +59,11 @@ type MsgClient interface {
 	UpdateConfiguration(ctx context.Context, in *MsgUpdateConfiguration, opts ...grpc.CallOption) (*MsgUpdateConfigurationResponse, error)
 	// DeleteConfiguration
 	DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error)
+	// CreateEnvironment
 	CreateEnvironment(ctx context.Context, in *MsgCreateEnvironment, opts ...grpc.CallOption) (*MsgCreateEnvironmentResponse, error)
+	// UpdateEnvironment
 	UpdateEnvironment(ctx context.Context, in *MsgUpdateEnvironment, opts ...grpc.CallOption) (*MsgUpdateEnvironmentResponse, error)
+	// DeleteEnvironment
 	DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error)
 }
 
@@ -214,8 +217,11 @@ type MsgServer interface {
 	UpdateConfiguration(context.Context, *MsgUpdateConfiguration) (*MsgUpdateConfigurationResponse, error)
 	// DeleteConfiguration
 	DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error)
+	// CreateEnvironment
 	CreateEnvironment(context.Context, *MsgCreateEnvironment) (*MsgCreateEnvironmentResponse, error)
+	// UpdateEnvironment
 	UpdateEnvironment(context.Context, *MsgUpdateEnvironment) (*MsgUpdateEnvironmentResponse, error)
+	// DeleteEnvironment
 	DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }

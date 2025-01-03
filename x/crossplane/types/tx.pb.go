@@ -1030,6 +1030,7 @@ func (m *MsgDeleteConfigurationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgDeleteConfigurationResponse proto.InternalMessageInfo
 
+// MsgCreateEnvironment
 type MsgCreateEnvironment struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -1082,6 +1083,7 @@ func (m *MsgCreateEnvironment) GetName() string {
 	return ""
 }
 
+// MsgCreateEnvironmentResponse
 type MsgCreateEnvironmentResponse struct {
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
@@ -1126,6 +1128,7 @@ func (m *MsgCreateEnvironmentResponse) GetId() uint64 {
 	return 0
 }
 
+// MsgUpdateEnvironment
 type MsgUpdateEnvironment struct {
 	Creator  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Id       uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1194,6 +1197,7 @@ func (m *MsgUpdateEnvironment) GetProvider() string {
 	return ""
 }
 
+// MsgUpdateEnvironmentResponse
 type MsgUpdateEnvironmentResponse struct {
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
@@ -1238,6 +1242,7 @@ func (m *MsgUpdateEnvironmentResponse) GetId() uint64 {
 	return 0
 }
 
+// MsgDeleteEnvironment
 type MsgDeleteEnvironment struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Id      uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1290,6 +1295,7 @@ func (m *MsgDeleteEnvironment) GetId() uint64 {
 	return 0
 }
 
+// MsgDeleteEnvironmentResponse
 type MsgDeleteEnvironmentResponse struct {
 }
 
@@ -1451,8 +1457,11 @@ type MsgClient interface {
 	UpdateConfiguration(ctx context.Context, in *MsgUpdateConfiguration, opts ...grpc.CallOption) (*MsgUpdateConfigurationResponse, error)
 	// DeleteConfiguration
 	DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error)
+	// CreateEnvironment
 	CreateEnvironment(ctx context.Context, in *MsgCreateEnvironment, opts ...grpc.CallOption) (*MsgCreateEnvironmentResponse, error)
+	// UpdateEnvironment
 	UpdateEnvironment(ctx context.Context, in *MsgUpdateEnvironment, opts ...grpc.CallOption) (*MsgUpdateEnvironmentResponse, error)
+	// DeleteEnvironment
 	DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error)
 }
 
@@ -1604,8 +1613,11 @@ type MsgServer interface {
 	UpdateConfiguration(context.Context, *MsgUpdateConfiguration) (*MsgUpdateConfigurationResponse, error)
 	// DeleteConfiguration
 	DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error)
+	// CreateEnvironment
 	CreateEnvironment(context.Context, *MsgCreateEnvironment) (*MsgCreateEnvironmentResponse, error)
+	// UpdateEnvironment
 	UpdateEnvironment(context.Context, *MsgUpdateEnvironment) (*MsgUpdateEnvironmentResponse, error)
+	// DeleteEnvironment
 	DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error)
 }
 

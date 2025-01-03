@@ -21,7 +21,7 @@ func (k Keeper) ListEnvironment(goCtx context.Context, req *types.QueryListEnvir
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.EnvironmentKey))
 
 	var environments []types.Environment
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {

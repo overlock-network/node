@@ -8728,6 +8728,7 @@ func (x *QueryListXrdResponse) GetPagination() *v1beta1.PageResponse {
 	return nil
 }
 
+// QueryShowEnvironmentRequest
 type QueryShowEnvironmentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -8763,6 +8764,7 @@ func (x *QueryShowEnvironmentRequest) GetId() uint64 {
 	return 0
 }
 
+// QueryShowEnvironmentResponse
 type QueryShowEnvironmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -8798,6 +8800,7 @@ func (x *QueryShowEnvironmentResponse) GetEnvironment() *Environment {
 	return nil
 }
 
+// QueryListEnvironmentRequest
 type QueryListEnvironmentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -8833,6 +8836,7 @@ func (x *QueryListEnvironmentRequest) GetPagination() *v1beta1.PageRequest {
 	return nil
 }
 
+// QueryListEnvironmentResponse
 type QueryListEnvironmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

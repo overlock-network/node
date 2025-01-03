@@ -12772,6 +12772,7 @@ func (*MsgDeleteConfigurationResponse) Descriptor() ([]byte, []int) {
 	return file_overlock_crossplane_tx_proto_rawDescGZIP(), []int{19}
 }
 
+// MsgCreateEnvironment
 type MsgCreateEnvironment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -12815,6 +12816,7 @@ func (x *MsgCreateEnvironment) GetName() string {
 	return ""
 }
 
+// MsgCreateEnvironmentResponse
 type MsgCreateEnvironmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -12850,6 +12852,7 @@ func (x *MsgCreateEnvironmentResponse) GetId() uint64 {
 	return 0
 }
 
+// MsgUpdateEnvironment
 type MsgUpdateEnvironment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -12909,6 +12912,7 @@ func (x *MsgUpdateEnvironment) GetProvider() string {
 	return ""
 }
 
+// MsgUpdateEnvironmentResponse
 type MsgUpdateEnvironmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -12944,6 +12948,7 @@ func (x *MsgUpdateEnvironmentResponse) GetId() uint64 {
 	return 0
 }
 
+// MsgDeleteEnvironment
 type MsgDeleteEnvironment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -12987,6 +12992,7 @@ func (x *MsgDeleteEnvironment) GetId() uint64 {
 	return 0
 }
 
+// MsgDeleteEnvironmentResponse
 type MsgDeleteEnvironmentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -202,9 +202,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "UpdateEnvironment",
-					Use:            "update-environment [name] [provider]",
+					Use:            "update-environment [id] [name] [provider]",
 					Short:          "Send a update-environment tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "provider"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "name"}, {ProtoField: "provider"}},
 				},
 				{
 					RpcMethod:      "DeleteEnvironment",

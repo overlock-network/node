@@ -678,6 +678,7 @@ func (m *QueryListXrdResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+// QueryShowEnvironmentRequest
 type QueryShowEnvironmentRequest struct {
 	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
@@ -722,6 +723,7 @@ func (m *QueryShowEnvironmentRequest) GetId() uint64 {
 	return 0
 }
 
+// QueryShowEnvironmentResponse
 type QueryShowEnvironmentResponse struct {
 	Environment *Environment `protobuf:"bytes,1,opt,name=environment,proto3" json:"environment,omitempty"`
 }
@@ -766,6 +768,7 @@ func (m *QueryShowEnvironmentResponse) GetEnvironment() *Environment {
 	return nil
 }
 
+// QueryListEnvironmentRequest
 type QueryListEnvironmentRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
@@ -810,6 +813,7 @@ func (m *QueryListEnvironmentRequest) GetPagination() *query.PageRequest {
 	return nil
 }
 
+// QueryListEnvironmentResponse
 type QueryListEnvironmentResponse struct {
 	Environments []Environment       `protobuf:"bytes,1,rep,name=environments,proto3" json:"environments"`
 	Pagination   *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
