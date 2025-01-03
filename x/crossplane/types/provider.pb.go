@@ -25,11 +25,9 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 // Provider
 type Provider struct {
 	// name
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// url
-	Url string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	// environment
-	Environment uint64 `protobuf:"varint,3,opt,name=environment,proto3" json:"environment,omitempty"`
+	Metadata *Metadata `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// spec
+	Spec *ProviderSpec `protobuf:"bytes,2,opt,name=spec,proto3" json:"spec,omitempty"`
 	// id
 	Id uint64 `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
 }
@@ -67,25 +65,18 @@ func (m *Provider) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Provider proto.InternalMessageInfo
 
-func (m *Provider) GetName() string {
+func (m *Provider) GetMetadata() *Metadata {
 	if m != nil {
-		return m.Name
+		return m.Metadata
 	}
-	return ""
+	return nil
 }
 
-func (m *Provider) GetUrl() string {
+func (m *Provider) GetSpec() *ProviderSpec {
 	if m != nil {
-		return m.Url
+		return m.Spec
 	}
-	return ""
-}
-
-func (m *Provider) GetEnvironment() uint64 {
-	if m != nil {
-		return m.Environment
-	}
-	return 0
+	return nil
 }
 
 func (m *Provider) GetId() uint64 {
@@ -95,8 +86,55 @@ func (m *Provider) GetId() uint64 {
 	return 0
 }
 
+// Spec defines the specification of the provider.
+type ProviderSpec struct {
+	// package
+	Package string `protobuf:"bytes,1,opt,name=package,proto3" json:"package,omitempty"`
+}
+
+func (m *ProviderSpec) Reset()         { *m = ProviderSpec{} }
+func (m *ProviderSpec) String() string { return proto.CompactTextString(m) }
+func (*ProviderSpec) ProtoMessage()    {}
+func (*ProviderSpec) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9c8a3d13dadadd50, []int{1}
+}
+func (m *ProviderSpec) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ProviderSpec) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ProviderSpec.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ProviderSpec) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProviderSpec.Merge(m, src)
+}
+func (m *ProviderSpec) XXX_Size() int {
+	return m.Size()
+}
+func (m *ProviderSpec) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProviderSpec.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProviderSpec proto.InternalMessageInfo
+
+func (m *ProviderSpec) GetPackage() string {
+	if m != nil {
+		return m.Package
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Provider)(nil), "overlock.crossplane.Provider")
+	proto.RegisterType((*ProviderSpec)(nil), "overlock.crossplane.ProviderSpec")
 }
 
 func init() {
@@ -104,19 +142,21 @@ func init() {
 }
 
 var fileDescriptor_9c8a3d13dadadd50 = []byte{
-	// 186 bytes of a gzipped FileDescriptorProto
+	// 222 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xca, 0x2f, 0x4b, 0x2d,
 	0xca, 0xc9, 0x4f, 0xce, 0xd6, 0x4f, 0x2e, 0xca, 0x2f, 0x2e, 0x2e, 0xc8, 0x49, 0xcc, 0x4b, 0xd5,
 	0x2f, 0x28, 0xca, 0x2f, 0xcb, 0x4c, 0x49, 0x2d, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12,
-	0x86, 0xa9, 0xd1, 0x43, 0xa8, 0x51, 0x4a, 0xe2, 0xe2, 0x08, 0x80, 0x2a, 0x13, 0x12, 0xe2, 0x62,
-	0xc9, 0x4b, 0xcc, 0x4d, 0x95, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x02, 0xb3, 0x85, 0x04, 0xb8,
-	0x98, 0x4b, 0x8b, 0x72, 0x24, 0x98, 0xc0, 0x42, 0x20, 0xa6, 0x90, 0x02, 0x17, 0x77, 0x6a, 0x5e,
-	0x59, 0x66, 0x51, 0x7e, 0x5e, 0x6e, 0x6a, 0x5e, 0x89, 0x04, 0xb3, 0x02, 0xa3, 0x06, 0x4b, 0x10,
-	0xb2, 0x90, 0x10, 0x1f, 0x17, 0x53, 0x66, 0x8a, 0x04, 0x0b, 0x58, 0x82, 0x29, 0x33, 0xc5, 0xc9,
-	0xf4, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58,
-	0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f, 0xe5, 0x18, 0xa2, 0xa4, 0xe1, 0xce, 0xae, 0x40,
-	0x76, 0x78, 0x49, 0x65, 0x41, 0x6a, 0x71, 0x12, 0x1b, 0xd8, 0xd9, 0xc6, 0x80, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0xe3, 0xd1, 0x46, 0xdf, 0xdc, 0x00, 0x00, 0x00,
+	0x86, 0xa9, 0xd1, 0x43, 0xa8, 0x91, 0xc2, 0xaa, 0x31, 0x37, 0xb5, 0x24, 0x31, 0x25, 0xb1, 0x24,
+	0x11, 0xa2, 0x51, 0xa9, 0x87, 0x91, 0x8b, 0x23, 0x00, 0x6a, 0x96, 0x90, 0x25, 0x17, 0x07, 0x4c,
+	0x5a, 0x82, 0x51, 0x81, 0x51, 0x83, 0xdb, 0x48, 0x56, 0x0f, 0x8b, 0xc1, 0x7a, 0xbe, 0x50, 0x45,
+	0x41, 0x70, 0xe5, 0x42, 0xa6, 0x5c, 0x2c, 0xc5, 0x05, 0xa9, 0xc9, 0x12, 0x4c, 0x60, 0x6d, 0x8a,
+	0x58, 0xb5, 0xc1, 0xec, 0x09, 0x2e, 0x48, 0x4d, 0x0e, 0x02, 0x2b, 0x17, 0xe2, 0xe3, 0x62, 0xca,
+	0x4c, 0x91, 0x60, 0x51, 0x60, 0xd4, 0x60, 0x09, 0x62, 0xca, 0x4c, 0x51, 0xd2, 0xe0, 0xe2, 0x41,
+	0x56, 0x25, 0x24, 0xc1, 0xc5, 0x5e, 0x90, 0x98, 0x9c, 0x9d, 0x98, 0x9e, 0x0a, 0x76, 0x10, 0x67,
+	0x10, 0x8c, 0xeb, 0x64, 0x7a, 0xe2, 0x91, 0x1c, 0xe3, 0x85, 0x47, 0x72, 0x8c, 0x0f, 0x1e, 0xc9,
+	0x31, 0x4e, 0x78, 0x2c, 0xc7, 0x70, 0xe1, 0xb1, 0x1c, 0xc3, 0x8d, 0xc7, 0x72, 0x0c, 0x51, 0xd2,
+	0x70, 0x6f, 0x57, 0x20, 0x7b, 0xbc, 0xa4, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0xec, 0x6d, 0x63,
+	0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0x19, 0x6d, 0x9b, 0xe3, 0x55, 0x01, 0x00, 0x00,
 }
 
 func (m *Provider) Marshal() (dAtA []byte, err error) {
@@ -144,22 +184,57 @@ func (m *Provider) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x20
 	}
-	if m.Environment != 0 {
-		i = encodeVarintProvider(dAtA, i, uint64(m.Environment))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Url) > 0 {
-		i -= len(m.Url)
-		copy(dAtA[i:], m.Url)
-		i = encodeVarintProvider(dAtA, i, uint64(len(m.Url)))
+	if m.Spec != nil {
+		{
+			size, err := m.Spec.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintProvider(dAtA, i, uint64(size))
+		}
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintProvider(dAtA, i, uint64(len(m.Name)))
+	if m.Metadata != nil {
+		{
+			size, err := m.Metadata.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintProvider(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ProviderSpec) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ProviderSpec) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ProviderSpec) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Package) > 0 {
+		i -= len(m.Package)
+		copy(dAtA[i:], m.Package)
+		i = encodeVarintProvider(dAtA, i, uint64(len(m.Package)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -183,19 +258,29 @@ func (m *Provider) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Name)
-	if l > 0 {
+	if m.Metadata != nil {
+		l = m.Metadata.Size()
 		n += 1 + l + sovProvider(uint64(l))
 	}
-	l = len(m.Url)
-	if l > 0 {
+	if m.Spec != nil {
+		l = m.Spec.Size()
 		n += 1 + l + sovProvider(uint64(l))
-	}
-	if m.Environment != 0 {
-		n += 1 + sovProvider(uint64(m.Environment))
 	}
 	if m.Id != 0 {
 		n += 1 + sovProvider(uint64(m.Id))
+	}
+	return n
+}
+
+func (m *ProviderSpec) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Package)
+	if l > 0 {
+		n += 1 + l + sovProvider(uint64(l))
 	}
 	return n
 }
@@ -237,9 +322,9 @@ func (m *Provider) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowProvider
@@ -249,29 +334,33 @@ func (m *Provider) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthProvider
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthProvider
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			if m.Metadata == nil {
+				m.Metadata = &Metadata{}
+			}
+			if err := m.Metadata.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Url", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Spec", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowProvider
@@ -281,43 +370,28 @@ func (m *Provider) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthProvider
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthProvider
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Url = string(dAtA[iNdEx:postIndex])
+			if m.Spec == nil {
+				m.Spec = &ProviderSpec{}
+			}
+			if err := m.Spec.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Environment", wireType)
-			}
-			m.Environment = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowProvider
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Environment |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
@@ -337,6 +411,88 @@ func (m *Provider) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipProvider(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthProvider
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ProviderSpec) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowProvider
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ProviderSpec: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ProviderSpec: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Package", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProvider
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthProvider
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProvider
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Package = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipProvider(dAtA[iNdEx:])

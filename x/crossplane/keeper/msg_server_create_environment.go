@@ -13,7 +13,8 @@ func (k msgServer) CreateEnvironment(goCtx context.Context, msg *types.MsgCreate
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var env = types.Environment{
-		Name: msg.Name,
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
 	}
 	id := k.AppendEnvironment(
 		ctx,

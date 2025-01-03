@@ -1,16 +1,22 @@
 syntax = "proto3";
 package overlock.crossplane;
 
+import "overlock/crossplane/metadata.proto";
+
 option go_package = "overlock/x/crossplane/types";
 
 // Provider
 message Provider {
   // name
-  string name = 1;
-  // url
-  string url = 2;
-  // environment
-  uint64 environment = 3;
+  Metadata metadata = 1;
+  // spec
+  ProviderSpec spec = 2;
   // id
   uint64 id = 4;
+}
+
+// Spec defines the specification of the provider.
+message ProviderSpec {
+  // package
+  string package = 1;
 }

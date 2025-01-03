@@ -8,8 +8,10 @@ import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "overlock/crossplane/composition.proto";
 import "overlock/crossplane/configuration.proto";
+import "overlock/crossplane/environment.proto";
 import "overlock/crossplane/metadata.proto";
 import "overlock/crossplane/params.proto";
+import "overlock/crossplane/provider.proto";
 import "overlock/crossplane/xrd.proto";
 
 option go_package = "overlock/x/crossplane/types";
@@ -57,8 +59,14 @@ service Msg {
 
   // DeleteEnvironment
   rpc DeleteEnvironment(MsgDeleteEnvironment) returns (MsgDeleteEnvironmentResponse);
+
+  // CreateProvider
   rpc CreateProvider(MsgCreateProvider) returns (MsgCreateProviderResponse);
+
+  // UpdateProvider
   rpc UpdateProvider(MsgUpdateProvider) returns (MsgUpdateProviderResponse);
+
+  // DeleteProvider
   rpc DeleteProvider(MsgDeleteProvider) returns (MsgDeleteProviderResponse);
 }
 
@@ -192,7 +200,8 @@ message MsgDeleteConfigurationResponse {}
 message MsgCreateEnvironment {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string name = 2;
+  Metadata metadata = 3;
+  EnvironmentSpec spec = 4;
 }
 
 // MsgCreateEnvironmentResponse
@@ -205,7 +214,8 @@ message MsgUpdateEnvironment {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
-  string name = 3;
+  Metadata metadata = 3;
+  EnvironmentSpec spec = 4;
 }
 
 // MsgUpdateEnvironmentResponse
@@ -223,37 +233,41 @@ message MsgDeleteEnvironment {
 // MsgDeleteEnvironmentResponse
 message MsgDeleteEnvironmentResponse {}
 
+// MsgCreateProvider
 message MsgCreateProvider {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  string name = 2;
-  string url = 3;
-  uint64 environment = 4;
+  Metadata metadata = 2;
+  ProviderSpec spec = 3;
 }
 
+// MsgCreateProviderResponse
 message MsgCreateProviderResponse {
   uint64 id = 1;
 }
 
+// MsgUpdateProvider
 message MsgUpdateProvider {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
-  string name = 3;
-  string url = 4;
-  uint64 environment = 5;
+  Metadata metadata = 3;
+  ProviderSpec spec = 4;
 }
 
+// MsgUpdateProviderResponse
 message MsgUpdateProviderResponse {
   uint64 id = 1;
 }
 
+// MsgDeleteProvider
 message MsgDeleteProvider {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
   uint64 id = 2;
 }
 
+// MsgDeleteProviderResponse
 message MsgDeleteProviderResponse {
   uint64 id = 1;
 }

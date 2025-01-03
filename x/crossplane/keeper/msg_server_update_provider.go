@@ -15,10 +15,9 @@ func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdatePro
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var provider = types.Provider{
-		Name:        msg.Name,
-		Url:         msg.Url,
-		Environment: msg.Environment,
-		Id:          msg.Id,
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
+		Id:       msg.Id,
 	}
 	_, found := k.GetProvider(ctx, msg.Id)
 	if !found {
