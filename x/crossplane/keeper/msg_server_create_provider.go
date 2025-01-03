@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -11,8 +12,21 @@ import (
 func (k msgServer) CreateProvider(goCtx context.Context, msg *types.MsgCreateProvider) (*types.MsgCreateProviderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	var provider = types.Provider{
+		Name:        msg.Name,
+		Url:         msg.Url,
+		Environment: msg.Environment,
+	}
+	id := k.AppendProvider(
+		ctx,
+		provider,
+	)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.ProviderCreatedEvent,
+			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(id, 10)),
+		),
+	)
 
 	return &types.MsgCreateProviderResponse{}, nil
 }
