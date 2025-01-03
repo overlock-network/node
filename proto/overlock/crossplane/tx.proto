@@ -49,6 +49,7 @@ service Msg {
   // DeleteConfiguration
   rpc DeleteConfiguration (MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
   rpc CreateEnvironment   (MsgCreateEnvironment  ) returns (MsgCreateEnvironmentResponse  );
+  rpc UpdateEnvironment   (MsgUpdateEnvironment  ) returns (MsgUpdateEnvironmentResponse  );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -180,6 +181,17 @@ message MsgCreateEnvironment {
 }
 
 message MsgCreateEnvironmentResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateEnvironment {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string name     = 2;
+  string provider = 3;
+}
+
+message MsgUpdateEnvironmentResponse {
   uint64 id = 1;
 }
 

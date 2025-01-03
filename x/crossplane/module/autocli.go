@@ -186,6 +186,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-environment tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
 				},
+				{
+					RpcMethod:      "UpdateEnvironment",
+					Use:            "update-environment [name] [provider]",
+					Short:          "Send a update-environment tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "provider"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
