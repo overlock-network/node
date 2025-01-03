@@ -18,7 +18,7 @@ func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpda
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 	}
-	_, found := k.GetComposition(ctx, msg.Id)
+	_, found := k.GetConfiguration(ctx, msg.Id)
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
