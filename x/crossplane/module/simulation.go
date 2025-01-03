@@ -59,6 +59,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteConfiguration int = 100
 
+	opWeightMsgCreateEnvironment = "op_weight_msg_create_environment"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateEnvironment int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -181,6 +185,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateEnvironment int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateEnvironment, &weightMsgCreateEnvironment, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateEnvironment = defaultWeightMsgCreateEnvironment
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateEnvironment,
+		crossplanesimulation.SimulateMsgCreateEnvironment(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -282,6 +297,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgDeleteConfiguration,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				overlocksimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateEnvironment,
+			defaultWeightMsgCreateEnvironment,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				crossplanesimulation.SimulateMsgCreateEnvironment(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

@@ -17,44 +17,51 @@ option go_package = "overlock/x/crossplane/types";
 // Msg defines the Msg service.
 service Msg {
   option (cosmos.msg.v1.service) = true;
+  
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  
   // CreateComposition
-  rpc CreateComposition(MsgCreateComposition) returns (MsgCreateCompositionResponse);
+  rpc CreateComposition (MsgCreateComposition) returns (MsgCreateCompositionResponse);
+  
   // UpdateComposition
-  rpc UpdateComposition(MsgUpdateComposition) returns (MsgUpdateCompositionResponse);
+  rpc UpdateComposition (MsgUpdateComposition) returns (MsgUpdateCompositionResponse);
+  
   // DeleteComposition
-  rpc DeleteComposition(MsgDeleteComposition) returns (MsgDeleteCompositionResponse);
+  rpc DeleteComposition (MsgDeleteComposition) returns (MsgDeleteCompositionResponse);
+  
   // CreateXrd
-  rpc CreateXrd(MsgCreateXrd) returns (MsgCreateXrdResponse);
+  rpc CreateXrd (MsgCreateXrd) returns (MsgCreateXrdResponse);
+  
   // UpdateXrd
-  rpc UpdateXrd(MsgUpdateXrd) returns (MsgUpdateXrdResponse);
+  rpc UpdateXrd (MsgUpdateXrd) returns (MsgUpdateXrdResponse);
+  
   // DeleteXrd
-  rpc DeleteXrd(MsgDeleteXrd) returns (MsgDeleteXrdResponse);
+  rpc DeleteXrd (MsgDeleteXrd) returns (MsgDeleteXrdResponse);
+  
   // CreateConfiguration
-  rpc CreateConfiguration(MsgCreateConfiguration) returns (MsgCreateConfigurationResponse);
+  rpc CreateConfiguration (MsgCreateConfiguration) returns (MsgCreateConfigurationResponse);
+  
   // UpdateConfiguration
-  rpc UpdateConfiguration(MsgUpdateConfiguration) returns (MsgUpdateConfigurationResponse);
+  rpc UpdateConfiguration (MsgUpdateConfiguration) returns (MsgUpdateConfigurationResponse);
+  
   // DeleteConfiguration
-  rpc DeleteConfiguration(MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
+  rpc DeleteConfiguration (MsgDeleteConfiguration) returns (MsgDeleteConfigurationResponse);
+  rpc CreateEnvironment   (MsgCreateEnvironment  ) returns (MsgCreateEnvironmentResponse  );
 }
-
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
-  option (cosmos.msg.v1.signer) = "authority";
-  option (amino.name) = "overlock/x/crossplane/MsgUpdateParams";
-
+  option (cosmos.msg.v1.signer) =                             "authority";
+  option           (amino.name) = "overlock/x/crossplane/MsgUpdateParams";
+  
   // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 
   // params defines the module parameters to update.
-
+  
   // NOTE: All parameters must be supplied.
-  Params params = 2 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
 // MsgUpdateParamsResponse defines the response structure for executing a
@@ -64,9 +71,9 @@ message MsgUpdateParamsResponse {}
 // MsgCreateComposition
 message MsgCreateComposition {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  Metadata metadata = 4;
-  CompositionSpec spec = 5;
+  string          creator  = 1;
+  Metadata        metadata = 4;
+  CompositionSpec spec     = 5;
 }
 
 // MsgCreateCompositionResponse
@@ -77,10 +84,10 @@ message MsgCreateCompositionResponse {
 // MsgUpdateComposition
 message MsgUpdateComposition {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  uint64 id = 2;
-  Metadata metadata = 5;
-  CompositionSpec spec = 6;
+  string          creator  = 1;
+  uint64          id       = 2;
+  Metadata        metadata = 5;
+  CompositionSpec spec     = 6;
 }
 
 // MsgUpdateCompositionResponse
@@ -90,7 +97,7 @@ message MsgUpdateCompositionResponse {}
 message MsgDeleteComposition {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  uint64 id = 2;
+  uint64 id      = 2;
 }
 
 // MsgDeleteCompositionResponse
@@ -99,9 +106,9 @@ message MsgDeleteCompositionResponse {}
 // MsgCreateXrd
 message MsgCreateXrd {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
+  string   creator  = 1;
   Metadata metadata = 4;
-  XrdSpec spec = 5;
+  XrdSpec  spec     = 5;
 }
 
 // MsgCreateXrdResponse
@@ -112,10 +119,10 @@ message MsgCreateXrdResponse {
 // MsgUpdateXrd
 message MsgUpdateXrd {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  uint64 id = 2;
+  string   creator  = 1;
+  uint64   id       = 2;
   Metadata metadata = 5;
-  XrdSpec spec = 6;
+  XrdSpec  spec     = 6;
 }
 
 // MsgUpdateXrdResponse
@@ -125,7 +132,7 @@ message MsgUpdateXrdResponse {}
 message MsgDeleteXrd {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  uint64 id = 2;
+  uint64 id      = 2;
 }
 
 // MsgDeleteXrdResponse
@@ -134,9 +141,9 @@ message MsgDeleteXrdResponse {}
 // MsgCreateConfiguration
 message MsgCreateConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  Metadata metadata = 4;
-  ConfigurationSpec spec = 5;
+  string            creator  = 1;
+  Metadata          metadata = 4;
+  ConfigurationSpec spec     = 5;
 }
 
 // MsgCreateConfigurationResponse
@@ -147,10 +154,10 @@ message MsgCreateConfigurationResponse {
 // MsgUpdateConfiguration
 message MsgUpdateConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator = 1;
-  uint64 id = 2;
-  Metadata metadata = 5;
-  ConfigurationSpec spec = 6;
+  string            creator  = 1;
+  uint64            id       = 2;
+  Metadata          metadata = 5;
+  ConfigurationSpec spec     = 6;
 }
 
 // MsgUpdateConfigurationResponse
@@ -160,8 +167,19 @@ message MsgUpdateConfigurationResponse {}
 message MsgDeleteConfiguration {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  uint64 id = 2;
+  uint64 id      = 2;
 }
 
 // MsgDeleteConfigurationResponse
 message MsgDeleteConfigurationResponse {}
+
+message MsgCreateEnvironment {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string name    = 2;
+}
+
+message MsgCreateEnvironmentResponse {
+  uint64 id = 1;
+}
+

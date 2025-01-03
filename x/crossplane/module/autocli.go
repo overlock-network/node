@@ -180,6 +180,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a delete-configuration tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "CreateEnvironment",
+					Use:            "create-environment [name]",
+					Short:          "Send a create-environment tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

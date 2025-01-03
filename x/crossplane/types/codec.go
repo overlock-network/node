@@ -44,6 +44,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgDeleteConfiguration{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateEnvironment{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),
