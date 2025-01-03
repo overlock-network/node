@@ -64,6 +64,12 @@ service Query {
     option (google.api.http).get = "/overlock/crossplane/show_environment/{id}";
   
   }
+  
+  // Queries a list of ListEnvironment items.
+  rpc ListEnvironment (QueryListEnvironmentRequest) returns (QueryListEnvironmentResponse) {
+    option (google.api.http).get = "/overlock/crossplane/list_environment";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -144,5 +150,14 @@ message QueryShowEnvironmentRequest {
 
 message QueryShowEnvironmentResponse {
   Environment environment = 1;
+}
+
+message QueryListEnvironmentRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListEnvironmentResponse {
+  Environment                            environment = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination  = 2;
 }
 
