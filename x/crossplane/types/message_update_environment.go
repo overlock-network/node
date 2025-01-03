@@ -10,9 +10,8 @@ var _ sdk.Msg = &MsgUpdateEnvironment{}
 
 func NewMsgUpdateEnvironment(creator string, name string, provider string) *MsgUpdateEnvironment {
 	return &MsgUpdateEnvironment{
-		Creator:  creator,
-		Name:     name,
-		Provider: provider,
+		Creator: creator,
+		Name:    name,
 	}
 }
 

@@ -1,6 +1,10 @@
 syntax = "proto3";
 package overlock.crossplane;
 
+import "overlock/crossplane/configuration.proto";
+import "overlock/crossplane/function.proto";
+import "overlock/crossplane/provider.proto";
+
 option go_package = "overlock/x/crossplane/types";
 
 // Environment
@@ -8,9 +12,15 @@ message Environment {
   // name
   string name = 1;
 
-  // provider
-  string provider = 2;
+  // providers
+  repeated Provider providers = 2;
+
+  // configurations
+  repeated Configuration configurations = 3;
+
+  // functions
+  repeated Function functions = 4;
 
   // id
-  uint64 id = 3;
+  uint64 id = 5;
 }

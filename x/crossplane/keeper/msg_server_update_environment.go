@@ -15,9 +15,8 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdate
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var env = types.Environment{
-		Name:     msg.Name,
-		Provider: msg.Provider,
-		Id:       msg.Id,
+		Name: msg.Name,
+		Id:   msg.Id,
 	}
 	_, found := k.GetEnvironment(ctx, msg.Id)
 	if !found {

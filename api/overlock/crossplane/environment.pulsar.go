@@ -3,28 +3,184 @@ package crossplane
 
 import (
 	fmt "fmt"
-	io "io"
-	reflect "reflect"
-	sync "sync"
-
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	io "io"
+	reflect "reflect"
+	sync "sync"
 )
 
+var _ protoreflect.List = (*_Environment_2_list)(nil)
+
+type _Environment_2_list struct {
+	list *[]*Provider
+}
+
+func (x *_Environment_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Environment_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Environment_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Provider)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Environment_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Provider)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Environment_2_list) AppendMutable() protoreflect.Value {
+	v := new(Provider)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Environment_2_list) NewElement() protoreflect.Value {
+	v := new(Provider)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_2_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_Environment_3_list)(nil)
+
+type _Environment_3_list struct {
+	list *[]*Configuration
+}
+
+func (x *_Environment_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Environment_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Environment_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Configuration)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Environment_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Configuration)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Environment_3_list) AppendMutable() protoreflect.Value {
+	v := new(Configuration)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_3_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Environment_3_list) NewElement() protoreflect.Value {
+	v := new(Configuration)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_3_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_Environment_4_list)(nil)
+
+type _Environment_4_list struct {
+	list *[]*Function
+}
+
+func (x *_Environment_4_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Environment_4_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Environment_4_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Function)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Environment_4_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Function)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Environment_4_list) AppendMutable() protoreflect.Value {
+	v := new(Function)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_4_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Environment_4_list) NewElement() protoreflect.Value {
+	v := new(Function)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Environment_4_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_Environment          protoreflect.MessageDescriptor
-	fd_Environment_name     protoreflect.FieldDescriptor
-	fd_Environment_provider protoreflect.FieldDescriptor
-	fd_Environment_id       protoreflect.FieldDescriptor
+	md_Environment                protoreflect.MessageDescriptor
+	fd_Environment_name           protoreflect.FieldDescriptor
+	fd_Environment_providers      protoreflect.FieldDescriptor
+	fd_Environment_configurations protoreflect.FieldDescriptor
+	fd_Environment_functions      protoreflect.FieldDescriptor
+	fd_Environment_id             protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_overlock_crossplane_environment_proto_init()
 	md_Environment = File_overlock_crossplane_environment_proto.Messages().ByName("Environment")
 	fd_Environment_name = md_Environment.Fields().ByName("name")
-	fd_Environment_provider = md_Environment.Fields().ByName("provider")
+	fd_Environment_providers = md_Environment.Fields().ByName("providers")
+	fd_Environment_configurations = md_Environment.Fields().ByName("configurations")
+	fd_Environment_functions = md_Environment.Fields().ByName("functions")
 	fd_Environment_id = md_Environment.Fields().ByName("id")
 }
 
@@ -99,9 +255,21 @@ func (x *fastReflection_Environment) Range(f func(protoreflect.FieldDescriptor, 
 			return
 		}
 	}
-	if x.Provider != "" {
-		value := protoreflect.ValueOfString(x.Provider)
-		if !f(fd_Environment_provider, value) {
+	if len(x.Providers) != 0 {
+		value := protoreflect.ValueOfList(&_Environment_2_list{list: &x.Providers})
+		if !f(fd_Environment_providers, value) {
+			return
+		}
+	}
+	if len(x.Configurations) != 0 {
+		value := protoreflect.ValueOfList(&_Environment_3_list{list: &x.Configurations})
+		if !f(fd_Environment_configurations, value) {
+			return
+		}
+	}
+	if len(x.Functions) != 0 {
+		value := protoreflect.ValueOfList(&_Environment_4_list{list: &x.Functions})
+		if !f(fd_Environment_functions, value) {
 			return
 		}
 	}
@@ -128,8 +296,12 @@ func (x *fastReflection_Environment) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "overlock.crossplane.Environment.name":
 		return x.Name != ""
-	case "overlock.crossplane.Environment.provider":
-		return x.Provider != ""
+	case "overlock.crossplane.Environment.providers":
+		return len(x.Providers) != 0
+	case "overlock.crossplane.Environment.configurations":
+		return len(x.Configurations) != 0
+	case "overlock.crossplane.Environment.functions":
+		return len(x.Functions) != 0
 	case "overlock.crossplane.Environment.id":
 		return x.Id != uint64(0)
 	default:
@@ -150,8 +322,12 @@ func (x *fastReflection_Environment) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "overlock.crossplane.Environment.name":
 		x.Name = ""
-	case "overlock.crossplane.Environment.provider":
-		x.Provider = ""
+	case "overlock.crossplane.Environment.providers":
+		x.Providers = nil
+	case "overlock.crossplane.Environment.configurations":
+		x.Configurations = nil
+	case "overlock.crossplane.Environment.functions":
+		x.Functions = nil
 	case "overlock.crossplane.Environment.id":
 		x.Id = uint64(0)
 	default:
@@ -173,9 +349,24 @@ func (x *fastReflection_Environment) Get(descriptor protoreflect.FieldDescriptor
 	case "overlock.crossplane.Environment.name":
 		value := x.Name
 		return protoreflect.ValueOfString(value)
-	case "overlock.crossplane.Environment.provider":
-		value := x.Provider
-		return protoreflect.ValueOfString(value)
+	case "overlock.crossplane.Environment.providers":
+		if len(x.Providers) == 0 {
+			return protoreflect.ValueOfList(&_Environment_2_list{})
+		}
+		listValue := &_Environment_2_list{list: &x.Providers}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.Environment.configurations":
+		if len(x.Configurations) == 0 {
+			return protoreflect.ValueOfList(&_Environment_3_list{})
+		}
+		listValue := &_Environment_3_list{list: &x.Configurations}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.Environment.functions":
+		if len(x.Functions) == 0 {
+			return protoreflect.ValueOfList(&_Environment_4_list{})
+		}
+		listValue := &_Environment_4_list{list: &x.Functions}
+		return protoreflect.ValueOfList(listValue)
 	case "overlock.crossplane.Environment.id":
 		value := x.Id
 		return protoreflect.ValueOfUint64(value)
@@ -201,8 +392,18 @@ func (x *fastReflection_Environment) Set(fd protoreflect.FieldDescriptor, value 
 	switch fd.FullName() {
 	case "overlock.crossplane.Environment.name":
 		x.Name = value.Interface().(string)
-	case "overlock.crossplane.Environment.provider":
-		x.Provider = value.Interface().(string)
+	case "overlock.crossplane.Environment.providers":
+		lv := value.List()
+		clv := lv.(*_Environment_2_list)
+		x.Providers = *clv.list
+	case "overlock.crossplane.Environment.configurations":
+		lv := value.List()
+		clv := lv.(*_Environment_3_list)
+		x.Configurations = *clv.list
+	case "overlock.crossplane.Environment.functions":
+		lv := value.List()
+		clv := lv.(*_Environment_4_list)
+		x.Functions = *clv.list
 	case "overlock.crossplane.Environment.id":
 		x.Id = value.Uint()
 	default:
@@ -225,10 +426,26 @@ func (x *fastReflection_Environment) Set(fd protoreflect.FieldDescriptor, value 
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Environment) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "overlock.crossplane.Environment.providers":
+		if x.Providers == nil {
+			x.Providers = []*Provider{}
+		}
+		value := &_Environment_2_list{list: &x.Providers}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.Environment.configurations":
+		if x.Configurations == nil {
+			x.Configurations = []*Configuration{}
+		}
+		value := &_Environment_3_list{list: &x.Configurations}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.Environment.functions":
+		if x.Functions == nil {
+			x.Functions = []*Function{}
+		}
+		value := &_Environment_4_list{list: &x.Functions}
+		return protoreflect.ValueOfList(value)
 	case "overlock.crossplane.Environment.name":
 		panic(fmt.Errorf("field name of message overlock.crossplane.Environment is not mutable"))
-	case "overlock.crossplane.Environment.provider":
-		panic(fmt.Errorf("field provider of message overlock.crossplane.Environment is not mutable"))
 	case "overlock.crossplane.Environment.id":
 		panic(fmt.Errorf("field id of message overlock.crossplane.Environment is not mutable"))
 	default:
@@ -246,8 +463,15 @@ func (x *fastReflection_Environment) NewField(fd protoreflect.FieldDescriptor) p
 	switch fd.FullName() {
 	case "overlock.crossplane.Environment.name":
 		return protoreflect.ValueOfString("")
-	case "overlock.crossplane.Environment.provider":
-		return protoreflect.ValueOfString("")
+	case "overlock.crossplane.Environment.providers":
+		list := []*Provider{}
+		return protoreflect.ValueOfList(&_Environment_2_list{list: &list})
+	case "overlock.crossplane.Environment.configurations":
+		list := []*Configuration{}
+		return protoreflect.ValueOfList(&_Environment_3_list{list: &list})
+	case "overlock.crossplane.Environment.functions":
+		list := []*Function{}
+		return protoreflect.ValueOfList(&_Environment_4_list{list: &list})
 	case "overlock.crossplane.Environment.id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
@@ -323,9 +547,23 @@ func (x *fastReflection_Environment) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Provider)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.Providers) > 0 {
+			for _, e := range x.Providers {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.Configurations) > 0 {
+			for _, e := range x.Configurations {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.Functions) > 0 {
+			for _, e := range x.Functions {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
 		}
 		if x.Id != 0 {
 			n += 1 + runtime.Sov(uint64(x.Id))
@@ -362,14 +600,55 @@ func (x *fastReflection_Environment) ProtoMethods() *protoiface.Methods {
 		if x.Id != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
 			i--
-			dAtA[i] = 0x18
+			dAtA[i] = 0x28
 		}
-		if len(x.Provider) > 0 {
-			i -= len(x.Provider)
-			copy(dAtA[i:], x.Provider)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Provider)))
-			i--
-			dAtA[i] = 0x12
+		if len(x.Functions) > 0 {
+			for iNdEx := len(x.Functions) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Functions[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x22
+			}
+		}
+		if len(x.Configurations) > 0 {
+			for iNdEx := len(x.Configurations) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Configurations[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x1a
+			}
+		}
+		if len(x.Providers) > 0 {
+			for iNdEx := len(x.Providers) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Providers[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+			}
 		}
 		if len(x.Name) > 0 {
 			i -= len(x.Name)
@@ -461,9 +740,9 @@ func (x *fastReflection_Environment) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Providers", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -473,25 +752,95 @@ func (x *fastReflection_Environment) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Provider = string(dAtA[iNdEx:postIndex])
+				x.Providers = append(x.Providers, &Provider{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Providers[len(x.Providers)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Configurations", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Configurations = append(x.Configurations, &Configuration{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Configurations[len(x.Configurations)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Functions", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Functions = append(x.Functions, &Function{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Functions[len(x.Functions)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
 				}
@@ -566,10 +915,14 @@ type Environment struct {
 
 	// name
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// provider
-	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	// providers
+	Providers []*Provider `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	// configurations
+	Configurations []*Configuration `protobuf:"bytes,3,rep,name=configurations,proto3" json:"configurations,omitempty"`
+	// functions
+	Functions []*Function `protobuf:"bytes,4,rep,name=functions,proto3" json:"functions,omitempty"`
 	// id
-	Id uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	Id uint64 `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *Environment) Reset() {
@@ -599,11 +952,25 @@ func (x *Environment) GetName() string {
 	return ""
 }
 
-func (x *Environment) GetProvider() string {
+func (x *Environment) GetProviders() []*Provider {
 	if x != nil {
-		return x.Provider
+		return x.Providers
 	}
-	return ""
+	return nil
+}
+
+func (x *Environment) GetConfigurations() []*Configuration {
+	if x != nil {
+		return x.Configurations
+	}
+	return nil
+}
+
+func (x *Environment) GetFunctions() []*Function {
+	if x != nil {
+		return x.Functions
+	}
+	return nil
 }
 
 func (x *Environment) GetId() uint64 {
@@ -619,24 +986,42 @@ var file_overlock_crossplane_environment_proto_rawDesc = []byte{
 	0x0a, 0x25, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73,
 	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2f, 0x65, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e,
 	0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
-	0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x22, 0x4d, 0x0a, 0x0b,
-	0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
-	0x1a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x42, 0xba, 0x01, 0x0a, 0x17,
-	0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f,
-	0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x10, 0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e,
-	0x6d, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03,
-	0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43,
-	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2,
-	0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73,
-	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72,
-	0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x1a, 0x27, 0x6f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e,
+	0x65, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x22, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f,
+	0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2f, 0x66, 0x75, 0x6e, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x22, 0x6f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2f, 0x70,
+	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xf7, 0x01,
+	0x0a, 0x0b, 0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x12, 0x3b, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
+	0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x76, 0x69,
+	0x64, 0x65, 0x72, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x4a,
+	0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x3b, 0x0a, 0x09, 0x66, 0x75,
+	0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c,
+	0x61, 0x6e, 0x65, 0x2e, 0x46, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x66, 0x75,
+	0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x42, 0xba, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e,
+	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c,
+	0x61, 0x6e, 0x65, 0x42, 0x10, 0x45, 0x6e, 0x76, 0x69, 0x72, 0x6f, 0x6e, 0x6d, 0x65, 0x6e, 0x74,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63,
+	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03, 0x4f, 0x43, 0x58, 0xaa,
+	0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
+	0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2, 0x02, 0x1f, 0x4f, 0x76,
+	0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e,
+	0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14,
+	0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70,
+	0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -653,14 +1038,20 @@ func file_overlock_crossplane_environment_proto_rawDescGZIP() []byte {
 
 var file_overlock_crossplane_environment_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_overlock_crossplane_environment_proto_goTypes = []interface{}{
-	(*Environment)(nil), // 0: overlock.crossplane.Environment
+	(*Environment)(nil),   // 0: overlock.crossplane.Environment
+	(*Provider)(nil),      // 1: overlock.crossplane.Provider
+	(*Configuration)(nil), // 2: overlock.crossplane.Configuration
+	(*Function)(nil),      // 3: overlock.crossplane.Function
 }
 var file_overlock_crossplane_environment_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: overlock.crossplane.Environment.providers:type_name -> overlock.crossplane.Provider
+	2, // 1: overlock.crossplane.Environment.configurations:type_name -> overlock.crossplane.Configuration
+	3, // 2: overlock.crossplane.Environment.functions:type_name -> overlock.crossplane.Function
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_overlock_crossplane_environment_proto_init() }
@@ -668,6 +1059,9 @@ func file_overlock_crossplane_environment_proto_init() {
 	if File_overlock_crossplane_environment_proto != nil {
 		return
 	}
+	file_overlock_crossplane_configuration_proto_init()
+	file_overlock_crossplane_function_proto_init()
+	file_overlock_crossplane_provider_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_overlock_crossplane_environment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Environment); i {

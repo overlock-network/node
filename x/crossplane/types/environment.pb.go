@@ -5,11 +5,10 @@ package types
 
 import (
 	fmt "fmt"
+	proto "github.com/cosmos/gogoproto/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-
-	proto "github.com/cosmos/gogoproto/proto"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,10 +26,14 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 type Environment struct {
 	// name
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// provider
-	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	// providers
+	Providers []*Provider `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	// configurations
+	Configurations []*Configuration `protobuf:"bytes,3,rep,name=configurations,proto3" json:"configurations,omitempty"`
+	// functions
+	Functions []*Function `protobuf:"bytes,4,rep,name=functions,proto3" json:"functions,omitempty"`
 	// id
-	Id uint64 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	Id uint64 `protobuf:"varint,5,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (m *Environment) Reset()         { *m = Environment{} }
@@ -73,11 +76,25 @@ func (m *Environment) GetName() string {
 	return ""
 }
 
-func (m *Environment) GetProvider() string {
+func (m *Environment) GetProviders() []*Provider {
 	if m != nil {
-		return m.Provider
+		return m.Providers
 	}
-	return ""
+	return nil
+}
+
+func (m *Environment) GetConfigurations() []*Configuration {
+	if m != nil {
+		return m.Configurations
+	}
+	return nil
+}
+
+func (m *Environment) GetFunctions() []*Function {
+	if m != nil {
+		return m.Functions
+	}
+	return nil
 }
 
 func (m *Environment) GetId() uint64 {
@@ -96,18 +113,24 @@ func init() {
 }
 
 var fileDescriptor_c7476339719a8cb6 = []byte{
-	// 173 bytes of a gzipped FileDescriptorProto
+	// 259 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xcd, 0x2f, 0x4b, 0x2d,
 	0xca, 0xc9, 0x4f, 0xce, 0xd6, 0x4f, 0x2e, 0xca, 0x2f, 0x2e, 0x2e, 0xc8, 0x49, 0xcc, 0x4b, 0xd5,
 	0x4f, 0xcd, 0x2b, 0xcb, 0x2c, 0xca, 0xcf, 0xcb, 0x4d, 0xcd, 0x2b, 0xd1, 0x2b, 0x28, 0xca, 0x2f,
-	0xc9, 0x17, 0x12, 0x86, 0x29, 0xd3, 0x43, 0x28, 0x53, 0xf2, 0xe5, 0xe2, 0x76, 0x45, 0xa8, 0x14,
-	0x12, 0xe2, 0x62, 0xc9, 0x4b, 0xcc, 0x4d, 0x95, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x02, 0xb3,
-	0x85, 0xa4, 0xb8, 0x38, 0x0a, 0x8a, 0xf2, 0xcb, 0x32, 0x53, 0x52, 0x8b, 0x24, 0x98, 0xc0, 0xe2,
-	0x70, 0xbe, 0x10, 0x1f, 0x17, 0x53, 0x66, 0x8a, 0x04, 0xb3, 0x02, 0xa3, 0x06, 0x4b, 0x10, 0x53,
-	0x66, 0x8a, 0x93, 0xe9, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7,
-	0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x49, 0xc3,
-	0x1d, 0x59, 0x81, 0xec, 0xcc, 0x92, 0xca, 0x82, 0xd4, 0xe2, 0x24, 0x36, 0xb0, 0x0b, 0x8d, 0x01,
-	0x01, 0x00, 0x00, 0xff, 0xff, 0xa6, 0x8f, 0x6e, 0x57, 0xca, 0x00, 0x00, 0x00,
+	0xc9, 0x17, 0x12, 0x86, 0x29, 0xd3, 0x43, 0x28, 0x93, 0x52, 0xc7, 0xa6, 0x37, 0x39, 0x3f, 0x2f,
+	0x2d, 0x33, 0xbd, 0xb4, 0x28, 0xb1, 0x24, 0x33, 0x3f, 0x0f, 0xa2, 0x5b, 0x4a, 0x09, 0x9b, 0xc2,
+	0xb4, 0xd2, 0xbc, 0x64, 0x42, 0x6a, 0x0a, 0x8a, 0xf2, 0xcb, 0x32, 0x53, 0x52, 0x8b, 0x20, 0x6a,
+	0x94, 0xbe, 0x33, 0x72, 0x71, 0xbb, 0x22, 0xdc, 0x26, 0x24, 0xc4, 0xc5, 0x92, 0x97, 0x98, 0x9b,
+	0x2a, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0x66, 0x0b, 0x59, 0x73, 0x71, 0xc2, 0x74, 0x15,
+	0x4b, 0x30, 0x29, 0x30, 0x6b, 0x70, 0x1b, 0xc9, 0xea, 0x61, 0x71, 0xbd, 0x5e, 0x00, 0x54, 0x55,
+	0x10, 0x42, 0xbd, 0x90, 0x17, 0x17, 0x1f, 0x8a, 0xfb, 0x8b, 0x25, 0x98, 0xc1, 0x26, 0x28, 0x61,
+	0x35, 0xc1, 0x19, 0x59, 0x69, 0x10, 0x9a, 0x4e, 0x90, 0x43, 0x60, 0x5e, 0x2c, 0x96, 0x60, 0xc1,
+	0xe3, 0x10, 0x37, 0xa8, 0xaa, 0x20, 0x84, 0x7a, 0x21, 0x3e, 0x2e, 0xa6, 0xcc, 0x14, 0x09, 0x56,
+	0x05, 0x46, 0x0d, 0x96, 0x20, 0xa6, 0xcc, 0x14, 0x27, 0xd3, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c,
+	0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e,
+	0x3c, 0x96, 0x63, 0x88, 0x92, 0x86, 0x87, 0x5b, 0x05, 0x72, 0xc8, 0x95, 0x54, 0x16, 0xa4, 0x16,
+	0x27, 0xb1, 0x81, 0xc3, 0xcd, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xb4, 0x5f, 0xe1, 0x31, 0xe6,
+	0x01, 0x00, 0x00,
 }
 
 func (m *Environment) Marshal() (dAtA []byte, err error) {
@@ -133,14 +156,49 @@ func (m *Environment) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.Id != 0 {
 		i = encodeVarintEnvironment(dAtA, i, uint64(m.Id))
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x28
 	}
-	if len(m.Provider) > 0 {
-		i -= len(m.Provider)
-		copy(dAtA[i:], m.Provider)
-		i = encodeVarintEnvironment(dAtA, i, uint64(len(m.Provider)))
-		i--
-		dAtA[i] = 0x12
+	if len(m.Functions) > 0 {
+		for iNdEx := len(m.Functions) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Functions[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Configurations) > 0 {
+		for iNdEx := len(m.Configurations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Configurations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.Providers) > 0 {
+		for iNdEx := len(m.Providers) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Providers[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEnvironment(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
@@ -173,9 +231,23 @@ func (m *Environment) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovEnvironment(uint64(l))
 	}
-	l = len(m.Provider)
-	if l > 0 {
-		n += 1 + l + sovEnvironment(uint64(l))
+	if len(m.Providers) > 0 {
+		for _, e := range m.Providers {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
+	}
+	if len(m.Configurations) > 0 {
+		for _, e := range m.Configurations {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
+	}
+	if len(m.Functions) > 0 {
+		for _, e := range m.Functions {
+			l = e.Size()
+			n += 1 + l + sovEnvironment(uint64(l))
+		}
 	}
 	if m.Id != 0 {
 		n += 1 + sovEnvironment(uint64(m.Id))
@@ -252,9 +324,9 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Providers", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEnvironment
@@ -264,25 +336,95 @@ func (m *Environment) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthEnvironment
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthEnvironment
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Provider = string(dAtA[iNdEx:postIndex])
+			m.Providers = append(m.Providers, &Provider{})
+			if err := m.Providers[len(m.Providers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Configurations", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEnvironment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Configurations = append(m.Configurations, &Configuration{})
+			if err := m.Configurations[len(m.Configurations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Functions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEnvironment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEnvironment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Functions = append(m.Functions, &Function{})
+			if err := m.Functions[len(m.Functions)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
 			}
