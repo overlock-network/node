@@ -17,6 +17,7 @@ func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpda
 	var configuration = types.Configuration{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Id:       msg.Id,
 	}
 	_, found := k.GetConfiguration(ctx, msg.Id)
 	if !found {

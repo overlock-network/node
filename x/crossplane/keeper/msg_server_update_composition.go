@@ -17,6 +17,7 @@ func (k msgServer) UpdateComposition(goCtx context.Context, msg *types.MsgUpdate
 	var composition = types.Composition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Id:       msg.Id,
 	}
 	_, found := k.GetComposition(ctx, msg.Id)
 	if !found {
