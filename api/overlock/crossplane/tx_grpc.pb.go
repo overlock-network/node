@@ -32,6 +32,7 @@ const (
 	Msg_DeleteConfiguration_FullMethodName = "/overlock.crossplane.Msg/DeleteConfiguration"
 	Msg_CreateEnvironment_FullMethodName   = "/overlock.crossplane.Msg/CreateEnvironment"
 	Msg_UpdateEnvironment_FullMethodName   = "/overlock.crossplane.Msg/UpdateEnvironment"
+	Msg_DeleteEnvironment_FullMethodName   = "/overlock.crossplane.Msg/DeleteEnvironment"
 )
 
 // MsgClient is the client API for Msg service.
@@ -61,6 +62,7 @@ type MsgClient interface {
 	DeleteConfiguration(ctx context.Context, in *MsgDeleteConfiguration, opts ...grpc.CallOption) (*MsgDeleteConfigurationResponse, error)
 	CreateEnvironment(ctx context.Context, in *MsgCreateEnvironment, opts ...grpc.CallOption) (*MsgCreateEnvironmentResponse, error)
 	UpdateEnvironment(ctx context.Context, in *MsgUpdateEnvironment, opts ...grpc.CallOption) (*MsgUpdateEnvironmentResponse, error)
+	DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error)
 }
 
 type msgClient struct {
@@ -179,6 +181,15 @@ func (c *msgClient) UpdateEnvironment(ctx context.Context, in *MsgUpdateEnvironm
 	return out, nil
 }
 
+func (c *msgClient) DeleteEnvironment(ctx context.Context, in *MsgDeleteEnvironment, opts ...grpc.CallOption) (*MsgDeleteEnvironmentResponse, error) {
+	out := new(MsgDeleteEnvironmentResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteEnvironment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -206,6 +217,7 @@ type MsgServer interface {
 	DeleteConfiguration(context.Context, *MsgDeleteConfiguration) (*MsgDeleteConfigurationResponse, error)
 	CreateEnvironment(context.Context, *MsgCreateEnvironment) (*MsgCreateEnvironmentResponse, error)
 	UpdateEnvironment(context.Context, *MsgUpdateEnvironment) (*MsgUpdateEnvironmentResponse, error)
+	DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -248,6 +260,9 @@ func (UnimplementedMsgServer) CreateEnvironment(context.Context, *MsgCreateEnvir
 }
 func (UnimplementedMsgServer) UpdateEnvironment(context.Context, *MsgUpdateEnvironment) (*MsgUpdateEnvironmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEnvironment not implemented")
+}
+func (UnimplementedMsgServer) DeleteEnvironment(context.Context, *MsgDeleteEnvironment) (*MsgDeleteEnvironmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEnvironment not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -478,6 +493,24 @@ func _Msg_UpdateEnvironment_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_DeleteEnvironment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteEnvironment)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteEnvironment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteEnvironment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteEnvironment(ctx, req.(*MsgDeleteEnvironment))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +565,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateEnvironment",
 			Handler:    _Msg_UpdateEnvironment_Handler,
+		},
+		{
+			MethodName: "DeleteEnvironment",
+			Handler:    _Msg_DeleteEnvironment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

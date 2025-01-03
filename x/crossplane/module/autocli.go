@@ -192,6 +192,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a update-environment tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}, {ProtoField: "provider"}},
 				},
+				{
+					RpcMethod:      "DeleteEnvironment",
+					Use:            "delete-environment [id]",
+					Short:          "Send a delete-environment tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
