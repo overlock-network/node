@@ -77,6 +77,12 @@ service Query {
     option (google.api.http).get = "/overlock/crossplane/list_provider";
   
   }
+  
+  // Queries a list of ShowProvider items.
+  rpc ShowProvider (QueryShowProviderRequest) returns (QueryShowProviderResponse) {
+    option (google.api.http).get = "/overlock/crossplane/show_provider/{id}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -179,5 +185,13 @@ message QueryListProviderRequest {
 message QueryListProviderResponse {
   Provider                               provider   = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryShowProviderRequest {
+  uint64 id = 1;
+}
+
+message QueryShowProviderResponse {
+  Provider provider = 1;
 }
 
