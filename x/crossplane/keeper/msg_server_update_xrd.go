@@ -17,6 +17,7 @@ func (k msgServer) UpdateXrd(goCtx context.Context, msg *types.MsgUpdateXrd) (*t
 	var xrd = types.CompositeResourceDefinition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Id:       msg.Id,
 	}
 	_, found := k.GetCompositeResourceDefinition(ctx, msg.Id)
 	if !found {
