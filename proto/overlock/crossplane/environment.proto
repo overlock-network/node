@@ -1,10 +1,7 @@
 syntax = "proto3";
 package overlock.crossplane;
 
-import "overlock/crossplane/configuration.proto";
-import "overlock/crossplane/function.proto";
 import "overlock/crossplane/metadata.proto";
-import "overlock/crossplane/provider.proto";
 
 option go_package = "overlock/x/crossplane/types";
 
@@ -23,11 +20,11 @@ message Environment {
 // Spec defines the specification of the environment.
 message EnvironmentSpec {
   // providers
-  repeated Provider providers = 2;
+  repeated uint64 providers = 2;
 
   // configurations
-  repeated Configuration configurations = 3;
+  repeated uint64 configurations = 3;
 
   // functions
-  repeated Function functions = 4;
+  repeated uint64 functions = 4;
 }
