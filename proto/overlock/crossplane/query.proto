@@ -90,6 +90,12 @@ service Query {
     option (google.api.http).get = "/overlock/crossplane/list_function";
   
   }
+  
+  // Queries a list of ShowFunction items.
+  rpc ShowFunction (QueryShowFunctionRequest) returns (QueryShowFunctionResponse) {
+    option (google.api.http).get = "/overlock/crossplane/show_function/{id}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -209,6 +215,14 @@ message QueryListProviderResponse {
 message QueryListFunctionRequest {}
 
 message QueryListFunctionResponse {
+  Function function = 1;
+}
+
+message QueryShowFunctionRequest {
+  uint64 id = 1;
+}
+
+message QueryShowFunctionResponse {
   Function function = 1;
 }
 

@@ -32,6 +32,7 @@ const (
 	Query_ShowProvider_FullMethodName      = "/overlock.crossplane.Query/ShowProvider"
 	Query_ListProvider_FullMethodName      = "/overlock.crossplane.Query/ListProvider"
 	Query_ListFunction_FullMethodName      = "/overlock.crossplane.Query/ListFunction"
+	Query_ShowFunction_FullMethodName      = "/overlock.crossplane.Query/ShowFunction"
 )
 
 // QueryClient is the client API for Query service.
@@ -62,6 +63,8 @@ type QueryClient interface {
 	ListProvider(ctx context.Context, in *QueryListProviderRequest, opts ...grpc.CallOption) (*QueryListProviderResponse, error)
 	// Queries a list of ListFunction items.
 	ListFunction(ctx context.Context, in *QueryListFunctionRequest, opts ...grpc.CallOption) (*QueryListFunctionResponse, error)
+	// Queries a list of ShowFunction items.
+	ShowFunction(ctx context.Context, in *QueryShowFunctionRequest, opts ...grpc.CallOption) (*QueryShowFunctionResponse, error)
 }
 
 type queryClient struct {
@@ -180,6 +183,15 @@ func (c *queryClient) ListFunction(ctx context.Context, in *QueryListFunctionReq
 	return out, nil
 }
 
+func (c *queryClient) ShowFunction(ctx context.Context, in *QueryShowFunctionRequest, opts ...grpc.CallOption) (*QueryShowFunctionResponse, error) {
+	out := new(QueryShowFunctionResponse)
+	err := c.cc.Invoke(ctx, Query_ShowFunction_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -208,6 +220,8 @@ type QueryServer interface {
 	ListProvider(context.Context, *QueryListProviderRequest) (*QueryListProviderResponse, error)
 	// Queries a list of ListFunction items.
 	ListFunction(context.Context, *QueryListFunctionRequest) (*QueryListFunctionResponse, error)
+	// Queries a list of ShowFunction items.
+	ShowFunction(context.Context, *QueryShowFunctionRequest) (*QueryShowFunctionResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -250,6 +264,9 @@ func (UnimplementedQueryServer) ListProvider(context.Context, *QueryListProvider
 }
 func (UnimplementedQueryServer) ListFunction(context.Context, *QueryListFunctionRequest) (*QueryListFunctionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunction not implemented")
+}
+func (UnimplementedQueryServer) ShowFunction(context.Context, *QueryShowFunctionRequest) (*QueryShowFunctionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowFunction not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -480,6 +497,24 @@ func _Query_ListFunction_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ShowFunction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowFunctionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowFunction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowFunction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowFunction(ctx, req.(*QueryShowFunctionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -534,6 +569,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFunction",
 			Handler:    _Query_ListFunction_Handler,
+		},
+		{
+			MethodName: "ShowFunction",
+			Handler:    _Query_ShowFunction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
