@@ -142,6 +142,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "ListFunction",
+					Use:            "list-function",
+					Short:          "Query list-function",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
