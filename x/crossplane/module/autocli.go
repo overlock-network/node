@@ -259,15 +259,15 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateFunction",
-					Use:            "create-function [name]",
+					Use:            "create-function [metadata] [spec]",
 					Short:          "Send a create-function tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "UpdateFunction",
-					Use:            "update-function [id]",
+					Use:            "update-function [id] [metadata] [spec]]",
 					Short:          "Send a update-function tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteFunction",

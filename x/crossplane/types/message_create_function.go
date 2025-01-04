@@ -8,10 +8,11 @@ import (
 
 var _ sdk.Msg = &MsgCreateFunction{}
 
-func NewMsgCreateFunction(creator string, name string) *MsgCreateFunction {
+func NewMsgCreateFunction(creator string, metadata Metadata, spec FunctionSpec) *MsgCreateFunction {
 	return &MsgCreateFunction{
-		Creator: creator,
-		Name:    name,
+		Creator:  creator,
+		Metadata: &metadata,
+		Spec:     &spec,
 	}
 }
 

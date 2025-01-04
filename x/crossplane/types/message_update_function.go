@@ -8,10 +8,12 @@ import (
 
 var _ sdk.Msg = &MsgUpdateFunction{}
 
-func NewMsgUpdateFunction(creator string, id uint64) *MsgUpdateFunction {
+func NewMsgUpdateFunction(creator string, id uint64, metadata Metadata, spec FunctionSpec) *MsgUpdateFunction {
 	return &MsgUpdateFunction{
-		Creator: creator,
-		Id:      id,
+		Creator:  creator,
+		Id:       id,
+		Metadata: &metadata,
+		Spec:     &spec,
 	}
 }
 

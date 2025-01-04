@@ -14,7 +14,7 @@ import (
 func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdateProvider) (*types.MsgUpdateProviderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var env = types.Provider{
+	var provider = types.Provider{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Id:       msg.Id,
@@ -24,7 +24,7 @@ func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdatePro
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
 
-	k.SetProvider(ctx, env)
+	k.SetProvider(ctx, provider)
 
-	return &types.MsgUpdateProviderResponse{}, nil
+	return &types.MsgUpdateProviderResponse{Id: msg.Id}, nil
 }

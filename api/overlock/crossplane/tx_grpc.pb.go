@@ -8,7 +8,6 @@ package crossplane
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -78,8 +77,11 @@ type MsgClient interface {
 	UpdateProvider(ctx context.Context, in *MsgUpdateProvider, opts ...grpc.CallOption) (*MsgUpdateProviderResponse, error)
 	// DeleteProvider
 	DeleteProvider(ctx context.Context, in *MsgDeleteProvider, opts ...grpc.CallOption) (*MsgDeleteProviderResponse, error)
+	// CreateFunction
 	CreateFunction(ctx context.Context, in *MsgCreateFunction, opts ...grpc.CallOption) (*MsgCreateFunctionResponse, error)
+	// UpdateFunction
 	UpdateFunction(ctx context.Context, in *MsgUpdateFunction, opts ...grpc.CallOption) (*MsgUpdateFunctionResponse, error)
+	// DeleteFunction
 	DeleteFunction(ctx context.Context, in *MsgDeleteFunction, opts ...grpc.CallOption) (*MsgDeleteFunctionResponse, error)
 }
 
@@ -299,8 +301,11 @@ type MsgServer interface {
 	UpdateProvider(context.Context, *MsgUpdateProvider) (*MsgUpdateProviderResponse, error)
 	// DeleteProvider
 	DeleteProvider(context.Context, *MsgDeleteProvider) (*MsgDeleteProviderResponse, error)
+	// CreateFunction
 	CreateFunction(context.Context, *MsgCreateFunction) (*MsgCreateFunctionResponse, error)
+	// UpdateFunction
 	UpdateFunction(context.Context, *MsgUpdateFunction) (*MsgUpdateFunctionResponse, error)
+	// DeleteFunction
 	DeleteFunction(context.Context, *MsgDeleteFunction) (*MsgDeleteFunctionResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }

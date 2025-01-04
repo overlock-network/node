@@ -49,6 +49,14 @@ const (
 	ProviderCreatedEvent = "provider-created"
 
 	ProviderIndex = "id"
+
+	FunctionKey = "Function/value/"
+
+	FunctionCountKey = "Function/count/"
+
+	FunctionCreatedEvent = "function-created"
+
+	FunctionIndex = "id"
 )
 
 var (

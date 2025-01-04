@@ -20,5 +20,5 @@ func (k msgServer) DeleteProvider(goCtx context.Context, msg *types.MsgDeletePro
 	}
 	k.RemoveProvider(ctx, msg.Id)
 
-	return &types.MsgDeleteProviderResponse{}, nil
+	return &types.MsgDeleteProviderResponse{Id: msg.Id}, nil
 }

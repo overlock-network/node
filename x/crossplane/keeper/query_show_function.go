@@ -6,6 +6,7 @@ import (
 	"overlock/x/crossplane/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -17,8 +18,10 @@ func (k Keeper) ShowFunction(goCtx context.Context, req *types.QueryShowFunction
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	function, found := k.GetFunction(ctx, req.Id)
+	if !found {
+		return nil, sdkerrors.ErrKeyNotFound
+	}
 
-	return &types.QueryShowFunctionResponse{}, nil
+	return &types.QueryShowFunctionResponse{Function: &function}, nil
 }

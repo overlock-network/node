@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -11,8 +12,20 @@ import (
 func (k msgServer) CreateFunction(goCtx context.Context, msg *types.MsgCreateFunction) (*types.MsgCreateFunctionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	var function = types.Function{
+		Metadata: msg.Metadata,
+		Spec:     msg.Spec,
+	}
+	id := k.AppendFunction(
+		ctx,
+		function,
+	)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.FunctionCreatedEvent,
+			sdk.NewAttribute(types.FunctionIndex, strconv.FormatUint(id, 10)),
+		),
+	)
 
 	return &types.MsgCreateFunctionResponse{}, nil
 }

@@ -25,5 +25,5 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdate
 	}
 
 	k.SetEnvironment(ctx, env)
-	return &types.MsgUpdateEnvironmentResponse{}, nil
+	return &types.MsgUpdateEnvironmentResponse{Id: env.Id}, nil
 }
