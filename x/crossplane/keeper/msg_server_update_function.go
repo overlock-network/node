@@ -11,19 +11,20 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdateEnvironment) (*types.MsgUpdateEnvironmentResponse, error) {
+func (k msgServer) UpdateFunction(goCtx context.Context, msg *types.MsgUpdateFunction) (*types.MsgUpdateFunctionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var env = types.Environment{
+	var function = types.Function{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Id:       msg.Id,
 	}
-	_, found := k.GetEnvironment(ctx, msg.Id)
+	_, found := k.GetFunction(ctx, msg.Id)
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
 
-	k.SetEnvironment(ctx, env)
-	return &types.MsgUpdateEnvironmentResponse{Id: env.Id}, nil
+	k.SetFunction(ctx, function)
+
+	return &types.MsgUpdateFunctionResponse{Id: msg.Id}, nil
 }

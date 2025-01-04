@@ -9,7 +9,9 @@ import "google/api/annotations.proto";
 import "overlock/crossplane/composition.proto";
 import "overlock/crossplane/configuration.proto";
 import "overlock/crossplane/environment.proto";
+import "overlock/crossplane/function.proto";
 import "overlock/crossplane/params.proto";
+import "overlock/crossplane/provider.proto";
 import "overlock/crossplane/xrd.proto";
 
 option go_package = "overlock/x/crossplane/types";
@@ -59,6 +61,26 @@ service Query {
   // Queries a list of ListEnvironment items.
   rpc ListEnvironment(QueryListEnvironmentRequest) returns (QueryListEnvironmentResponse) {
     option (google.api.http).get = "/overlock/crossplane/list_environment";
+  }
+
+  // Queries a list of ShowProvider items.
+  rpc ShowProvider(QueryShowProviderRequest) returns (QueryShowProviderResponse) {
+    option (google.api.http).get = "/overlock/crossplane/show_provider/{id}";
+  }
+
+  // Queries a list of ListProvider items.
+  rpc ListProvider(QueryListProviderRequest) returns (QueryListProviderResponse) {
+    option (google.api.http).get = "/overlock/crossplane/list_provider";
+  }
+
+  // Queries a list of ListFunction items.
+  rpc ListFunction(QueryListFunctionRequest) returns (QueryListFunctionResponse) {
+    option (google.api.http).get = "/overlock/crossplane/list_function";
+  }
+
+  // Queries a list of ShowFunction items.
+  rpc ShowFunction(QueryShowFunctionRequest) returns (QueryShowFunctionResponse) {
+    option (google.api.http).get = "/overlock/crossplane/show_function/{id}";
   }
 }
 
@@ -156,4 +178,46 @@ message QueryListEnvironmentRequest {
 message QueryListEnvironmentResponse {
   repeated Environment environments = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryShowProviderRequest
+message QueryShowProviderRequest {
+  uint64 id = 1;
+}
+
+// QueryShowProviderResponse
+message QueryShowProviderResponse {
+  Provider provider = 1;
+}
+
+// QueryListProviderRequest
+message QueryListProviderRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryListProviderResponse
+message QueryListProviderResponse {
+  repeated Provider providers = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryListFunctionRequest
+message QueryListFunctionRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryListFunctionResponse
+message QueryListFunctionResponse {
+  repeated Function functions = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryShowFunctionRequest
+message QueryShowFunctionRequest {
+  uint64 id = 1;
+}
+
+// QueryShowFunctionResponse
+message QueryShowFunctionResponse {
+  Function function = 1;
 }
