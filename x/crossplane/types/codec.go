@@ -68,6 +68,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateFunction{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgDeleteFunction{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),

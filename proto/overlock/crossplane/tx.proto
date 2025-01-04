@@ -70,6 +70,7 @@ service Msg {
   rpc DeleteProvider (MsgDeleteProvider) returns (MsgDeleteProviderResponse);
   rpc CreateFunction (MsgCreateFunction) returns (MsgCreateFunctionResponse);
   rpc UpdateFunction (MsgUpdateFunction) returns (MsgUpdateFunctionResponse);
+  rpc DeleteFunction (MsgDeleteFunction) returns (MsgDeleteFunctionResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -287,6 +288,16 @@ message MsgUpdateFunction {
 }
 
 message MsgUpdateFunctionResponse {
+  uint64 id = 1;
+}
+
+message MsgDeleteFunction {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteFunctionResponse {
   uint64 id = 1;
 }
 
