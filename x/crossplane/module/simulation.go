@@ -71,6 +71,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteEnvironment int = 100
 
+	opWeightMsgCreateProvider = "op_weight_msg_create_provider"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateProvider int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -226,6 +230,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		crossplanesimulation.SimulateMsgDeleteEnvironment(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateProvider int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateProvider, &weightMsgCreateProvider, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateProvider = defaultWeightMsgCreateProvider
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateProvider,
+		crossplanesimulation.SimulateMsgCreateProvider(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -351,6 +366,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgDeleteEnvironment,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				crossplanesimulation.SimulateMsgDeleteEnvironment(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateProvider,
+			defaultWeightMsgCreateProvider,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				crossplanesimulation.SimulateMsgCreateProvider(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
