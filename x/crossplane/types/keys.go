@@ -41,6 +41,14 @@ const (
 	EnvironmentCreatedEvent = "environment-created"
 
 	EnvironmentIndex = "id"
+
+	ProviderKey = "Provider/value/"
+
+	ProviderCountKey = "Provider/count/"
+
+	ProviderCreatedEvent = "provider-created"
+
+	ProviderIndex = "id"
 )
 
 var (

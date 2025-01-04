@@ -213,15 +213,15 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateProvider",
-					Use:            "create-provider [name]",
+					Use:            "create-provider [metadata] [spec]",
 					Short:          "Send a create-provider tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "UpdateProvider",
-					Use:            "update-provider [name]",
+					Use:            "update-provider [id] [metadata] [spec]",
 					Short:          "Send a update-provider tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "name"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
 				},
 				{
 					RpcMethod:      "DeleteProvider",
