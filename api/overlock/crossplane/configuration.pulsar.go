@@ -577,7 +577,7 @@ func (x *fastReflection_Configuration) ProtoMethods() *protoiface.Methods {
 var _ protoreflect.List = (*_ConfigurationSpec_2_list)(nil)
 
 type _ConfigurationSpec_2_list struct {
-	list *[]*Dependency
+	list *[]uint64
 }
 
 func (x *_ConfigurationSpec_2_list) Len() int {
@@ -588,54 +588,241 @@ func (x *_ConfigurationSpec_2_list) Len() int {
 }
 
 func (x *_ConfigurationSpec_2_list) Get(i int) protoreflect.Value {
-	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+	return protoreflect.ValueOfUint64((*x.list)[i])
 }
 
 func (x *_ConfigurationSpec_2_list) Set(i int, value protoreflect.Value) {
-	valueUnwrapped := value.Message()
-	concreteValue := valueUnwrapped.Interface().(*Dependency)
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
 	(*x.list)[i] = concreteValue
 }
 
 func (x *_ConfigurationSpec_2_list) Append(value protoreflect.Value) {
-	valueUnwrapped := value.Message()
-	concreteValue := valueUnwrapped.Interface().(*Dependency)
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
 	*x.list = append(*x.list, concreteValue)
 }
 
 func (x *_ConfigurationSpec_2_list) AppendMutable() protoreflect.Value {
-	v := new(Dependency)
-	*x.list = append(*x.list, v)
-	return protoreflect.ValueOfMessage(v.ProtoReflect())
+	panic(fmt.Errorf("AppendMutable can not be called on message ConfigurationSpec at list field Compositions as it is not of Message kind"))
 }
 
 func (x *_ConfigurationSpec_2_list) Truncate(n int) {
-	for i := n; i < len(*x.list); i++ {
-		(*x.list)[i] = nil
-	}
 	*x.list = (*x.list)[:n]
 }
 
 func (x *_ConfigurationSpec_2_list) NewElement() protoreflect.Value {
-	v := new(Dependency)
-	return protoreflect.ValueOfMessage(v.ProtoReflect())
+	v := uint64(0)
+	return protoreflect.ValueOfUint64(v)
 }
 
 func (x *_ConfigurationSpec_2_list) IsValid() bool {
 	return x.list != nil
 }
 
+var _ protoreflect.List = (*_ConfigurationSpec_3_list)(nil)
+
+type _ConfigurationSpec_3_list struct {
+	list *[]uint64
+}
+
+func (x *_ConfigurationSpec_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_ConfigurationSpec_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfUint64((*x.list)[i])
+}
+
+func (x *_ConfigurationSpec_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_ConfigurationSpec_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_ConfigurationSpec_3_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message ConfigurationSpec at list field Xrds as it is not of Message kind"))
+}
+
+func (x *_ConfigurationSpec_3_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_ConfigurationSpec_3_list) NewElement() protoreflect.Value {
+	v := uint64(0)
+	return protoreflect.ValueOfUint64(v)
+}
+
+func (x *_ConfigurationSpec_3_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_ConfigurationSpec_5_list)(nil)
+
+type _ConfigurationSpec_5_list struct {
+	list *[]uint64
+}
+
+func (x *_ConfigurationSpec_5_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_ConfigurationSpec_5_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfUint64((*x.list)[i])
+}
+
+func (x *_ConfigurationSpec_5_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_ConfigurationSpec_5_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_ConfigurationSpec_5_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message ConfigurationSpec at list field Functions as it is not of Message kind"))
+}
+
+func (x *_ConfigurationSpec_5_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_ConfigurationSpec_5_list) NewElement() protoreflect.Value {
+	v := uint64(0)
+	return protoreflect.ValueOfUint64(v)
+}
+
+func (x *_ConfigurationSpec_5_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_ConfigurationSpec_6_list)(nil)
+
+type _ConfigurationSpec_6_list struct {
+	list *[]uint64
+}
+
+func (x *_ConfigurationSpec_6_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_ConfigurationSpec_6_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfUint64((*x.list)[i])
+}
+
+func (x *_ConfigurationSpec_6_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_ConfigurationSpec_6_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_ConfigurationSpec_6_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message ConfigurationSpec at list field Providers as it is not of Message kind"))
+}
+
+func (x *_ConfigurationSpec_6_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_ConfigurationSpec_6_list) NewElement() protoreflect.Value {
+	v := uint64(0)
+	return protoreflect.ValueOfUint64(v)
+}
+
+func (x *_ConfigurationSpec_6_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_ConfigurationSpec_7_list)(nil)
+
+type _ConfigurationSpec_7_list struct {
+	list *[]uint64
+}
+
+func (x *_ConfigurationSpec_7_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_ConfigurationSpec_7_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfUint64((*x.list)[i])
+}
+
+func (x *_ConfigurationSpec_7_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_ConfigurationSpec_7_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Uint()
+	concreteValue := valueUnwrapped
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_ConfigurationSpec_7_list) AppendMutable() protoreflect.Value {
+	panic(fmt.Errorf("AppendMutable can not be called on message ConfigurationSpec at list field Configurations as it is not of Message kind"))
+}
+
+func (x *_ConfigurationSpec_7_list) Truncate(n int) {
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_ConfigurationSpec_7_list) NewElement() protoreflect.Value {
+	v := uint64(0)
+	return protoreflect.ValueOfUint64(v)
+}
+
+func (x *_ConfigurationSpec_7_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_ConfigurationSpec            protoreflect.MessageDescriptor
-	fd_ConfigurationSpec_crossplane protoreflect.FieldDescriptor
-	fd_ConfigurationSpec_depends_on protoreflect.FieldDescriptor
+	md_ConfigurationSpec                protoreflect.MessageDescriptor
+	fd_ConfigurationSpec_crossplane     protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_compositions   protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_xrds           protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_functions      protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_providers      protoreflect.FieldDescriptor
+	fd_ConfigurationSpec_configurations protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_overlock_crossplane_configuration_proto_init()
 	md_ConfigurationSpec = File_overlock_crossplane_configuration_proto.Messages().ByName("ConfigurationSpec")
 	fd_ConfigurationSpec_crossplane = md_ConfigurationSpec.Fields().ByName("crossplane")
-	fd_ConfigurationSpec_depends_on = md_ConfigurationSpec.Fields().ByName("depends_on")
+	fd_ConfigurationSpec_compositions = md_ConfigurationSpec.Fields().ByName("compositions")
+	fd_ConfigurationSpec_xrds = md_ConfigurationSpec.Fields().ByName("xrds")
+	fd_ConfigurationSpec_functions = md_ConfigurationSpec.Fields().ByName("functions")
+	fd_ConfigurationSpec_providers = md_ConfigurationSpec.Fields().ByName("providers")
+	fd_ConfigurationSpec_configurations = md_ConfigurationSpec.Fields().ByName("configurations")
 }
 
 var _ protoreflect.Message = (*fastReflection_ConfigurationSpec)(nil)
@@ -709,9 +896,33 @@ func (x *fastReflection_ConfigurationSpec) Range(f func(protoreflect.FieldDescri
 			return
 		}
 	}
-	if len(x.DependsOn) != 0 {
-		value := protoreflect.ValueOfList(&_ConfigurationSpec_2_list{list: &x.DependsOn})
-		if !f(fd_ConfigurationSpec_depends_on, value) {
+	if len(x.Compositions) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_2_list{list: &x.Compositions})
+		if !f(fd_ConfigurationSpec_compositions, value) {
+			return
+		}
+	}
+	if len(x.Xrds) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_3_list{list: &x.Xrds})
+		if !f(fd_ConfigurationSpec_xrds, value) {
+			return
+		}
+	}
+	if len(x.Functions) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_5_list{list: &x.Functions})
+		if !f(fd_ConfigurationSpec_functions, value) {
+			return
+		}
+	}
+	if len(x.Providers) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_6_list{list: &x.Providers})
+		if !f(fd_ConfigurationSpec_providers, value) {
+			return
+		}
+	}
+	if len(x.Configurations) != 0 {
+		value := protoreflect.ValueOfList(&_ConfigurationSpec_7_list{list: &x.Configurations})
+		if !f(fd_ConfigurationSpec_configurations, value) {
 			return
 		}
 	}
@@ -732,8 +943,16 @@ func (x *fastReflection_ConfigurationSpec) Has(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "overlock.crossplane.ConfigurationSpec.crossplane":
 		return x.Crossplane != nil
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
-		return len(x.DependsOn) != 0
+	case "overlock.crossplane.ConfigurationSpec.compositions":
+		return len(x.Compositions) != 0
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		return len(x.Xrds) != 0
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		return len(x.Functions) != 0
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		return len(x.Providers) != 0
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		return len(x.Configurations) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
@@ -752,8 +971,16 @@ func (x *fastReflection_ConfigurationSpec) Clear(fd protoreflect.FieldDescriptor
 	switch fd.FullName() {
 	case "overlock.crossplane.ConfigurationSpec.crossplane":
 		x.Crossplane = nil
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
-		x.DependsOn = nil
+	case "overlock.crossplane.ConfigurationSpec.compositions":
+		x.Compositions = nil
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		x.Xrds = nil
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		x.Functions = nil
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		x.Providers = nil
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		x.Configurations = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
@@ -773,11 +1000,35 @@ func (x *fastReflection_ConfigurationSpec) Get(descriptor protoreflect.FieldDesc
 	case "overlock.crossplane.ConfigurationSpec.crossplane":
 		value := x.Crossplane
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
-		if len(x.DependsOn) == 0 {
+	case "overlock.crossplane.ConfigurationSpec.compositions":
+		if len(x.Compositions) == 0 {
 			return protoreflect.ValueOfList(&_ConfigurationSpec_2_list{})
 		}
-		listValue := &_ConfigurationSpec_2_list{list: &x.DependsOn}
+		listValue := &_ConfigurationSpec_2_list{list: &x.Compositions}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		if len(x.Xrds) == 0 {
+			return protoreflect.ValueOfList(&_ConfigurationSpec_3_list{})
+		}
+		listValue := &_ConfigurationSpec_3_list{list: &x.Xrds}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		if len(x.Functions) == 0 {
+			return protoreflect.ValueOfList(&_ConfigurationSpec_5_list{})
+		}
+		listValue := &_ConfigurationSpec_5_list{list: &x.Functions}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		if len(x.Providers) == 0 {
+			return protoreflect.ValueOfList(&_ConfigurationSpec_6_list{})
+		}
+		listValue := &_ConfigurationSpec_6_list{list: &x.Providers}
+		return protoreflect.ValueOfList(listValue)
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		if len(x.Configurations) == 0 {
+			return protoreflect.ValueOfList(&_ConfigurationSpec_7_list{})
+		}
+		listValue := &_ConfigurationSpec_7_list{list: &x.Configurations}
 		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
@@ -801,10 +1052,26 @@ func (x *fastReflection_ConfigurationSpec) Set(fd protoreflect.FieldDescriptor, 
 	switch fd.FullName() {
 	case "overlock.crossplane.ConfigurationSpec.crossplane":
 		x.Crossplane = value.Message().Interface().(*CrossplaneSpec)
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
+	case "overlock.crossplane.ConfigurationSpec.compositions":
 		lv := value.List()
 		clv := lv.(*_ConfigurationSpec_2_list)
-		x.DependsOn = *clv.list
+		x.Compositions = *clv.list
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		lv := value.List()
+		clv := lv.(*_ConfigurationSpec_3_list)
+		x.Xrds = *clv.list
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		lv := value.List()
+		clv := lv.(*_ConfigurationSpec_5_list)
+		x.Functions = *clv.list
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		lv := value.List()
+		clv := lv.(*_ConfigurationSpec_6_list)
+		x.Providers = *clv.list
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		lv := value.List()
+		clv := lv.(*_ConfigurationSpec_7_list)
+		x.Configurations = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
@@ -830,11 +1097,35 @@ func (x *fastReflection_ConfigurationSpec) Mutable(fd protoreflect.FieldDescript
 			x.Crossplane = new(CrossplaneSpec)
 		}
 		return protoreflect.ValueOfMessage(x.Crossplane.ProtoReflect())
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
-		if x.DependsOn == nil {
-			x.DependsOn = []*Dependency{}
+	case "overlock.crossplane.ConfigurationSpec.compositions":
+		if x.Compositions == nil {
+			x.Compositions = []uint64{}
 		}
-		value := &_ConfigurationSpec_2_list{list: &x.DependsOn}
+		value := &_ConfigurationSpec_2_list{list: &x.Compositions}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		if x.Xrds == nil {
+			x.Xrds = []uint64{}
+		}
+		value := &_ConfigurationSpec_3_list{list: &x.Xrds}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		if x.Functions == nil {
+			x.Functions = []uint64{}
+		}
+		value := &_ConfigurationSpec_5_list{list: &x.Functions}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		if x.Providers == nil {
+			x.Providers = []uint64{}
+		}
+		value := &_ConfigurationSpec_6_list{list: &x.Providers}
+		return protoreflect.ValueOfList(value)
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		if x.Configurations == nil {
+			x.Configurations = []uint64{}
+		}
+		value := &_ConfigurationSpec_7_list{list: &x.Configurations}
 		return protoreflect.ValueOfList(value)
 	default:
 		if fd.IsExtension() {
@@ -852,9 +1143,21 @@ func (x *fastReflection_ConfigurationSpec) NewField(fd protoreflect.FieldDescrip
 	case "overlock.crossplane.ConfigurationSpec.crossplane":
 		m := new(CrossplaneSpec)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "overlock.crossplane.ConfigurationSpec.depends_on":
-		list := []*Dependency{}
+	case "overlock.crossplane.ConfigurationSpec.compositions":
+		list := []uint64{}
 		return protoreflect.ValueOfList(&_ConfigurationSpec_2_list{list: &list})
+	case "overlock.crossplane.ConfigurationSpec.xrds":
+		list := []uint64{}
+		return protoreflect.ValueOfList(&_ConfigurationSpec_3_list{list: &list})
+	case "overlock.crossplane.ConfigurationSpec.functions":
+		list := []uint64{}
+		return protoreflect.ValueOfList(&_ConfigurationSpec_5_list{list: &list})
+	case "overlock.crossplane.ConfigurationSpec.providers":
+		list := []uint64{}
+		return protoreflect.ValueOfList(&_ConfigurationSpec_6_list{list: &list})
+	case "overlock.crossplane.ConfigurationSpec.configurations":
+		list := []uint64{}
+		return protoreflect.ValueOfList(&_ConfigurationSpec_7_list{list: &list})
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.ConfigurationSpec"))
@@ -928,11 +1231,40 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Crossplane)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if len(x.DependsOn) > 0 {
-			for _, e := range x.DependsOn {
-				l = options.Size(e)
-				n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.Compositions) > 0 {
+			l = 0
+			for _, e := range x.Compositions {
+				l += runtime.Sov(uint64(e))
 			}
+			n += 1 + runtime.Sov(uint64(l)) + l
+		}
+		if len(x.Xrds) > 0 {
+			l = 0
+			for _, e := range x.Xrds {
+				l += runtime.Sov(uint64(e))
+			}
+			n += 1 + runtime.Sov(uint64(l)) + l
+		}
+		if len(x.Functions) > 0 {
+			l = 0
+			for _, e := range x.Functions {
+				l += runtime.Sov(uint64(e))
+			}
+			n += 1 + runtime.Sov(uint64(l)) + l
+		}
+		if len(x.Providers) > 0 {
+			l = 0
+			for _, e := range x.Providers {
+				l += runtime.Sov(uint64(e))
+			}
+			n += 1 + runtime.Sov(uint64(l)) + l
+		}
+		if len(x.Configurations) > 0 {
+			l = 0
+			for _, e := range x.Configurations {
+				l += runtime.Sov(uint64(e))
+			}
+			n += 1 + runtime.Sov(uint64(l)) + l
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -963,21 +1295,105 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.DependsOn) > 0 {
-			for iNdEx := len(x.DependsOn) - 1; iNdEx >= 0; iNdEx-- {
-				encoded, err := options.Marshal(x.DependsOn[iNdEx])
-				if err != nil {
-					return protoiface.MarshalOutput{
-						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-						Buf:               input.Buf,
-					}, err
-				}
-				i -= len(encoded)
-				copy(dAtA[i:], encoded)
-				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-				i--
-				dAtA[i] = 0x12
+		if len(x.Configurations) > 0 {
+			var pksize2 int
+			for _, num := range x.Configurations {
+				pksize2 += runtime.Sov(uint64(num))
 			}
+			i -= pksize2
+			j1 := i
+			for _, num := range x.Configurations {
+				for num >= 1<<7 {
+					dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j1++
+				}
+				dAtA[j1] = uint8(num)
+				j1++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize2))
+			i--
+			dAtA[i] = 0x3a
+		}
+		if len(x.Providers) > 0 {
+			var pksize4 int
+			for _, num := range x.Providers {
+				pksize4 += runtime.Sov(uint64(num))
+			}
+			i -= pksize4
+			j3 := i
+			for _, num := range x.Providers {
+				for num >= 1<<7 {
+					dAtA[j3] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j3++
+				}
+				dAtA[j3] = uint8(num)
+				j3++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize4))
+			i--
+			dAtA[i] = 0x32
+		}
+		if len(x.Functions) > 0 {
+			var pksize6 int
+			for _, num := range x.Functions {
+				pksize6 += runtime.Sov(uint64(num))
+			}
+			i -= pksize6
+			j5 := i
+			for _, num := range x.Functions {
+				for num >= 1<<7 {
+					dAtA[j5] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j5++
+				}
+				dAtA[j5] = uint8(num)
+				j5++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize6))
+			i--
+			dAtA[i] = 0x2a
+		}
+		if len(x.Xrds) > 0 {
+			var pksize8 int
+			for _, num := range x.Xrds {
+				pksize8 += runtime.Sov(uint64(num))
+			}
+			i -= pksize8
+			j7 := i
+			for _, num := range x.Xrds {
+				for num >= 1<<7 {
+					dAtA[j7] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j7++
+				}
+				dAtA[j7] = uint8(num)
+				j7++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize8))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.Compositions) > 0 {
+			var pksize10 int
+			for _, num := range x.Compositions {
+				pksize10 += runtime.Sov(uint64(num))
+			}
+			i -= pksize10
+			j9 := i
+			for _, num := range x.Compositions {
+				for num >= 1<<7 {
+					dAtA[j9] = uint8(uint64(num)&0x7f | 0x80)
+					num >>= 7
+					j9++
+				}
+				dAtA[j9] = uint8(num)
+				j9++
+			}
+			i = runtime.EncodeVarint(dAtA, i, uint64(pksize10))
+			i--
+			dAtA[i] = 0x12
 		}
 		if x.Crossplane != nil {
 			encoded, err := options.Marshal(x.Crossplane)
@@ -1079,39 +1495,385 @@ func (x *fastReflection_ConfigurationSpec) ProtoMethods() *protoiface.Methods {
 				}
 				iNdEx = postIndex
 			case 2:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DependsOn", wireType)
-				}
-				var msglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				if wireType == 0 {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+					x.Compositions = append(x.Compositions, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					msglen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
 					}
+					elementCount = count
+					if elementCount != 0 && len(x.Compositions) == 0 {
+						x.Compositions = make([]uint64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v uint64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.Compositions = append(x.Compositions, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Compositions", wireType)
 				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+			case 3:
+				if wireType == 0 {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					x.Xrds = append(x.Xrds, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
+					}
+					elementCount = count
+					if elementCount != 0 && len(x.Xrds) == 0 {
+						x.Xrds = make([]uint64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v uint64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.Xrds = append(x.Xrds, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Xrds", wireType)
 				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+			case 5:
+				if wireType == 0 {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					x.Functions = append(x.Functions, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
+					}
+					elementCount = count
+					if elementCount != 0 && len(x.Functions) == 0 {
+						x.Functions = make([]uint64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v uint64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.Functions = append(x.Functions, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Functions", wireType)
 				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+			case 6:
+				if wireType == 0 {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					x.Providers = append(x.Providers, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
+					}
+					elementCount = count
+					if elementCount != 0 && len(x.Providers) == 0 {
+						x.Providers = make([]uint64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v uint64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.Providers = append(x.Providers, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Providers", wireType)
 				}
-				x.DependsOn = append(x.DependsOn, &Dependency{})
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.DependsOn[len(x.DependsOn)-1]); err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+			case 7:
+				if wireType == 0 {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					x.Configurations = append(x.Configurations, v)
+				} else if wireType == 2 {
+					var packedLen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+						}
+						if iNdEx >= l {
+							return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						packedLen |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if packedLen < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					postIndex := iNdEx + packedLen
+					if postIndex < 0 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+					}
+					if postIndex > l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					var elementCount int
+					var count int
+					for _, integer := range dAtA[iNdEx:postIndex] {
+						if integer < 128 {
+							count++
+						}
+					}
+					elementCount = count
+					if elementCount != 0 && len(x.Configurations) == 0 {
+						x.Configurations = make([]uint64, 0, elementCount)
+					}
+					for iNdEx < postIndex {
+						var v uint64
+						for shift := uint(0); ; shift += 7 {
+							if shift >= 64 {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+							}
+							if iNdEx >= l {
+								return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+							}
+							b := dAtA[iNdEx]
+							iNdEx++
+							v |= uint64(b&0x7F) << shift
+							if b < 0x80 {
+								break
+							}
+						}
+						x.Configurations = append(x.Configurations, v)
+					}
+				} else {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Configurations", wireType)
 				}
-				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1567,618 +2329,6 @@ func (x *fastReflection_CrossplaneSpec) ProtoMethods() *protoiface.Methods {
 	}
 }
 
-var (
-	md_Dependency               protoreflect.MessageDescriptor
-	fd_Dependency_configuration protoreflect.FieldDescriptor
-	fd_Dependency_function      protoreflect.FieldDescriptor
-	fd_Dependency_provider      protoreflect.FieldDescriptor
-	fd_Dependency_version       protoreflect.FieldDescriptor
-)
-
-func init() {
-	file_overlock_crossplane_configuration_proto_init()
-	md_Dependency = File_overlock_crossplane_configuration_proto.Messages().ByName("Dependency")
-	fd_Dependency_configuration = md_Dependency.Fields().ByName("configuration")
-	fd_Dependency_function = md_Dependency.Fields().ByName("function")
-	fd_Dependency_provider = md_Dependency.Fields().ByName("provider")
-	fd_Dependency_version = md_Dependency.Fields().ByName("version")
-}
-
-var _ protoreflect.Message = (*fastReflection_Dependency)(nil)
-
-type fastReflection_Dependency Dependency
-
-func (x *Dependency) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_Dependency)(x)
-}
-
-func (x *Dependency) slowProtoReflect() protoreflect.Message {
-	mi := &file_overlock_crossplane_configuration_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-var _fastReflection_Dependency_messageType fastReflection_Dependency_messageType
-var _ protoreflect.MessageType = fastReflection_Dependency_messageType{}
-
-type fastReflection_Dependency_messageType struct{}
-
-func (x fastReflection_Dependency_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_Dependency)(nil)
-}
-func (x fastReflection_Dependency_messageType) New() protoreflect.Message {
-	return new(fastReflection_Dependency)
-}
-func (x fastReflection_Dependency_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_Dependency
-}
-
-// Descriptor returns message descriptor, which contains only the protobuf
-// type information for the message.
-func (x *fastReflection_Dependency) Descriptor() protoreflect.MessageDescriptor {
-	return md_Dependency
-}
-
-// Type returns the message type, which encapsulates both Go and protobuf
-// type information. If the Go type information is not needed,
-// it is recommended that the message descriptor be used instead.
-func (x *fastReflection_Dependency) Type() protoreflect.MessageType {
-	return _fastReflection_Dependency_messageType
-}
-
-// New returns a newly allocated and mutable empty message.
-func (x *fastReflection_Dependency) New() protoreflect.Message {
-	return new(fastReflection_Dependency)
-}
-
-// Interface unwraps the message reflection interface and
-// returns the underlying ProtoMessage interface.
-func (x *fastReflection_Dependency) Interface() protoreflect.ProtoMessage {
-	return (*Dependency)(x)
-}
-
-// Range iterates over every populated field in an undefined order,
-// calling f for each field descriptor and value encountered.
-// Range returns immediately if f returns false.
-// While iterating, mutating operations may only be performed
-// on the current field descriptor.
-func (x *fastReflection_Dependency) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Configuration != "" {
-		value := protoreflect.ValueOfString(x.Configuration)
-		if !f(fd_Dependency_configuration, value) {
-			return
-		}
-	}
-	if x.Function != "" {
-		value := protoreflect.ValueOfString(x.Function)
-		if !f(fd_Dependency_function, value) {
-			return
-		}
-	}
-	if x.Provider != "" {
-		value := protoreflect.ValueOfString(x.Provider)
-		if !f(fd_Dependency_provider, value) {
-			return
-		}
-	}
-	if x.Version != "" {
-		value := protoreflect.ValueOfString(x.Version)
-		if !f(fd_Dependency_version, value) {
-			return
-		}
-	}
-}
-
-// Has reports whether a field is populated.
-//
-// Some fields have the property of nullability where it is possible to
-// distinguish between the default value of a field and whether the field
-// was explicitly populated with the default value. Singular message fields,
-// member fields of a oneof, and proto2 scalar fields are nullable. Such
-// fields are populated only if explicitly set.
-//
-// In other cases (aside from the nullable cases above),
-// a proto3 scalar field is populated if it contains a non-zero value, and
-// a repeated field is populated if it is non-empty.
-func (x *fastReflection_Dependency) Has(fd protoreflect.FieldDescriptor) bool {
-	switch fd.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		return x.Configuration != ""
-	case "overlock.crossplane.Dependency.function":
-		return x.Function != ""
-	case "overlock.crossplane.Dependency.provider":
-		return x.Provider != ""
-	case "overlock.crossplane.Dependency.version":
-		return x.Version != ""
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
-	}
-}
-
-// Clear clears the field such that a subsequent Has call reports false.
-//
-// Clearing an extension field clears both the extension type and value
-// associated with the given field number.
-//
-// Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Dependency) Clear(fd protoreflect.FieldDescriptor) {
-	switch fd.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		x.Configuration = ""
-	case "overlock.crossplane.Dependency.function":
-		x.Function = ""
-	case "overlock.crossplane.Dependency.provider":
-		x.Provider = ""
-	case "overlock.crossplane.Dependency.version":
-		x.Version = ""
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
-	}
-}
-
-// Get retrieves the value for a field.
-//
-// For unpopulated scalars, it returns the default value, where
-// the default value of a bytes scalar is guaranteed to be a copy.
-// For unpopulated composite types, it returns an empty, read-only view
-// of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_Dependency) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
-	switch descriptor.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		value := x.Configuration
-		return protoreflect.ValueOfString(value)
-	case "overlock.crossplane.Dependency.function":
-		value := x.Function
-		return protoreflect.ValueOfString(value)
-	case "overlock.crossplane.Dependency.provider":
-		value := x.Provider
-		return protoreflect.ValueOfString(value)
-	case "overlock.crossplane.Dependency.version":
-		value := x.Version
-		return protoreflect.ValueOfString(value)
-	default:
-		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", descriptor.FullName()))
-	}
-}
-
-// Set stores the value for a field.
-//
-// For a field belonging to a oneof, it implicitly clears any other field
-// that may be currently set within the same oneof.
-// For extension fields, it implicitly stores the provided ExtensionType.
-// When setting a composite type, it is unspecified whether the stored value
-// aliases the source's memory in any way. If the composite value is an
-// empty, read-only value, then it panics.
-//
-// Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Dependency) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
-	switch fd.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		x.Configuration = value.Interface().(string)
-	case "overlock.crossplane.Dependency.function":
-		x.Function = value.Interface().(string)
-	case "overlock.crossplane.Dependency.provider":
-		x.Provider = value.Interface().(string)
-	case "overlock.crossplane.Dependency.version":
-		x.Version = value.Interface().(string)
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
-	}
-}
-
-// Mutable returns a mutable reference to a composite type.
-//
-// If the field is unpopulated, it may allocate a composite value.
-// For a field belonging to a oneof, it implicitly clears any other field
-// that may be currently set within the same oneof.
-// For extension fields, it implicitly stores the provided ExtensionType
-// if not already stored.
-// It panics if the field does not contain a composite type.
-//
-// Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Dependency) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
-	switch fd.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		panic(fmt.Errorf("field configuration of message overlock.crossplane.Dependency is not mutable"))
-	case "overlock.crossplane.Dependency.function":
-		panic(fmt.Errorf("field function of message overlock.crossplane.Dependency is not mutable"))
-	case "overlock.crossplane.Dependency.provider":
-		panic(fmt.Errorf("field provider of message overlock.crossplane.Dependency is not mutable"))
-	case "overlock.crossplane.Dependency.version":
-		panic(fmt.Errorf("field version of message overlock.crossplane.Dependency is not mutable"))
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
-	}
-}
-
-// NewField returns a new value that is assignable to the field
-// for the given descriptor. For scalars, this returns the default value.
-// For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_Dependency) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
-	switch fd.FullName() {
-	case "overlock.crossplane.Dependency.configuration":
-		return protoreflect.ValueOfString("")
-	case "overlock.crossplane.Dependency.function":
-		return protoreflect.ValueOfString("")
-	case "overlock.crossplane.Dependency.provider":
-		return protoreflect.ValueOfString("")
-	case "overlock.crossplane.Dependency.version":
-		return protoreflect.ValueOfString("")
-	default:
-		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: overlock.crossplane.Dependency"))
-		}
-		panic(fmt.Errorf("message overlock.crossplane.Dependency does not contain field %s", fd.FullName()))
-	}
-}
-
-// WhichOneof reports which field within the oneof is populated,
-// returning nil if none are populated.
-// It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_Dependency) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
-	switch d.FullName() {
-	default:
-		panic(fmt.Errorf("%s is not a oneof field in overlock.crossplane.Dependency", d.FullName()))
-	}
-	panic("unreachable")
-}
-
-// GetUnknown retrieves the entire list of unknown fields.
-// The caller may only mutate the contents of the RawFields
-// if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_Dependency) GetUnknown() protoreflect.RawFields {
-	return x.unknownFields
-}
-
-// SetUnknown stores an entire list of unknown fields.
-// The raw fields must be syntactically valid according to the wire format.
-// An implementation may panic if this is not the case.
-// Once stored, the caller must not mutate the content of the RawFields.
-// An empty RawFields may be passed to clear the fields.
-//
-// SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_Dependency) SetUnknown(fields protoreflect.RawFields) {
-	x.unknownFields = fields
-}
-
-// IsValid reports whether the message is valid.
-//
-// An invalid message is an empty, read-only value.
-//
-// An invalid message often corresponds to a nil pointer of the concrete
-// message type, but the details are implementation dependent.
-// Validity is not part of the protobuf data model, and may not
-// be preserved in marshaling or other operations.
-func (x *fastReflection_Dependency) IsValid() bool {
-	return x != nil
-}
-
-// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
-// This method may return nil.
-//
-// The returned methods type is identical to
-// "google.golang.org/protobuf/runtime/protoiface".Methods.
-// Consult the protoiface package documentation for details.
-func (x *fastReflection_Dependency) ProtoMethods() *protoiface.Methods {
-	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*Dependency)
-		if x == nil {
-			return protoiface.SizeOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Size:              0,
-			}
-		}
-		options := runtime.SizeInputToOptions(input)
-		_ = options
-		var n int
-		var l int
-		_ = l
-		l = len(x.Configuration)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Function)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Provider)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Version)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		if x.unknownFields != nil {
-			n += len(x.unknownFields)
-		}
-		return protoiface.SizeOutput{
-			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-			Size:              n,
-		}
-	}
-
-	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*Dependency)
-		if x == nil {
-			return protoiface.MarshalOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Buf:               input.Buf,
-			}, nil
-		}
-		options := runtime.MarshalInputToOptions(input)
-		_ = options
-		size := options.Size(x)
-		dAtA := make([]byte, size)
-		i := len(dAtA)
-		_ = i
-		var l int
-		_ = l
-		if x.unknownFields != nil {
-			i -= len(x.unknownFields)
-			copy(dAtA[i:], x.unknownFields)
-		}
-		if len(x.Version) > 0 {
-			i -= len(x.Version)
-			copy(dAtA[i:], x.Version)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Version)))
-			i--
-			dAtA[i] = 0x22
-		}
-		if len(x.Provider) > 0 {
-			i -= len(x.Provider)
-			copy(dAtA[i:], x.Provider)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Provider)))
-			i--
-			dAtA[i] = 0x1a
-		}
-		if len(x.Function) > 0 {
-			i -= len(x.Function)
-			copy(dAtA[i:], x.Function)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Function)))
-			i--
-			dAtA[i] = 0x12
-		}
-		if len(x.Configuration) > 0 {
-			i -= len(x.Configuration)
-			copy(dAtA[i:], x.Configuration)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Configuration)))
-			i--
-			dAtA[i] = 0xa
-		}
-		if input.Buf != nil {
-			input.Buf = append(input.Buf, dAtA...)
-		} else {
-			input.Buf = dAtA
-		}
-		return protoiface.MarshalOutput{
-			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-			Buf:               input.Buf,
-		}, nil
-	}
-	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*Dependency)
-		if x == nil {
-			return protoiface.UnmarshalOutput{
-				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-				Flags:             input.Flags,
-			}, nil
-		}
-		options := runtime.UnmarshalInputToOptions(input)
-		_ = options
-		dAtA := input.Buf
-		l := len(dAtA)
-		iNdEx := 0
-		for iNdEx < l {
-			preIndex := iNdEx
-			var wire uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				wire |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			fieldNum := int32(wire >> 3)
-			wireType := int(wire & 0x7)
-			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Dependency: wiretype end group for non-group")
-			}
-			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Dependency: illegal tag %d (wire type %d)", fieldNum, wire)
-			}
-			switch fieldNum {
-			case 1:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Configuration", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Configuration = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 2:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Function", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Function = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Provider", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Provider = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 4:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Version = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			default:
-				iNdEx = preIndex
-				skippy, err := runtime.Skip(dAtA[iNdEx:])
-				if err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				if (skippy < 0) || (iNdEx+skippy) < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if (iNdEx + skippy) > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if !options.DiscardUnknown {
-					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-				}
-				iNdEx += skippy
-			}
-		}
-
-		if iNdEx > l {
-			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-		}
-		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
-	}
-	return &protoiface.Methods{
-		NoUnkeyedLiterals: struct{}{},
-		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
-		Size:              size,
-		Marshal:           marshal,
-		Unmarshal:         unmarshal,
-		Merge:             nil,
-		CheckInitialized:  nil,
-	}
-}
-
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -2251,7 +2401,16 @@ type ConfigurationSpec struct {
 	unknownFields protoimpl.UnknownFields
 
 	Crossplane *CrossplaneSpec `protobuf:"bytes,1,opt,name=crossplane,proto3" json:"crossplane,omitempty"`
-	DependsOn  []*Dependency   `protobuf:"bytes,2,rep,name=depends_on,json=dependsOn,proto3" json:"depends_on,omitempty"`
+	// compositions
+	Compositions []uint64 `protobuf:"varint,2,rep,packed,name=compositions,proto3" json:"compositions,omitempty"`
+	// xrds
+	Xrds []uint64 `protobuf:"varint,3,rep,packed,name=xrds,proto3" json:"xrds,omitempty"`
+	// functions
+	Functions []uint64 `protobuf:"varint,5,rep,packed,name=functions,proto3" json:"functions,omitempty"`
+	// providers
+	Providers []uint64 `protobuf:"varint,6,rep,packed,name=providers,proto3" json:"providers,omitempty"`
+	// configurations
+	Configurations []uint64 `protobuf:"varint,7,rep,packed,name=configurations,proto3" json:"configurations,omitempty"`
 }
 
 func (x *ConfigurationSpec) Reset() {
@@ -2281,9 +2440,37 @@ func (x *ConfigurationSpec) GetCrossplane() *CrossplaneSpec {
 	return nil
 }
 
-func (x *ConfigurationSpec) GetDependsOn() []*Dependency {
+func (x *ConfigurationSpec) GetCompositions() []uint64 {
 	if x != nil {
-		return x.DependsOn
+		return x.Compositions
+	}
+	return nil
+}
+
+func (x *ConfigurationSpec) GetXrds() []uint64 {
+	if x != nil {
+		return x.Xrds
+	}
+	return nil
+}
+
+func (x *ConfigurationSpec) GetFunctions() []uint64 {
+	if x != nil {
+		return x.Functions
+	}
+	return nil
+}
+
+func (x *ConfigurationSpec) GetProviders() []uint64 {
+	if x != nil {
+		return x.Providers
+	}
+	return nil
+}
+
+func (x *ConfigurationSpec) GetConfigurations() []uint64 {
+	if x != nil {
+		return x.Configurations
 	}
 	return nil
 }
@@ -2324,66 +2511,6 @@ func (x *CrossplaneSpec) GetVersion() string {
 	return ""
 }
 
-// Dependency specs.
-type Dependency struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Configuration string `protobuf:"bytes,1,opt,name=configuration,proto3" json:"configuration,omitempty"`
-	Function      string `protobuf:"bytes,2,opt,name=function,proto3" json:"function,omitempty"`
-	Provider      string `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
-	Version       string `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
-}
-
-func (x *Dependency) Reset() {
-	*x = Dependency{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_overlock_crossplane_configuration_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Dependency) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Dependency) ProtoMessage() {}
-
-// Deprecated: Use Dependency.ProtoReflect.Descriptor instead.
-func (*Dependency) Descriptor() ([]byte, []int) {
-	return file_overlock_crossplane_configuration_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Dependency) GetConfiguration() string {
-	if x != nil {
-		return x.Configuration
-	}
-	return ""
-}
-
-func (x *Dependency) GetFunction() string {
-	if x != nil {
-		return x.Function
-	}
-	return ""
-}
-
-func (x *Dependency) GetProvider() string {
-	if x != nil {
-		return x.Provider
-	}
-	return ""
-}
-
-func (x *Dependency) GetVersion() string {
-	if x != nil {
-		return x.Version
-	}
-	return ""
-}
-
 var File_overlock_crossplane_configuration_proto protoreflect.FileDescriptor
 
 var file_overlock_crossplane_configuration_proto_rawDesc = []byte{
@@ -2402,40 +2529,38 @@ var file_overlock_crossplane_configuration_proto_rawDesc = []byte{
 	0x3a, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e,
 	0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c,
 	0x61, 0x6e, 0x65, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0x98, 0x01, 0x0a, 0x11,
+	0x6e, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0xf4, 0x01, 0x0a, 0x11,
 	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x70, 0x65,
 	0x63, 0x12, 0x43, 0x0a, 0x0a, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b,
 	0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x2e, 0x43, 0x72, 0x6f, 0x73,
 	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x53, 0x70, 0x65, 0x63, 0x52, 0x0a, 0x63, 0x72, 0x6f, 0x73,
-	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x12, 0x3e, 0x0a, 0x0a, 0x64, 0x65, 0x70, 0x65, 0x6e, 0x64,
-	0x73, 0x5f, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65,
-	0x2e, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x52, 0x09, 0x64, 0x65, 0x70,
-	0x65, 0x6e, 0x64, 0x73, 0x4f, 0x6e, 0x22, 0x2a, 0x0a, 0x0e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70,
-	0x6c, 0x61, 0x6e, 0x65, 0x53, 0x70, 0x65, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73,
-	0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69,
-	0x6f, 0x6e, 0x22, 0x84, 0x01, 0x0a, 0x0a, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63,
-	0x79, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6e, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12,
-	0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0xbc, 0x01, 0x0a, 0x17, 0x63, 0x6f,
-	0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73,
-	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x12, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x6f, 0x76, 0x65,
-	0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f,
-	0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xa2, 0x02, 0x03,
-	0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e, 0x43,
-	0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72,
-	0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xe2,
-	0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73,
-	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x3a, 0x3a, 0x43, 0x72,
-	0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x63, 0x6f, 0x6d, 0x70, 0x6f, 0x73,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x0c, 0x63, 0x6f,
+	0x6d, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x78, 0x72,
+	0x64, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x04, 0x52, 0x04, 0x78, 0x72, 0x64, 0x73, 0x12, 0x1c,
+	0x0a, 0x09, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28,
+	0x04, 0x52, 0x09, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1c, 0x0a, 0x09,
+	0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x04, 0x52,
+	0x09, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x07, 0x20, 0x03,
+	0x28, 0x04, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x22, 0x2a, 0x0a, 0x0e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65,
+	0x53, 0x70, 0x65, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0xbc,
+	0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2e,
+	0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x42, 0x12, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
+	0x5a, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f,
+	0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x2f, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61,
+	0x6e, 0x65, 0xa2, 0x02, 0x03, 0x4f, 0x43, 0x58, 0xaa, 0x02, 0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c,
+	0x6f, 0x63, 0x6b, 0x2e, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0xca, 0x02,
+	0x13, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70,
+	0x6c, 0x61, 0x6e, 0x65, 0xe2, 0x02, 0x1f, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63, 0x6b, 0x5c,
+	0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4f, 0x76, 0x65, 0x72, 0x6c, 0x6f, 0x63,
+	0x6b, 0x3a, 0x3a, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2450,24 +2575,22 @@ func file_overlock_crossplane_configuration_proto_rawDescGZIP() []byte {
 	return file_overlock_crossplane_configuration_proto_rawDescData
 }
 
-var file_overlock_crossplane_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_overlock_crossplane_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_overlock_crossplane_configuration_proto_goTypes = []interface{}{
 	(*Configuration)(nil),     // 0: overlock.crossplane.Configuration
 	(*ConfigurationSpec)(nil), // 1: overlock.crossplane.ConfigurationSpec
 	(*CrossplaneSpec)(nil),    // 2: overlock.crossplane.CrossplaneSpec
-	(*Dependency)(nil),        // 3: overlock.crossplane.Dependency
-	(*Metadata)(nil),          // 4: overlock.crossplane.Metadata
+	(*Metadata)(nil),          // 3: overlock.crossplane.Metadata
 }
 var file_overlock_crossplane_configuration_proto_depIdxs = []int32{
-	4, // 0: overlock.crossplane.Configuration.metadata:type_name -> overlock.crossplane.Metadata
+	3, // 0: overlock.crossplane.Configuration.metadata:type_name -> overlock.crossplane.Metadata
 	1, // 1: overlock.crossplane.Configuration.spec:type_name -> overlock.crossplane.ConfigurationSpec
 	2, // 2: overlock.crossplane.ConfigurationSpec.crossplane:type_name -> overlock.crossplane.CrossplaneSpec
-	3, // 3: overlock.crossplane.ConfigurationSpec.depends_on:type_name -> overlock.crossplane.Dependency
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_overlock_crossplane_configuration_proto_init() }
@@ -2513,18 +2636,6 @@ func file_overlock_crossplane_configuration_proto_init() {
 				return nil
 			}
 		}
-		file_overlock_crossplane_configuration_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Dependency); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2532,7 +2643,7 @@ func file_overlock_crossplane_configuration_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_overlock_crossplane_configuration_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
