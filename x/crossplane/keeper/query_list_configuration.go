@@ -25,12 +25,15 @@ func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListCon
 
 	var configurations []types.Configuration
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+
 		var configuration types.Configuration
 		if err := k.cdc.Unmarshal(value, &configuration); err != nil {
 			return err
 		}
 
-		configurations = append(configurations, configuration)
+		if configuration.Creator == req.Creator && req.Creator == "" {
+			configurations = append(configurations, configuration)
+		}
 		return nil
 	})
 

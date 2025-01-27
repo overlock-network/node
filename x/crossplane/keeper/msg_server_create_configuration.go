@@ -15,6 +15,7 @@ func (k msgServer) CreateConfiguration(goCtx context.Context, msg *types.MsgCrea
 	var configuration = types.Configuration{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 	}
 	id := k.AppendConfiguration(
 		ctx,

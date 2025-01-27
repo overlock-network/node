@@ -109,6 +109,7 @@ message QueryShowConfigurationResponse {
 // QueryListConfigurationRequest
 message QueryListConfigurationRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string creator = 2;
 }
 
 // QueryListConfigurationResponse

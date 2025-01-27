@@ -9,6 +9,10 @@ accounts:
   coins:
   - 10000token
   - 100000000stake
+- name: bobic
+  coins:
+  - 10000token
+  - 100000000stake
 client:
   openapi:
     path: docs/static/openapi.yml
