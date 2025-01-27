@@ -15,6 +15,7 @@ func (k msgServer) CreateEnvironment(goCtx context.Context, msg *types.MsgCreate
 	var env = types.Environment{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 	}
 	id := k.AppendEnvironment(
 		ctx,

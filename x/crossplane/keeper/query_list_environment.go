@@ -24,14 +24,20 @@ func (k Keeper) ListEnvironment(goCtx context.Context, req *types.QueryListEnvir
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.EnvironmentKey))
 
 	var environments []types.Environment
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
 		var env types.Environment
 		if err := k.cdc.Unmarshal(value, &env); err != nil {
-			return err
+			return false, err
 		}
 
-		environments = append(environments, env)
-		return nil
+		if req.Creator == "" || env.Creator == req.Creator {
+			if accumulate {
+				environments = append(environments, env)
+			}
+			return true, nil
+		}
+
+		return false, nil
 	})
 
 	if err != nil {

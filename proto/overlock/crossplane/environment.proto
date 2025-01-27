@@ -15,6 +15,9 @@ message Environment {
 
   // id
   uint64 id = 5;
+
+  // creator
+  string creator = 6;
 }
 
 // Spec defines the specification of the environment.

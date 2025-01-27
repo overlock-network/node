@@ -24,14 +24,20 @@ func (k Keeper) ListFunction(goCtx context.Context, req *types.QueryListFunction
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.FunctionKey))
 
 	var functions []types.Function
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
 		var env types.Function
 		if err := k.cdc.Unmarshal(value, &env); err != nil {
-			return err
+			return false, err
 		}
 
-		functions = append(functions, env)
-		return nil
+		if req.Creator == "" || env.Creator == req.Creator {
+			if accumulate {
+				functions = append(functions, env)
+			}
+			return true, nil
+		}
+
+		return false, nil
 	})
 
 	if err != nil {
