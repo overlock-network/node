@@ -10,6 +10,7 @@ message Configuration {
   uint64 id = 1;
   Metadata metadata = 2;
   ConfigurationSpec spec = 3;
+  string creator = 4;
 }
 
 // Spec defines the specification of the composition.

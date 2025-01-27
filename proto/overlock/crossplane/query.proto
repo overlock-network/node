@@ -109,6 +109,7 @@ message QueryShowConfigurationResponse {
 // QueryListConfigurationRequest
 message QueryListConfigurationRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string creator = 2;
 }
 
 // QueryListConfigurationResponse
@@ -172,6 +173,7 @@ message QueryShowEnvironmentResponse {
 // QueryListEnvironmentRequest
 message QueryListEnvironmentRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string creator = 2;
 }
 
 // QueryListEnvironmentResponse
@@ -193,6 +195,7 @@ message QueryShowProviderResponse {
 // QueryListProviderRequest
 message QueryListProviderRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string creator = 2;
 }
 
 // QueryListProviderResponse
@@ -204,6 +207,7 @@ message QueryListProviderResponse {
 // QueryListFunctionRequest
 message QueryListFunctionRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  string creator = 2;
 }
 
 // QueryListFunctionResponse

@@ -15,6 +15,7 @@ func (k msgServer) CreateProvider(goCtx context.Context, msg *types.MsgCreatePro
 	var provider = types.Provider{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 	}
 	id := k.AppendProvider(
 		ctx,

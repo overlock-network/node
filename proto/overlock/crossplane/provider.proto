@@ -13,6 +13,8 @@ message Provider {
   ProviderSpec spec = 2;
   // id
   uint64 id = 4;
+  // creator
+  string creator = 5;
 }
 
 // Spec defines the specification of the provider.

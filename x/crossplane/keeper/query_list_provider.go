@@ -24,14 +24,20 @@ func (k Keeper) ListProvider(goCtx context.Context, req *types.QueryListProvider
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ProviderKey))
 
 	var providers []types.Provider
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
 		var env types.Provider
 		if err := k.cdc.Unmarshal(value, &env); err != nil {
-			return err
+			return false, err
 		}
 
-		providers = append(providers, env)
-		return nil
+		if req.Creator == "" || env.Creator == req.Creator {
+			if accumulate {
+				providers = append(providers, env)
+			}
+			return true, nil
+		}
+
+		return false, nil
 	})
 
 	if err != nil {

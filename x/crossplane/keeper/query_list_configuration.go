@@ -24,14 +24,21 @@ func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListCon
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
 
 	var configurations []types.Configuration
-	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
+
+	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
 		var configuration types.Configuration
 		if err := k.cdc.Unmarshal(value, &configuration); err != nil {
-			return err
+			return false, err
 		}
 
-		configurations = append(configurations, configuration)
-		return nil
+		if req.Creator == "" || configuration.Creator == req.Creator {
+			if accumulate {
+				configurations = append(configurations, configuration)
+			}
+			return true, nil
+		}
+
+		return false, nil
 	})
 
 	if err != nil {

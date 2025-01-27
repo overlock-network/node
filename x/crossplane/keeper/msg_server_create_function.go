@@ -15,6 +15,7 @@ func (k msgServer) CreateFunction(goCtx context.Context, msg *types.MsgCreateFun
 	var function = types.Function{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 	}
 	id := k.AppendFunction(
 		ctx,
