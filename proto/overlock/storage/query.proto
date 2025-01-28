@@ -1,11 +1,13 @@
 syntax = "proto3";
+
 package overlock.storage;
 
 import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "cosmos/base/query/v1beta1/pagination.proto";
 import "overlock/storage/params.proto";
+import "overlock/storage/registry.proto";
 
 option go_package = "overlock/x/storage/types";
 
@@ -14,6 +16,16 @@ service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/overlock/storage/params";
+  }
+
+  // Queries a list of ShowRegistry items.
+  rpc ShowRegistry(QueryShowRegistryRequest) returns (QueryShowRegistryResponse) {
+    option (google.api.http).get = "/overlock/storage/show_registry/{id}";
+  }
+
+  // Queries a list of ListRegistry items.
+  rpc ListRegistry(QueryListRegistryRequest) returns (QueryListRegistryResponse) {
+    option (google.api.http).get = "/overlock/storage/list_registry";
   }
 }
 
@@ -27,4 +39,21 @@ message QueryParamsResponse {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+}
+
+message QueryShowRegistryRequest {
+  uint64 id = 1;
+}
+
+message QueryShowRegistryResponse {
+  Registry registry = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListRegistryRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListRegistryResponse {
+  repeated Registry registry = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

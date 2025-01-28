@@ -9,6 +9,14 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_storage"
+
+	RegistryKey = "Registry/value/"
+
+	RegistryCountKey = "Registry/count/"
+
+	RegistryCreatedEvent = "Registry-created"
+
+	RegistryIndex = "id"
 )
 
 var (

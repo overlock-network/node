@@ -30,4 +30,6 @@ message EnvironmentSpec {
 
   // functions
   repeated uint64 functions = 4;
+
+  repeated uint64 registries = 5;
 }

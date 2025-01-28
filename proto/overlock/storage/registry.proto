@@ -1,0 +1,11 @@
+syntax = "proto3";
+package overlock.storage;
+
+option go_package = "overlock/x/storage/types";
+
+message Registry {
+  
+  string name = 1; 
+  string provider = 2; 
+  uint64 id = 3; 
+}
