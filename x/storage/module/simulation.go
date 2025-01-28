@@ -23,7 +23,19 @@ var (
 )
 
 const (
-// this line is used by starport scaffolding # simapp/module/const
+	opWeightMsgCreateRegistry = "op_weight_msg_create_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateRegistry int = 100
+
+	opWeightMsgUpdateRegistry = "op_weight_msg_update_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateRegistry int = 100
+
+	opWeightMsgDeleteRegistry = "op_weight_msg_delete_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteRegistry int = 100
+
+	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module.
@@ -46,6 +58,39 @@ func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
+	var weightMsgCreateRegistry int
+	simState.AppParams.GetOrGenerate(opWeightMsgCreateRegistry, &weightMsgCreateRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateRegistry = defaultWeightMsgCreateRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateRegistry,
+		storagesimulation.SimulateMsgCreateRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateRegistry int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateRegistry, &weightMsgUpdateRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateRegistry = defaultWeightMsgUpdateRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateRegistry,
+		storagesimulation.SimulateMsgUpdateRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteRegistry int
+	simState.AppParams.GetOrGenerate(opWeightMsgDeleteRegistry, &weightMsgDeleteRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteRegistry = defaultWeightMsgDeleteRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteRegistry,
+		storagesimulation.SimulateMsgDeleteRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -54,6 +99,30 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 // ProposalMsgs returns msgs used for governance proposals for simulations.
 func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.WeightedProposalMsg {
 	return []simtypes.WeightedProposalMsg{
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateRegistry,
+			defaultWeightMsgCreateRegistry,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				storagesimulation.SimulateMsgCreateRegistry(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateRegistry,
+			defaultWeightMsgUpdateRegistry,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				storagesimulation.SimulateMsgUpdateRegistry(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDeleteRegistry,
+			defaultWeightMsgDeleteRegistry,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				storagesimulation.SimulateMsgDeleteRegistry(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
 		// this line is used by starport scaffolding # simapp/module/OpMsg
 	}
 }
