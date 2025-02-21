@@ -20,5 +20,10 @@ func (k msgServer) DeleteComposition(goCtx context.Context, msg *types.MsgDelete
 	}
 	k.RemoveComposition(ctx, msg.Id)
 
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.CompositionDeletedEvent,
+			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(id, 10)),
+		),
+	)
 	return &types.MsgDeleteCompositionResponse{}, nil
 }
