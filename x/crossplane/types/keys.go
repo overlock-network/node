@@ -16,6 +16,8 @@ const (
 
 	ConfigurationCreatedEvent = "configuration-created"
 
+	ConfigurationDeletedEvent = "configuration-deleted"
+
 	ConfigurationIndex = "id"
 
 	CompositionKey = "Composition/value/"
@@ -23,6 +25,8 @@ const (
 	CompositionCountKey = "Composition/count/"
 
 	CompositionCreatedEvent = "composition-created"
+
+	CompositionDeletedEvent = "composition-deleted"
 
 	CompositionIndex = "id"
 
@@ -32,6 +36,8 @@ const (
 
 	XRDCreatedEvent = "CompositeResource-created"
 
+	XRDDeletedEvent = "CompositeResource-deleted"
+
 	XRDIndex = "id"
 
 	EnvironmentKey = "Environment/value/"
@@ -39,6 +45,8 @@ const (
 	EnvironmentCountKey = "Environment/count/"
 
 	EnvironmentCreatedEvent = "environment-created"
+
+	EnvironmentDeletedEvent = "environment-deleted"
 
 	EnvironmentIndex = "id"
 
@@ -48,6 +56,8 @@ const (
 
 	ProviderCreatedEvent = "provider-created"
 
+	ProviderDeletedEvent = "provider-deleted"
+
 	ProviderIndex = "id"
 
 	FunctionKey = "Function/value/"
@@ -55,6 +65,8 @@ const (
 	FunctionCountKey = "Function/count/"
 
 	FunctionCreatedEvent = "function-created"
+
+	FunctionDeletedEvent = "function-deleted"
 
 	FunctionIndex = "id"
 )
