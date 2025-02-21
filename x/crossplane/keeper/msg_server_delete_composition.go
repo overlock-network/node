@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -22,7 +23,7 @@ func (k msgServer) DeleteComposition(goCtx context.Context, msg *types.MsgDelete
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(types.CompositionDeletedEvent,
-			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(id, 10)),
+			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 	return &types.MsgDeleteCompositionResponse{}, nil

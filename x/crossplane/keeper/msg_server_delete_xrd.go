@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -23,7 +24,7 @@ func (k msgServer) DeleteXrd(goCtx context.Context, msg *types.MsgDeleteXrd) (*t
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(types.XRDDeletedEvent,
-			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(id, 10)),
+			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 	return &types.MsgDeleteXrdResponse{}, nil

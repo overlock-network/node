@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -22,7 +23,7 @@ func (k msgServer) DeleteProvider(goCtx context.Context, msg *types.MsgDeletePro
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(types.ProviderDeletedEvent,
-			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(id, 10)),
+			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 	return &types.MsgDeleteProviderResponse{Id: msg.Id}, nil
