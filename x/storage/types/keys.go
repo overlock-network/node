@@ -16,6 +16,8 @@ const (
 
 	RegistryCreatedEvent = "Registry-created"
 
+	RegistryDeletedEvent = "Registry-deleted"
+
 	RegistryIndex = "id"
 )
 
