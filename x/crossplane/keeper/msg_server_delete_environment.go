@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -19,5 +20,11 @@ func (k msgServer) DeleteEnvironment(goCtx context.Context, msg *types.MsgDelete
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
 	k.RemoveEnvironment(ctx, msg.Id)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.EnvironmentDeletedEvent,
+			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 	return &types.MsgDeleteEnvironmentResponse{}, nil
 }
