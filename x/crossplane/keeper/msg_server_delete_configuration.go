@@ -20,5 +20,10 @@ func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *types.MsgDele
 	}
 	k.RemoveComposition(ctx, msg.Id)
 
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.ConfigurationDeletedEvent,
+			sdk.NewAttribute(types.ConfigurationIndex, strconv.FormatUint(id, 10)),
+		),
+	)
 	return &types.MsgDeleteConfigurationResponse{}, nil
 }
