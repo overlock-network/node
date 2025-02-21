@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -20,5 +21,10 @@ func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *types.MsgDele
 	}
 	k.RemoveComposition(ctx, msg.Id)
 
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.ConfigurationDeletedEvent,
+			sdk.NewAttribute(types.ConfigurationIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 	return &types.MsgDeleteConfigurationResponse{}, nil
 }
