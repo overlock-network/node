@@ -17,6 +17,7 @@ func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdatePro
 	var provider = types.Provider{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 		Id:       msg.Id,
 	}
 	_, found := k.GetProvider(ctx, msg.Id)
