@@ -17,6 +17,7 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdate
 	var env = types.Environment{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 		Id:       msg.Id,
 	}
 	_, found := k.GetEnvironment(ctx, msg.Id)

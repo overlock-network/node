@@ -17,6 +17,7 @@ func (k msgServer) UpdateFunction(goCtx context.Context, msg *types.MsgUpdateFun
 	var function = types.Function{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
+		Creator:  msg.Creator,
 		Id:       msg.Id,
 	}
 	_, found := k.GetFunction(ctx, msg.Id)
