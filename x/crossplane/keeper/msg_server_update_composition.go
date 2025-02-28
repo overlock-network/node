@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -25,6 +26,12 @@ func (k msgServer) UpdateComposition(goCtx context.Context, msg *types.MsgUpdate
 	}
 
 	k.SetComposition(ctx, composition)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.CompositionUpdatedEvent,
+			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 
 	return &types.MsgUpdateCompositionResponse{}, nil
 }
