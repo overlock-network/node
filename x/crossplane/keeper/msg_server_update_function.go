@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -26,6 +27,12 @@ func (k msgServer) UpdateFunction(goCtx context.Context, msg *types.MsgUpdateFun
 	}
 
 	k.SetFunction(ctx, function)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.FunctionUpdatedEvent,
+			sdk.NewAttribute(types.FunctionIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 
 	return &types.MsgUpdateFunctionResponse{Id: msg.Id}, nil
 }

@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -25,6 +26,12 @@ func (k msgServer) UpdateXrd(goCtx context.Context, msg *types.MsgUpdateXrd) (*t
 	}
 
 	k.SetCompositeResourceDefinition(ctx, xrd)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.XRDUpdateEvent,
+			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 
 	return &types.MsgUpdateXrdResponse{}, nil
 }

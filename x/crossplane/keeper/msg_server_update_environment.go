@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -26,5 +27,12 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdate
 	}
 
 	k.SetEnvironment(ctx, env)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.EnvironmentUpdatedEvent,
+			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
+
 	return &types.MsgUpdateEnvironmentResponse{Id: env.Id}, nil
 }

@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"overlock/x/crossplane/types"
 
@@ -26,6 +27,12 @@ func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdatePro
 	}
 
 	k.SetProvider(ctx, provider)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(types.ProviderUpdatedEvent,
+			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
+		),
+	)
 
 	return &types.MsgUpdateProviderResponse{Id: msg.Id}, nil
 }
