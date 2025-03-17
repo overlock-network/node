@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListConfigurationRequest) (*types.QueryListConfigurationResponse, error) {
+func (k Keeper) ListConfiguration(goCtx context.Context, req *v1beta1.QueryListConfigurationRequest) (*v1beta1.QueryListConfigurationResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,12 +21,12 @@ func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListCon
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.ConfigurationKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.ConfigurationKey))
 
-	var configurations []types.Configuration
+	var configurations []v1beta1.Configuration
 
 	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
-		var configuration types.Configuration
+		var configuration v1beta1.Configuration
 		if err := k.cdc.Unmarshal(value, &configuration); err != nil {
 			return false, err
 		}
@@ -45,5 +45,5 @@ func (k Keeper) ListConfiguration(goCtx context.Context, req *types.QueryListCon
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListConfigurationResponse{Configurations: configurations, Pagination: pageRes}, nil
+	return &v1beta1.QueryListConfigurationResponse{Configurations: configurations, Pagination: pageRes}, nil
 }

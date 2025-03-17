@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpdateConfiguration) (*types.MsgUpdateConfigurationResponse, error) {
+func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *v1beta1.MsgUpdateConfiguration) (*v1beta1.MsgUpdateConfigurationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var configuration = types.Configuration{
+	var configuration = v1beta1.Configuration{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Creator:  msg.Creator,
@@ -29,10 +29,10 @@ func (k msgServer) UpdateConfiguration(goCtx context.Context, msg *types.MsgUpda
 	k.SetConfiguration(ctx, configuration)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.ConfigurationUpdatedEvent,
-			sdk.NewAttribute(types.ConfigurationIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.ConfigurationUpdatedEvent,
+			sdk.NewAttribute(v1beta1.ConfigurationIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 
-	return &types.MsgUpdateConfigurationResponse{}, nil
+	return &v1beta1.MsgUpdateConfigurationResponse{}, nil
 }

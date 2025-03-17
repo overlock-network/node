@@ -4,15 +4,15 @@ import (
 	"context"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) CreateComposition(goCtx context.Context, msg *types.MsgCreateComposition) (*types.MsgCreateCompositionResponse, error) {
+func (k msgServer) CreateComposition(goCtx context.Context, msg *v1beta1.MsgCreateComposition) (*v1beta1.MsgCreateCompositionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var composition = types.Composition{
+	var composition = v1beta1.Composition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 	}
@@ -22,10 +22,10 @@ func (k msgServer) CreateComposition(goCtx context.Context, msg *types.MsgCreate
 	)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.CompositionCreatedEvent,
-			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(id, 10)),
+		sdk.NewEvent(v1beta1.CompositionCreatedEvent,
+			sdk.NewAttribute(v1beta1.CompositionIndex, strconv.FormatUint(id, 10)),
 		),
 	)
 
-	return &types.MsgCreateCompositionResponse{Id: id}, nil
+	return &v1beta1.MsgCreateCompositionResponse{Id: id}, nil
 }

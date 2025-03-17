@@ -6,14 +6,15 @@ import (
 	keepertest "overlock/testutil/keeper"
 	"overlock/testutil/nullify"
 	storage "overlock/x/storage/module"
-	"overlock/x/storage/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
-	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+	genesisState := v1beta1.GenesisState{
+		Params: v1beta1.DefaultParams(),
 
 		// this line is used by starport scaffolding # genesis/test/state
 	}

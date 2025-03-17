@@ -3,18 +3,18 @@ package keeper
 import (
 	"context"
 
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-
-	"overlock/x/crossplane/types"
 )
 
-func (k Keeper) Params(goCtx context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {
+func (k Keeper) Params(goCtx context.Context, req *v1beta1.QueryParamsRequest) (*v1beta1.QueryParamsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	return &types.QueryParamsResponse{Params: k.GetParams(ctx)}, nil
+	return &v1beta1.QueryParamsResponse{Params: k.GetParams(ctx)}, nil
 }

@@ -4,15 +4,15 @@ import (
 	"context"
 	"strconv"
 
-	"overlock/x/storage/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateRegistry) (*types.MsgCreateRegistryResponse, error) {
+func (k msgServer) CreateRegistry(goCtx context.Context, msg *v1beta1.MsgCreateRegistry) (*v1beta1.MsgCreateRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var registry = types.Registry{
+	var registry = v1beta1.Registry{
 		Name:     msg.Name,
 		Provider: msg.Provider,
 	}
@@ -22,10 +22,10 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.RegistryCreatedEvent,
-			sdk.NewAttribute(types.RegistryIndex, strconv.FormatUint(id, 10)),
+		sdk.NewEvent(v1beta1.RegistryCreatedEvent,
+			sdk.NewAttribute(v1beta1.RegistryIndex, strconv.FormatUint(id, 10)),
 		),
 	)
 
-	return &types.MsgCreateRegistryResponse{Id: id}, nil
+	return &v1beta1.MsgCreateRegistryResponse{Id: id}, nil
 }

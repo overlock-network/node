@@ -3,7 +3,7 @@ package storage
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "overlock/api/overlock/storage"
+	modulev1 "github.com/web-seven/overlock-api/go/api/overlock/storage/v1beta1"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

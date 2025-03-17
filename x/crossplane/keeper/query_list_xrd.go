@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListXrd(goCtx context.Context, req *types.QueryListXrdRequest) (*types.QueryListXrdResponse, error) {
+func (k Keeper) ListXrd(goCtx context.Context, req *v1beta1.QueryListXrdRequest) (*v1beta1.QueryListXrdResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,11 +21,11 @@ func (k Keeper) ListXrd(goCtx context.Context, req *types.QueryListXrdRequest) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.XRDKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.XRDKey))
 
-	var xrds []types.CompositeResourceDefinition
+	var xrds []v1beta1.CompositeResourceDefinition
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
-		var compositeResourceDefinition types.CompositeResourceDefinition
+		var compositeResourceDefinition v1beta1.CompositeResourceDefinition
 		if err := k.cdc.Unmarshal(value, &compositeResourceDefinition); err != nil {
 			return err
 		}
@@ -38,5 +38,5 @@ func (k Keeper) ListXrd(goCtx context.Context, req *types.QueryListXrdRequest) (
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListXrdResponse{Xrd: xrds, Pagination: pageRes}, nil
+	return &v1beta1.QueryListXrdResponse{Xrd: xrds, Pagination: pageRes}, nil
 }

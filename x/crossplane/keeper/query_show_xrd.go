@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ShowXrd(goCtx context.Context, req *types.QueryShowXrdRequest) (*types.QueryShowXrdResponse, error) {
+func (k Keeper) ShowXrd(goCtx context.Context, req *v1beta1.QueryShowXrdRequest) (*v1beta1.QueryShowXrdResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -23,5 +23,5 @@ func (k Keeper) ShowXrd(goCtx context.Context, req *types.QueryShowXrdRequest) (
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowXrdResponse{Xrd: xrd}, nil
+	return &v1beta1.QueryShowXrdResponse{Xrd: xrd}, nil
 }

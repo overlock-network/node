@@ -6,25 +6,25 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 )
 
 func TestMsgUpdateParams(t *testing.T) {
 	k, ms, ctx := setupMsgServer(t)
-	params := types.DefaultParams()
+	params := v1beta1.DefaultParams()
 	require.NoError(t, k.SetParams(ctx, params))
 	wctx := sdk.UnwrapSDKContext(ctx)
 
 	// default params
 	testCases := []struct {
 		name      string
-		input     *types.MsgUpdateParams
+		input     *v1beta1.MsgUpdateParams
 		expErr    bool
 		expErrMsg string
 	}{
 		{
 			name: "invalid authority",
-			input: &types.MsgUpdateParams{
+			input: &v1beta1.MsgUpdateParams{
 				Authority: "invalid",
 				Params:    params,
 			},
@@ -33,15 +33,15 @@ func TestMsgUpdateParams(t *testing.T) {
 		},
 		{
 			name: "send enabled param",
-			input: &types.MsgUpdateParams{
+			input: &v1beta1.MsgUpdateParams{
 				Authority: k.GetAuthority(),
-				Params:    types.Params{},
+				Params:    v1beta1.Params{},
 			},
 			expErr: false,
 		},
 		{
 			name: "all good",
-			input: &types.MsgUpdateParams{
+			input: &v1beta1.MsgUpdateParams{
 				Authority: k.GetAuthority(),
 				Params:    params,
 			},

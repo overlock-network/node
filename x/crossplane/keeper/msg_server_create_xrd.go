@@ -4,15 +4,15 @@ import (
 	"context"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) CreateXrd(goCtx context.Context, msg *types.MsgCreateXrd) (*types.MsgCreateXrdResponse, error) {
+func (k msgServer) CreateXrd(goCtx context.Context, msg *v1beta1.MsgCreateXrd) (*v1beta1.MsgCreateXrdResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var xrd = types.CompositeResourceDefinition{
+	var xrd = v1beta1.CompositeResourceDefinition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 	}
@@ -23,10 +23,10 @@ func (k msgServer) CreateXrd(goCtx context.Context, msg *types.MsgCreateXrd) (*t
 	)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.XRDCreatedEvent,
-			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(id, 10)),
+		sdk.NewEvent(v1beta1.XRDCreatedEvent,
+			sdk.NewAttribute(v1beta1.XRDIndex, strconv.FormatUint(id, 10)),
 		),
 	)
 
-	return &types.MsgCreateXrdResponse{Id: id}, nil
+	return &v1beta1.MsgCreateXrdResponse{Id: id}, nil
 }
