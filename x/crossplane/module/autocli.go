@@ -13,11 +13,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: modulev1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Params",
-					Use:       "params",
-					Short:     "Shows the parameters of the module",
-				},
-				{
 					RpcMethod:      "ShowConfiguration",
 					Use:            "show-configuration [id]",
 					Short:          "Query show-configuration",
@@ -163,10 +158,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service:              modulev1.Msg_ServiceDesc.ServiceName,
 			EnhanceCustomCommand: true, // only required if you want to use the custom command
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
-				{
-					RpcMethod: "UpdateParams",
-					Skip:      true, // skipped because authority gated
-				},
 				{
 					RpcMethod:      "CreateComposition",
 					Use:            "create-composition [metadata] [spec]",

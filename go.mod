@@ -40,7 +40,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.10.0
-	github.com/web-seven/overlock-api v0.0.0-20250317153954-845367fff123
+	github.com/web-seven/overlock-api v0.0.0-20250320114244-25005b4312ab
 	golang.org/x/tools v0.22.0
 	google.golang.org/grpc v1.71.0
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.3.0

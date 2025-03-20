@@ -13,11 +13,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: modulev1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Params",
-					Use:       "params",
-					Short:     "Shows the parameters of the module",
-				},
-				{
 					RpcMethod:      "ShowRegistry",
 					Use:            "show-registry [id]",
 					Short:          "Query show-registry",
@@ -38,10 +33,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service:              modulev1.Msg_ServiceDesc.ServiceName,
 			EnhanceCustomCommand: true, // only required if you want to use the custom command
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
-				{
-					RpcMethod: "UpdateParams",
-					Skip:      true, // skipped because authority gated
-				},
 				{
 					RpcMethod:      "CreateRegistry",
 					Use:            "create-registry [name] [provider]",
