@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdateProvider) (*types.MsgUpdateProviderResponse, error) {
+func (k msgServer) UpdateProvider(goCtx context.Context, msg *v1beta1.MsgUpdateProvider) (*v1beta1.MsgUpdateProviderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var provider = types.Provider{
+	var provider = v1beta1.Provider{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Creator:  msg.Creator,
@@ -29,10 +29,10 @@ func (k msgServer) UpdateProvider(goCtx context.Context, msg *types.MsgUpdatePro
 	k.SetProvider(ctx, provider)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.ProviderUpdatedEvent,
-			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.ProviderUpdatedEvent,
+			sdk.NewAttribute(v1beta1.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 
-	return &types.MsgUpdateProviderResponse{Id: msg.Id}, nil
+	return &v1beta1.MsgUpdateProviderResponse{Id: msg.Id}, nil
 }

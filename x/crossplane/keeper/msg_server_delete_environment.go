@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) DeleteEnvironment(goCtx context.Context, msg *types.MsgDeleteEnvironment) (*types.MsgDeleteEnvironmentResponse, error) {
+func (k msgServer) DeleteEnvironment(goCtx context.Context, msg *v1beta1.MsgDeleteEnvironment) (*v1beta1.MsgDeleteEnvironmentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	_, found := k.GetEnvironment(ctx, msg.Id)
@@ -22,9 +22,9 @@ func (k msgServer) DeleteEnvironment(goCtx context.Context, msg *types.MsgDelete
 	k.RemoveEnvironment(ctx, msg.Id)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.EnvironmentDeletedEvent,
-			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.EnvironmentDeletedEvent,
+			sdk.NewAttribute(v1beta1.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
-	return &types.MsgDeleteEnvironmentResponse{}, nil
+	return &v1beta1.MsgDeleteEnvironmentResponse{}, nil
 }

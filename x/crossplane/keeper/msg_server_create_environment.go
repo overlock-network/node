@@ -4,15 +4,15 @@ import (
 	"context"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) CreateEnvironment(goCtx context.Context, msg *types.MsgCreateEnvironment) (*types.MsgCreateEnvironmentResponse, error) {
+func (k msgServer) CreateEnvironment(goCtx context.Context, msg *v1beta1.MsgCreateEnvironment) (*v1beta1.MsgCreateEnvironmentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var env = types.Environment{
+	var env = v1beta1.Environment{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Creator:  msg.Creator,
@@ -23,9 +23,9 @@ func (k msgServer) CreateEnvironment(goCtx context.Context, msg *types.MsgCreate
 	)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.EnvironmentCreatedEvent,
-			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(id, 10)),
+		sdk.NewEvent(v1beta1.EnvironmentCreatedEvent,
+			sdk.NewAttribute(v1beta1.EnvironmentIndex, strconv.FormatUint(id, 10)),
 		),
 	)
-	return &types.MsgCreateEnvironmentResponse{Id: id}, nil
+	return &v1beta1.MsgCreateEnvironmentResponse{Id: id}, nil
 }

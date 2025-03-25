@@ -1,7 +1,5 @@
 package keeper
 
-import (
-	"overlock/x/crossplane/types"
-)
+import "github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
-var _ types.QueryServer = Keeper{}
+var _ v1beta1.QueryServer = Keeper{}

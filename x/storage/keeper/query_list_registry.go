@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/storage/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListRegistry(goCtx context.Context, req *types.QueryListRegistryRequest) (*types.QueryListRegistryResponse, error) {
+func (k Keeper) ListRegistry(goCtx context.Context, req *v1beta1.QueryListRegistryRequest) (*v1beta1.QueryListRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,11 +21,11 @@ func (k Keeper) ListRegistry(goCtx context.Context, req *types.QueryListRegistry
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.RegistryKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.RegistryKey))
 
-	var registries []types.Registry
+	var registries []v1beta1.Registry
 	pageRes, err := query.Paginate(store, req.Pagination, func(key []byte, value []byte) error {
-		var registry types.Registry
+		var registry v1beta1.Registry
 		if err := k.cdc.Unmarshal(value, &registry); err != nil {
 			return err
 		}
@@ -38,5 +38,5 @@ func (k Keeper) ListRegistry(goCtx context.Context, req *types.QueryListRegistry
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListRegistryResponse{Registry: registries, Pagination: pageRes}, nil
+	return &v1beta1.QueryListRegistryResponse{Registry: registries, Pagination: pageRes}, nil
 }

@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/storage/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ShowRegistry(goCtx context.Context, req *types.QueryShowRegistryRequest) (*types.QueryShowRegistryResponse, error) {
+func (k Keeper) ShowRegistry(goCtx context.Context, req *v1beta1.QueryShowRegistryRequest) (*v1beta1.QueryShowRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -23,5 +23,5 @@ func (k Keeper) ShowRegistry(goCtx context.Context, req *types.QueryShowRegistry
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowRegistryResponse{Registry: registry}, nil
+	return &v1beta1.QueryShowRegistryResponse{Registry: registry}, nil
 }

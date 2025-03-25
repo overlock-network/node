@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ShowProvider(goCtx context.Context, req *types.QueryShowProviderRequest) (*types.QueryShowProviderResponse, error) {
+func (k Keeper) ShowProvider(goCtx context.Context, req *v1beta1.QueryShowProviderRequest) (*v1beta1.QueryShowProviderResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -22,5 +22,5 @@ func (k Keeper) ShowProvider(goCtx context.Context, req *types.QueryShowProvider
 	if !found {
 		return nil, sdkerrors.ErrKeyNotFound
 	}
-	return &types.QueryShowProviderResponse{Provider: &provider}, nil
+	return &v1beta1.QueryShowProviderResponse{Provider: &provider}, nil
 }
