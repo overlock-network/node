@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateXrd(goCtx context.Context, msg *types.MsgUpdateXrd) (*types.MsgUpdateXrdResponse, error) {
+func (k msgServer) UpdateXrd(goCtx context.Context, msg *v1beta1.MsgUpdateXrd) (*v1beta1.MsgUpdateXrdResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var xrd = types.CompositeResourceDefinition{
+	var xrd = v1beta1.CompositeResourceDefinition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Id:       msg.Id,
@@ -28,10 +28,10 @@ func (k msgServer) UpdateXrd(goCtx context.Context, msg *types.MsgUpdateXrd) (*t
 	k.SetCompositeResourceDefinition(ctx, xrd)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.XRDUpdateEvent,
-			sdk.NewAttribute(types.XRDIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.XRDUpdateEvent,
+			sdk.NewAttribute(v1beta1.XRDIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 
-	return &types.MsgUpdateXrdResponse{}, nil
+	return &v1beta1.MsgUpdateXrdResponse{}, nil
 }

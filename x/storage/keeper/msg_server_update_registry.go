@@ -4,17 +4,17 @@ import (
 	"context"
 	"fmt"
 
-	"overlock/x/storage/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateRegistry(goCtx context.Context, msg *types.MsgUpdateRegistry) (*types.MsgUpdateRegistryResponse, error) {
+func (k msgServer) UpdateRegistry(goCtx context.Context, msg *v1beta1.MsgUpdateRegistry) (*v1beta1.MsgUpdateRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var registry = types.Registry{
+	var registry = v1beta1.Registry{
 		Name:     msg.Name,
 		Provider: msg.Provider,
 		Id:       msg.Id,
@@ -26,5 +26,5 @@ func (k msgServer) UpdateRegistry(goCtx context.Context, msg *types.MsgUpdateReg
 
 	k.SetRegistry(ctx, registry)
 
-	return &types.MsgUpdateRegistryResponse{}, nil
+	return &v1beta1.MsgUpdateRegistryResponse{}, nil
 }

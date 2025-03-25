@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *types.MsgDeleteConfiguration) (*types.MsgDeleteConfigurationResponse, error) {
+func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *v1beta1.MsgDeleteConfiguration) (*v1beta1.MsgDeleteConfigurationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	_, found := k.GetConfiguration(ctx, msg.Id)
@@ -22,9 +22,9 @@ func (k msgServer) DeleteConfiguration(goCtx context.Context, msg *types.MsgDele
 	k.RemoveConfiguration(ctx, msg.Id)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.ConfigurationDeletedEvent,
-			sdk.NewAttribute(types.ConfigurationIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.ConfigurationDeletedEvent,
+			sdk.NewAttribute(v1beta1.ConfigurationIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
-	return &types.MsgDeleteConfigurationResponse{}, nil
+	return &v1beta1.MsgDeleteConfigurationResponse{}, nil
 }

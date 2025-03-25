@@ -1,7 +1,5 @@
 package keeper
 
-import (
-	"overlock/x/storage/types"
-)
+import "github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
-var _ types.QueryServer = Keeper{}
+var _ v1beta1.QueryServer = Keeper{}

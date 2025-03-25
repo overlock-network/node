@@ -6,21 +6,19 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/web-seven/overlock-api/docs"
 )
 
 const (
-	apiFile   = "/static/openapi.yml"
+	apiFile   = "/swagger-ui/swagger.yaml"
 	indexFile = "template/index.tpl"
 )
-
-//go:embed static
-var Static embed.FS
 
 //go:embed template
 var template embed.FS
 
 func RegisterOpenAPIService(appName string, rtr *mux.Router) {
-	rtr.Handle(apiFile, http.FileServer(http.FS(Static)))
+	rtr.Handle(apiFile, http.FileServerFS(docs.SwaggerYAML))
 	rtr.HandleFunc("/", handler(appName))
 }
 

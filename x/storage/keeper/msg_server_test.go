@@ -8,10 +8,11 @@ import (
 
 	keepertest "overlock/testutil/keeper"
 	"overlock/x/storage/keeper"
-	"overlock/x/storage/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 )
 
-func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Context) {
+func setupMsgServer(t testing.TB) (keeper.Keeper, v1beta1.MsgServer, context.Context) {
 	k, ctx := keepertest.StorageKeeper(t)
 	return k, keeper.NewMsgServerImpl(k), ctx
 }

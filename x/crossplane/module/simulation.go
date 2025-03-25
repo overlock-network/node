@@ -10,7 +10,8 @@ import (
 
 	"overlock/testutil/sample"
 	crossplanesimulation "overlock/x/crossplane/simulation"
-	"overlock/x/crossplane/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 )
 
 // avoid unused import issue
@@ -104,11 +105,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	overlockGenesis := types.GenesisState{
-		Params: types.DefaultParams(),
+	overlockGenesis := v1beta1.GenesisState{
+		Params: v1beta1.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&overlockGenesis)
+	simState.GenState[v1beta1.ModuleName] = simState.Cdc.MustMarshalJSON(&overlockGenesis)
 }
 
 // RegisterStoreDecoder registers a decoder.

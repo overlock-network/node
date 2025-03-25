@@ -6,12 +6,13 @@ import (
 	"github.com/stretchr/testify/require"
 
 	keepertest "overlock/testutil/keeper"
-	"overlock/x/storage/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 )
 
 func TestGetParams(t *testing.T) {
 	k, ctx := keepertest.StorageKeeper(t)
-	params := types.DefaultParams()
+	params := v1beta1.DefaultParams()
 
 	require.NoError(t, k.SetParams(ctx, params))
 	require.EqualValues(t, params, k.GetParams(ctx))

@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateComposition(goCtx context.Context, msg *types.MsgUpdateComposition) (*types.MsgUpdateCompositionResponse, error) {
+func (k msgServer) UpdateComposition(goCtx context.Context, msg *v1beta1.MsgUpdateComposition) (*v1beta1.MsgUpdateCompositionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var composition = types.Composition{
+	var composition = v1beta1.Composition{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Id:       msg.Id,
@@ -28,10 +28,10 @@ func (k msgServer) UpdateComposition(goCtx context.Context, msg *types.MsgUpdate
 	k.SetComposition(ctx, composition)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.CompositionUpdatedEvent,
-			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.CompositionUpdatedEvent,
+			sdk.NewAttribute(v1beta1.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 
-	return &types.MsgUpdateCompositionResponse{}, nil
+	return &v1beta1.MsgUpdateCompositionResponse{}, nil
 }

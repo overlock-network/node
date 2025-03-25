@@ -3,15 +3,15 @@ package keeper
 import (
 	"context"
 
-	"github.com/cosmos/cosmos-sdk/runtime"
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
-	"overlock/x/storage/types"
+	"github.com/cosmos/cosmos-sdk/runtime"
 )
 
 // GetParams get all parameters as types.Params
-func (k Keeper) GetParams(ctx context.Context) (params types.Params) {
+func (k Keeper) GetParams(ctx context.Context) (params v1beta1.Params) {
 	store := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	bz := store.Get(types.ParamsKey)
+	bz := store.Get(v1beta1.ParamsKey)
 	if bz == nil {
 		return params
 	}
@@ -21,13 +21,13 @@ func (k Keeper) GetParams(ctx context.Context) (params types.Params) {
 }
 
 // SetParams set the params
-func (k Keeper) SetParams(ctx context.Context, params types.Params) error {
+func (k Keeper) SetParams(ctx context.Context, params v1beta1.Params) error {
 	store := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	bz, err := k.cdc.Marshal(&params)
 	if err != nil {
 		return err
 	}
-	store.Set(types.ParamsKey, bz)
+	store.Set(v1beta1.ParamsKey, bz)
 
 	return nil
 }

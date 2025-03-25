@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) DeleteProvider(goCtx context.Context, msg *types.MsgDeleteProvider) (*types.MsgDeleteProviderResponse, error) {
+func (k msgServer) DeleteProvider(goCtx context.Context, msg *v1beta1.MsgDeleteProvider) (*v1beta1.MsgDeleteProviderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	_, found := k.GetProvider(ctx, msg.Id)
@@ -22,9 +22,9 @@ func (k msgServer) DeleteProvider(goCtx context.Context, msg *types.MsgDeletePro
 	k.RemoveProvider(ctx, msg.Id)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.ProviderDeletedEvent,
-			sdk.NewAttribute(types.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.ProviderDeletedEvent,
+			sdk.NewAttribute(v1beta1.ProviderIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
-	return &types.MsgDeleteProviderResponse{Id: msg.Id}, nil
+	return &v1beta1.MsgDeleteProviderResponse{Id: msg.Id}, nil
 }

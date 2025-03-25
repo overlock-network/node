@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListEnvironment(goCtx context.Context, req *types.QueryListEnvironmentRequest) (*types.QueryListEnvironmentResponse, error) {
+func (k Keeper) ListEnvironment(goCtx context.Context, req *v1beta1.QueryListEnvironmentRequest) (*v1beta1.QueryListEnvironmentResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,11 +21,11 @@ func (k Keeper) ListEnvironment(goCtx context.Context, req *types.QueryListEnvir
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.EnvironmentKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.EnvironmentKey))
 
-	var environments []types.Environment
+	var environments []v1beta1.Environment
 	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
-		var env types.Environment
+		var env v1beta1.Environment
 		if err := k.cdc.Unmarshal(value, &env); err != nil {
 			return false, err
 		}
@@ -44,5 +44,5 @@ func (k Keeper) ListEnvironment(goCtx context.Context, req *types.QueryListEnvir
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListEnvironmentResponse{Environments: environments, Pagination: pageRes}, nil
+	return &v1beta1.QueryListEnvironmentResponse{Environments: environments, Pagination: pageRes}, nil
 }

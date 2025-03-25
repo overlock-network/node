@@ -4,7 +4,8 @@ import (
 	"math/rand"
 
 	"overlock/x/storage/keeper"
-	"overlock/x/storage/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -12,19 +13,19 @@ import (
 )
 
 func SimulateMsgCreateRegistry(
-	ak types.AccountKeeper,
-	bk types.BankKeeper,
+	ak v1beta1.AccountKeeper,
+	bk v1beta1.BankKeeper,
 	k keeper.Keeper,
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
-		msg := &types.MsgCreateRegistry{
+		msg := &v1beta1.MsgCreateRegistry{
 			Creator: simAccount.Address.String(),
 		}
 
 		// TODO: Handling the CreateRegistry simulation
 
-		return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "CreateRegistry simulation not implemented"), nil, nil
+		return simtypes.NoOpMsg(v1beta1.ModuleName, sdk.MsgTypeURL(msg), "CreateRegistry simulation not implemented"), nil, nil
 	}
 }

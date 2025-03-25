@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListFunction(goCtx context.Context, req *types.QueryListFunctionRequest) (*types.QueryListFunctionResponse, error) {
+func (k Keeper) ListFunction(goCtx context.Context, req *v1beta1.QueryListFunctionRequest) (*v1beta1.QueryListFunctionResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -21,11 +21,11 @@ func (k Keeper) ListFunction(goCtx context.Context, req *types.QueryListFunction
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.FunctionKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.FunctionKey))
 
-	var functions []types.Function
+	var functions []v1beta1.Function
 	pageRes, err := query.FilteredPaginate(store, req.Pagination, func(key, value []byte, accumulate bool) (bool, error) {
-		var env types.Function
+		var env v1beta1.Function
 		if err := k.cdc.Unmarshal(value, &env); err != nil {
 			return false, err
 		}
@@ -44,5 +44,5 @@ func (k Keeper) ListFunction(goCtx context.Context, req *types.QueryListFunction
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryListFunctionResponse{Functions: functions, Pagination: pageRes}, nil
+	return &v1beta1.QueryListFunctionResponse{Functions: functions, Pagination: pageRes}, nil
 }

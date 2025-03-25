@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ShowConfiguration(goCtx context.Context, req *types.QueryShowConfigurationRequest) (*types.QueryShowConfigurationResponse, error) {
+func (k Keeper) ShowConfiguration(goCtx context.Context, req *v1beta1.QueryShowConfigurationRequest) (*v1beta1.QueryShowConfigurationResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -23,5 +23,5 @@ func (k Keeper) ShowConfiguration(goCtx context.Context, req *types.QueryShowCon
 		return nil, sdkerrors.ErrKeyNotFound
 	}
 
-	return &types.QueryShowConfigurationResponse{Configuration: configuration}, nil
+	return &v1beta1.QueryShowConfigurationResponse{Configuration: configuration}, nil
 }

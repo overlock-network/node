@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) DeleteComposition(goCtx context.Context, msg *types.MsgDeleteComposition) (*types.MsgDeleteCompositionResponse, error) {
+func (k msgServer) DeleteComposition(goCtx context.Context, msg *v1beta1.MsgDeleteComposition) (*v1beta1.MsgDeleteCompositionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	_, found := k.GetComposition(ctx, msg.Id)
@@ -22,9 +22,9 @@ func (k msgServer) DeleteComposition(goCtx context.Context, msg *types.MsgDelete
 	k.RemoveComposition(ctx, msg.Id)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.CompositionDeletedEvent,
-			sdk.NewAttribute(types.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.CompositionDeletedEvent,
+			sdk.NewAttribute(v1beta1.CompositionIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
-	return &types.MsgDeleteCompositionResponse{}, nil
+	return &v1beta1.MsgDeleteCompositionResponse{}, nil
 }

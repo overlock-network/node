@@ -3,12 +3,12 @@ package keeper
 import (
 	"fmt"
 
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
-	"overlock/x/crossplane/types"
 )
 
 type (
@@ -49,5 +49,5 @@ func (k Keeper) GetAuthority() string {
 
 // Logger returns a module-specific logger.
 func (k Keeper) Logger() log.Logger {
-	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
+	return k.logger.With("module", fmt.Sprintf("x/%s", v1beta1.ModuleName))
 }

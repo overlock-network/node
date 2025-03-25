@@ -10,7 +10,8 @@ import (
 
 	"overlock/testutil/sample"
 	storagesimulation "overlock/x/storage/simulation"
-	"overlock/x/storage/types"
+
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
 )
 
 // avoid unused import issue
@@ -44,11 +45,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	storageGenesis := types.GenesisState{
-		Params: types.DefaultParams(),
+	storageGenesis := v1beta1.GenesisState{
+		Params: v1beta1.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&storageGenesis)
+	simState.GenState[v1beta1.ModuleName] = simState.Cdc.MustMarshalJSON(&storageGenesis)
 }
 
 // RegisterStoreDecoder registers a decoder.

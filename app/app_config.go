@@ -53,12 +53,17 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	crossplanemodulev1 "overlock/api/overlock/crossplane/module"
-	storagemodulev1 "overlock/api/overlock/storage/module"
-	_ "overlock/x/crossplane/module" // import for side-effects
-	overlockmoduletypes "overlock/x/crossplane/types"
 	_ "overlock/x/storage/module" // import for side-effects
-	storagemoduletypes "overlock/x/storage/types"
+
+	_ "overlock/x/crossplane/module" // import for side-effects
+
+	storagemoduletypes "github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+
+	overlockmoduletypes "github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+
+	storagemodulev1 "github.com/web-seven/overlock-api/go/api/overlock/storage/v1beta1/module"
+
+	crossplanemodulev1 "github.com/web-seven/overlock-api/go/api/overlock/crossplane/v1beta1/module"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

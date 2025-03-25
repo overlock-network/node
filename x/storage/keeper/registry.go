@@ -3,18 +3,18 @@ package keeper
 import (
 	"encoding/binary"
 
+	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+
 	"cosmossdk.io/store/prefix"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
-	"overlock/x/storage/types"
 )
 
-func (k Keeper) AppendRegistry(ctx sdk.Context, composition types.Registry) uint64 {
+func (k Keeper) AppendRegistry(ctx sdk.Context, composition v1beta1.Registry) uint64 {
 	count := k.GetRegistryCount(ctx)
 	composition.Id = count
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.RegistryKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.RegistryKey))
 	appendedValue := k.cdc.MustMarshal(&composition)
 	store.Set(GetRegistryIDBytes(composition.Id), appendedValue)
 	k.SetRegistryCount(ctx, count+1)
@@ -24,7 +24,7 @@ func (k Keeper) AppendRegistry(ctx sdk.Context, composition types.Registry) uint
 func (k Keeper) GetRegistryCount(ctx sdk.Context) uint64 {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
-	byteKey := types.KeyPrefix(types.RegistryCountKey)
+	byteKey := v1beta1.KeyPrefix(v1beta1.RegistryCountKey)
 	bz := store.Get(byteKey)
 	if bz == nil {
 		return 0
@@ -41,15 +41,15 @@ func GetRegistryIDBytes(id uint64) []byte {
 func (k Keeper) SetRegistryCount(ctx sdk.Context, count uint64) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, []byte{})
-	byteKey := types.KeyPrefix(types.RegistryCountKey)
+	byteKey := v1beta1.KeyPrefix(v1beta1.RegistryCountKey)
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, count)
 	store.Set(byteKey, bz)
 }
 
-func (k Keeper) GetRegistry(ctx sdk.Context, id uint64) (val types.Registry, found bool) {
+func (k Keeper) GetRegistry(ctx sdk.Context, id uint64) (val v1beta1.Registry, found bool) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.RegistryKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.RegistryKey))
 	b := store.Get(GetRegistryIDBytes(id))
 	if b == nil {
 		return val, false
@@ -58,15 +58,15 @@ func (k Keeper) GetRegistry(ctx sdk.Context, id uint64) (val types.Registry, fou
 	return val, true
 }
 
-func (k Keeper) SetRegistry(ctx sdk.Context, composition types.Registry) {
+func (k Keeper) SetRegistry(ctx sdk.Context, composition v1beta1.Registry) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.RegistryKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.RegistryKey))
 	b := k.cdc.MustMarshal(&composition)
 	store.Set(GetRegistryIDBytes(composition.Id), b)
 }
 
 func (k Keeper) RemoveRegistry(ctx sdk.Context, id uint64) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.RegistryKey))
+	store := prefix.NewStore(storeAdapter, v1beta1.KeyPrefix(v1beta1.RegistryKey))
 	store.Delete(GetRegistryIDBytes(id))
 }

@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strconv"
 
-	"overlock/x/crossplane/types"
+	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdateEnvironment) (*types.MsgUpdateEnvironmentResponse, error) {
+func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *v1beta1.MsgUpdateEnvironment) (*v1beta1.MsgUpdateEnvironmentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	var env = types.Environment{
+	var env = v1beta1.Environment{
 		Metadata: msg.Metadata,
 		Spec:     msg.Spec,
 		Creator:  msg.Creator,
@@ -29,10 +29,10 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *types.MsgUpdate
 	k.SetEnvironment(ctx, env)
 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(types.EnvironmentUpdatedEvent,
-			sdk.NewAttribute(types.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
+		sdk.NewEvent(v1beta1.EnvironmentUpdatedEvent,
+			sdk.NewAttribute(v1beta1.EnvironmentIndex, strconv.FormatUint(msg.Id, 10)),
 		),
 	)
 
-	return &types.MsgUpdateEnvironmentResponse{Id: env.Id}, nil
+	return &v1beta1.MsgUpdateEnvironmentResponse{Id: env.Id}, nil
 }
