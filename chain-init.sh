@@ -36,7 +36,7 @@ if [ "$CURRENT_HASH" != "$(cat $HASH_FILE 2>/dev/null)" ] || [ ! -d "$HOME_DIR/d
     # Initialize the chain
     $NODE_CMD init $MONIKER --chain-id $CHAIN_ID --home $HOME_DIR >/dev/null 2>&1
 
-    ACCOUNTS=$(yq -r '.accounts[].name' "$CONFIG_FILE" 2>/dev/null || true)q
+    ACCOUNTS=$(yq -r '.accounts[].name' "$CONFIG_FILE" 2>/dev/null || true)
 
 
     ACCOUNTS_JSON="$HOME_DIR/accounts.json"
