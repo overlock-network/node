@@ -11,7 +11,7 @@ MONIKER="overlock-node"
 STATE_BACKUP="$HOME_DIR/state_backup.json"
 ACCOUNTS_FILE="$HOME_DIR/accounts_list.txt"
 KEYRING_DIR="$HOME/.keyring-overlock"
-export NODE_CMD="overlockd" CHAIN_ID="overlock" KEYRING_DIR="/home/catalin/.keyring-overlock" ACCOUNT="bob"
+export NODE_CMD="overlockd" CHAIN_ID="overlock" KEYRING_DIR="$HOME/.keyring-overlock" ACCOUNT="bob"
 
 # Compute hash of the config file
 CURRENT_HASH=$(sha256sum $CONFIG_FILE | awk '{print $1}')
