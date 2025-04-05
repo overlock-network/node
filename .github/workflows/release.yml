@@ -20,12 +20,22 @@ jobs:
       -
         name: Set up Go
         uses: actions/setup-go@v5
+
+      - uses: addnab/docker-run-action@v3
+        with:
+          registry: gcr.io
+          image: ghcr.io/web-seven/git-chlog:0.15.4
+          options: -v ${{ github.workspace }}:/workspace
+          run: |
+            cd /workspace;
+            git config --global --add safe.directory /workspace;
+            git-chglog -o .cache/changelog.md;
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
           version: '~> v2'
-          args: release --clean
+          args: release --clean --release-notes .cache/changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
