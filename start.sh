@@ -2,7 +2,7 @@
 
 # Define variables
 NODE_CMD="overlockd"
-HOME_DIR="$HOME/.overlock"
+HOME_DIR="$HOME/.overlockd"
 CONFIG_FILE="config.yml"
 HASH_FILE="$HOME_DIR/config_hash"
 KEYRING_BACKEND="test"
@@ -11,7 +11,10 @@ MONIKER="overlock-node"
 STATE_BACKUP="$HOME_DIR/state_backup.json"
 ACCOUNTS_FILE="$HOME_DIR/accounts_list.txt"
 KEYRING_DIR="$HOME/.keyring-overlock"
-export NODE_CMD="overlockd" CHAIN_ID="overlock" KEYRING_DIR="$HOME/.keyring-overlock" ACCOUNT="bob"
+RPC_PORT="26657"
+GRPC_PORT="9090"
+API_PORT="1317"
+export NODE_CMD=$NODE_CMD CHAIN_ID=$CHAIN_ID KEYRING_DIR=$KEYRING_DIR ACCOUNT="bob"
 
 # Compute hash of the config file
 CURRENT_HASH=$(sha256sum $CONFIG_FILE | awk '{print $1}')
@@ -127,12 +130,12 @@ cp config/config.toml $HOME_DIR/config/config.toml
 
 # Start the node with correct API bindings
 echo "🚀 Starting Overlock node..."
-$NODE_CMD start --rpc.laddr tcp://localhost:26657 \
+$NODE_CMD start --rpc.laddr tcp://localhost:$RPC_PORT \
                 --grpc.enable \
-                --grpc.address localhost:9090 \
+                --grpc.address localhost:$GRPC_PORT \
                 --api.enable \
                 --api.enabled-unsafe-cors \
-                --api.address tcp://localhost:1317 \
+                --api.address tcp://localhost:$API_PORT \
                 --minimum-gas-prices 0stake \
                 --home $HOME_DIR > overlock_node.log 2>&1 &
 
