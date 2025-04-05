@@ -9,3 +9,5 @@ release/
 *.ign
 # Added by goreleaser init:
 dist/
+.cache/
+semicolon_delimited_script
