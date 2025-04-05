@@ -18,6 +18,8 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+    binary: overlockd
+    main: ./cmd/overlockd/main.go
     goos:
       - linux
       - windows
