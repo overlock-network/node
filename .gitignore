@@ -9,3 +9,4 @@ release/
 *.ign
 # Added by goreleaser init:
 dist/
+.cache/
