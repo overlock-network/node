@@ -7,3 +7,5 @@ release/
 *.dot
 *.log
 *.ign
+# Added by goreleaser init:
+dist/
