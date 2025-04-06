@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-go@v5
 
       - 
-        name: Generate chnagelog
+        name: Generate changelog
         uses: addnab/docker-run-action@v3
         with:
           registry: gcr.io
