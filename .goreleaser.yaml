@@ -37,6 +37,9 @@ archives:
     format_overrides:
       - goos: windows
         formats: [zip]
+    files:
+      - readme.md
+      - start.sh
 
 release:
   github:
