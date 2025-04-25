@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

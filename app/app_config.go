@@ -57,13 +57,13 @@ import (
 
 	_ "overlock/x/crossplane/module" // import for side-effects
 
-	storagemoduletypes "github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	storagemoduletypes "github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
-	overlockmoduletypes "github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+	overlockmoduletypes "github.com/overlock-network/api/go/node/overlock/crossplane/v1beta1"
 
-	storagemodulev1 "github.com/web-seven/overlock-api/go/api/overlock/storage/v1beta1/module"
+	storagemodulev1 "github.com/overlock-network/api/go/api/overlock/storage/v1beta1/module"
 
-	crossplanemodulev1 "github.com/web-seven/overlock-api/go/api/overlock/crossplane/v1beta1/module"
+	crossplanemodulev1 "github.com/overlock-network/api/go/api/overlock/crossplane/v1beta1/module"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

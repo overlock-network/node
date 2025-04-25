@@ -7,7 +7,7 @@ import (
 	"overlock/testutil/nullify"
 	storage "overlock/x/storage/module"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
 	"github.com/stretchr/testify/require"
 )

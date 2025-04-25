@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/crossplane/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -14,7 +14,6 @@ func (k msgServer) CreateProvider(goCtx context.Context, msg *v1beta1.MsgCreateP
 
 	var provider = v1beta1.Provider{
 		Metadata: msg.Metadata,
-		Spec:     msg.Spec,
 		Creator:  msg.Creator,
 	}
 	id := k.AppendProvider(

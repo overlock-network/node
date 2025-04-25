@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/crossplane/v1beta1"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,7 +17,6 @@ func (k msgServer) UpdateEnvironment(goCtx context.Context, msg *v1beta1.MsgUpda
 
 	var env = v1beta1.Environment{
 		Metadata: msg.Metadata,
-		Spec:     msg.Spec,
 		Creator:  msg.Creator,
 		Id:       msg.Id,
 	}

@@ -48,7 +48,7 @@ body:
     attributes:
       label: '🏢 Have you read the Code of Conduct?'
       options:
-        - label: 'I have read the [Code of Conduct](https://github.com/web-seven/overlock-network/blob/main/CODE_OF_CONDUCT.md)'
+        - label: 'I have read the [Code of Conduct](https://github.com/overlock-network/node/blob/main/CODE_OF_CONDUCT.md)'
           required: true
   - type: dropdown
     id: willing-to-submit-pr

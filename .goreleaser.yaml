@@ -43,7 +43,7 @@ archives:
 
 release:
   github:
-    owner: web-seven
+    owner: overlock-network
     name: overlock-network
   prerelease: auto
   mode: replace

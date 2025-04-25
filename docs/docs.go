@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/web-seven/overlock-api/docs"
+	"github.com/overlock-network/api/docs"
 )
 
 const (
