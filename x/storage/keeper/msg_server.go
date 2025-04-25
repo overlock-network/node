@@ -1,6 +1,6 @@
 package keeper
 
-import "github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+import "github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
 type msgServer struct {
 	Keeper

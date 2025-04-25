@@ -3,7 +3,7 @@ package keeper
 import (
 	"fmt"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
