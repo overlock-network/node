@@ -5,7 +5,7 @@ import (
 
 	"overlock/x/storage/keeper"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

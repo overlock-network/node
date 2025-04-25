@@ -11,7 +11,7 @@ import (
 	"overlock/testutil/sample"
 	storagesimulation "overlock/x/storage/simulation"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 )
 
 // avoid unused import issue

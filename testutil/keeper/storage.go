@@ -19,7 +19,7 @@ import (
 
 	"overlock/x/storage/keeper"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 )
 
 func StorageKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

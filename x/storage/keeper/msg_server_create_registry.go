@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

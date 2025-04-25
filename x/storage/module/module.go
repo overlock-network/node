@@ -22,9 +22,9 @@ import (
 
 	"overlock/x/storage/keeper"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 
-	modulev1 "github.com/web-seven/overlock-api/go/api/overlock/storage/v1beta1/module"
+	modulev1 "github.com/overlock-network/api/go/api/overlock/storage/v1beta1/module"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 
 	keepertest "overlock/testutil/keeper"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/storage/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 )
 
 func TestGetParams(t *testing.T) {
