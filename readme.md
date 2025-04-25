@@ -1,4 +1,4 @@
-# Overlock - Decentralized Serverless Network
+# Overlock - Decentralized Control Planes Network
 
 [![codecov](https://codecov.io/github/overlock-network/node/coverage.svg?branch=main)](https://codecov.io/github/overlock-network/node?branch=main)
 
