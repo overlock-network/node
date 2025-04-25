@@ -1,16 +1,13 @@
 # Overlock - Decentralized Serverless Network
 
-![tests](https://github.com/overlock-network/node/workflows/tests/badge.svg)
 [![codecov](https://codecov.io/github/overlock-network/node/coverage.svg?branch=main)](https://codecov.io/github/overlock-network/node?branch=main)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/overlock-network/node)](https://goreportcard.com/report/github.com/overlock-network/node)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-[![Overlock](_docs/img/logo-label-black.svg "Overlock")](#overview)
-
 [Overlock](https://overlock.network) is a secure, transparent, and decentralized Control Planes marketplace that connects those who need ready to use Crossplane or ArgoCD Control Planes (tenants) with those that have required Control Plane capacity to lease (providers).
 
-For a high-level overview of the Overlock protocol and network economics, check out the [whitepaper](https://ipfs.io/ipfs/QmVwsi5kTrg7UcUEGi5UfdheVLBWoHjze2pHy4tLqYvLYv); a detailed protocol definition can be 
+For a high-level overview of the Overlock protocol and network economics, check out the [whitepaper](https://overlock.network/docs/OverlockWhitepaper.pdf); a detailed protocol definition can be 
 found in the [design documentation](https://docs.overlock.network); and the target workload definition spec is [here](https://docs.overlock.network/sdl).
 
 # Branching and Versioning
