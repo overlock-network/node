@@ -3,14 +3,15 @@ package storage
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "github.com/web-seven/overlock-api/go/api/overlock/storage/v1beta1"
+	apiv1 "github.com/overlock-network/api/go/api/overlock/storage/v1beta1"
+	nodev1 "github.com/overlock-network/api/go/node/overlock/storage/v1beta1"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.
 func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 	return &autocliv1.ModuleOptions{
 		Query: &autocliv1.ServiceCommandDescriptor{
-			Service: modulev1.Query_ServiceDesc.ServiceName,
+			Service: apiv1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
 					RpcMethod:      "ShowRegistry",
@@ -30,7 +31,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			},
 		},
 		Tx: &autocliv1.ServiceCommandDescriptor{
-			Service:              modulev1.Msg_ServiceDesc.ServiceName,
+			Service:              nodev1.Msg_serviceDesc.ServiceName,
 			EnhanceCustomCommand: true, // only required if you want to use the custom command
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{

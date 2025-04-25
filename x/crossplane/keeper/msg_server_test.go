@@ -9,7 +9,7 @@ import (
 	keepertest "overlock/testutil/keeper"
 	"overlock/x/crossplane/keeper"
 
-	"github.com/web-seven/overlock-api/go/node/overlock/crossplane/v1beta1"
+	"github.com/overlock-network/api/go/node/overlock/crossplane/v1beta1"
 )
 
 func setupMsgServer(t testing.TB) (keeper.Keeper, v1beta1.MsgServer, context.Context) {
