@@ -45,13 +45,13 @@ Windows | amd64 | ⚠️ **Experimental**
 [GoDownloader](https://github.com/goreleaser/godownloader):
 
 ```sh
-$ curl -sSfL https://raw.githubusercontent.com/overlock-network/node/main/install.sh | sh
+curl -sSfL https://raw.githubusercontent.com/overlock-network/node/main/install.sh | sh
 ```
 
 Or install a specific version with [GoDownloader](https://github.com/goreleaser/godownloader)
 
 ```sh
-$ curl -sSfL https://raw.githubusercontent.com/overlock-network/node/main/install | sh -s -- v0.22.0
+curl -sSfL https://raw.githubusercontent.com/overlock-network/node/main/install | sh -s -- 0.0.37
 ```
 
 # Roadmap and contributing
