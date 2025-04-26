@@ -346,7 +346,7 @@ End of functions from https://github.com/client9/shlib
 ------------------------------------------------------------------------
 EOF
 
-INSTALL_ARTIFACTS="overlock"
+INSTALL_ARTIFACTS="overlockd"
 PROJECT_NAME="overlock"
 OWNER="overlock-network"
 REPO="node"
