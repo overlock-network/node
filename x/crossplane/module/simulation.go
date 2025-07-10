@@ -24,18 +24,6 @@ var (
 )
 
 const (
-	opWeightMsgCreateConfiguration = "op_weight_msg_create_configuration"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateConfiguration int = 100
-
-	opWeightMsgUpdateConfiguration = "op_weight_msg_update_configuration"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateConfiguration int = 100
-
-	opWeightMsgDeleteConfiguration = "op_weight_msg_delete_configuration"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteConfiguration int = 100
-
 	opWeightMsgCreateEnvironment = "op_weight_msg_create_environment"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateEnvironment int = 100
@@ -82,39 +70,6 @@ func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgCreateConfiguration int
-	simState.AppParams.GetOrGenerate(opWeightMsgCreateConfiguration, &weightMsgCreateConfiguration, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateConfiguration = defaultWeightMsgCreateConfiguration
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateConfiguration,
-		crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgUpdateConfiguration int
-	simState.AppParams.GetOrGenerate(opWeightMsgUpdateConfiguration, &weightMsgUpdateConfiguration, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateConfiguration = defaultWeightMsgUpdateConfiguration
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateConfiguration,
-		crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgDeleteConfiguration int
-	simState.AppParams.GetOrGenerate(opWeightMsgDeleteConfiguration, &weightMsgDeleteConfiguration, nil,
-		func(_ *rand.Rand) {
-			weightMsgDeleteConfiguration = defaultWeightMsgDeleteConfiguration
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteConfiguration,
-		crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	var weightMsgCreateEnvironment int
 	simState.AppParams.GetOrGenerate(opWeightMsgCreateEnvironment, &weightMsgCreateEnvironment, nil,
@@ -190,54 +145,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 // ProposalMsgs returns msgs used for governance proposals for simulations.
 func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.WeightedProposalMsg {
 	return []simtypes.WeightedProposalMsg{
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgCreateConfiguration,
-			defaultWeightMsgCreateConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgUpdateConfiguration,
-			defaultWeightMsgUpdateConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgDeleteConfiguration,
-			defaultWeightMsgDeleteConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgCreateConfiguration,
-			defaultWeightMsgCreateConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgCreateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgUpdateConfiguration,
-			defaultWeightMsgUpdateConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgUpdateConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgDeleteConfiguration,
-			defaultWeightMsgDeleteConfiguration,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				crossplanesimulation.SimulateMsgDeleteConfiguration(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
 		simulation.NewWeightedProposalMsg(
 			opWeightMsgCreateEnvironment,
 			defaultWeightMsgCreateEnvironment,

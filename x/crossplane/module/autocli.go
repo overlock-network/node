@@ -14,20 +14,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: apiv1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod:      "ShowConfiguration",
-					Use:            "show-configuration [id]",
-					Short:          "Query show-configuration",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
-				},
-
-				{
-					RpcMethod:      "ListConfiguration",
-					Use:            "list-configuration",
-					Short:          "Query list-configuration",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
-				},
-
-				{
 					RpcMethod:      "ShowEnvironment",
 					Use:            "show-environment [id]",
 					Short:          "Query show-environment",
@@ -61,24 +47,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service:              nodev1.Msg_serviceDesc.ServiceName,
 			EnhanceCustomCommand: true, // only required if you want to use the custom command
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
-				{
-					RpcMethod:      "CreateConfiguration",
-					Use:            "create-configuration [metadata] [spec]",
-					Short:          "Send a create-configuration tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "metadata"}, {ProtoField: "spec"}},
-				},
-				{
-					RpcMethod:      "UpdateConfiguration",
-					Use:            "update-configuration [id] [metadata] [spec]",
-					Short:          "Send a update-configuration tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "metadata"}, {ProtoField: "spec"}},
-				},
-				{
-					RpcMethod:      "DeleteConfiguration",
-					Use:            "delete-configuration [id]",
-					Short:          "Send a delete-configuration tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
-				},
 				{
 					RpcMethod:      "CreateEnvironment",
 					Use:            "create-environment [metadata] [spec]",
