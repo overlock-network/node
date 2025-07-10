@@ -30,7 +30,7 @@ func (k Keeper) ListProvider(goCtx context.Context, req *v1beta1.QueryListProvid
 			return false, err
 		}
 
-		if req.Creator == "" || env.Creator == req.Creator {
+		if req.Creator.Value == "" || env.Creator == req.Creator.Value {
 			if accumulate {
 				providers = append(providers, env)
 			}
