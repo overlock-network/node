@@ -4,8 +4,12 @@ import (
 	"errors"
 	"io"
 
+	"overlock/app"
+
 	"cosmossdk.io/log"
 	confixcmd "cosmossdk.io/tools/confix/cmd"
+	"github.com/CosmWasm/wasmd/x/wasm"
+	wasmcli "github.com/CosmWasm/wasmd/x/wasm/client/cli"
 	dbm "github.com/cosmos/cosmos-db"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/debug"
@@ -23,8 +27,6 @@ import (
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
-	"overlock/app"
 )
 
 func initRootCmd(
@@ -52,10 +54,14 @@ func initRootCmd(
 		txCommand(),
 		keys.Commands(),
 	)
+	wasmcli.ExtendUnsafeResetAllCmd(
+		rootCmd,
+	)
 }
 
 func addModuleInitFlags(startCmd *cobra.Command) {
 	crisis.AddModuleInitFlags(startCmd)
+	wasm.AddModuleInitFlags(startCmd)
 }
 
 // genesisCommand builds genesis-related `overlockd genesis` command. Users may provide application specific commands as a parameter
