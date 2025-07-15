@@ -2,7 +2,6 @@ package app
 
 import (
 	"fmt"
-	"strings"
 
 	storetypes "cosmossdk.io/store/types"
 	"github.com/CosmWasm/wasmd/x/wasm"
@@ -22,21 +21,6 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v8/modules/core/05-port/types"
 )
 
-// AllCapabilities returns all capabilities available with the current wasmvm
-// See https://github.com/CosmWasm/cosmwasm/blob/main/docs/CAPABILITIES-BUILT-IN.md
-// This functionality is going to be moved upstream: https://github.com/CosmWasm/wasmvm/issues/425
-func AllCapabilities() []string {
-	return []string{
-		"iterator",
-		"staking",
-		"stargate",
-		"cosmwasm_1_1",
-		"cosmwasm_1_2",
-		"cosmwasm_1_3",
-		"cosmwasm_1_4",
-	}
-}
-
 // registerWasmModules register CosmWasm keepers and non dependency inject modules.
 func (app *App) registerWasmModules(
 	appOpts servertypes.AppOptions,
@@ -51,12 +35,13 @@ func (app *App) registerWasmModules(
 
 	scopedWasmKeeper := app.CapabilityKeeper.ScopeToModule(wasmtypes.ModuleName)
 
-	wasmConfig, err := wasm.ReadWasmConfig(appOpts)
+	wasmConfig, err := wasm.ReadNodeConfig(appOpts)
 	if err != nil {
 		return nil, fmt.Errorf("error while reading wasm config: %s", err)
 	}
 
-	availableCapabilities := strings.Join(AllCapabilities(), ",")
+	// The last arguments can contain custom message handlers, and custom query handlers,
+	// if we want to allow any custom callbacks
 	app.WasmKeeper = wasmkeeper.NewKeeper(
 		app.AppCodec(),
 		runtime.NewKVStoreService(app.GetKey(wasmtypes.StoreKey)),
@@ -73,7 +58,8 @@ func (app *App) registerWasmModules(
 		app.GRPCQueryRouter(),
 		DefaultNodeHome,
 		wasmConfig,
-		availableCapabilities,
+		wasmtypes.VMConfig{},
+		wasmkeeper.BuiltInCapabilities(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 		wasmOpts...,
 	)
@@ -140,7 +126,7 @@ func (app *App) setPostHandler() error {
 	return nil
 }
 
-func (app *App) setAnteHandler(txConfig client.TxConfig, wasmConfig wasmtypes.WasmConfig, txCounterStoreKey *storetypes.KVStoreKey) error {
+func (app *App) setAnteHandler(txConfig client.TxConfig, wasmConfig wasmtypes.NodeConfig, txCounterStoreKey *storetypes.KVStoreKey) error {
 	anteHandler, err := NewAnteHandler(
 		HandlerOptions{
 			HandlerOptions: ante.HandlerOptions{
