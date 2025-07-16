@@ -1,6 +1,14 @@
-FROM golang:1.24 AS build-stage
+FROM golang:1.24-alpine AS build-stage
 
-LABEL org.opencontainers.image.source: "https://github.com/overlock-network/node"
+LABEL org.opencontainers.image.source="https://github.com/overlock-network/node"
+
+RUN apk add --no-cache git build-base wget
+
+ADD https://github.com/CosmWasm/wasmvm/releases/download/v2.2.4/libwasmvm_muslc.aarch64.a /lib/libwasmvm_muslc.aarch64.a
+ADD https://github.com/CosmWasm/wasmvm/releases/download/v2.2.4/libwasmvm_muslc.x86_64.a /lib/libwasmvm_muslc.x86_64.a
+
+RUN sha256sum /lib/libwasmvm_muslc.aarch64.a | grep 27fb13821dbc519119f4f98c30a42cb32429b111b0fdc883686c34a41777488f
+RUN sha256sum /lib/libwasmvm_muslc.x86_64.a | grep 70c989684d2b48ca17bbd55bb694bbb136d75c393c067ef3bdbca31d2b23b578
 
 WORKDIR /app
 
@@ -9,7 +17,11 @@ RUN go mod download
 
 COPY ./ /app
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /overlockd /app/cmd/overlockd/main.go 
+
+RUN CGO_ENABLED=1 go build \
+    -tags="muslc" \
+    -ldflags='-w -s -linkmode external -extldflags "-static"' \
+    -o /overlockd /app/cmd/overlockd/main.go
 
 FROM alpine:3.22
 
