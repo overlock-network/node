@@ -37,4 +37,9 @@ RUN wget -O /node/config/genesis.json https://raw.githubusercontent.com/overlock
 
 EXPOSE 26657 1317 9090
 
-ENTRYPOINT ["/overlockd", "start", "--home", "/node", "--rpc.laddr", "tcp://0.0.0.0:26657", "--grpc.enable", "--grpc.address", "0.0.0.0:9090", "--api.enable", "--api.enabled-unsafe-cors", "--api.address", "tcp://0.0.0.0:1317", "--minimum-gas-prices", "0stake"]
+COPY docker/node/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["/overlockd", "start", "--home", "/node", "--rpc.laddr", "tcp://0.0.0.0:26657", "--grpc.enable", "--grpc.address", "0.0.0.0:9090", "--api.enable", "--api.enabled-unsafe-cors", "--api.address", "tcp://0.0.0.0:1317", "--minimum-gas-prices", "0stake"]
