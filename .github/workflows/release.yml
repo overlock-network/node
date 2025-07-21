@@ -77,7 +77,11 @@ jobs:
           file: ./docker/supervisor/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}-supervisor:${{ env.TAG }}
-          build-args: API_DOMAIN="api.devnet.overlock.pub",GRPC_DOMAIN="grpc.devnet.overlock.pub",RPC_DOMAIN="rpc.devnet.overlock.pub",BASE_IMAGE=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ env.TAG }}
+          build-args: |
+           API_DOMAIN="api.devnet.overlock.pub"
+           GRPC_DOMAIN="grpc.devnet.overlock.pub"
+           RPC_DOMAIN="rpc.devnet.overlock.pub"
+           BASE_IMAGE=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ env.TAG }}
       
       - 
         name: 'Gcloud Auth'
