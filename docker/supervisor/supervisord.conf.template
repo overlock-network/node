@@ -1,0 +1,16 @@
+[supervisord]
+nodaemon=true
+
+[program:overlockd]
+command=${OVERLOCKD_ARGS}
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/overlockd.log
+stderr_logfile=/var/log/overlockd.err
+
+[program:nginx]
+command=nginx -g "daemon off;"
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stderr_logfile=/dev/stderr
