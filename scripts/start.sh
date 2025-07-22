@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "Building overlockd binary..."
+
+go build -o overlockd ./cmd/overlockd/main.go
+mv overlockd "$HOME/go/bin/overlockd"
+
 # Define variables
 NODE_CMD="overlockd"
 HOME_DIR="$HOME/.overlockd"
@@ -43,7 +48,7 @@ if [ "$CURRENT_HASH" != "$(cat $HASH_FILE 2>/dev/null)" ] || [ ! -d "$HOME_DIR/d
 
 
     ACCOUNTS_JSON="$HOME_DIR/accounts.json"
-    echo "{}" > "$ACCOUNTS_JSON" >/dev/null 2>&1
+    echo "{}" > "$ACCOUNTS_JSON"
 
 
     for ACCOUNT in $ACCOUNTS; do
@@ -52,10 +57,10 @@ if [ "$CURRENT_HASH" != "$(cat $HASH_FILE 2>/dev/null)" ] || [ ! -d "$HOME_DIR/d
         # Ensure key exists
         if ! $NODE_CMD keys show $ACCOUNT --keyring-backend $KEYRING_BACKEND --home $KEYRING_DIR > /dev/null 2>&1; then
             ACCOUNT_DATA=$($NODE_CMD keys add $ACCOUNT --keyring-backend $KEYRING_BACKEND --output json --home $KEYRING_DIR)
-            
-            ACCOUNT_ADDRESS=$(echo $ACCOUNT_DATA | jq -r '.address')
             MNEMONIC=$(echo "$ACCOUNT_DATA" | jq -r '.mnemonic')
+        fi
 
+        ACCOUNT_ADDRESS=$($NODE_CMD keys show $ACCOUNT -a --keyring-backend $KEYRING_BACKEND --home $KEYRING_DIR)
             echo "$ACCOUNT,$ACCOUNT_ADDRESS" >> "$ACCOUNTS_FILE"
 
             # Store in JSON
@@ -64,16 +69,12 @@ if [ "$CURRENT_HASH" != "$(cat $HASH_FILE 2>/dev/null)" ] || [ ! -d "$HOME_DIR/d
             --arg mnemonic "$MNEMONIC" \
             '. + {($name): {"address": $address, "mnemonic": $mnemonic}}' \
             "$ACCOUNTS_JSON" > "$ACCOUNTS_JSON.tmp" && mv "$ACCOUNTS_JSON.tmp" "$ACCOUNTS_JSON"
-        fi
 
         ACCOUNT_COINS=$(yq -r ".accounts[] | select(.name == \"$ACCOUNT\") | .coins | join(\",\")" $CONFIG_FILE)
 
         if [ -n "$ACCOUNT_COINS" ]; then
             echo "⚠ Funding account $ACCOUNT with $ACCOUNT_COINS..."
-
-            echo "⚠ Funding account $ACCOUNT with $ACCOUNT_COINS..."
-            $NODE_CMD genesis add-genesis-account $ACCOUNT_ADDRESS "$ACCOUNT_COINS" --append --home $HOME_DIR --keyring-backend $KEYRING_BACKEND 
-            
+            $NODE_CMD genesis add-genesis-account "$ACCOUNT_ADDRESS" "$ACCOUNT_COINS" --append --home $HOME_DIR --keyring-backend $KEYRING_BACKEND
         else
             echo "⚠ No coins specified for $ACCOUNT, skipping funding."
         fi
@@ -115,6 +116,15 @@ if [ "$CURRENT_HASH" != "$(cat $HASH_FILE 2>/dev/null)" ] || [ ! -d "$HOME_DIR/d
         exit 1
     fi
 
+    echo "Applying custom Wasm modifications to genesis file..."
+    BOB_ADDRESS=$(jq -r '.bob.address' "$HOME_DIR/accounts.json")
+    if [ -n "$BOB_ADDRESS" ]; then
+        chmod +x ./scripts/genesis.sh
+        ./scripts/genesis.sh "$HOME_DIR/config/genesis.json" "$BOB_ADDRESS"
+    else
+        echo "Warning: Could not find address for 'bob'. Skipping Wasm genesis modification."
+    fi
+
     echo "$CURRENT_HASH" | tee "$HASH_FILE" >/dev/null
 
 else
@@ -127,6 +137,14 @@ else
 fi
 
 cp config/config.toml $HOME_DIR/config/config.toml
+
+mkdir -p "$HOME_DIR/keys"
+
+if [ -f "$HOME_DIR/config/priv_validator_key.json" ]; then
+    cp "$HOME_DIR/config/priv_validator_key.json" "$HOME_DIR/keys/priv_validator_key.json"
+fi
+
+sed -i 's|priv_validator_key_file = ".*"|priv_validator_key_file = "keys/priv_validator_key.json"|' "$HOME_DIR/config/config.toml"
 
 # Start the node with correct API bindings
 echo "🚀 Starting Overlock node..."
