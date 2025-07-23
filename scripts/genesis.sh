@@ -1,9 +1,13 @@
 #!/bin/bash
 
 GENESIS_FILE="$1"
-CW2981_URL="https://github.com/public-awesome/cw-nfts/releases/download/v0.18.0/cw721_base.wasm"
-WASM_FILE="cw721_base.wasm"
 CREATOR_ADDRESS="$2"
+
+CW721_URL="https://github.com/public-awesome/cw-nfts/releases/download/v0.18.0/cw721_base.wasm"
+CW2981_URL="https://github.com/public-awesome/cw-nfts/releases/download/v0.18.0/cw2981_royalties.wasm"
+
+CW721_FILE="cw721_base.wasm"
+CW2981_FILE="cw2981_royalties.wasm"
 
 if [ -z "$GENESIS_FILE" ]; then
     echo "Error: Path to genesis.json not provided."
@@ -15,53 +19,74 @@ if [ -z "$CREATOR_ADDRESS" ]; then
     exit 1
 fi
 
-if [ ! -f "$WASM_FILE" ]; then
-    wget -q -O "$WASM_FILE" "$CW2981_URL"
-    if [ $? -ne 0 ]; then
-        echo "Error downloading WASM file. Aborting."
-        exit 1
+download_wasm_if_missing() {
+    local url=$1
+    local file=$2
+
+    if [ ! -f "$file" ]; then
+        echo "Downloading $file..."
+        wget -q -O "$file" "$url"
+        if [ $? -ne 0 ]; then
+            echo "Error downloading $file. Aborting."
+            exit 1
+        fi
     fi
-fi
+}
 
-CODE_HASH_HEX=$(sha256sum "$WASM_FILE" | awk '{print $1}')
-CODE_HASH_BASE64=$(echo -n "$CODE_HASH_HEX" | xxd -r -p | base64 -w 0)
-CODE_BYTES_BASE64=$(base64 -w 0 "$WASM_FILE")
+wasm_entry_json() {
+    local file=$1
+    local creator=$2
+    local code_id=$3
 
-LAST_CODE_ID=$(jq -r '.app_state.wasm.sequences[]? | select(.id_key == "BGxhc3RDb2RlSWQ=") | .value' "$GENESIS_FILE")
-if [ -z "$LAST_CODE_ID" ]; then
-    NEW_CODE_ID=1
-else
-    NEW_CODE_ID=$((LAST_CODE_ID + 1))
-fi
+    local code_hash_hex=$(sha256sum "$file" | awk '{print $1}')
+    local code_hash_base64=$(echo -n "$code_hash_hex" | xxd -r -p | base64 -w 0)
+    local code_bytes_base64=$(base64 -w 0 "$file")
 
-cat > "$GENESIS_FILE.tmp_code" <<EOF
+    cat <<EOF
 {
-  "code_id": "$NEW_CODE_ID",
+  "code_id": "$code_id",
   "code_info": {
-    "code_hash": "$CODE_HASH_BASE64",
-    "creator": "$CREATOR_ADDRESS",
+    "code_hash": "$code_hash_base64",
+    "creator": "$creator",
     "instantiate_config": {
       "permission": "Everybody",
       "addresses": []
     }
   },
-  "code_bytes": "$CODE_BYTES_BASE64"
+  "code_bytes": "$code_bytes_base64"
 }
 EOF
+}
+
+download_wasm_if_missing "$CW721_URL" "$CW721_FILE"
+download_wasm_if_missing "$CW2981_URL" "$CW2981_FILE"
+
+LAST_CODE_ID=$(jq -r '.app_state.wasm.sequences[]? | select(.id_key == "BGxhc3RDb2RlSWQ=") | .value' "$GENESIS_FILE")
+if [ -z "$LAST_CODE_ID" ]; then
+    CODE_ID_1=1
+else
+    CODE_ID_1=$((LAST_CODE_ID + 1))
+fi
+CODE_ID_2=$((CODE_ID_1 + 1))
+NEW_SEQ=$((CODE_ID_2 + 1))
+
+wasm_entry_json "$CW721_FILE" "$CREATOR_ADDRESS" "$CODE_ID_1" > "$GENESIS_FILE.tmp_code1"
+wasm_entry_json "$CW2981_FILE" "$CREATOR_ADDRESS" "$CODE_ID_2" > "$GENESIS_FILE.tmp_code2"
 
 jq \
-  --slurpfile newcode "$GENESIS_FILE.tmp_code" \
-  --argjson new_id "$NEW_CODE_ID" \
+  --slurpfile code1 "$GENESIS_FILE.tmp_code1" \
+  --slurpfile code2 "$GENESIS_FILE.tmp_code2" \
+  --argjson new_seq "$NEW_SEQ" \
   '
-  .app_state.wasm.codes += $newcode
+  .app_state.wasm.codes += ($code1 + $code2)
   | .app_state.wasm.sequences = [
       {
         id_key: "BGxhc3RDb250cmFjdElk",
-        value: ($new_id + 1 | tostring)
+        value: ($new_seq | tostring)
       },
       {
         id_key: "BGxhc3RDb2RlSWQ=",
-        value: ($new_id + 1 | tostring)
+        value: ($new_seq | tostring)
       }
     ]
   | .app_state.wasm.params = {
@@ -73,7 +98,7 @@ jq \
     }
   ' "$GENESIS_FILE" > "$GENESIS_FILE.tmp_final" && mv "$GENESIS_FILE.tmp_final" "$GENESIS_FILE"
 
-rm "$GENESIS_FILE.tmp_code"
-rm -f "$WASM_FILE"
+rm -f "$GENESIS_FILE.tmp_code1" "$GENESIS_FILE.tmp_code2"
+rm -f "$CW721_FILE" "$CW2981_FILE"
 
-echo "Genesis updated"
+echo "Genesis updated with CW721 and CW2981"
