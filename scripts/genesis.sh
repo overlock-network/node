@@ -3,8 +3,8 @@
 GENESIS_FILE="$1"
 CREATOR_ADDRESS="$2"
 
-CW721_URL="https://github.com/public-awesome/cw-nfts/releases/download/v0.18.0/cw721_base.wasm"
-CW2981_URL="https://github.com/public-awesome/cw-nfts/releases/download/v0.18.0/cw2981_royalties.wasm"
+CW721_URL="https://github.com/overlock-network/cw-nfts/releases/download/v0.18.5/cw721_base.wasm"
+CW2981_URL="https://github.com/overlock-network/cw-nfts/releases/download/v0.18.5/cw2981_configuration.wasm"
 
 CW721_FILE="cw721_base.wasm"
 CW2981_FILE="cw2981_royalties.wasm"
