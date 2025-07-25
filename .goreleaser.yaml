@@ -44,8 +44,8 @@ archives:
         formats: [zip]
     files:
       - readme.md
-      - start.sh
-      - install.sh
+      - scripts/start.sh
+      - scripts/install.sh
 
 release:
   github:
