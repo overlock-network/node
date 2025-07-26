@@ -1,0 +1,96 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/overlock-network/node
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  ports: 
+    api: 1317
+    rpc: 26657
+    grpc: 9090
+
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations: 
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+  hosts:
+    - host: api.devnet.overlock.pub
+      port: 1317
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    - host: rpc.devnet.overlock.pub
+      port: 26657
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    - host: grpc.devnet.overlock.pub
+      port: 9090
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - api.devnet.overlock.pub
+        - rpc.devnet.overlock.pub
+        - grpc.devnet.overlock.pub
+      secretName: devnet-overlock-pub
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: rpc
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: rpc
+
+secretVolume:
+  enabled: true
+  name: keys
+  mountPath: /node/keys/
+  secretName: keys
+
+volumeClaimTemplates:
+  - name: data
+    accessModes: ["ReadWriteOnce"]
+    resources:
+      requests:
+        storage: 50Gi
+    storageClassName: local-path
+
+volumeMounts: 
+  - name: data
+    mountPath: /node/data
+    readOnly: false
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+cert-manager:
+  crds:
+    enabled: false
