@@ -14,10 +14,10 @@ ENV RPC_DOMAIN=rpc.default.local
 ENV API_DOMAIN=api.default.local
 ENV GRPC_DOMAIN=grpc.default.local
 
-COPY docker/supervisor/nginx.conf.template /etc/nginx/nginx.conf.template
-COPY docker/supervisor/supervisord.conf.template /etc/supervisor/supervisord.conf.template
+COPY cluster/docker/supervisor/nginx.conf.template /etc/nginx/nginx.conf.template
+COPY cluster/docker/supervisor/supervisord.conf.template /etc/supervisor/supervisord.conf.template
 
-COPY docker/supervisor/entrypoint.sh /entrypoint.sh
+COPY cluster/docker/supervisor/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 80

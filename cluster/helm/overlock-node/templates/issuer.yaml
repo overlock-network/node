@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "overlock-node.fullname" . }}
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: overlock.network@gmail.com
+    profile: tlsserver
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: traefik

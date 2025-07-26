@@ -37,7 +37,7 @@ RUN wget -O /node/config/genesis.json https://raw.githubusercontent.com/overlock
 
 EXPOSE 26657 1317 9090
 
-COPY docker/node/entrypoint.sh /entrypoint.sh
+COPY cluster/docker/node/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
