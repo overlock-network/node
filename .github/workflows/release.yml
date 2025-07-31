@@ -77,7 +77,7 @@ jobs:
       - name: Package Helm chart
         run: |
           mkdir -p dist
-          helm dep up
+          helm dep up --skip-refresh cluster/helm/overlock-node
           helm package cluster/helm/overlock-node \
             --version "${{ steps.tag.outputs.TAG_NAME }}" \
             --app-version "${{ steps.tag.outputs.TAG_NAME }}" \
